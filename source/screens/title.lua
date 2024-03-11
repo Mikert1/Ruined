@@ -31,9 +31,7 @@ function title.load()
     title.logo.animations.region3 = anim8.newAnimation( title.logo.grid('1-8', 3), 0.1 )
     title.logo.animations.region4 = anim8.newAnimation( title.logo.grid('1-32', 4), 0.1 )
     title.logo.anim = title.logo.animations.region1
-    title.mainColorR = 0
-    title.mainColorG = 1
-    title.mainColorB = 1
+    title.mainColor = {0, 1, 1}
     title.icons = {}
     title.icons.start = {}
     title.icons.start.active = love.graphics.newImage("assets/textures/gui/title/start.png")
@@ -51,6 +49,7 @@ function title.load()
     title.rune.image1 = love.graphics.newImage("assets/textures/gui/title/rune1.png")
     title.rune.image2 = love.graphics.newImage("assets/textures/gui/title/rune2.png")
     title.rune.image3 = love.graphics.newImage("assets/textures/gui/title/rune3.png")
+
     title.button = {}
     title.button.normal = {}
     title.button.normal.image = love.graphics.newImage("assets/textures/gui/title/button.png")
@@ -74,6 +73,20 @@ function title.load()
     title.button.red.menu.button2 = title.button.red.animations.normal
     title.button.red.menu.button3 = title.button.red.animations.normal
     title.button.red.menu.button4 = title.button.red.animations.normal
+
+    function title.createButton(x, y, w, h, text, action)
+        local button = {}
+        button.x = x
+        button.y = y
+        button.w = w
+        button.h = h
+        button.text = text
+        button.color = title.mainColor
+        button.hover = false
+        button.action = action
+        return button
+    end
+
     title.delete = {}
     title.delete.mode = false
     title.delete.image = love.graphics.newImage("assets/textures/gui/title/delete.png")
@@ -305,7 +318,7 @@ function title:draw()
             end
         elseif title.state >= 1 and title.state <= 3 then
             -- show title
-            love.graphics.setColor(title.mainColorR, title.mainColorG, title.mainColorB)
+            love.graphics.setColor(title.mainColor)
             love.graphics.print(title.text.name, love.graphics.getWidth() / 2 - (font:getWidth(title.text.name) * playerCamera.globalScale), love.graphics.getHeight() / 2 - (title.logo.y * playerCamera.globalScale), nil, playerCamera.globalScale * 2)
             love.graphics.setColor(0.3, 0.3, 0.3)
             love.graphics.print(title.text.chapter, love.graphics.getWidth() / 2 - (font:getWidth(title.text.chapter) / 2 * playerCamera.globalScale), love.graphics.getHeight() / 2 - ((title.logo.y - (font:getHeight() * 2) + 2) * playerCamera.globalScale), nil, playerCamera.globalScale)
@@ -331,19 +344,19 @@ function title:draw()
             title.settings.anim:draw(title.settings.image, love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (70 * playerCamera.globalScale) , nil, playerCamera.globalScale)
             --show location
             if preview.file1.created == true then
-                love.graphics.setColor(title.mainColorR, title.mainColorG, title.mainColorB)
+                love.graphics.setColor(title.mainColor)
             end
             love.graphics.draw(title.preview.location1, love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (14 * playerCamera.globalScale) , nil, playerCamera.globalScale / 2)
             love.graphics.draw(title.preview.time1, love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (34 * playerCamera.globalScale) , nil, playerCamera.globalScale / 2)
             love.graphics.setColor(1, 1, 1)
             if preview.file2.created == true then
-                love.graphics.setColor(title.mainColorR, title.mainColorG, title.mainColorB)
+                love.graphics.setColor(title.mainColor)
             end
             love.graphics.draw(title.preview.location2, love.graphics.getWidth() / 2 - (40 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (14 * playerCamera.globalScale) , nil, playerCamera.globalScale / 2)
             love.graphics.draw(title.preview.time2, love.graphics.getWidth() / 2 - (40 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (34 * playerCamera.globalScale) , nil, playerCamera.globalScale / 2)
             love.graphics.setColor(1, 1, 1)
             if preview.file3.created == true then
-                love.graphics.setColor(title.mainColorR, title.mainColorG, title.mainColorB)
+                love.graphics.setColor(title.mainColor)
             end
             love.graphics.draw(title.preview.location3, love.graphics.getWidth() / 2 + (48 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (14 * playerCamera.globalScale) , nil, playerCamera.globalScale / 2)
             love.graphics.draw(title.preview.time3, love.graphics.getWidth() / 2 + (48 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (34 * playerCamera.globalScale) , nil, playerCamera.globalScale / 2)
@@ -368,19 +381,19 @@ function title:draw()
             love.graphics.print("h" .. preview.file3.hours .. ", m" .. preview.file3.minutes .. ", s" .. string.sub(preview.file3.seconds, 0, 2) , love.graphics.getWidth() / 2 + (58 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (34 * playerCamera.globalScale) , nil, playerCamera.globalScale / 2)
             -- show savegame name
             if preview.file1.created == true then
-                love.graphics.setColor(title.mainColorR, title.mainColorG, title.mainColorB)
+                love.graphics.setColor(title.mainColor)
             else
                 love.graphics.setColor(0.15, 0.15, 0.15)
             end
             love.graphics.print("Save 1", love.graphics.getWidth() / 2 - (109 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (30 * playerCamera.globalScale), nil, playerCamera.globalScale)
             if preview.file2.created == true then
-                love.graphics.setColor(title.mainColorR, title.mainColorG, title.mainColorB)
+                love.graphics.setColor(title.mainColor)
             else
                 love.graphics.setColor(0.15, 0.15, 0.15)
             end
             love.graphics.print("Save 2", love.graphics.getWidth() / 2 - (21 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (30 * playerCamera.globalScale), nil, playerCamera.globalScale)
             if preview.file3.created == true then
-                love.graphics.setColor(title.mainColorR, title.mainColorG, title.mainColorB)
+                love.graphics.setColor(title.mainColor)
             else
                 love.graphics.setColor(0.15, 0.15, 0.15)
             end
@@ -388,7 +401,7 @@ function title:draw()
             -- play, create ect. text,s and back text
             if not(title.button.normal.menu.button1 == title.button.normal.animations.normal) then
                 if title.delete.mode == false then
-                    love.graphics.setColor(title.mainColorR, title.mainColorG, title.mainColorB)
+                    love.graphics.setColor(title.mainColor)
                 else
                     if preview.file1.created == true then
                         love.graphics.setColor(1, 0, 0)
@@ -407,7 +420,7 @@ function title:draw()
 
             if not(title.button.normal.menu.button2 == title.button.normal.animations.normal) then
                 if title.delete.mode == false then
-                    love.graphics.setColor(title.mainColorR, title.mainColorG, title.mainColorB)
+                    love.graphics.setColor(title.mainColor)
                 else
                     if preview.file2.created == true then
                         love.graphics.setColor(1, 0, 0)
@@ -425,7 +438,7 @@ function title:draw()
             )
             if not(title.button.normal.menu.button3 == title.button.normal.animations.normal) then
                 if title.delete.mode == false then
-                    love.graphics.setColor(title.mainColorR, title.mainColorG, title.mainColorB)
+                    love.graphics.setColor(title.mainColor)
                 else
                     if preview.file3.created == true then
                         love.graphics.setColor(1, 0, 0)

@@ -184,13 +184,13 @@ function gui:draw()
         end
         love.graphics.print(gui.text.back, love.graphics.getWidth() / 2 - (font:getWidth(gui.text.back) / 2 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (26 * playerCamera.globalScale), nil, playerCamera.globalScale)
         if not(title.button.normal.menu.button2 == title.button.normal.animations.normal) then
-            love.graphics.setColor(title.mainColorR, title.mainColorG, title.mainColorB)
+            love.graphics.setColor(title.mainColor)
         else
             love.graphics.setColor(0.15, 0.15, 0.15)
         end
         love.graphics.print(gui.text.settings, love.graphics.getWidth() / 2 - (font:getWidth(gui.text.settings) / 2 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (1 * playerCamera.globalScale), nil, playerCamera.globalScale)
         if not(title.button.normal.menu.button1 == title.button.normal.animations.normal) then
-            love.graphics.setColor(title.mainColorR, title.mainColorG, title.mainColorB)
+            love.graphics.setColor(title.mainColor)
         else
             love.graphics.setColor(0.15, 0.15, 0.15)
         end

@@ -27,7 +27,7 @@ function settings.draw()
         if savedSettings.devmode == true then
             title.button.normal.menu.button2:draw(title.button.normal.image, love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (55 * playerCamera.globalScale) , nil, playerCamera.globalScale)
             if not(title.button.normal.menu.button2 == title.button.normal.animations.normal) then
-                love.graphics.setColor(title.mainColorR, title.mainColorG, title.mainColorB)
+                love.graphics.setColor(title.mainColor)
             else
                 love.graphics.setColor(0.15, 0.15, 0.15)
             end
@@ -46,7 +46,7 @@ function settings.draw()
         love.graphics.print("Skin - beta", love.graphics.getWidth() / 2 + (48 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (66 * playerCamera.globalScale) , nil, playerCamera.globalScale * 0.5)
         title.button.normal.menu.button3:draw(title.button.normal.image, love.graphics.getWidth() / 2 + (48 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (55 * playerCamera.globalScale) , nil, playerCamera.globalScale)
         if not(title.button.normal.menu.button3 == title.button.normal.animations.normal) then
-            love.graphics.setColor(title.mainColorR, title.mainColorG, title.mainColorB)
+            love.graphics.setColor(title.mainColor)
         else
             love.graphics.setColor(0.15, 0.15, 0.15)
         end

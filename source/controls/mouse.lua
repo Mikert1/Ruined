@@ -38,10 +38,10 @@ function love.mousemoved(x, y)
         end
     elseif title.state >= 1 and title.state <= 3 then
         if x > love.graphics.getWidth() / 2 - (40 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (40 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (43 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (63 * playerCamera.globalScale) then
-            if title.state == 2 then
-                title.button.normal.menu.button2 = title.button.normal.animations.activeGreen
-            else
+            if title.mainColor[3] == 1 then
                 title.button.normal.menu.button2 = title.button.normal.animations.activeBlue
+            else
+                title.button.normal.menu.button2 = title.button.normal.animations.activeGreen
             end
             if preview.file2.created == true then
                 title.button.red.menu.button3 = title.button.red.animations.active
@@ -51,10 +51,10 @@ function love.mousemoved(x, y)
             title.button.red.menu.button3 = title.button.red.animations.normal
         end
         if x > love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 - (48 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (43 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (63 * playerCamera.globalScale) then
-            if title.state == 2 then
-                title.button.normal.menu.button1 = title.button.normal.animations.activeGreen
-            else
+            if title.mainColor[3] == 1 then
                 title.button.normal.menu.button1 = title.button.normal.animations.activeBlue
+            else
+                title.button.normal.menu.button1 = title.button.normal.animations.activeGreen
             end
             if preview.file1.created == true then
                 title.button.red.menu.button2 = title.button.red.animations.active
@@ -64,10 +64,10 @@ function love.mousemoved(x, y)
             title.button.red.menu.button2 = title.button.red.animations.normal
         end
         if x > love.graphics.getWidth() / 2 + (48 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (128 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (43 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (63 * playerCamera.globalScale) then
-            if title.state == 2 then
-                title.button.normal.menu.button3 = title.button.normal.animations.activeGreen
-            else
+            if title.mainColor[3] == 1 then
                 title.button.normal.menu.button3 = title.button.normal.animations.activeBlue
+            else
+                title.button.normal.menu.button3 = title.button.normal.animations.activeGreen
             end
             if preview.file3.created == true then
                 title.button.red.menu.button4 = title.button.red.animations.active
@@ -85,7 +85,7 @@ function love.mousemoved(x, y)
             if title.delete.mode == false then
                 title.delete.anim = title.delete.animations.hoverDelete
             else
-                if title.state == 1 then
+                if title.mainColor[3] == 1 then
                     title.delete.anim = title.delete.animations.hoverPlay
                 else
                     title.delete.anim = title.delete.animations.hoverPlayG
@@ -99,7 +99,7 @@ function love.mousemoved(x, y)
             end
         end
         if x > love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 - (108 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (70 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (90 * playerCamera.globalScale) then
-            if title.state == 1 then
+            if title.mainColor[3] == 1 then
                 title.settings.anim = title.settings.animations.hover
             else
                 title.settings.anim = title.settings.animations.hoverG
@@ -117,13 +117,13 @@ function love.mousemoved(x, y)
         if title.texture == false then
             if x > love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 - (48 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 - (60 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 - (40 * playerCamera.globalScale) then
                 if savedSettings.devmode == true then
-                    if title.mainColorB == 0 then
-                        title.button.normal.menu.button2 = title.button.normal.animations.activeGreen
-                    else
+                    if title.mainColor[3] == 1 then
                         title.button.normal.menu.button2 = title.button.normal.animations.activeBlue
+                    else
+                        title.button.normal.menu.button2 = title.button.normal.animations.activeGreen
                     end
                 else
-                    if title.mainColorB == 0 then
+                    if title.mainColor[3] == 1 then
                         title.button.red.menu.button2 = title.button.red.animations.active
                     else
                         title.button.red.menu.button2 = title.button.red.animations.active
@@ -134,10 +134,10 @@ function love.mousemoved(x, y)
                 title.button.normal.menu.button2 = title.button.normal.animations.normal
             end
             if x > love.graphics.getWidth() / 2 + (48 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (128 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 - (60 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 - (40 * playerCamera.globalScale) then
-                if title.mainColorB == 0 then
-                    title.button.normal.menu.button3 = title.button.normal.animations.activeGreen
-                else
+                if title.mainColor[3] == 1 then
                     title.button.normal.menu.button3 = title.button.normal.animations.activeBlue
+                else
+                    title.button.normal.menu.button3 = title.button.normal.animations.activeGreen
                 end
             else
                 title.button.normal.menu.button3 = title.button.normal.animations.normal
@@ -152,19 +152,19 @@ function love.mousemoved(x, y)
                 title.button.red.menu.button1 = title.button.red.animations.normal
             end
             if x > love.graphics.getWidth() / 2 - (40 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (40 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 - (0 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (20 * playerCamera.globalScale) then
-                if title.mainColorB == 0 then
-                    title.button.normal.menu.button2 = title.button.normal.animations.activeGreen
-                else
+                if title.mainColor[3] == 1 then
                     title.button.normal.menu.button2 = title.button.normal.animations.activeBlue
+                else
+                    title.button.normal.menu.button2 = title.button.normal.animations.activeGreen
                 end
             else
                 title.button.normal.menu.button2 = title.button.normal.animations.normal
             end
             if x > love.graphics.getWidth() / 2 - (40 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (40 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (25 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (45 * playerCamera.globalScale) then
-                if title.mainColorB == 0 then
-                    title.button.normal.menu.button1 = title.button.normal.animations.activeGreen
-                else
+                if title.mainColor[3] == 1 then
                     title.button.normal.menu.button1 = title.button.normal.animations.activeBlue
+                else
+                    title.button.normal.menu.button1 = title.button.normal.animations.activeGreen
                 end
             else
                 title.button.normal.menu.button1 = title.button.normal.animations.normal
@@ -185,9 +185,7 @@ function love.mousepressed(x, y, button, istouch)
                     title.icons.start.image = title.icons.start.inactive
                     title.text.name = "Ruined"
                     title.text.chapter = "Chapter 1"
-                    title.mainColorR = 0
-                    title.mainColorG = 1
-                    title.mainColorB = 1
+                    title.mainColor = {0, 1, 1}
                     title.background.current = title.background.blue
                 end
                 if button == 1 and x > love.graphics.getWidth() / 2 - (12.5 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (12.5 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (50 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (88 * playerCamera.globalScale) then
@@ -198,7 +196,7 @@ function love.mousepressed(x, y, button, istouch)
                     title.icons.past.image = title.icons.past.inactive
                     title.text.name = "The days of John's"
                     title.text.chapter = "Chapter 2"
-                    title.mainColorR, title.mainColorG, title.mainColorB = 0, 1, 0
+                    title.mainColor = {0, 1, 0}
                     title.background.current = title.background.green
                 end
                 if x > love.graphics.getWidth() / 2 + (71 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (96 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (50 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (88 * playerCamera.globalScale) then
@@ -209,9 +207,7 @@ function love.mousepressed(x, y, button, istouch)
                     title.icons.final.image = title.icons.final.inactive
                     title.text.name = "Returned"
                     title.text.chapter = "Chapter 3"
-                    title.mainColorR = 0
-                    title.mainColorG = 1
-                    title.mainColorB = 1
+                    title.mainColor = {0, 1, 1}
                     title.background.current = title.background.blue
                 end
             else
@@ -308,7 +304,7 @@ function love.mousepressed(x, y, button, istouch)
                         title.state = 5
                     else
                         love.window.setTitle("Ruined | Title Screen")
-                        if title.mainColorB == 0 then
+                        if title.mainColor[3] == 0 then
                             title.state = 2
                         else
                             title.state = 1
@@ -320,27 +316,23 @@ function love.mousepressed(x, y, button, istouch)
                 end
             end
             if title.texture == false then
-                if button == 1 and x > love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 - (48 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 - (60 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 - (40 * playerCamera.globalScale) then
+                if button == 1 and x > love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 - (48 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 - (55 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 - (35 * playerCamera.globalScale) then
                     if savedSettings.devmode == false then
                         savedSettings.devmode = true
-                        print("Console is active\n- use Tab to show more info and show colliders\n- use F1 to degrid the camera\n- use F2 to remove walls\n- use F3 to Force save\n- use F8 for a screen shake\n- use F9 spawn stone enemy\n- use F10 to open console\n- use F11 to force start savefile 1 (also in loading phase)\n- use F12 for a Force error")
-                        if title.mainColorB == 0 then
-                            title.button.normal.menu.button2 = title.button.normal.animations.activeGreen
-                        else
+                        print("Console is active")
+                        if title.mainColor[3] == 1 then
                             title.button.normal.menu.button2 = title.button.normal.animations.activeBlue
+                        else
+                            title.button.normal.menu.button2 = title.button.normal.animations.activeGreen
                         end
                     else
                         savedSettings.devmode = false
                         print("Console is deactivated --restart game to take effect")
-                        if title.mainColorB == 0 then
-                            title.button.red.menu.button2 = title.button.red.animations.active
-                        else
-                            title.button.red.menu.button2 = title.button.red.animations.active
-                        end
+                        title.button.red.menu.button2 = title.button.red.animations.active
                     end
                     file.savedSettings.save()
                 end
-                if button == 1 and x > love.graphics.getWidth() / 2 + (48 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (128 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 - (60 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 - (40 * playerCamera.globalScale) then
+                if button == 1 and x > love.graphics.getWidth() / 2 + (48 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (128 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 - (55 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 - (35 * playerCamera.globalScale) then
                     if title.texture == false then
                         title.texture = true
                     else
@@ -359,7 +351,7 @@ function love.mousepressed(x, y, button, istouch)
                     title.rezet()
                     enemymanager:load()
                     game.state = 1
-                    if title.mainColorB == 0 then
+                    if title.mainColor[3] == 0 then
                         title.state = 2
                     else
                         title.state = 1
