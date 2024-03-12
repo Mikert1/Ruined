@@ -4,6 +4,7 @@ local gui
 local file = require("source/data")
 local preview = file.show()
 local settings
+local shake
 require("source/data")
 function title.load()
     settings = require("source/screens/settings")
@@ -74,17 +75,19 @@ function title.load()
     title.button.red.menu.button3 = title.button.red.animations.normal
     title.button.red.menu.button4 = title.button.red.animations.normal
 
-    function title.createButton(x, y, w, h, text, action)
-        local button = {}
-        button.x = x
-        button.y = y
-        button.w = w
-        button.h = h
-        button.text = text
-        button.color = title.mainColor
-        button.hover = false
-        button.action = action
-        return button
+    local button = {}
+    button.__index = button
+
+    function title.newButton(x, y, w, h, text, action)
+        local instance = setmetatable({}, button)
+        instance.x = x
+        instance.y = y
+        instance.w = w
+        instance.h = h
+        instance.color = title.mainColor
+        instance.text = text
+        instance.action = action
+        return instance
     end
 
     title.delete = {}
@@ -146,6 +149,30 @@ function title.load()
     title.mikert.showed = false
     title.loveImage = love.graphics.newImage("assets/textures/gui/title/LÖVE.png")
     title.settingBackground = love.graphics.newImage("assets/textures/gui/title/background.png")
+
+    shake = {
+        {
+            isActive = true,
+            targetPosition = 0,
+            currentPosition = 0,
+            targetPositive = true,
+            shakeSpeed = 50
+        },
+        {
+            isActive = true,
+            targetPosition = 0,
+            currentPosition = 0,
+            targetPositive = true,
+            shakeSpeed = 50
+        },
+        {
+            isActive = true,
+            targetPosition = 0,
+            currentPosition = 0,
+            targetPositive = true,
+            shakeSpeed = 50
+        }
+    }
 end
 
 function title.rezet()
@@ -245,6 +272,23 @@ function title.update(dt)
             title.swordicon.savegame2:update(dt)
             title.swordicon.savegame3:update(dt)
         end
+        if title.delete.mode == true then
+            for i, v in ipairs(shake) do
+                if shake[i].isActive then
+                    shake[i].targetPosition = love.math.random(-5, 5)
+                    shake[i].isActive = false
+                else
+                    local target = shake[i].targetPosition
+                    local speed = shake[i].shakeSpeed
+                    shake[i].currentPosition = shake[i].currentPosition + (target - shake[i].currentPosition) * speed * dt
+                    
+                    if math.abs(shake[i].currentPosition - target) < 0.1 then
+                        shake[i].currentPosition = target
+                        shake[i].isActive = true
+                    end
+                end
+            end
+        end
     end
 end
 
@@ -332,9 +376,9 @@ function title:draw()
                 title.button.normal.menu.button2:draw(title.button.normal.image, love.graphics.getWidth() / 2 - (40 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (43 * playerCamera.globalScale) , nil, playerCamera.globalScale)
                 title.button.normal.menu.button3:draw(title.button.normal.image, love.graphics.getWidth() / 2 + (48 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (43 * playerCamera.globalScale) , nil, playerCamera.globalScale)
             else
-                love.graphics.draw(title.savetile.image, love.graphics.getWidth() / 2 - (130 * playerCamera.globalScale) + title.savetile.image:getWidth() / 2 * playerCamera.globalScale, love.graphics.getHeight() / 2 - (33 * playerCamera.globalScale) + title.savetile.image:getHeight() / 2 * playerCamera.globalScale, love.math.random(-5, 5) / 100, playerCamera.globalScale, nil, title.savetile.image:getWidth() / 2, title.savetile.image:getHeight() / 2)
-                love.graphics.draw(title.savetile.image, love.graphics.getWidth() / 2 - (42 * playerCamera.globalScale) + title.savetile.image:getWidth() / 2 * playerCamera.globalScale, love.graphics.getHeight() / 2 - (33 * playerCamera.globalScale) + title.savetile.image:getHeight() / 2 * playerCamera.globalScale, love.math.random(-5, 5) / 100, playerCamera.globalScale, nil, title.savetile.image:getWidth() / 2, title.savetile.image:getHeight() / 2)
-                love.graphics.draw(title.savetile.image, love.graphics.getWidth() / 2 + (46 * playerCamera.globalScale) + title.savetile.image:getWidth() / 2 * playerCamera.globalScale, love.graphics.getHeight() / 2 - (33 * playerCamera.globalScale) + title.savetile.image:getHeight() / 2 * playerCamera.globalScale, love.math.random(-5, 5) / 100, playerCamera.globalScale, nil, title.savetile.image:getWidth() / 2, title.savetile.image:getHeight() / 2)
+                love.graphics.draw(title.savetile.image, love.graphics.getWidth() / 2 - (130 * playerCamera.globalScale) + title.savetile.image:getWidth() / 2 * playerCamera.globalScale, love.graphics.getHeight() / 2 - (33 * playerCamera.globalScale) + title.savetile.image:getHeight() / 2 * playerCamera.globalScale, shake[1].currentPosition / 100, playerCamera.globalScale, nil, title.savetile.image:getWidth() / 2, title.savetile.image:getHeight() / 2)
+                love.graphics.draw(title.savetile.image, love.graphics.getWidth() / 2 - (42 * playerCamera.globalScale) + title.savetile.image:getWidth() / 2 * playerCamera.globalScale, love.graphics.getHeight() / 2 - (33 * playerCamera.globalScale) + title.savetile.image:getHeight() / 2 * playerCamera.globalScale, shake[2].currentPosition / 100, playerCamera.globalScale, nil, title.savetile.image:getWidth() / 2, title.savetile.image:getHeight() / 2)
+                love.graphics.draw(title.savetile.image, love.graphics.getWidth() / 2 + (46 * playerCamera.globalScale) + title.savetile.image:getWidth() / 2 * playerCamera.globalScale, love.graphics.getHeight() / 2 - (33 * playerCamera.globalScale) + title.savetile.image:getHeight() / 2 * playerCamera.globalScale, shake[3].currentPosition / 100, playerCamera.globalScale, nil, title.savetile.image:getWidth() / 2, title.savetile.image:getHeight() / 2)
                 title.button.red.menu.button2:draw(title.button.red.image, love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (43 * playerCamera.globalScale) , nil, playerCamera.globalScale)
                 title.button.red.menu.button3:draw(title.button.red.image, love.graphics.getWidth() / 2 - (40 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (43 * playerCamera.globalScale) , nil, playerCamera.globalScale)
                 title.button.red.menu.button4:draw(title.button.red.image, love.graphics.getWidth() / 2 + (48 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (43 * playerCamera.globalScale) , nil, playerCamera.globalScale)
