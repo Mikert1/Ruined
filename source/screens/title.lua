@@ -156,21 +156,18 @@ function title.load()
             targetPosition = 0,
             currentPosition = 0,
             targetPositive = true,
-            shakeSpeed = 50
         },
         {
             isActive = true,
             targetPosition = 0,
             currentPosition = 0,
             targetPositive = true,
-            shakeSpeed = 50
         },
         {
             isActive = true,
             targetPosition = 0,
             currentPosition = 0,
             targetPositive = true,
-            shakeSpeed = 50
         }
     }
 end
@@ -278,12 +275,11 @@ function title.update(dt)
                     shake[i].targetPosition = love.math.random(-5, 5)
                     shake[i].isActive = false
                 else
-                    local target = shake[i].targetPosition
-                    local speed = shake[i].shakeSpeed
-                    shake[i].currentPosition = shake[i].currentPosition + (target - shake[i].currentPosition) * speed * dt
+                    local speed = 40
+                    shake[i].currentPosition = shake[i].currentPosition + (shake[i].targetPosition - shake[i].currentPosition) * speed * dt
                     
-                    if math.abs(shake[i].currentPosition - target) < 0.1 then
-                        shake[i].currentPosition = target
+                    if math.abs(shake[i].currentPosition - shake[i].targetPosition) < 0.1 then
+                        shake[i].currentPosition = shake[i].targetPosition
                         shake[i].isActive = true
                     end
                 end
