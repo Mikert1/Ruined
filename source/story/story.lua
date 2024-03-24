@@ -26,6 +26,7 @@ story.npc.foto.john = story.npc.foto.john_normal
 
 story.npc.interaction = false
 story.npc.interactionAvalible = false
+story.npc.interactionHold = 0
 
 story.dialogue = {}
 story.dialogue.image = love.graphics.newImage("assets/textures/gui/dialogue/dialogue.png")

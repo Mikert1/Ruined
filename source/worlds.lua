@@ -475,7 +475,7 @@ function drawNpcLayer()
     end
 end
 
-local function checkNpc()
+local function checkNpc(dt)
     local correctLayer = nil
     if story.npc.john.collider.world == worldManagement.thisWorld then
         correctLayer = story.npc.john.collider
@@ -486,16 +486,22 @@ local function checkNpc()
                 story.npc.who = "john"
                 story.npc.interactionAvalible = true
                 if love.keyboard.isDown("e") or (controller.joysticks and controller.joysticks:isGamepadDown("a")) then
-                    if story.data.storyTold.john1 == false then
-                        talk("john1")
-                    elseif story.data.storyTold.john2 == false then
-                        talk("john2")
+                    if story.npc.interactionHold >= 1 then
+                        if story.data.storyTold.john1 == false then
+                            talk("john1")
+                        elseif story.data.storyTold.john2 == false then
+                            talk("john2")
+                        end
+                        story.npc.interactionHold = 0
+                    else
+                        story.npc.interactionHold = story.npc.interactionHold + dt
                     end
                 end
             end
         else
             story.npc.interactionAvalible = false
             story.npc.interaction = false
+            story.npc.interactionHold = story.npc.interactionHold - dt
         end
     end
 end
@@ -553,7 +559,7 @@ function worldManagement.update(dt)
         end
     end
     checkPortals()
-    checkNpc()
+    checkNpc(dt)
     if checkCircleCollision(player, saveStone) then
         if saveStone.active == false then
             saveStone.active = true
