@@ -108,7 +108,12 @@ function story.npc:draw()
         end
         if story.data.storyTold.john1 == false then
             love.graphics.stencil(function()
-                love.graphics.rectangle("fill", story.npc.john.x + 5 - story.dialogue.storyAvalible:getWidth() / 2, (story.npc.john.y - 20) - story.dialogue.storyAvalible:getHeight(), story.npc.interactionHold * story.dialogue.storyAvalible:getHeight(), story.dialogue.storyAvalible:getHeight())
+                love.graphics.rectangle(
+                "fill",
+                (story.npc.john.x + 5 - story.dialogue.storyAvalible:getWidth() / 2),
+                (story.npc.john.y - 20),
+                story.dialogue.storyAvalible:getWidth(),
+                -story.npc.interactionHold * story.dialogue.storyAvalible:getHeight())
             end, "replace", 1)
             
             love.graphics.setColor(0,0,0)
