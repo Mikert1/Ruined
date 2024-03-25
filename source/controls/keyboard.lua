@@ -30,6 +30,7 @@ function love.keypressed(key)
                 story.data.current = story.data.current + 1
                 story.dialogue.position = 0
                 story.dialogue.update()
+                story.skiped = true
             end
         end
         if key == controls.keys.map then
@@ -129,5 +130,8 @@ function love.keyreleased(key)
     if key == "m" then
         gui.map = false
     end
+    if key == "e" then
+        story.skiped = false
+    end	
 end
 return keys

@@ -75,6 +75,10 @@ function story.slowShow(dt)
     else
         story.dialogue.position = story.dialogue.position + (dt * 2)
     end
+    -- if E key is down
+    if story.skiped == false and love.keyboard.isDown("e") then
+        story.dialogue.position = story.dialogue.position + (dt * 100)
+    end
     story.dialogue.text = string.sub(story.currentStory, 0, story.dialogue.position)
     story.dialogue.length = string.len(story.currentStory)
 end
@@ -109,7 +113,7 @@ function story.npc:draw()
                     (story.npc.john.x + 5 - story.dialogue.storyAvalible:getWidth() / 2),
                     (story.npc.john.y - 20),
                     story.dialogue.storyAvalible:getWidth(),
-                    (-story.npc.interactionHold * 2) * story.dialogue.storyAvalible:getHeight())
+                    (-story.npc.interactionHold * 4) * story.dialogue.storyAvalible:getHeight())
                 end, "replace", 1)
                 love.graphics.draw(story.dialogue.storyAvalibleShadow, story.npc.john.x + 5 - story.dialogue.storyAvalible:getWidth() / 2, (story.npc.john.y - 20) - story.dialogue.storyAvalible:getHeight())
                 love.graphics.setColor(1,1,1)
