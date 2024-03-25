@@ -33,6 +33,7 @@ story.dialogue.image = love.graphics.newImage("assets/textures/gui/dialogue/dial
 story.dialogue.skipImage = love.graphics.newImage("assets/textures/gui/dialogue/skip.png")
 story.dialogue.doneImage = love.graphics.newImage("assets/textures/gui/dialogue/done.png")
 story.dialogue.storyAvalible = love.graphics.newImage("assets/textures/gui/dialogue/interact.png")
+story.dialogue.storyAvalibleShadow = love.graphics.newImage("assets/textures/gui/dialogue/interactshadow.png")
 story.dialogue.position = 0
 story.dialogue.john1 = {
     "Hello traveler, my name is John.",
@@ -115,7 +116,7 @@ function story.npc:draw()
                 story.dialogue.storyAvalible:getWidth(),
                 (-story.npc.interactionHold * 2) * story.dialogue.storyAvalible:getHeight())
             end, "replace", 1)
-            
+            love.graphics.draw(story.dialogue.storyAvalibleShadow, story.npc.john.x + 5 - story.dialogue.storyAvalible:getWidth() / 2, (story.npc.john.y - 20) - story.dialogue.storyAvalible:getHeight())
             love.graphics.setColor(1,1,1)
                 love.graphics.draw(story.dialogue.storyAvalible, story.npc.john.x + 5 - story.dialogue.storyAvalible:getWidth() / 2, (story.npc.john.y - 20) - story.dialogue.storyAvalible:getHeight())
                 love.graphics.setStencilTest("greater", 0)
