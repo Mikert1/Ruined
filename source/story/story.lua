@@ -75,7 +75,6 @@ function story.slowShow(dt)
     else
         story.dialogue.position = story.dialogue.position + (dt * 2)
     end
-    -- if E key is down
     if story.skiped == false and love.keyboard.isDown("e") then
         story.dialogue.position = story.dialogue.position + (dt * 100)
     end

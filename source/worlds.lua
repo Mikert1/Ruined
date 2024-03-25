@@ -495,7 +495,9 @@ local function checkNpc(dt)
                         end
                         story.npc.interactionHold = 0
                     else
-                        story.npc.interactionHold = story.npc.interactionHold + dt
+                        if story.skiped == false then
+                            story.npc.interactionHold = story.npc.interactionHold + dt
+                        end
                     end
                 else
                     if story.npc.interactionHold > 0 then
