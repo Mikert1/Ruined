@@ -441,6 +441,7 @@ local function talk(id)
     game.state = 2.1
     story.currentStory = story.dialogue[story.id][story.data.current]
     story.arrayLength = #story.dialogue[story.id]
+    story.skiped = true
 end
 
 function worldManagement.spawn()
