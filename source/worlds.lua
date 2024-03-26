@@ -485,7 +485,7 @@ local function checkNpc(dt)
             if story.npc.interaction == false then
                 story.npc.who = "john"
                 story.npc.interactionAvalible = true
-                if love.keyboard.isDown("e") or (controller.joysticks and controller.joysticks:isGamepadDown("a")) then
+                if love.keyboard.isDown(controls.keys.interact) or (controller.joysticks and controller.joysticks:isGamepadDown("a")) then
                     print(story.npc.interactionHold)
                     if story.npc.interactionHold >= 0.25 then
                         if story.data.storyTold.john1 == false then
@@ -501,7 +501,7 @@ local function checkNpc(dt)
                     end
                 else
                     if story.npc.interactionHold > 0 then
-                        story.npc.interactionHold = story.npc.interactionHold - dt / 2
+                        story.npc.interactionHold = story.npc.interactionHold - dt / 4
                     else
                         story.npc.interactionHold = 0
                     end

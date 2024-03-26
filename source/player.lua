@@ -2,7 +2,6 @@ local anim8 = require 'assets/library/animations'
 local bump = require 'assets/library/bump'
 local file = require("source/data")
 local worldManagement = require("source/worlds")
-local controller = require("source/controls/controller")
 local weapon = require("source/weapons")
 local player = {}
 local gui

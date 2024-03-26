@@ -25,7 +25,7 @@ function love.keypressed(key)
                 game.freeze = true
             end
         end
-        if key == "e" and story.npc.interaction == true then
+        if key == controls.keys.interact and story.npc.interaction == true then
             if story.dialogue.length < story.dialogue.position then
                 story.data.current = story.data.current + 1
                 story.dialogue.position = 0
@@ -53,7 +53,7 @@ function love.keypressed(key)
             server.receiveData()
         end
         if story.npc.interaction == true then
-            if key == "right" or key == "e" then
+            if key == "right" or key == controls.keys.interact then
                 if story.dialogue.length < story.dialogue.position then
                     story.data.current = story.data.current + 1
                     story.dialogue.position = 0
@@ -130,7 +130,7 @@ function love.keyreleased(key)
     if key == "m" then
         gui.map = false
     end
-    if key == "e" then
+    if key == controls.keys.interact then
         story.skiped = false
     end	
 end
