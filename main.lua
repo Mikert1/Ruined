@@ -29,13 +29,6 @@ local stone = require("source/enemies")
 _G.server = require("source/network/server")
 print("Done loading")
 
--- local fontScale = 16
--- local fontFile = "assets/textures/fonts/berylium bd.otf"
--- local fontData = love.filesystem.newFileData(fontFile)
--- local fontBlob = love.font.newRasterizer(fontData, fontScale, "normal", 0, 1)
--- _G.font = love.graphics.newFont(fontBlob)
--- love.graphics.setFont(font)
-
 player.load()
 worldManagement.load()
 gui.load()
