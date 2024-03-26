@@ -76,8 +76,7 @@ function story.slowShow(dt)
         story.dialogue.position = story.dialogue.position + (dt * 2)
     end
     if story.skiped == false and love.keyboard.isDown(controls.keys.interact) then
-        story.dialogue.position = story.dialogue.position + (dt * 100)
-        --story.dialogue.position = story.arrayLength
+        story.dialogue.position = story.dialogue.length
     end
     story.dialogue.text = string.sub(story.currentStory, 0, story.dialogue.position)
     story.dialogue.length = string.len(story.currentStory)
