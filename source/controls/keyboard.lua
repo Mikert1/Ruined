@@ -31,7 +31,6 @@ function love.keypressed(key)
                 story.dialogue.position = 0
                 story.dialogue.update()
                 story.skiped = true
-                print("skiped")
             end
         end
         if key == controls.keys.map then
