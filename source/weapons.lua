@@ -278,8 +278,14 @@ function weapon.sword.use()
             if checkCollision(weapon.sword.collider, enemy.collider) then
                 enemymanager.enemyGotHit = 0.5
                 weapon.dammage = 1
+                if weapon.sword.currentCombo == 3 then
+                    weapon.dammage = 2
+                end
                 if player.focus == true then
                     weapon.dammage = 2
+                    if weapon.sword.currentCombo == 3 then
+                        weapon.dammage = 4
+                    end
                 end
                 enemy.health = enemy.health - weapon.dammage
                 weapon.enemyGotHit = true
