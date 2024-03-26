@@ -10,9 +10,11 @@ weapon.sword.slash.active = false
 weapon.sword.slash.direction = 0
 weapon.sword.slash.image = love.graphics.newImage("assets/textures/player/swordslash.png")
 weapon.sword.grid = anim8.newGrid( 39, 15, weapon.sword.slash.image:getWidth(), weapon.sword.slash.image:getHeight() )
+weapon.sword.grid2 = anim8.newGrid( 39, 30, weapon.sword.slash.image:getWidth(), weapon.sword.slash.image:getHeight() )
 weapon.sword.animations = {}
 weapon.sword.animations.slash = anim8.newAnimation( weapon.sword.grid('1-6', 1), 0.05 )
 weapon.sword.animations.slash2 = anim8.newAnimation( weapon.sword.grid('1-6', 2), 0.05 )
+weapon.sword.animations.slash3 = anim8.newAnimation( weapon.sword.grid2('1-6', 2), 0.05 )
 weapon.sword.anim = weapon.sword.animations.slash
 weapon.sword.prepSlash = {}
 weapon.sword.prepSlash.active = false
@@ -298,7 +300,7 @@ function weapon.sword.use()
         elseif weapon.sword.currentCombo == 3 then
             weapon.sword.cooldown = true
             weapon.sword.downTimer = 0
-            weapon.sword.anim = weapon.sword.animations.slash
+            weapon.sword.anim = weapon.sword.animations.slash3
             weapon.sword.currentCombo = 1
         end
     end
