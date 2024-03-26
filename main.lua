@@ -8,7 +8,7 @@ require("source/controls/mouse")
 _G.game = require("game")
 _G.player = require("source/player")
 _G.playerCamera = require("source/camera")
-local controls = require("source/controls/controls")
+_G.controls = require("source/controls/controls")
 _G.keys = require("source/controls/keyboard")
 _G.controller = require("source/controls/controller")
 _G.enemymanager = require("source/enemymanager")
@@ -28,13 +28,6 @@ local scene = require("source/story/cutscene")
 local stone = require("source/enemies")
 _G.server = require("source/network/server")
 print("Done loading")
-
--- local fontScale = 16
--- local fontFile = "assets/textures/fonts/berylium bd.otf"
--- local fontData = love.filesystem.newFileData(fontFile)
--- local fontBlob = love.font.newRasterizer(fontData, fontScale, "normal", 0, 1)
--- _G.font = love.graphics.newFont(fontBlob)
--- love.graphics.setFont(font)
 
 player.load()
 worldManagement.load()

@@ -441,6 +441,7 @@ local function talk(id)
     game.state = 2.1
     story.currentStory = story.dialogue[story.id][story.data.current]
     story.arrayLength = #story.dialogue[story.id]
+    story.skiped = true
 end
 
 function worldManagement.spawn()
@@ -485,8 +486,7 @@ local function checkNpc(dt)
             if story.npc.interaction == false then
                 story.npc.who = "john"
                 story.npc.interactionAvalible = true
-                if love.keyboard.isDown("e") or (controller.joysticks and controller.joysticks:isGamepadDown("a")) then
-                    print(story.npc.interactionHold)
+                if love.keyboard.isDown(controls.keys.interact) or (controller.joysticks and controller.joysticks:isGamepadDown("a")) then
                     if story.npc.interactionHold >= 0.25 then
                         if story.data.storyTold.john1 == false then
                             talk("john1")
@@ -501,7 +501,7 @@ local function checkNpc(dt)
                     end
                 else
                     if story.npc.interactionHold > 0 then
-                        story.npc.interactionHold = story.npc.interactionHold - dt / 2
+                        story.npc.interactionHold = story.npc.interactionHold - dt / 4
                     else
                         story.npc.interactionHold = 0
                     end
