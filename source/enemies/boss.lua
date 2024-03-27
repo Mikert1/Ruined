@@ -23,7 +23,7 @@ function boss.new(x,y)
     instance.knockback = {
         x = 0,
         y = 0,
-        force = 150
+        force = 100
     }
     instance.arrowInvincible = false
     
