@@ -10,7 +10,7 @@ function boss.new(x,y)
     instance.offsetY = 6
     instance.height = 2
     world:add(instance, instance.x, instance.y, instance.width, instance.height)
-    instance.health = 10
+    instance.health = 40
     instance.speed = 40
     instance.isLeft = false
     instance.stepTimer = 5
@@ -35,7 +35,13 @@ function boss:update()
 end
 
 function boss:followPlayer() 
-
+    self.x, self.y = world:move(self, self.x, self.y)
+    self.collider = {
+        x = self.x - 0.5,
+        y = self.y - 0.5,
+        width = self.width + 1,
+        height = self.height + 1
+    }
 end
 
 function boss:draw()

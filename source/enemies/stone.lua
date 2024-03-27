@@ -61,7 +61,8 @@ function stone:followPlayer(playerX, playerY, dt)
         x = self.x - 0.5,
         y = self.y - 0.5,
         width = self.width + 1,
-        height = self.height + 1}
+        height = self.height + 1
+    }
 end
 
 function stone:update(dt)
