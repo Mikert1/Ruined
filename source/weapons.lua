@@ -267,12 +267,14 @@ function weapon.sword.use()
 
         local angle = math.atan2(mouseY - playerCenterY, mouseX - playerCenterX)
         print(angle)
-        local distanceFromPlayer = 45
-
-        local colliderDistance = distanceFromPlayer / 3
+        
+        local colliderDistance = 15
+        local imageDistance = 25
 
         weapon.sword.collider.x = playerCenterX + colliderDistance * math.cos(angle) - weapon.sword.collider.width / 2
         weapon.sword.collider.y = playerCenterY + colliderDistance * math.sin(angle) - weapon.sword.collider.height / 2
+        weapon.sword.slash.x = playerCenterX + imageDistance * math.cos(angle) - weapon.sword.collider.width / 2
+        weapon.sword.slash.y = playerCenterY + imageDistance * math.sin(angle) - weapon.sword.collider.height / 2
         weapon.sword.slash.direction = angle - 1.5
 
         if weapon.sword.currentCombo == 3 then
@@ -344,11 +346,14 @@ end
 
 function weapon.draw()
     if weapon.sword.slash.active == true then
-        weapon.sword.anim:draw(weapon.sword.slash.image, weapon.sword.collider.x + (36) - (weapon.sword.slash.image:getWidth() / 6 / 2), weapon.sword.collider.y + 2 + (weapon.sword.slash.image:getHeight() / 2 / 2), weapon.sword.slash.direction, 1, 1, weapon.sword.slash.image:getWidth() / 6 / 2, weapon.sword.slash.image:getHeight() / 2 / 2)
-        if keys.tab == true then
-            love.graphics.setColor(1,0,1)
-            love.graphics.rectangle("line", weapon.sword.collider.x, weapon.sword.collider.y, weapon.sword.collider.width, weapon.sword.collider.height)
-            love.graphics.setColor(1,1,1)
+        -- if the direction is negative
+        if weapon.sword.slash.direction < 0 and -1 or 0 then
+            weapon.sword.anim:draw(weapon.sword.slash.image, weapon.sword.slash.x + (36) - (weapon.sword.slash.image:getWidth() / 6 / 2), weapon.sword.slash.y + 2 + (weapon.sword.slash.image:getHeight() / 2 / 2), weapon.sword.slash.direction, 1, 1, weapon.sword.slash.image:getWidth() / 6 / 2, weapon.sword.slash.image:getHeight() / 2 / 2)
+            if keys.tab == true then
+                love.graphics.setColor(1,0,1)
+                love.graphics.rectangle("line", weapon.sword.collider.x, weapon.sword.collider.y, weapon.sword.collider.width, weapon.sword.collider.height)
+                love.graphics.setColor(1,1,1)
+            end
         end
     end
     if enemymanager.enemyGotHit > 0 then
@@ -370,6 +375,7 @@ function weapon.draw()
             speedNurf = hold * 2
             angleNurf = 0
         end
+        
         local mouseX, mouseY = playerCamera.cam:mousePosition()
         local centerX, centerY = player.x + player.width / 2, player.y + player.height / 2
 
@@ -386,6 +392,19 @@ function weapon.draw()
         love.graphics.setColor(1, 1 - weapon.bow.holdCounter / 2, 0, 0.2)
         love.graphics.arc("fill", centerX, centerY, radius, startAngle, endAngle)
         love.graphics.setColor(1, 1, 1)
+    end
+end
+
+function weapon.draw2L()
+    if weapon.sword.slash.active == true then
+        if weapon.sword.slash.direction > 0 and 1 then
+            weapon.sword.anim:draw(weapon.sword.slash.image, weapon.sword.slash.x + (36) - (weapon.sword.slash.image:getWidth() / 6 / 2), weapon.sword.slash.y + 2 + (weapon.sword.slash.image:getHeight() / 2 / 2), weapon.sword.slash.direction, 1, 1, weapon.sword.slash.image:getWidth() / 6 / 2, weapon.sword.slash.image:getHeight() / 2 / 2)
+            if keys.tab == true then
+                love.graphics.setColor(1,0,1)
+                love.graphics.rectangle("line", weapon.sword.collider.x, weapon.sword.collider.y, weapon.sword.collider.width, weapon.sword.collider.height)
+                love.graphics.setColor(1,1,1)
+            end
+        end
     end
 end
 return weapon

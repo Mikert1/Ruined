@@ -95,10 +95,11 @@ function love.draw()
         else
             love.graphics.setColor(255, 255, 255)
         end
+        weapon.draw()
         player:draw()
         worldManagement:draw2dLayer()
         enemymanager:draw()
-        weapon.draw()
+        weapon.draw2L()
         worldManagement:drawDarkness()
     playerCamera.cam:detach()
         love.graphics.setColor(255, 255, 255)
