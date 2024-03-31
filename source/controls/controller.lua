@@ -88,11 +88,14 @@ function controller.update(dt)
                             story.data.current = story.data.current + 1
                             story.dialogue.position = 0
                             story.dialogue.update()
+                            story.skiped = true
                         end
                     end
                 else
                     controller.buttonReleace.a = true
+                    story.skiped = false
                 end
+                print(story.skiped)
                 if controller.joysticks:isGamepadDown("start") then
                     if controller.buttonReleace.start == true then
                         controller.buttonReleace.start = false

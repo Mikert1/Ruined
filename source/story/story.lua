@@ -61,6 +61,7 @@ story.data.storyTold.john2 = false
 story.dialogue.text = string.sub(story.currentStory, 0, story.dialogue.position)
 story.dialogue.active = false
 story.lasttext = false
+story.skiped = false
 
 function story.load()
     story.data.current = 1
@@ -75,7 +76,7 @@ function story.slowShow(dt)
     else
         story.dialogue.position = story.dialogue.position + (dt * 2)
     end
-    if story.skiped == false and love.keyboard.isDown(controls.keys.interact) then
+    if story.skiped == false and love.keyboard.isDown(controls.keys.interact) or story.skiped == false and (controller.joysticks and controller.joysticks:isGamepadDown("a")) then
         story.dialogue.position = story.dialogue.length
     end
     story.dialogue.text = string.sub(story.currentStory, 0, story.dialogue.position)

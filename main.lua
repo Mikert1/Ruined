@@ -87,10 +87,13 @@ function love.draw()
         story.npc:draw()
         weapon.draw()
         enemymanager:draw()
+        -- Player
         player:draw()
+        --
         worldManagement:draw2dLayer()
         enemymanager:draw2L()
         weapon.draw2L()
+        
         worldManagement:drawDarkness()
     playerCamera.cam:detach()
         love.graphics.setColor(1, 1, 1)
