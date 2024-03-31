@@ -23,13 +23,13 @@ local title = require("source/screens/title")
 
 function controller.update(dt)
     if not (controller.vibrationL == 0) and not (controller.vibrationR == 0) then
-        controller.joysticks:setVibration(controller.vibrationL, controller.vibrationR)
         controller.vibrationL = controller.vibrationL - dt / 1.3
         controller.vibrationR = controller.vibrationR - dt / 1.3
         if controller.vibrationL <= 0 and controller.vibrationR <= 0 then
             controller.vibrationL = 0
             controller.vibrationR = 0
         end
+        controller.joysticks:setVibration(controller.vibrationL, controller.vibrationR)
     end
 
     if game.controlType == 0 then
@@ -95,7 +95,6 @@ function controller.update(dt)
                     controller.buttonReleace.a = true
                     story.skiped = false
                 end
-                print(story.skiped)
                 if controller.joysticks:isGamepadDown("start") then
                     if controller.buttonReleace.start == true then
                         controller.buttonReleace.start = false

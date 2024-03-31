@@ -93,13 +93,12 @@ function love.draw()
         worldManagement:draw2dLayer()
         enemymanager:draw2L()
         weapon.draw2L()
-        
+
         worldManagement:drawDarkness()
     playerCamera.cam:detach()
         love.graphics.setColor(1, 1, 1)
         story.dialogue:draw()
         if gui.esc == true then
-            print("Freeze")
             love.graphics.setColor(0, 0, 0, 0.5)
             love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
             love.graphics.setColor(1, 1, 1)
