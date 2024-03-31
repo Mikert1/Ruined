@@ -265,10 +265,6 @@ function weapon.sword.use()
         local playerCenterY = player.y + player.height / 2
         local angle
         if controller.joysticks then
-            if controller.joysticks:isGamepadDown("y") then
-                playerCenterX = playerCenterX + controller.joysticks:getGamepadAxis("rightx") * 10
-                playerCenterY = playerCenterY + controller.joysticks:getGamepadAxis("righty") * 10
-            end
             angle = math.atan2(controller.joysticks:getGamepadAxis("righty"), controller.joysticks:getGamepadAxis("rightx"))
         else
             local mouseX, mouseY = playerCamera.cam:mousePosition()
@@ -342,9 +338,13 @@ function weapon.bow.use()
         local playerCenterX = player.x + player.width / 2
         local playerCenterY = player.y + player.height / 2
         
-        local mouseX, mouseY = playerCamera.cam:mousePosition()
-        
-        local angle = math.atan2(mouseY - playerCenterY, mouseX - playerCenterX)
+        local angle
+        if controller.joysticks then
+            angle = math.atan2(controller.joysticks:getGamepadAxis("righty"), controller.joysticks:getGamepadAxis("rightx"))
+        else
+            local mouseX, mouseY = playerCamera.cam:mousePosition()
+            angle = math.atan2(mouseY - playerCenterY, mouseX - playerCenterX)
+        end
         
         local arrow = Projectile:new(playerCenterX, playerCenterY, weapon.bow.arrow.speed, angle, weapon.bow.arrow.image, weapon.bow.holdCounter)
         table.insert(projectiles, arrow)
@@ -383,20 +383,30 @@ function weapon.draw()
             speedNurf = hold * 2
             angleNurf = 0
         end
-        
-        local mouseX, mouseY = playerCamera.cam:mousePosition()
+        local angle
         local centerX, centerY = player.x + player.width / 2, player.y + player.height / 2
+        local dx, dy
+        if controller.joysticks then
+            angle = math.atan2(controller.joysticks:getGamepadAxis("righty"), controller.joysticks:getGamepadAxis("rightx"))
+            dx = controller.joysticks:getGamepadAxis("rightx")
+            dy = controller.joysticks:getGamepadAxis("righty")
+            local fixedAngle = math.pi / 4 + math.atan2(dy, dx) - 0.7853981633974483
+            local radius = (weapon.bow.arrow.speed * speedNurf) * 0.46
+            local scalingFactor = 1 - angleNurf / 1.66
+        else
+            local mouseX, mouseY = playerCamera.cam:mousePosition()
 
-        local dx = mouseX - centerX
-        local dy = mouseY - centerY
+            dx = mouseX - centerX
+            dy = mouseY - centerY
 
+        end
         local fixedAngle = math.pi / 4 + math.atan2(dy, dx) - 0.7853981633974483
         local radius = (weapon.bow.arrow.speed * speedNurf) * 0.46
         local scalingFactor = 1 - angleNurf / 1.66
 
         local startAngle = fixedAngle - (math.pi / 8) * scalingFactor
         local endAngle = fixedAngle + (math.pi / 8) * scalingFactor
-
+        
         love.graphics.setColor(1, 1 - weapon.bow.holdCounter / 2, 0, 0.2)
         love.graphics.arc("fill", centerX, centerY, radius, startAngle, endAngle)
         love.graphics.setColor(1, 1, 1)

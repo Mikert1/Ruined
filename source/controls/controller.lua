@@ -6,6 +6,7 @@ end
 controller.buttonReleace = {}
 controller.buttonReleace.triggerL = true
 controller.buttonReleace.x = true
+controller.buttonReleace.y = true
 controller.buttonReleace.a = true
 controller.buttonReleace.back = 0
 controller.buttonReleace.start = true
@@ -45,18 +46,24 @@ function controller.update(dt)
                         elseif weapon.equipment == 2 then
                             weapon.bow.charge()
                         end
-                    else
-                        if weapon.equipment == 2 then
-                            weapon.bow.charge()
-                        end
                     end
                 else
+                    if weapon.equipment == 2 and weapon.bow.hold == true then
+                        weapon.bow.use()
+                    end
                     controller.buttonReleace.triggerL = true
                 end
                 if controller.joysticks:isGamepadDown("y") then
-                    controller.vibrationL = 1
-                    controller.vibrationR = 1
-                    playerCamera.shake(10 * playerCamera.globalScale)
+                    if controller.buttonReleace.y == true then
+                        controller.buttonReleace.y = false
+                        if weapon.equipment == 1 then
+                            weapon.equipment = 2
+                        else
+                            weapon.equipment = 1
+                        end
+                    end
+                else
+                    controller.buttonReleace.y = true
                 end
                 if controller.joysticks:isGamepadDown("x") then
                     if controller.buttonReleace.x == true then
