@@ -46,6 +46,8 @@ function love.keypressed(key)
                 weapon.equipment = 2
             else
                 weapon.equipment = 1
+                weapon.bow.hold = false
+                weapon.bow.holdCounter = 0
             end
         end
         if key == "c" then
