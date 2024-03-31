@@ -7,8 +7,8 @@ function boss.new(x,y)
     instance.x = x
     instance.y = y
     instance.width = boss.image:getWidth()
-    instance.offsetY = 6
-    instance.height = 2
+    instance.height = 3
+    instance.offsetY = boss.image:getHeight() - instance.height
     world:add(instance, instance.x, instance.y, instance.width, instance.height)
     instance.health = 40
     instance.speed = 40
