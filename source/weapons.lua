@@ -149,7 +149,7 @@ function Projectile:update(dt, i)
             end
         end
     else
-        for _, enemy in ipairs(enemymanager.activeStones) do
+        for _, enemy in ipairs(enemymanager.activeEnemies) do
             if checkCollision(enemy, self.collider) then
                 if enemy.arrowInvincible then
                     weapon.dammage = 0.5
@@ -224,7 +224,7 @@ function weapon.sword.update(dt)
             weapon.dammageDisplay.timer = weapon.dammageDisplay.timer + dt
         end
     end
-    for _, enemy in ipairs(enemymanager.activeStones) do
+    for _, enemy in ipairs(enemymanager.activeEnemies) do
         enemy.x = enemy.x + enemy.knockback.x * dt
         enemy.y = enemy.y + enemy.knockback.y * dt
         enemy.knockback.x = enemy.knockback.x * 0.9
@@ -281,7 +281,7 @@ function weapon.sword.use()
             player.x, player.y = world:move(player, weapon.sword.collider.x + weapon.sword.collider.width / 2 - player.width / 2, weapon.sword.collider.y + weapon.sword.collider.height / 2)
         end
 
-        for _, enemy in ipairs(enemymanager.activeStones) do
+        for _, enemy in ipairs(enemymanager.activeEnemies) do
             if checkCollision(weapon.sword.collider, enemy.collider) then
                 enemymanager.enemyGotHit = 0.5
                 weapon.dammage = 1

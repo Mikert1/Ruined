@@ -73,7 +73,7 @@ end
 
 function player.update(dt)
     if player.gotHit == false then
-        for _, enemy in ipairs(enemymanager.activeStones) do
+        for _, enemy in ipairs(enemymanager.activeEnemies) do
             if checkCollision(player, enemy) then
                 player.hearts = player.hearts - 1
                 player.gotHit = true

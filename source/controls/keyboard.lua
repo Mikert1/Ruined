@@ -115,7 +115,7 @@ function love.keypressed(key)
     end
     if key == "f9" then
         local newStone = stone.new(love.math.random(1, 800),love.math.random(1, 157))
-        table.insert(enemymanager.activeStones, newStone)
+        table.insert(enemymanager.activeEnemies, newStone)
     end
     if key == "f10" then
         love._openConsole()
