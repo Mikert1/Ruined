@@ -1,5 +1,6 @@
 local enemymanager = {}
-local stone = require("source/enemies")
+local stone = require("source/enemies/stone")
+local boss = require("source/enemies/boss")
 local worldManagement = require("source/worlds")
 enemymanager.enemyGotHit = 0
 

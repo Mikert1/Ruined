@@ -7,6 +7,7 @@ local story = require("source/story/story")
 local shader = require("source/shaders")
 local gui = require("source/gui")
 local stone
+local boss
 local file
 _G.world = bump.newWorld(16)
 _G.village = sti("assets/maps/village.lua", { "bump" })
@@ -41,7 +42,8 @@ shader.light:send("lightPositions", unpack(lightPositions))
 shader.light:send("lightRadii", unpack(lightRadii))
 
 function worldManagement.load()
-    stone = require("source/enemies")
+    stone = require("source/enemies/stone")
+    boss = require("source/enemies/boss")
     file = require("source/data")
 end
 
@@ -458,6 +460,10 @@ function worldManagement.spawn()
             if object.name == "stone" then
                 local newStone = stone.new(object.x, object.y)
                 table.insert(enemymanager.activeStones, newStone)
+            end
+            if object.name == "boss" then
+                local newBoss = boss.new(object.x, object.y)
+                table.insert(enemymanager.activeStones, newBoss)
             end
         end
     end
