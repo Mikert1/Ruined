@@ -55,7 +55,6 @@ function boss:draw()
         love.graphics.rectangle("line", self.collider.x, self.collider.y, self.collider.width, self.collider.height)
         love.graphics.setColor(1, 1, 1)
     end
-    print(self.health)
 end
 
 return boss

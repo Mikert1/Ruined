@@ -266,9 +266,10 @@ function weapon.sword.use()
         local mouseX, mouseY = playerCamera.cam:mousePosition()
 
         local angle = math.atan2(mouseY - playerCenterY, mouseX - playerCenterX)
+        print(angle)
         local distanceFromPlayer = 45
 
-        local colliderDistance = distanceFromPlayer / 2
+        local colliderDistance = distanceFromPlayer / 3
 
         weapon.sword.collider.x = playerCenterX + colliderDistance * math.cos(angle) - weapon.sword.collider.width / 2
         weapon.sword.collider.y = playerCenterY + colliderDistance * math.sin(angle) - weapon.sword.collider.height / 2
