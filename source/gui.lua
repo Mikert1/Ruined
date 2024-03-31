@@ -63,6 +63,12 @@ function gui.load()
 end
 
 function gui.update(dt)
+    if not love.window.hasFocus() then
+        keys.esc = true
+        gui.esc = true
+        player.noMove = true
+        game.freeze = true
+    end
     if gui.welcome.timer > 0 then
         gui.welcome.timer = gui.welcome.timer - dt
         gui.welcome.animations.region1:update(dt)

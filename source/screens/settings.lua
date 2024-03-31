@@ -1,6 +1,11 @@
 local settings = {}
 local anim8 = require("assets/library/animations")
 local title = require("source/screens/title")
+settings.mainButtons = {}
+settings.mainButtons.video = love.graphics.newImage("assets/textures/gui/settings/video.png")
+settings.mainButtons.controls = love.graphics.newImage("assets/textures/gui/settings/controls.png")
+settings.mainButtons.audio = {}
+settings.mainButtons.game = {}
 
 
 function settings.update()
@@ -22,7 +27,8 @@ function settings.draw()
     )
     love.graphics.setColor(255,255,255)
     if title.texture == false then
-
+        love.graphics.draw(settings.mainButtons.video, love.graphics.getWidth() / 2 - (126 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (88 * playerCamera.globalScale) , nil, playerCamera.globalScale * 0.9)
+        love.graphics.draw(settings.mainButtons.controls, love.graphics.getWidth() / 2 - (80 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (88 * playerCamera.globalScale) , nil, playerCamera.globalScale * 0.9)
         love.graphics.print("Developer Mode", love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (66 * playerCamera.globalScale) , nil, playerCamera.globalScale * 0.5)
         if savedSettings.devmode == true then
             title.button.normal.menu.button2:draw(title.button.normal.image, love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (55 * playerCamera.globalScale) , nil, playerCamera.globalScale)
