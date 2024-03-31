@@ -25,7 +25,7 @@ function settings.draw()
         love.graphics.getHeight() / 2 + (59 * playerCamera.globalScale) + (font:getHeight("Back") / 2 * playerCamera.globalScale),
         nil, playerCamera.globalScale
     )
-    love.graphics.setColor(255,255,255)
+    love.graphics.setColor(1, 1, 1)
     if title.texture == false then
         love.graphics.draw(settings.mainButtons.game, love.graphics.getWidth() / 2 - (126 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (88 * playerCamera.globalScale) , nil, playerCamera.globalScale * 0.9)
         love.graphics.draw(settings.mainButtons.video, love.graphics.getWidth() / 2 - (80 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (88 * playerCamera.globalScale) , nil, playerCamera.globalScale * 0.9)
@@ -64,7 +64,7 @@ function settings.draw()
         love.graphics.print("Drop your file here.", love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (85 * playerCamera.globalScale))
         love.graphics.print("image 95x105 pixels (19x21 for every animation frame)", love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (80 * playerCamera.globalScale))
     end
-    love.graphics.setColor(255,255,255)
+    love.graphics.setColor(1, 1, 1)
 end
 
 return settings

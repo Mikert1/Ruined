@@ -184,7 +184,7 @@ function gui:draw()
         title.button.normal.menu.button2:draw(title.button.normal.image, love.graphics.getWidth() / 2 - (40 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (0 * playerCamera.globalScale), nil, playerCamera.globalScale)
         title.button.red.menu.button1:draw(title.button.red.image, love.graphics.getWidth() / 2 - (40 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (25 * playerCamera.globalScale), nil, playerCamera.globalScale)
         if not(title.button.red.menu.button1 == title.button.red.animations.normal) then
-            love.graphics.setColor(255/255, 0/255, 0/255)
+            love.graphics.setColor(1, 0, 0)
         else
             love.graphics.setColor(0.15, 0.15, 0.15)
         end
@@ -202,11 +202,7 @@ function gui:draw()
         end
         love.graphics.print(gui.text.resume, love.graphics.getWidth() / 2 - (font:getWidth(gui.text.resume) / 2 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (24 * playerCamera.globalScale), nil, playerCamera.globalScale)
     end
-    if game.freeze == false then
-        love.graphics.setColor(255, 255, 255)
-    else
-        love.graphics.setColor(60/255, 60/255, 60/255)
-    end
+    love.graphics.setColor(1, 1, 1)
     gui.healthbar.anim:draw(gui.healthbar.sprite, 0, love.graphics.getHeight() - (16.5 * playerCamera.globalScale) - gui.hide.health.y * playerCamera.globalScale, nil, playerCamera.globalScale * 1.2)
     gui.focusbar.anim:draw(gui.focusbar.sprite, love.graphics.getWidth() - (93.5 * playerCamera.globalScale), love.graphics.getHeight() - (16.5 * playerCamera.globalScale) - gui.hide.sword.y * playerCamera.globalScale, nil, playerCamera.globalScale * 1.2)
     -- if gui.welcome.timer > 0 then
@@ -218,15 +214,15 @@ function gui:draw()
             love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
         end
         if player.isMoving == true then
-            love.graphics.setColor(255, 255, 255, 0.5)
+            love.graphics.setColor(1, 1, 1, 0.5)
         else
-            love.graphics.setColor(255, 255, 255)
+            love.graphics.setColor(1, 1, 1)
         end
         love.graphics.draw(gui.mapImageBackground, love.graphics.getWidth() / 2 - (gui.mapImageBackground:getWidth() / 2 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (gui.mapImageBackground:getHeight() / 2 * playerCamera.globalScale), nil, playerCamera.globalScale)
         love.graphics.draw(gui.mapImage, love.graphics.getWidth() / 2 - (gui.mapImage:getWidth() / 2 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (gui.mapImage:getHeight() / 2 * playerCamera.globalScale), nil, playerCamera.globalScale)
-        love.graphics.setColor(0, 225, 225)
+        love.graphics.setColor(0, 1, 1)
         love.graphics.rectangle("fill", love.graphics.getWidth() / 2 - (1 / 2 * playerCamera.globalScale) + (player.x / 16 * playerCamera.globalScale) + (gui.mapWorld.x * playerCamera.globalScale) - (gui.mapImage:getWidth() / 2 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (1 / 2 * playerCamera.globalScale) + (player.y / 16 * playerCamera.globalScale) + (gui.mapWorld.y * playerCamera.globalScale) - (gui.mapImage:getHeight() / 2 * playerCamera.globalScale), 5, 5, playerCamera.globalScale)
-        love.graphics.setColor(255, 255, 255)
     end
+    love.graphics.setColor(1, 1, 1)
 end
 return gui
