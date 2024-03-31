@@ -34,7 +34,7 @@ function boss:update()
 
 end
 
-function boss:followPlayer() 
+function boss:walk() 
     self.x, self.y = world:move(self, self.x, self.y)
     self.collider = {
         x = self.x - 0.5,

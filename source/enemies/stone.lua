@@ -30,7 +30,7 @@ function stone.new(x,y)
     return instance
 end
 
-function stone:followPlayer(playerX, playerY, dt)
+function stone:walk(playerX, playerY, dt)
     local dx = playerX - self.x
     local dy = (playerY + self.offsetY) - self.y
     local distance = math.sqrt(dx * dx + dy * dy)

@@ -16,7 +16,7 @@ end
 function enemymanager:update(dt)
     for _, entity in ipairs(self.activeEnemies) do
         entity:update(dt)
-        entity:followPlayer(player.x, player.y - 6, dt)
+        entity:walk(player.x, player.y - 6, dt)
     end
     for i, entity in ipairs(self.activeEnemies) do
         if entity.health <= 0 then
