@@ -93,16 +93,21 @@ function love.keypressed(key)
         data = file.save()
     end
     if key == "f4" then
-        if keys.f4 == 2 then
-            print("Enabled Normal view")
+        if keys.f4 == 3 then
+            print("Enabled Player view")
             keys.f4 = 0
         else
             if keys.f4 == 0 then
-                print("Enabled Map view")
+                print("Enabled Player view (degrid)")
                 keys.f4 = 1
             else
-                print("Enabled NoGrid view")
-                keys.f4 = 2
+                if keys.f4 == 1 then
+                    print("Enabled Map view")
+                    keys.f4 = 2
+                else
+                    print("Enabled Map view (degrid)")
+                    keys.f4 = 3
+                end
             end
         end
     end

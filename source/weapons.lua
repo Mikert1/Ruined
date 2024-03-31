@@ -266,7 +266,6 @@ function weapon.sword.use()
         local mouseX, mouseY = playerCamera.cam:mousePosition()
 
         local angle = math.atan2(mouseY - playerCenterY, mouseX - playerCenterX)
-        print(angle)
         
         local colliderDistance = 15
         local imageDistance = 25
