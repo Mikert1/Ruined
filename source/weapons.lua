@@ -263,9 +263,18 @@ function weapon.sword.use()
         weapon.sword.slash.active = true
         local playerCenterX = player.x + player.width / 2
         local playerCenterY = player.y + player.height / 2
-        local mouseX, mouseY = playerCamera.cam:mousePosition()
+        local angle
+        if controller.joysticks then
+            if controller.joysticks:isGamepadDown("y") then
+                playerCenterX = playerCenterX + controller.joysticks:getGamepadAxis("rightx") * 10
+                playerCenterY = playerCenterY + controller.joysticks:getGamepadAxis("righty") * 10
+            end
+            angle = math.atan2(controller.joysticks:getGamepadAxis("righty"), controller.joysticks:getGamepadAxis("rightx"))
+        else
+            local mouseX, mouseY = playerCamera.cam:mousePosition()
+            angle = math.atan2(mouseY - playerCenterY, mouseX - playerCenterX)
+        end
 
-        local angle = math.atan2(mouseY - playerCenterY, mouseX - playerCenterX)
         
         local colliderDistance = 15
         local imageDistance = 25
