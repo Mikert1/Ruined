@@ -50,7 +50,7 @@ function playerCamera.follow(dt)
     playerCamera.realScale.x = (playerCamera.globalScaleFactor / 1200) * love.graphics.getWidth()
     playerCamera.realScale.y = (playerCamera.globalScaleFactor / 1200) * love.graphics.getHeight()
     playerCamera.cam:zoomTo(playerCamera.globalScale)
-    if keys.f4 == 1 then -- debugg keys remove when done
+    if keys.f4 == 2 or keys.f4 == 3 then -- debugg keys remove when done
         playerCamera.cam:zoomTo(1)
     end
     local w = love.graphics.getWidth()
@@ -59,7 +59,7 @@ function playerCamera.follow(dt)
     --local w, h = love.graphics.getDimensions()
     w, h = w / playerCamera.globalScale, h / playerCamera.globalScale
     
-    if keys.f4 == 0 then
+    if keys.f4 == 0 or keys.f4 == 2 then -- debugg keys remove when done
         if playerCamera.cam.x < w/2 then
             playerCamera.cam.x = w/2
         end

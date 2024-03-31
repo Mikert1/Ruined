@@ -77,7 +77,7 @@ function debug:draw()
 
         -- dot at 0,0
         love.graphics.rectangle("fill", love.graphics.getWidth() / 2, love.graphics.getHeight() / 2, 1, 1)
-        if keys.f4 == 1 then
+        if keys.f4 == 2 or keys.f4 == 3 then
             love.graphics.rectangle("line", (love.graphics.getWidth() / 2) - love.graphics.getWidth() / 2 / playerCamera.globalScale, (love.graphics.getHeight() / 2) - love.graphics.getHeight() / 2 / playerCamera.globalScale, love.graphics.getWidth() / playerCamera.globalScale, love.graphics.getHeight() / playerCamera.globalScale)
         end
 

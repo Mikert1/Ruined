@@ -6,6 +6,7 @@ end
 controller.buttonReleace = {}
 controller.buttonReleace.triggerL = true
 controller.buttonReleace.x = true
+controller.buttonReleace.y = true
 controller.buttonReleace.a = true
 controller.buttonReleace.back = 0
 controller.buttonReleace.start = true
@@ -22,13 +23,13 @@ local title = require("source/screens/title")
 
 function controller.update(dt)
     if not (controller.vibrationL == 0) and not (controller.vibrationR == 0) then
-        controller.joysticks:setVibration(controller.vibrationL, controller.vibrationR)
         controller.vibrationL = controller.vibrationL - dt / 1.3
         controller.vibrationR = controller.vibrationR - dt / 1.3
         if controller.vibrationL <= 0 and controller.vibrationR <= 0 then
             controller.vibrationL = 0
             controller.vibrationR = 0
         end
+        controller.joysticks:setVibration(controller.vibrationL, controller.vibrationR)
     end
 
     if game.controlType == 0 then
@@ -45,18 +46,26 @@ function controller.update(dt)
                         elseif weapon.equipment == 2 then
                             weapon.bow.charge()
                         end
-                    else
-                        if weapon.equipment == 2 then
-                            weapon.bow.charge()
-                        end
                     end
                 else
+                    if weapon.equipment == 2 and weapon.bow.hold == true then
+                        weapon.bow.use()
+                    end
                     controller.buttonReleace.triggerL = true
                 end
                 if controller.joysticks:isGamepadDown("y") then
-                    controller.vibrationL = 1
-                    controller.vibrationR = 1
-                    playerCamera.shake(10 * playerCamera.globalScale)
+                    if controller.buttonReleace.y == true then
+                        controller.buttonReleace.y = false
+                        if weapon.equipment == 1 then
+                            weapon.equipment = 2
+                        else
+                            weapon.equipment = 1
+                            weapon.bow.hold = false
+                            weapon.bow.holdCounter = 0
+                        end
+                    end
+                else
+                    controller.buttonReleace.y = true
                 end
                 if controller.joysticks:isGamepadDown("x") then
                     if controller.buttonReleace.x == true then
@@ -79,10 +88,12 @@ function controller.update(dt)
                             story.data.current = story.data.current + 1
                             story.dialogue.position = 0
                             story.dialogue.update()
+                            story.skiped = true
                         end
                     end
                 else
                     controller.buttonReleace.a = true
+                    story.skiped = false
                 end
                 if controller.joysticks:isGamepadDown("start") then
                     if controller.buttonReleace.start == true then
@@ -104,6 +115,9 @@ function controller.update(dt)
                 end
             end
             if controller.joysticks:isGamepadDown("back") then
+                if title.mikert.showed == false then
+                    title.mikert.showed = true
+                end
                 if game.state == 1 then
                     file.filenumber = 1
                     game.state = 0

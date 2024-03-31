@@ -81,30 +81,29 @@ function love.draw()
     if player.focus == true then 
         love.graphics.setShader(shader.focus)
     end
-    if game.freeze == true then
-        love.graphics.setColor(100/255, 100/255, 100/255)
-    else
-        love.graphics.setColor(255, 255, 255)
-    end
     playerCamera.cam:attach()
         worldManagement:draw()
         debug.world:draw()
         story.npc:draw()
-        if game.freeze == true then
-            love.graphics.setColor(100/255, 100/255, 100/255)
-        else
-            love.graphics.setColor(255, 255, 255)
-        end
         weapon.draw()
-        player:draw()
-        worldManagement:draw2dLayer()
         enemymanager:draw()
+        -- Player
+        player:draw()
+        --
+        worldManagement:draw2dLayer()
+        enemymanager:draw2L()
         weapon.draw2L()
+
         worldManagement:drawDarkness()
     playerCamera.cam:detach()
-        love.graphics.setColor(255, 255, 255)
-        gui:draw()
+        love.graphics.setColor(1, 1, 1)
         story.dialogue:draw()
+        if gui.esc == true then
+            love.graphics.setColor(0, 0, 0, 0.5)
+            love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
+            love.graphics.setColor(1, 1, 1)
+        end
+        gui:draw()
         title:draw()
         debug:draw()
         file:draw()

@@ -149,7 +149,7 @@ function Projectile:update(dt, i)
             end
         end
     else
-        for _, enemy in ipairs(enemymanager.activeStones) do
+        for _, enemy in ipairs(enemymanager.activeEnemies) do
             if checkCollision(enemy, self.collider) then
                 if enemy.arrowInvincible then
                     weapon.dammage = 0.5
@@ -224,7 +224,7 @@ function weapon.sword.update(dt)
             weapon.dammageDisplay.timer = weapon.dammageDisplay.timer + dt
         end
     end
-    for _, enemy in ipairs(enemymanager.activeStones) do
+    for _, enemy in ipairs(enemymanager.activeEnemies) do
         enemy.x = enemy.x + enemy.knockback.x * dt
         enemy.y = enemy.y + enemy.knockback.y * dt
         enemy.knockback.x = enemy.knockback.x * 0.9
@@ -263,10 +263,14 @@ function weapon.sword.use()
         weapon.sword.slash.active = true
         local playerCenterX = player.x + player.width / 2
         local playerCenterY = player.y + player.height / 2
-        local mouseX, mouseY = playerCamera.cam:mousePosition()
+        local angle
+        if controller.joysticks then
+            angle = math.atan2(controller.joysticks:getGamepadAxis("righty"), controller.joysticks:getGamepadAxis("rightx"))
+        else
+            local mouseX, mouseY = playerCamera.cam:mousePosition()
+            angle = math.atan2(mouseY - playerCenterY, mouseX - playerCenterX)
+        end
 
-        local angle = math.atan2(mouseY - playerCenterY, mouseX - playerCenterX)
-        print(angle)
         
         local colliderDistance = 15
         local imageDistance = 25
@@ -281,7 +285,7 @@ function weapon.sword.use()
             player.x, player.y = world:move(player, weapon.sword.collider.x + weapon.sword.collider.width / 2 - player.width / 2, weapon.sword.collider.y + weapon.sword.collider.height / 2)
         end
 
-        for _, enemy in ipairs(enemymanager.activeStones) do
+        for _, enemy in ipairs(enemymanager.activeEnemies) do
             if checkCollision(weapon.sword.collider, enemy.collider) then
                 enemymanager.enemyGotHit = 0.5
                 weapon.dammage = 1
@@ -334,9 +338,13 @@ function weapon.bow.use()
         local playerCenterX = player.x + player.width / 2
         local playerCenterY = player.y + player.height / 2
         
-        local mouseX, mouseY = playerCamera.cam:mousePosition()
-        
-        local angle = math.atan2(mouseY - playerCenterY, mouseX - playerCenterX)
+        local angle
+        if controller.joysticks then
+            angle = math.atan2(controller.joysticks:getGamepadAxis("righty"), controller.joysticks:getGamepadAxis("rightx"))
+        else
+            local mouseX, mouseY = playerCamera.cam:mousePosition()
+            angle = math.atan2(mouseY - playerCenterY, mouseX - playerCenterX)
+        end
         
         local arrow = Projectile:new(playerCenterX, playerCenterY, weapon.bow.arrow.speed, angle, weapon.bow.arrow.image, weapon.bow.holdCounter)
         table.insert(projectiles, arrow)
@@ -375,20 +383,30 @@ function weapon.draw()
             speedNurf = hold * 2
             angleNurf = 0
         end
-        
-        local mouseX, mouseY = playerCamera.cam:mousePosition()
+        local angle
         local centerX, centerY = player.x + player.width / 2, player.y + player.height / 2
+        local dx, dy
+        if controller.joysticks then
+            angle = math.atan2(controller.joysticks:getGamepadAxis("righty"), controller.joysticks:getGamepadAxis("rightx"))
+            dx = controller.joysticks:getGamepadAxis("rightx")
+            dy = controller.joysticks:getGamepadAxis("righty")
+            local fixedAngle = math.pi / 4 + math.atan2(dy, dx) - 0.7853981633974483
+            local radius = (weapon.bow.arrow.speed * speedNurf) * 0.46
+            local scalingFactor = 1 - angleNurf / 1.66
+        else
+            local mouseX, mouseY = playerCamera.cam:mousePosition()
 
-        local dx = mouseX - centerX
-        local dy = mouseY - centerY
+            dx = mouseX - centerX
+            dy = mouseY - centerY
 
+        end
         local fixedAngle = math.pi / 4 + math.atan2(dy, dx) - 0.7853981633974483
         local radius = (weapon.bow.arrow.speed * speedNurf) * 0.46
         local scalingFactor = 1 - angleNurf / 1.66
 
         local startAngle = fixedAngle - (math.pi / 8) * scalingFactor
         local endAngle = fixedAngle + (math.pi / 8) * scalingFactor
-
+        
         love.graphics.setColor(1, 1 - weapon.bow.holdCounter / 2, 0, 0.2)
         love.graphics.arc("fill", centerX, centerY, radius, startAngle, endAngle)
         love.graphics.setColor(1, 1, 1)

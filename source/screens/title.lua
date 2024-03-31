@@ -504,7 +504,7 @@ function title:draw()
                 love.graphics.getHeight() / 2 + (59 * playerCamera.globalScale) + (font:getHeight("Back") / 2 * playerCamera.globalScale),
                 nil, playerCamera.globalScale
             )
-            love.graphics.setColor(255,255,255)
+            love.graphics.setColor(1, 1, 1)
         elseif title.state == 4 then
             settings.draw()
         end

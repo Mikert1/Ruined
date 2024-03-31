@@ -389,7 +389,7 @@ function love.mousepressed(x, y, button, istouch)
 end
 
 function love.mousereleased(x, y, button, istouch, presses)
-    if button == 1 and weapon.equipment == 2 then
+    if button == 1 and weapon.equipment == 2 and weapon.bow.hold == true then
         weapon.bow.use()
     end
 end
