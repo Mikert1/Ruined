@@ -116,6 +116,9 @@ function controller.update(dt)
                 end
             end
             if controller.joysticks:isGamepadDown("back") then
+                if title.mikert.showed == false then
+                    title.mikert.showed = true
+                end
                 if game.state == 1 then
                     file.filenumber = 1
                     game.state = 0
