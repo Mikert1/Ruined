@@ -202,7 +202,6 @@ function weapon.sword.update(dt)
         weapon.sword.combo.timer = 0
         weapon.sword.combo.current = 1
     end
-    print(weapon.sword.combo.timer)
     if enemymanager.enemyGotHit >= 0 then
         enemymanager.enemyGotHit = enemymanager.enemyGotHit - dt
     end
