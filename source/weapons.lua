@@ -269,7 +269,6 @@ end
 
 function weapon.sword.use()
     if weapon.sword.slash.active == false and weapon.sword.cooldown == false and player.item.sword == true then
-        weapon.sword.combo.timer = 1
         weapon.sword.anim:gotoFrame(1)
         weapon.sword.slash.active = true
         local playerCenterX = player.x + player.width / 2
@@ -298,6 +297,7 @@ function weapon.sword.use()
 
         for _, enemy in ipairs(enemymanager.activeEnemies) do
             if checkCollision(weapon.sword.collider, enemy.collider) then
+                weapon.sword.combo.timer = 1
                 enemymanager.enemyGotHit = 0.5
                 weapon.dammage = 1
                 if weapon.sword.combo.current == 3 then
