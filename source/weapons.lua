@@ -18,8 +18,11 @@ weapon.sword.animations.slash3 = anim8.newAnimation( weapon.sword.grid2('1-6', 2
 weapon.sword.anim = weapon.sword.animations.slash
 weapon.sword.prepSlash = {}
 weapon.sword.prepSlash.active = false
-weapon.sword.maxCombo = 3
-weapon.sword.currentCombo = 1
+weapon.sword.combo = {
+    timer = 0,
+    max = 3,
+    current = 1
+}
 weapon.sword.cooldown = false
 weapon.sword.downTimer = 0
 weapon.sword.collider = {
@@ -193,6 +196,13 @@ function Projectile:draw()
 end
 
 function weapon.sword.update(dt)
+    if weapon.sword.combo.timer > 0 then
+        weapon.sword.combo.timer = weapon.sword.combo.timer - dt
+    else
+        weapon.sword.combo.timer = 0
+        weapon.sword.combo.current = 1
+    end
+    print(weapon.sword.combo.timer)
     if enemymanager.enemyGotHit >= 0 then
         enemymanager.enemyGotHit = enemymanager.enemyGotHit - dt
     end
@@ -259,6 +269,7 @@ end
 
 function weapon.sword.use()
     if weapon.sword.slash.active == false and weapon.sword.cooldown == false and player.item.sword == true then
+        weapon.sword.combo.timer = 1
         weapon.sword.anim:gotoFrame(1)
         weapon.sword.slash.active = true
         local playerCenterX = player.x + player.width / 2
@@ -281,7 +292,7 @@ function weapon.sword.use()
         weapon.sword.slash.y = playerCenterY + imageDistance * math.sin(angle) - weapon.sword.collider.height / 2
         weapon.sword.slash.direction = angle - 1.5
 
-        if weapon.sword.currentCombo == 3 then
+        if weapon.sword.combo.current == 3 then
             player.x, player.y = world:move(player, weapon.sword.collider.x + weapon.sword.collider.width / 2 - player.width / 2, weapon.sword.collider.y + weapon.sword.collider.height / 2)
         end
 
@@ -289,12 +300,12 @@ function weapon.sword.use()
             if checkCollision(weapon.sword.collider, enemy.collider) then
                 enemymanager.enemyGotHit = 0.5
                 weapon.dammage = 1
-                if weapon.sword.currentCombo == 3 then
+                if weapon.sword.combo.current == 3 then
                     weapon.dammage = 2
                 end
                 if player.focus == true then
                     weapon.dammage = 2
-                    if weapon.sword.currentCombo == 3 then
+                    if weapon.sword.combo.current == 3 then
                         weapon.dammage = 4
                     end
                 end
@@ -308,17 +319,17 @@ function weapon.sword.use()
         end
         player.speed = 2 * player.speedMultiplier
         player.sideSpeed = 1.54213562 * 0.80
-        if weapon.sword.currentCombo == 1 then
+        if weapon.sword.combo.current == 1 then
             weapon.sword.anim = weapon.sword.animations.slash
-            weapon.sword.currentCombo = 2
-        elseif weapon.sword.currentCombo == 2 then
+            weapon.sword.combo.current = 2
+        elseif weapon.sword.combo.current == 2 then
             weapon.sword.anim = weapon.sword.animations.slash2
-            weapon.sword.currentCombo = 3
-        elseif weapon.sword.currentCombo == 3 then
+            weapon.sword.combo.current = 3
+        elseif weapon.sword.combo.current == 3 then
             weapon.sword.cooldown = true
             weapon.sword.downTimer = 0
             weapon.sword.anim = weapon.sword.animations.slash3
-            weapon.sword.currentCombo = 1
+            weapon.sword.combo.current = 1
         end
     end
 end
