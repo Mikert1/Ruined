@@ -29,9 +29,10 @@ saveStone.imageActive = love.graphics.newImage("assets/textures/world/structures
 saveStone.imageInactive = love.graphics.newImage("assets/textures/world/structures/inactiveStone.png")
 saveStone.image = saveStone.imageInactive
 
-structures = {}
+local structures = {}
 structures.s1 = {
     image = love.graphics.newImage("assets/textures/world/structures/tent.png"),
+    imageBackground = love.graphics.newImage("assets/textures/world/structures/tentBackground.png")
 }
 local playerCircleRadius = 10
 local lightPositions = {{0, 0}, {0, 0}}
@@ -217,7 +218,7 @@ local function saveStones()
     end
 end
 
-local function Structures()
+local function Structures(drawLayer)
 
     if worldManagement.thisWorld == "Snow" then
         for _, layer in ipairs(_G.currentWorld.layers) do
@@ -229,7 +230,11 @@ local function Structures()
         if correctLayer then
             for _, object in ipairs(correctLayer.objects) do
                 if object.name == "structure1" then
-                    love.graphics.draw(structures.s1.image, object.x, object.y)
+                    if drawLayer == 1 then
+                        love.graphics.draw(structures.s1.imageBackground, object.x, object.y)
+                    else
+                        love.graphics.draw(structures.s1.image, object.x, object.y)
+                    end
                 end
             end
         end
@@ -620,13 +625,14 @@ function worldManagement:draw()
     love.graphics.setColor(0, 1, 1, 0.5)
     love.graphics.circle("line", saveStone.x + 13.5, saveStone.y + 31, saveStone.radius)
     love.graphics.setColor(1, 1, 1)
-    Structures()
+    Structures(1)
 end
 
 function worldManagement:draw2dLayer()
     if saveStone.y + 30 > player.y then
         love.graphics.draw(saveStone.image, saveStone.x, saveStone.y)
     end
+    Structures()
 end
 
 function worldManagement:drawDarkness()
