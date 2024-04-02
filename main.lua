@@ -93,7 +93,7 @@ function love.draw()
         worldManagement:draw2dLayer()
         enemymanager:draw2L()
         weapon.draw2L()
-        --story.npc:draw2L()
+        story.npc:draw2L()
 
         worldManagement:drawDarkness()
     playerCamera.cam:detach()
