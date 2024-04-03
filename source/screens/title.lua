@@ -322,7 +322,6 @@ function title:draw()
         if title.mikert.timer < 5 then
             love.graphics.setColor(1, 1, 1, 1 -( title.mikert.timer -3) / 2)
             title.mikert.animation:draw(title.mikert.image, (love.graphics.getWidth() / 2) - (884 / 2 * (playerCamera.globalScale / 5)), (love.graphics.getHeight() / 2) - (188 / 2 * (playerCamera.globalScale / 5)), nil, playerCamera.globalScale / 5)
-            love.graphics.draw(title.mikert.image)
         else
             if title.mikert.timer < 7 then
                 love.graphics.setColor(1, 1, 1, 0 + (title.mikert.timer - 5) / 2)
