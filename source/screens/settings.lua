@@ -40,7 +40,7 @@ function settings.draw()
             end
             love.graphics.print("True", love.graphics.getWidth() / 2 - (102 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (55 * playerCamera.globalScale), nil, playerCamera.globalScale)
         else
-            title.button.red.menu.button2:draw(title.button.red.image, love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (60 * playerCamera.globalScale) , nil, playerCamera.globalScale)
+            title.button.red.menu.button2:draw(title.button.red.image, love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (55 * playerCamera.globalScale) , nil, playerCamera.globalScale)
             if not(title.button.red.menu.button2 == title.button.red.animations.normal) then
                 love.graphics.setColor(1, 0, 0)
             else

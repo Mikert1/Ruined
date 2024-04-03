@@ -143,7 +143,7 @@ function title.load()
     title.text.button3 = "Play"
     title.mikert = {}
     title.mikert.image = love.graphics.newImage("assets/textures/gui/title/mikert-logo.png")
-    title.mikert.grid = anim8.newGrid( 884, 188, title.mikert.image:getWidth(), title.mikert.image:getHeight() )
+    title.mikert.grid = anim8.newGrid( 884, 188, title.mikert.image:getWidth(), title.mikert.image:getHeight())
     title.mikert.animation = anim8.newAnimation( title.mikert.grid('1-30', 1), 0.1 )
     title.mikert.timer = 0
     title.mikert.showed = false
@@ -322,6 +322,7 @@ function title:draw()
         if title.mikert.timer < 5 then
             love.graphics.setColor(1, 1, 1, 1 -( title.mikert.timer -3) / 2)
             title.mikert.animation:draw(title.mikert.image, (love.graphics.getWidth() / 2) - (884 / 2 * (playerCamera.globalScale / 5)), (love.graphics.getHeight() / 2) - (188 / 2 * (playerCamera.globalScale / 5)), nil, playerCamera.globalScale / 5)
+            love.graphics.draw(title.mikert.image)
         else
             if title.mikert.timer < 7 then
                 love.graphics.setColor(1, 1, 1, 0 + (title.mikert.timer - 5) / 2)
