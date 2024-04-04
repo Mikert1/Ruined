@@ -24,7 +24,7 @@ function button.new(x, y, animations, text, font)
 end
 
 function button:draw(image, x, y)
-    self.animations:draw(self.image, love.graphics.getWidth() / 2 - (x * playerCamera.globalScale), love.graphics.getHeight() / 2 - (y * playerCamera.globalScale) , nil, playerCamera.globalScale)
+    self.animations:draw(self.image, love.graphics.getWidth() / 2 + (x * playerCamera.globalScale), love.graphics.getHeight() / 2 + (y * playerCamera.globalScale) , nil, playerCamera.globalScale)
 end
 
 function button:update(x, y)

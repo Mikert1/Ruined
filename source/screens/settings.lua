@@ -11,9 +11,9 @@ settings.settings = "game"
 
 function settings.load()
     button.activeButtons = {}
-    local newButton = button.new(128, 55, title.button.normal.animations, "True", font)
+    local newButton = button.new(-128, -55, title.button.normal.animations, "True", font)
     table.insert(button.activeButtons, newButton)
-    local newButton = button.new(0, 0, title.button.red.animations, "False", font)
+    local newButton = button.new(48, -55, title.button.red.animations, "False", font)
     table.insert(button.activeButtons, newButton)
     local newButton = button.new(0, 0, title.button.normal.animations, "Customize", font)
     table.insert(button.activeButtons, newButton)
