@@ -10,17 +10,17 @@ settings.mainButtons.audio = {}
 settings.settings = "game"
 
 function settings.load()
-    local newButton = button.new(0, 0, 80, 20, title.button.normal.animations, "True", font, 1)
+    local newButton = button.new(0, 0, title.button.normal.animations, "True", font)
     table.insert(button.activeButtons, newButton)
-    local newButton = button.new(0, 0, 80, 20, title.button.red.animations, "False", font, 1)
+    local newButton = button.new(0, 0, title.button.red.animations, "False", font)
     table.insert(button.activeButtons, newButton)
-    local newButton = button.new(0, 0, 80, 20, title.button.normal.animations, "Customize", font, 1)
+    local newButton = button.new(0, 0, title.button.normal.animations, "Customize", font)
     table.insert(button.activeButtons, newButton)
 end
 
 
 function settings.update()
-    
+
 end
 
 function settings.draw()

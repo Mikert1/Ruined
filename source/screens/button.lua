@@ -9,7 +9,7 @@ buttonAnimations.hover = anim8.newAnimation( buttonGrid('1-1', 2), 1 )
 
 button.activeButtons = {}
 
-function button.new(x, y, width, height, animations, text, font, scale)
+function button.new(x, y, animations, text, font)
     local self = setmetatable({}, button)
     self.x = x
     self.y = y
@@ -19,7 +19,6 @@ function button.new(x, y, width, height, animations, text, font, scale)
     self.animations = buttonAnimations.normal
     self.text = text
     self.font = font
-    self.scale = scale
     self.currentAnimation = self.animations.normal
     return self
 end
