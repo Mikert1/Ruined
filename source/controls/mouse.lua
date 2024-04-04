@@ -320,7 +320,6 @@ function love.mousepressed(x, y, button, istouch)
             if title.texture == false then
                 if settings.settings == "game" then
                     if button == 1 and x > love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 - (48 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 - (55 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 - (35 * playerCamera.globalScale) then
-                        button:update(x, y)
                         if savedSettings.devmode == false then
                             savedSettings.devmode = true
                             print("Console is active")

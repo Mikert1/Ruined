@@ -26,6 +26,7 @@ local shader = require("source/shaders")
 local story = require("source/story/story")
 local scene = require("source/story/cutscene")
 local stone = require("source/enemies/stone")
+local button = require("source/screens/button")
 _G.server = require("source/network/server")
 print("Done loading")
 
@@ -73,6 +74,7 @@ function love.update(dt)
             story.slowShow(dt)
         end
     end
+    button:UpdateAll()
 end
 
 function love.draw()
@@ -106,6 +108,7 @@ function love.draw()
         end
         gui:draw()
         title:draw()
+        button:drawAll()
         debug:draw()
         file:draw()
 end

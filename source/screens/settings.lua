@@ -20,7 +20,7 @@ end
 
 
 function settings.update()
-
+    
 end
 
 function settings.draw()

@@ -39,4 +39,16 @@ function button:update(x, y)
     end
 end
 
+function button:UpdateAll()
+    for _, button in ipairs(button.activeButtons) do
+        button:update(love.mouse.getX(), love.mouse.getY())
+    end
+end
+
+function button:drawAll()
+    for _, button in ipairs(button.activeButtons) do
+        button:draw(button.image, button.x, button.y, nil, button.scale)
+    end
+end
+
 return button
