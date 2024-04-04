@@ -75,21 +75,6 @@ function title.load()
     title.button.red.menu.button3 = title.button.red.animations.normal
     title.button.red.menu.button4 = title.button.red.animations.normal
 
-    local button = {}
-    button.__index = button
-
-    function title.newButton(x, y, w, h, text, action)
-        local instance = setmetatable({}, button)
-        instance.x = x
-        instance.y = y
-        instance.w = w
-        instance.h = h
-        instance.color = title.mainColor
-        instance.text = text
-        instance.action = action
-        return instance
-    end
-
     title.delete = {}
     title.delete.mode = false
     title.delete.image = love.graphics.newImage("assets/textures/gui/title/delete.png")
