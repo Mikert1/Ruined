@@ -23,8 +23,8 @@ function button.new(x, y, animations, text, font)
     return self
 end
 
-function button:draw(image, x, y, r, s)
-    self.animations:draw(self.image, x, y, r, s)
+function button:draw(image, x, y)
+    self.animations:draw(self.image, love.graphics.getWidth() / 2 - (x * playerCamera.globalScale), love.graphics.getHeight() / 2 - (y * playerCamera.globalScale) , nil, playerCamera.globalScale)
 end
 
 function button:update(x, y)
@@ -46,7 +46,7 @@ end
 
 function button:drawAll()
     for _, button in ipairs(button.activeButtons) do
-        button:draw(button.image, button.x, button.y, nil, button.scale)
+        button:draw(button.image, button.x, button.y)
     end
 end
 

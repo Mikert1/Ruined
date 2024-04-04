@@ -10,7 +10,8 @@ settings.mainButtons.audio = {}
 settings.settings = "game"
 
 function settings.load()
-    local newButton = button.new(0, 0, title.button.normal.animations, "True", font)
+    button.activeButtons = {}
+    local newButton = button.new(128, 55, title.button.normal.animations, "True", font)
     table.insert(button.activeButtons, newButton)
     local newButton = button.new(0, 0, title.button.red.animations, "False", font)
     table.insert(button.activeButtons, newButton)
