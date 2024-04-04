@@ -1,12 +1,22 @@
 local settings = {}
 local anim8 = require("assets/library/animations")
 local title = require("source/screens/title")
+local button = require("source/screens/button")
 settings.mainButtons = {}
 settings.mainButtons.game = love.graphics.newImage("assets/textures/gui/settings/game.png")
 settings.mainButtons.video = love.graphics.newImage("assets/textures/gui/settings/video.png")
 settings.mainButtons.controls = love.graphics.newImage("assets/textures/gui/settings/controls.png")
 settings.mainButtons.audio = {}
 settings.settings = "game"
+
+function settings.load()
+    local newButton = button.new(0, 0, 80, 20, title.button.normal.animations, "True", font, 1)
+    table.insert(button.activeButtons, newButton)
+    local newButton = button.new(0, 0, 80, 20, title.button.red.animations, "False", font, 1)
+    table.insert(button.activeButtons, newButton)
+    local newButton = button.new(0, 0, 80, 20, title.button.normal.animations, "Customize", font, 1)
+    table.insert(button.activeButtons, newButton)
+end
 
 
 function settings.update()
