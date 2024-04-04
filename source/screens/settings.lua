@@ -15,7 +15,7 @@ function settings.load()
     table.insert(button.activeButtons, newButton)
     local newButton = button.new(48, -55, title.button.red.animations, "False", font)
     table.insert(button.activeButtons, newButton)
-    local newButton = button.new(0, 0, title.button.normal.animations, "Customize", font)
+    local newButton = button.new(-40, 70, title.button.normal.animations, "Customize", font)
     table.insert(button.activeButtons, newButton)
 end
 
