@@ -6,6 +6,7 @@ settings.mainButtons.game = love.graphics.newImage("assets/textures/gui/settings
 settings.mainButtons.video = love.graphics.newImage("assets/textures/gui/settings/video.png")
 settings.mainButtons.controls = love.graphics.newImage("assets/textures/gui/settings/controls.png")
 settings.mainButtons.audio = {}
+settings.settings = "game"
 
 
 function settings.update()
@@ -30,34 +31,40 @@ function settings.draw()
         love.graphics.draw(settings.mainButtons.game, love.graphics.getWidth() / 2 - (126 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (88 * playerCamera.globalScale) , nil, playerCamera.globalScale * 0.9)
         love.graphics.draw(settings.mainButtons.video, love.graphics.getWidth() / 2 - (80 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (88 * playerCamera.globalScale) , nil, playerCamera.globalScale * 0.9)
         love.graphics.draw(settings.mainButtons.controls, love.graphics.getWidth() / 2 - (34 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (88 * playerCamera.globalScale) , nil, playerCamera.globalScale * 0.9)
-        love.graphics.print("Developer Mode", love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (66 * playerCamera.globalScale) , nil, playerCamera.globalScale * 0.5)
-        if savedSettings.devmode == true then
-            title.button.normal.menu.button2:draw(title.button.normal.image, love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (55 * playerCamera.globalScale) , nil, playerCamera.globalScale)
-            if not(title.button.normal.menu.button2 == title.button.normal.animations.normal) then
+        if settings.settings == "game" then
+            love.graphics.print("Developer Mode", love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (66 * playerCamera.globalScale) , nil, playerCamera.globalScale * 0.5)
+            if savedSettings.devmode == true then
+                title.button.normal.menu.button2:draw(title.button.normal.image, love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (55 * playerCamera.globalScale) , nil, playerCamera.globalScale)
+                if not(title.button.normal.menu.button2 == title.button.normal.animations.normal) then
+                    love.graphics.setColor(title.mainColor)
+                else
+                    love.graphics.setColor(0.15, 0.15, 0.15)
+                end
+                love.graphics.print("True", love.graphics.getWidth() / 2 - (102 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (55 * playerCamera.globalScale), nil, playerCamera.globalScale)
+            else
+                title.button.red.menu.button2:draw(title.button.red.image, love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (55 * playerCamera.globalScale) , nil, playerCamera.globalScale)
+                if not(title.button.red.menu.button2 == title.button.red.animations.normal) then
+                    love.graphics.setColor(1, 0, 0)
+                else
+                    love.graphics.setColor(0.15, 0.15, 0.15)
+                end
+                love.graphics.print("False", love.graphics.getWidth() / 2 - (104 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (55 * playerCamera.globalScale), nil, playerCamera.globalScale)
+            end
+            love.graphics.setColor(1, 1, 1)
+    
+            love.graphics.print("Skin - beta", love.graphics.getWidth() / 2 + (48 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (66 * playerCamera.globalScale) , nil, playerCamera.globalScale * 0.5)
+            title.button.normal.menu.button3:draw(title.button.normal.image, love.graphics.getWidth() / 2 + (48 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (55 * playerCamera.globalScale) , nil, playerCamera.globalScale)
+            if not(title.button.normal.menu.button3 == title.button.normal.animations.normal) then
                 love.graphics.setColor(title.mainColor)
             else
                 love.graphics.setColor(0.15, 0.15, 0.15)
             end
-            love.graphics.print("True", love.graphics.getWidth() / 2 - (102 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (55 * playerCamera.globalScale), nil, playerCamera.globalScale)
-        else
-            title.button.red.menu.button2:draw(title.button.red.image, love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (55 * playerCamera.globalScale) , nil, playerCamera.globalScale)
-            if not(title.button.red.menu.button2 == title.button.red.animations.normal) then
-                love.graphics.setColor(1, 0, 0)
-            else
-                love.graphics.setColor(0.15, 0.15, 0.15)
-            end
-            love.graphics.print("False", love.graphics.getWidth() / 2 - (104 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (55 * playerCamera.globalScale), nil, playerCamera.globalScale)
+            love.graphics.print("Customize", love.graphics.getWidth() / 2 + (58 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (55 * playerCamera.globalScale), nil, playerCamera.globalScale)
+        elseif settings.settings == "video" then
+            
+        elseif settings.settings == "controls" then
+            
         end
-        love.graphics.setColor(1, 1, 1)
-
-        love.graphics.print("Skin - beta", love.graphics.getWidth() / 2 + (48 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (66 * playerCamera.globalScale) , nil, playerCamera.globalScale * 0.5)
-        title.button.normal.menu.button3:draw(title.button.normal.image, love.graphics.getWidth() / 2 + (48 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (55 * playerCamera.globalScale) , nil, playerCamera.globalScale)
-        if not(title.button.normal.menu.button3 == title.button.normal.animations.normal) then
-            love.graphics.setColor(title.mainColor)
-        else
-            love.graphics.setColor(0.15, 0.15, 0.15)
-        end
-        love.graphics.print("Customize", love.graphics.getWidth() / 2 + (58 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (55 * playerCamera.globalScale), nil, playerCamera.globalScale)
     else
         love.graphics.draw(player.spriteSheet, love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (75 * playerCamera.globalScale) , nil, playerCamera.globalScale * 0.9)
         love.graphics.draw(player.spriteSheetfocus, love.graphics.getWidth() / 2 + (48 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (75 * playerCamera.globalScale) , nil, playerCamera.globalScale * 0.9)
