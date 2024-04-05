@@ -9,7 +9,7 @@ buttonAnimations.hover = anim8.newAnimation( buttonGrid('1-1', 2), 1 )
 
 button.activeButtons = {}
 
-function button.new(x, y, animations, text, font)
+function button.new(x, y, animations, text)
     local self = setmetatable({}, button)
     self.x = x
     self.y = y
@@ -17,15 +17,12 @@ function button.new(x, y, animations, text, font)
     self.height = buttonImage:getHeight()
     self.image = buttonImage
     self.animations = buttonAnimations.normal
+    self.color = {0, 255, 255}
     self.text = text
-    self.font = font
     self.currentAnimation = self.animations.normal
     return self
 end
 
-function button:draw(image, x, y)
-    self.animations:draw(self.image, love.graphics.getWidth() / 2 + (x * playerCamera.globalScale), love.graphics.getHeight() / 2 + (y * playerCamera.globalScale) , nil, playerCamera.globalScale)
-end
 
 function button:update(x, y)
     if self.x < x and x < self.x + self.width and self.y < y and y < self.y + self.height then
@@ -36,6 +33,11 @@ function button:update(x, y)
     else
         self.currentAnimation = self.animations.normal
     end
+end
+
+function button:draw(image, x, y)
+    self.animations:draw(self.image, love.graphics.getWidth() / 2 + (x * playerCamera.globalScale), love.graphics.getHeight() / 2 + (y * playerCamera.globalScale) , nil, playerCamera.globalScale)
+    love.graphics.print(self.text, love.graphics.getWidth() / 2 + ((x + 40) * playerCamera.globalScale) - (font:getWidth(self.text) * playerCamera.globalScale) / 2, love.graphics.getHeight() / 2 + ((y + 10) * playerCamera.globalScale) - (font:getHeight(self.text) * playerCamera.globalScale) / 2, nil, playerCamera.globalScale)
 end
 
 function button:UpdateAll()
