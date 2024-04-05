@@ -53,7 +53,7 @@ function title.load()
 
     title.button = {}
     title.button.normal = {}
-    title.button.normal.image = love.graphics.newImage("assets/textures/gui/title/button.png")
+    title.button.normal.image = love.graphics.newImage("assets/textures/gui/title/buttonBlue.png")
     title.button.normal.grid = anim8.newGrid( 80, 20, title.button.normal.image:getWidth(), title.button.normal.image:getHeight() )
     title.button.normal.animations = {}
     title.button.normal.animations.normal = anim8.newAnimation( title.button.normal.grid('1-1', 1), 1 )
