@@ -13,25 +13,37 @@ function button.new(x, y, text, color, id)
     local self = setmetatable({}, button)
     self.x = x
     self.y = y
+    self.id = id
     self.width = buttonImage:getWidth()
     self.height = buttonImage:getHeight()
     self.image = buttonImage
     self.animations = buttonAnimations.normal
     self.color = color
     self.text = text
-    self.currentAnimation = self.animations.normal
     return self
 end
 
+function button:action()
+    print("Button clicked")
+    --do whatever you want to do when the button is clicked
+    if self.id == 1 then
+        print("Button 1 clicked")
+    elseif self.id == 2 then
+        print("Button 2 clicked")
+    end
+end
 
-function button:update(x, y)
-    if self.x < x and x < self.x + self.width and self.y < y and y < self.y + self.height then
-        self.currentAnimation = self.animations.hover
+function button:update()
+    local x = love.mouse.getX()
+    local y = love.mouse.getY()
+    if x > love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + ((self.x + self.width) * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (self.y * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 - ((self.y + self.height) * playerCamera.globalScale) then
+        self.animations = buttonAnimations.hover
+        print("Button clicked")
         if love.mouse.isDown(1) then
-            --do whatever you want to do when the button is clicked
+            button:action()
         end
     else
-        self.currentAnimation = self.animations.normal
+        self.animations = buttonAnimations.normal
     end
 end
 
