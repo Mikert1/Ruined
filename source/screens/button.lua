@@ -9,7 +9,7 @@ buttonAnimations.hover = anim8.newAnimation( buttonGrid('1-1', 2), 1 )
 
 button.activeButtons = {}
 
-function button.new(x, y, animations, text)
+function button.new(x, y, text, color, id)
     local self = setmetatable({}, button)
     self.x = x
     self.y = y
@@ -17,7 +17,7 @@ function button.new(x, y, animations, text)
     self.height = buttonImage:getHeight()
     self.image = buttonImage
     self.animations = buttonAnimations.normal
-    self.color = {0, 255, 255}
+    self.color = color
     self.text = text
     self.currentAnimation = self.animations.normal
     return self
@@ -37,7 +37,9 @@ end
 
 function button:draw(image, x, y)
     self.animations:draw(self.image, love.graphics.getWidth() / 2 + (x * playerCamera.globalScale), love.graphics.getHeight() / 2 + (y * playerCamera.globalScale) , nil, playerCamera.globalScale)
+    love.graphics.setColor(self.color[1], self.color[2], self.color[3])
     love.graphics.print(self.text, love.graphics.getWidth() / 2 + ((x + 40) * playerCamera.globalScale) - (font:getWidth(self.text) * playerCamera.globalScale) / 2, love.graphics.getHeight() / 2 + ((y + 10) * playerCamera.globalScale) - (font:getHeight(self.text) * playerCamera.globalScale) / 2, nil, playerCamera.globalScale)
+    love.graphics.setColor(1, 1, 1)
 end
 
 function button:UpdateAll()

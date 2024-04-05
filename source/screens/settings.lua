@@ -11,11 +11,11 @@ settings.settings = "game"
 
 function settings.load()
     button.activeButtons = {}
-    local newButton = button.new(-128, -55, title.button.normal.animations, "True", font)
+    local newButton = button.new(-128, -55, "True", {0, 1, 1}, 1)
     table.insert(button.activeButtons, newButton)
-    local newButton = button.new(48, -55, title.button.red.animations, "False", font)
+    local newButton = button.new(48, -55, "Customize", {0, 1, 1}, 2)
     table.insert(button.activeButtons, newButton)
-    local newButton = button.new(-40, 70, title.button.normal.animations, "Customize", font)
+    local newButton = button.new(-40, 70, "Back", {1, 0, 0}, 3)
     table.insert(button.activeButtons, newButton)
 end
 
