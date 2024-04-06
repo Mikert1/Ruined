@@ -37,6 +37,7 @@ title.load()
 _G.savedSettings = file.savedSettings.load()
 controls.load()
 enemymanager:load()
+button.load()
 
 function love.load()
     story.load()
@@ -101,7 +102,7 @@ function love.draw()
     playerCamera.cam:detach()
         love.graphics.setColor(1, 1, 1)
         story.dialogue:draw()
-        if gui.esc == true then
+        if game.esc == true then
             love.graphics.setColor(0, 0, 0, 0.5)
             love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
             love.graphics.setColor(1, 1, 1)

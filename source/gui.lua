@@ -8,7 +8,6 @@ function gui.load()
     weapon = require("source/weapons")
     local anim8 = require("assets/library/animations")
     gui.pressE = love.graphics.newImage("assets/textures/npc/pressE.png")
-    gui.esc = false
     gui.welcome = {}
     gui.welcome.timer = 0
     gui.welcome.image = love.graphics.newImage("assets/textures/gui/welcome.png")
@@ -65,7 +64,7 @@ end
 function gui.update(dt)
     if not love.window.hasFocus() then
         keys.esc = true
-        gui.esc = true
+        game.esc = true
         player.noMove = true
         game.freeze = true
     end
@@ -179,7 +178,7 @@ function gui:draw()
         love.graphics.draw(gui.gameover, love.graphics.getWidth() / 2 - (46 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (40 * playerCamera.globalScale), nil, playerCamera.globalScale)
         love.graphics.print("Press enter (return) to load last save.", love.graphics.getWidth() / 2 - (46 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (30 * playerCamera.globalScale), nil, playerCamera.globalScale / 2.5)
     end
-    if gui.esc == true and title.state == 5 then
+    if game.esc == true and title.state == 5 then
         title.button.normal.menu.button1:draw(title.button.normal.image, love.graphics.getWidth() / 2 - (40 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (25 * playerCamera.globalScale), nil, playerCamera.globalScale)
         title.button.normal.menu.button2:draw(title.button.normal.image, love.graphics.getWidth() / 2 - (40 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (0 * playerCamera.globalScale), nil, playerCamera.globalScale)
         title.button.red.menu.button1:draw(title.button.red.image, love.graphics.getWidth() / 2 - (40 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (25 * playerCamera.globalScale), nil, playerCamera.globalScale)

@@ -115,7 +115,7 @@ function love.mousemoved(x, y)
         else
             title.button.red.menu.button1 = title.button.red.animations.normal
         end
-        if title.texture == false then
+        if not settings.tab == "skin" then
             if x > love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 - (48 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 - (55 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 - (35 * playerCamera.globalScale) then
                 if savedSettings.devmode == true then
                     if title.mainColor[3] == 1 then
@@ -146,7 +146,7 @@ function love.mousemoved(x, y)
         end
     end
     if title.state == 5 then
-        if gui.esc == true then
+        if game.esc == true then
             if x > love.graphics.getWidth() / 2 - (40 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (40 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 - (25 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 - (5 * playerCamera.globalScale) then
                 title.button.red.menu.button1 = title.button.red.animations.active
             else
@@ -252,7 +252,7 @@ function love.mousepressed(x, y, button, istouch)
                     worldManagement.teleport("start")
                     game.freeze = false
                     title.state = 5
-                    gui.esc = false
+                    game.esc = false
                     data = file.save()
                     player.noMove = false
                 end
@@ -272,7 +272,7 @@ function love.mousepressed(x, y, button, istouch)
                     worldManagement.teleport("start")
                     game.freeze = false
                     title.state = 5
-                    gui.esc = false
+                    game.esc = false
                     data = file.save()
                     player.noMove = false
                 end
@@ -292,7 +292,7 @@ function love.mousepressed(x, y, button, istouch)
                     worldManagement.teleport("start")
                     game.freeze = false
                     title.state = 5
-                    gui.esc = false
+                    game.esc = false
                     data = file.save()
                     player.noMove = false
                 end
@@ -300,42 +300,11 @@ function love.mousepressed(x, y, button, istouch)
                 title.button.red.menu.button4 = title.button.red.animations.normal
             end
         elseif title.state == 4 then
-            if button == 1 and x > love.graphics.getWidth() / 2 - (40 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (40 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (70 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (90 * playerCamera.globalScale) then
-                if title.texture == false then
-                    if gui.esc == true then
-                        title.state = 5
-                    else
-                        love.window.setTitle("Ruined | Title Screen")
-                        if title.mainColor[3] == 0 then
-                            title.state = 2
-                        else
-                            title.state = 1
-                            --fix there will be the finaly (3)
-                        end
-                    end
-                else
-                    title.texture = false
-                end
-            end
-            if title.texture == false then
-                if settings.settings == "game" then
-                    if button == 1 and x > love.graphics.getWidth() / 2 + (48 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (128 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 - (55 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 - (35 * playerCamera.globalScale) then
-                        if title.texture == false then
-                            title.texture = true
-                        else
-                            title.texture = false
-                        end
-                    end
-                elseif settings.settings == "video" then
-                    -- video settings
-                elseif settings.settings == "controls" then
-                    -- controls settings
-                end
-            end
+-- normaly this would be setting but moved it to button.lua
         elseif title.state == 5 then
-            if gui.esc == true then
+            if game.esc == true then
                 if button == 1 and x > love.graphics.getWidth() / 2 - (40 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (40 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 - (25 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 - (5 * playerCamera.globalScale) then
-                    gui.esc = false
+                    game.esc = false
                     love.window.setTitle("Ruined | Title Screen")
                     keys.esc = false
                     game.freeze = false
@@ -354,7 +323,7 @@ function love.mousepressed(x, y, button, istouch)
                     title.state = 4
                 end
                 if button == 1 and x > love.graphics.getWidth() / 2 - (40 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (40 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (25 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (45 * playerCamera.globalScale) then
-                    gui.esc = false
+                    game.esc = false
                     game.freeze = false
                     keys.esc = false
                     player.noMove = false

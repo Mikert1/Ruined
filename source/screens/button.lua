@@ -3,7 +3,15 @@ button.__index = button
 local buttonImage = love.graphics.newImage("assets/textures/gui/title/button.png")
 local buttonImageOutline = love.graphics.newImage("assets/textures/gui/title/buttonOutline.png")
 
-local file = require("source/data")
+local file
+local settings
+local title
+
+function button.load()
+    file = require("source/data")
+    settings = require("source/screens/settings")
+    title = require("source/screens/title")
+end
 
 button.activeButtons = {}
 
@@ -19,33 +27,46 @@ function button.new(x, y, text, color, id)
     self.color = color
     self.text = text
     self.hover = false
-    self.clicked = false
+    self.clicked = true
     return self
 end
 
-function button:action(id)
-    print("Button clicked")
-    --do whatever you want to do when the button is clicked
-    if id == 1 then
-        print("Button 1 clicked")
+function button:action()
+    if self.id == 1 then -- disables or enables devmode
         if savedSettings.devmode == false then
             savedSettings.devmode = true
             print("Console is active")
-            self.color = {1, 0, 0}
-            self.text = "False"
+            self.color = {0, 1, 1}
+            self.text = "True"
         else
             savedSettings.devmode = false
             print("Console is deactivated --restart game to take effect")
-            self.color = {0, 1, 1}
-            self.text = "True"
+            self.color = {1, 0, 0}
+            self.text = "False"
         end
         file.savedSettings.save()
-    elseif id == 2 then
-        print("Button 2 clicked")
-    elseif id == 3 then
-        -- back button on settings screen
+    elseif self.id == 2 then -- opens skin change setting menu
+        settings.tab = "skin"
+        settings.load()
+    elseif self.id == 3 then -- back button on settings screen
         print("Button 3 clicked")
-        button.activeButtons = {}
+        print(settings.tab)
+        if settings.tab == "skin" then
+            settings.tab = "game"
+        else
+            if game.esc == true then
+                title.state = 5
+            else
+                love.window.setTitle("Ruined | Title Screen")
+                if title.mainColor[3] == 0 then
+                    title.state = 2
+                else
+                    title.state = 1
+                    --fix there will be the finaly (3)
+                end
+            end
+        end
+        settings.load()
     end
 end
 
@@ -58,7 +79,7 @@ function button:update()
             if self.clicked == false then
                 self.clicked = true
                 print("Button clicked")
-                button:action(self.id)
+                self:action(self.id)
             end
         else
             self.clicked = false

@@ -119,7 +119,6 @@ function title.load()
     title.swordicon.savegame2 = title.swordicon.animations.progress1
     title.swordicon.savegame3 = title.swordicon.animations.progress1
     title.setting = false
-    title.texture = false
     title.text = {}
     title.text.name = "Main story"
     title.text.chapter = "Chapter 1"
@@ -245,7 +244,7 @@ function title.update(dt)
                 worldManagement.teleport("start")
                 game.freeze = false
                 title.state = 5
-                gui.esc = false
+                game.esc = false
                 data = file.save()
             end
         end
@@ -274,7 +273,7 @@ function title.update(dt)
 end
 
 function love.filedropped(file)
-    if title.texture == true then
+    if settings.tab == "skin" then
         local filename = file:getFilename()
         local ext = filename:match("%.%w+$")
 
@@ -323,7 +322,7 @@ function title:draw()
         end
     else
         love.graphics.setColor(1, 1, 1)
-        if title.state == 0 or  title.state == 1 or title.state == 2 or title.state == 3 or (title.state == 4 and gui.esc == false) then
+        if title.state == 0 or  title.state == 1 or title.state == 2 or title.state == 3 or (title.state == 4 and game.esc == false) then
             love.graphics.draw(title.background.current, 0, 0, nil, playerCamera.realScale.x, playerCamera.realScale.y)
             love.graphics.setColor(0, 0, 0, 1 - (title.logo.y - 27) / 63)
             love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), love.graphics.getHeight())

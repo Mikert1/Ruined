@@ -100,12 +100,12 @@ function controller.update(dt)
                         controller.buttonReleace.start = false
                         if keys.esc == true then
                             keys.esc = false
-                            gui.esc = false
+                            game.esc = false
                             player.noMove = false
                             game.freeze = false
                         else
                             keys.esc = true
-                            gui.esc = true
+                            game.esc = true
                             player.noMove = true
                             game.freeze = true
                         end
@@ -125,7 +125,7 @@ function controller.update(dt)
                     worldManagement.teleport("start")
                     game.freeze = false
                     title.state = 5
-                    gui.esc = false
+                    game.esc = false
                     data = file.save()
                 end
                 controller.buttonReleace.back = controller.buttonReleace.back + dt
