@@ -319,22 +319,6 @@ function love.mousepressed(x, y, button, istouch)
             end
             if title.texture == false then
                 if settings.settings == "game" then
-                    if button == 1 and x > love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 - (48 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 - (55 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 - (35 * playerCamera.globalScale) then
-                        if savedSettings.devmode == false then
-                            savedSettings.devmode = true
-                            print("Console is active")
-                            if title.mainColor[3] == 1 then
-                                title.button.normal.menu.button2 = title.button.normal.animations.activeBlue
-                            else
-                                title.button.normal.menu.button2 = title.button.normal.animations.activeGreen
-                            end
-                        else
-                            savedSettings.devmode = false
-                            print("Console is deactivated --restart game to take effect")
-                            title.button.red.menu.button2 = title.button.red.animations.active
-                        end
-                        file.savedSettings.save()
-                    end
                     if button == 1 and x > love.graphics.getWidth() / 2 + (48 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (128 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 - (55 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 - (35 * playerCamera.globalScale) then
                         if title.texture == false then
                             title.texture = true

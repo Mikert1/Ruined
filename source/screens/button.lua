@@ -3,6 +3,8 @@ button.__index = button
 local buttonImage = love.graphics.newImage("assets/textures/gui/title/button.png")
 local buttonImageOutline = love.graphics.newImage("assets/textures/gui/title/buttonOutline.png")
 
+local file = require("source/data")
+
 button.activeButtons = {}
 
 function button.new(x, y, text, color, id)
@@ -17,14 +19,27 @@ function button.new(x, y, text, color, id)
     self.color = color
     self.text = text
     self.hover = false
+    self.clicked = false
     return self
 end
 
-local function action(id)
+function button:action(id)
     print("Button clicked")
     --do whatever you want to do when the button is clicked
     if id == 1 then
         print("Button 1 clicked")
+        if savedSettings.devmode == false then
+            savedSettings.devmode = true
+            print("Console is active")
+            self.color = {1, 0, 0}
+            self.text = "False"
+        else
+            savedSettings.devmode = false
+            print("Console is deactivated --restart game to take effect")
+            self.color = {0, 1, 1}
+            self.text = "True"
+        end
+        file.savedSettings.save()
     elseif id == 2 then
         print("Button 2 clicked")
     elseif id == 3 then
@@ -40,8 +55,13 @@ function button:update()
     if x > love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + ((self.x + self.width) * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (self.y * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + ((self.y + self.height) * playerCamera.globalScale) then
         self.hover = true
         if love.mouse.isDown(1) then
-            print("Button clicked")
-            action(self.id)
+            if self.clicked == false then
+                self.clicked = true
+                print("Button clicked")
+                button:action(self.id)
+            end
+        else
+            self.clicked = false
         end
     else
         self.hover = false

@@ -11,11 +11,11 @@ settings.settings = "game"
 
 function settings.load()
     button.activeButtons = {}
-    local newButton = button.new(-128, -55, "True", {0, 1, 1}, 1)
+    local newButton = button.new(-128, -55, "True", {0, 1, 1}, 1) -- devmode
     table.insert(button.activeButtons, newButton)
-    local newButton = button.new(48, -55, "Customize", {0, 1, 1}, 2)
+    local newButton = button.new(48, -55, "Customize", {0, 1, 1}, 2) -- skin
     table.insert(button.activeButtons, newButton)
-    local newButton = button.new(-40, 70, "Back", {1, 0, 0}, 3)
+    local newButton = button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings
     table.insert(button.activeButtons, newButton)
 end
 
