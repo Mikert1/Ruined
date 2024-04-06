@@ -233,6 +233,7 @@ function love.mousepressed(x, y, button, istouch)
             if button == 1 and x > love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 - (108 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (70 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (90 * playerCamera.globalScale) then
                 -- settings
                 title.settings.anim = title.settings.animations.normal
+                love.window.setTitle("Ruined | Settings")
                 title.state = 4
                 settings.load()
             end
@@ -300,7 +301,7 @@ function love.mousepressed(x, y, button, istouch)
                 title.button.red.menu.button4 = title.button.red.animations.normal
             end
         elseif title.state == 4 then
--- normaly this would be setting but moved it to button.lua
+-- normaly this would be settings but moved it to button.lua
         elseif title.state == 5 then
             if game.esc == true then
                 if button == 1 and x > love.graphics.getWidth() / 2 - (40 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (40 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 - (25 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 - (5 * playerCamera.globalScale) then
@@ -321,6 +322,7 @@ function love.mousepressed(x, y, button, istouch)
                 end
                 if button == 1 and x > love.graphics.getWidth() / 2 - (40 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (40 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 - (0 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (20 * playerCamera.globalScale) then
                     title.state = 4
+                    settings.load()
                 end
                 if button == 1 and x > love.graphics.getWidth() / 2 - (40 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (40 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (25 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (45 * playerCamera.globalScale) then
                     game.esc = false
