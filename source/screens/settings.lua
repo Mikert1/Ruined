@@ -32,6 +32,8 @@ function settings.load()
             newButton = button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from skin to settings
             table.insert(button.activeButtons, newButton)
         elseif settings.tab == "skin" then
+            newButton = button.new(-124, 70, "Reset", {1, 0, 0}, 4) -- remove saved skin
+            table.insert(button.activeButtons, newButton)
             newButton = button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from skin to settings
             table.insert(button.activeButtons, newButton)
         end

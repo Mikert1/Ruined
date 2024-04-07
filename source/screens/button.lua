@@ -67,6 +67,8 @@ function button:action()
             end
         end
         settings.load()
+    elseif self.id == 4 then -- removes texture pack
+        file.settings.removeTexturePack()
     end
 end
 

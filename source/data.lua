@@ -328,6 +328,11 @@ function file.settings.loadTexturePack()
     end
 end
 
+function file.settings.removeTexturePack()
+    love.filesystem.remove("player.png")
+    player.spriteSheet = love.graphics.newImage("assets/textures/player/player.png")
+end
+
 function file.update(dt)
     if file.message < 3 then
         file.message = file.message + dt
