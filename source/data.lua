@@ -14,7 +14,7 @@ preview.file2 = {}
 preview.file3 = {}
 file.status = "Nil"
 file.message = 3
-file.savedSettings = {}
+file.settings = {}
 
 function file.save()
     file.message = 0
@@ -234,7 +234,7 @@ function file.show()
             preview.file1.created = true
         else
             love.filesystem.remove("previewcard1.json")
-            error("Oops! The save file (prevgame1.json) failed to decode, this means the file was (probably) corrupted.")
+            error("Oops! The save file (previewcard1.json) failed to decode, this means the file was (probably) corrupted.")
         end
     else
         preview.file1 = {}
@@ -255,7 +255,7 @@ function file.show()
             preview.file2.created = true
         else
             love.filesystem.remove("previewcard2.json")
-            error("Oops! The save file (prevgame2.json) failed to decode, this means the file was (probably) corrupted.")
+            error("Oops! The save file (previewcard2.json) failed to decode, this means the file was (probably) corrupted.")
         end
     else
         preview.file2 = {}
@@ -291,13 +291,14 @@ function file.show()
     end
     return preview
 end
-function file.savedSettings.save()
+
+function file.settings.save()
     print("saveing settings")
     local jsonString = json.encode(savedSettings)
     love.filesystem.write("settings.json", jsonString)
 end
 
-function file.savedSettings.load()
+function file.settings.load()
     local jsonString = love.filesystem.read("settings.json")
     if jsonString then
         local success, decodedData = pcall(json.decode, jsonString)
@@ -312,6 +313,19 @@ function file.savedSettings.load()
         --normaly this would open the console
     end
     return savedSettings
+end
+
+function file.settings.saveTexturePack(imageData)
+    local encodedData = imageData:encode("png")
+    love.filesystem.write("player.png", encodedData)
+end
+
+function file.settings.loadTexturePack()
+    if love.filesystem.getInfo("player.png") then
+        local imageData = love.filesystem.newFileData("player.png")
+        local image = love.graphics.newImage(imageData)
+        player.spriteSheet = image
+    end
 end
 
 function file.update(dt)

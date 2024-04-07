@@ -44,7 +44,7 @@ function button:action()
             self.color = {1, 0, 0}
             self.text = "False"
         end
-        file.savedSettings.save()
+        file.settings.save()
     elseif self.id == 2 then -- opens skin change setting menu
         settings.tab = "skin"
         settings.load()

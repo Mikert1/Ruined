@@ -272,16 +272,17 @@ function title.update(dt)
     end
 end
 
-function love.filedropped(file)
+function love.filedropped(droppedFile)
     if settings.tab == "skin" then
-        local filename = file:getFilename()
+        local filename = droppedFile:getFilename()
         local ext = filename:match("%.%w+$")
 
         if ext == ".png" then
             print("file is png")
-            file:open("r")
-            fileData = file:read("data")
+            droppedFile:open("r")
+            fileData = droppedFile:read("data")
             local img = love.image.newImageData(fileData)
+            file.settings.saveTexturePack(img)
             img = love.graphics.newImage(img)
             if img:getWidth() == 95 and img:getHeight() == 105 then
                 print("dimentions are oke.")
@@ -295,7 +296,7 @@ function love.filedropped(file)
             print("try a png file")
         end
     else
-        print("not in texture mode (go to settings)")
+        print("not in texture mode (go to settings > general > skin - beta)")
     end
 end
 
