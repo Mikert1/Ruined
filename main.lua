@@ -31,6 +31,7 @@ _G.server = require("source/network/server")
 print("Done loading")
 
 player.load()
+file.settings.loadTexturePack()
 worldManagement.load()
 gui.load()
 title.load()
