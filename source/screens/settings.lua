@@ -58,11 +58,11 @@ function settings.draw()
     elseif settings.tab == "controls" then
         
     elseif settings.tab == "skin" then
-        -- love.graphics.draw(player.spriteSheet, love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (75 * playerCamera.globalScale) , nil, playerCamera.globalScale * 0.5)
-        -- love.graphics.draw(player.spriteSheetfocus, love.graphics.getWidth() / 2 + (48 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (75 * playerCamera.globalScale) , nil, playerCamera.globalScale * 0.5)
+        love.graphics.print("preview", love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (66 * playerCamera.globalScale) , nil, playerCamera.globalScale * 0.5)
+        love.graphics.draw(player.spriteSheet, love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (55 * playerCamera.globalScale) , nil, playerCamera.globalScale * 0.5)
+        love.graphics.print("Drop your file here.", love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (3 * playerCamera.globalScale), nil, playerCamera.globalScale * 0.2)
+        love.graphics.print("image 95x105 pixels (19x21 for every animation frame)", love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (0 * playerCamera.globalScale) , nil, playerCamera.globalScale * 0.2)
         love.graphics.draw(settings.dropFileImage, love.graphics.getWidth() / 2 - (settings.dropFileImage:getWidth() / 2 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (settings.dropFileImage:getHeight() / 2 * playerCamera.globalScale) , nil, playerCamera.globalScale)
-        love.graphics.print("Drop your file here.", love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (85 * playerCamera.globalScale))
-        love.graphics.print("image 95x105 pixels (19x21 for every animation frame)", love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (80 * playerCamera.globalScale))
     end
     love.graphics.setColor(1, 1, 1)
 end
