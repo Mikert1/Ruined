@@ -23,6 +23,7 @@ function love.keypressed(key)
                 game.esc = true
                 player.noMove = true
                 game.freeze = true
+                gui.buttonLoad()
             end
         end
         if key == controls.keys.interact and story.npc.interaction == true then

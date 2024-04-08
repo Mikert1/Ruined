@@ -2,6 +2,8 @@ local gui = {}
 local title
 local settings
 local weapon
+local button = require("source/screens/button")
+
 function gui.load()
     title = require("source/screens/title")
     settings = require("source/screens/settings")
@@ -59,6 +61,13 @@ function gui.load()
         x = 0,
         y = 0
     }
+end
+
+function gui.buttonLoad()
+    local newButton
+    button.activeButtons = {}
+    newButton = button.new(-40, 25, "Back", {1, 0, 0}, 3) -- back from skin to settings
+    table.insert(button.activeButtons, newButton)
 end
 
 function gui.update(dt)
