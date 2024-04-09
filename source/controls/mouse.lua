@@ -145,33 +145,6 @@ function love.mousemoved(x, y)
             end
         end
     end
-    if title.state == 5 then
-        if game.esc == true then
-            if x > love.graphics.getWidth() / 2 - (40 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (40 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 - (25 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 - (5 * playerCamera.globalScale) then
-                title.button.red.menu.button1 = title.button.red.animations.active
-            else
-                title.button.red.menu.button1 = title.button.red.animations.normal
-            end
-            if x > love.graphics.getWidth() / 2 - (40 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (40 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 - (0 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (20 * playerCamera.globalScale) then
-                if title.mainColor[3] == 1 then
-                    title.button.normal.menu.button2 = title.button.normal.animations.activeBlue
-                else
-                    title.button.normal.menu.button2 = title.button.normal.animations.activeGreen
-                end
-            else
-                title.button.normal.menu.button2 = title.button.normal.animations.normal
-            end
-            if x > love.graphics.getWidth() / 2 - (40 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (40 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (25 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (45 * playerCamera.globalScale) then
-                if title.mainColor[3] == 1 then
-                    title.button.normal.menu.button1 = title.button.normal.animations.activeBlue
-                else
-                    title.button.normal.menu.button1 = title.button.normal.animations.activeGreen
-                end
-            else
-                title.button.normal.menu.button1 = title.button.normal.animations.normal
-            end
-        end
-    end
 end
 function love.mousepressed(x, y, button, istouch)
     if title.mikert.showed == false then
@@ -303,34 +276,6 @@ function love.mousepressed(x, y, button, istouch)
         elseif title.state == 4 then
 -- normaly this would be settings but moved it to button.lua
         elseif title.state == 5 then
-            if game.esc == true then
-                if button == 1 and x > love.graphics.getWidth() / 2 - (40 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (40 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 - (25 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 - (5 * playerCamera.globalScale) then
-                    game.esc = false
-                    love.window.setTitle("Ruined | Title Screen")
-                    keys.esc = false
-                    game.freeze = false
-                    --data = file.save()
-                    title.rezet()
-                    enemymanager:load()
-                    game.state = 1
-                    if title.mainColor[3] == 0 then
-                        title.state = 2
-                    else
-                        title.state = 1
-                        --fix there will be the finaly (3)
-                    end
-                end
-                if button == 1 and x > love.graphics.getWidth() / 2 - (40 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (40 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 - (0 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (20 * playerCamera.globalScale) then
-                    title.state = 4
-                    settings.load()
-                end
-                if button == 1 and x > love.graphics.getWidth() / 2 - (40 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (40 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (25 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (45 * playerCamera.globalScale) then
-                    game.esc = false
-                    game.freeze = false
-                    keys.esc = false
-                    player.noMove = false
-                end
-            end
             if not player.isDead then
                 if story.npc.interaction == true then
                     if story.dialogue.length < story.dialogue.position then

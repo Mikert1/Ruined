@@ -11,6 +11,7 @@ settings.mainButtons.audio = {}
 settings.tab = "game"
 
 function settings.load()
+    print("settings button load")
     local newButton
     button.activeButtons = {}
     if title.state == 4 then
@@ -42,10 +43,10 @@ end
 
 
 function settings.update()
-
 end
 
 function settings.draw()
+    print("settings update")
     love.graphics.draw(title.settingBackground, love.graphics.getWidth() / 2 - (title.settingBackground:getWidth() / 2) * playerCamera.globalScale, love.graphics.getHeight() / 2 - (title.settingBackground:getHeight() / 2) * playerCamera.globalScale, nil, playerCamera.globalScale)
     love.graphics.setColor(1, 1, 1)
     love.graphics.draw(settings.mainButtons.game, love.graphics.getWidth() / 2 - (126 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (88 * playerCamera.globalScale) , nil, playerCamera.globalScale * 0.9)

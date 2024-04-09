@@ -67,22 +67,23 @@ function gui.buttonLoad()
     button.activeButtons = {}
     if game.esc == true then
         local newButton
-        newButton = button.new(-40, -25, "Title screen", {0, 1, 1}, 3) -- back from skin to settings
+        newButton = button.new(-40, -25, "Title screen", {0, 1, 1}, 5) -- back from skin to settings
         table.insert(button.activeButtons, newButton)
-        newButton = button.new(-40, 0, "Settings", {0, 1, 1}, 2) -- back from skin to settings\
+        newButton = button.new(-40, 0, "Settings", {0, 1, 1}, 6) -- back from skin to settings\
         table.insert(button.activeButtons, newButton)
-        newButton = button.new(-40, 25, "Resume", {1, 0, 0}, 3) -- back from skin to settings
+        newButton = button.new(-40, 25, "Resume", {1, 0, 0}, 7) -- back from skin to settings
         table.insert(button.activeButtons, newButton)
     end
 end
 
 function gui.update(dt)
     if not love.window.hasFocus() then
-        keys.esc = true
-        game.esc = true
-        player.noMove = true
-        game.freeze = true
-        gui.buttonLoad()
+        if game.esc == false then
+            game.esc = true
+            player.noMove = true
+            game.freeze = true
+            gui.buttonLoad()
+        end
     end
     if gui.welcome.timer > 0 then
         gui.welcome.timer = gui.welcome.timer - dt
@@ -193,29 +194,6 @@ function gui:draw()
     if player.isDead == true then
         love.graphics.draw(gui.gameover, love.graphics.getWidth() / 2 - (46 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (40 * playerCamera.globalScale), nil, playerCamera.globalScale)
         love.graphics.print("Press enter (return) to load last save.", love.graphics.getWidth() / 2 - (46 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (30 * playerCamera.globalScale), nil, playerCamera.globalScale / 2.5)
-    end
-    if game.esc == true and title.state == 5 then
-        title.button.normal.menu.button1:draw(title.button.normal.image, love.graphics.getWidth() / 2 - (40 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (25 * playerCamera.globalScale), nil, playerCamera.globalScale)
-        title.button.normal.menu.button2:draw(title.button.normal.image, love.graphics.getWidth() / 2 - (40 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (0 * playerCamera.globalScale), nil, playerCamera.globalScale)
-        title.button.red.menu.button1:draw(title.button.red.image, love.graphics.getWidth() / 2 - (40 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (25 * playerCamera.globalScale), nil, playerCamera.globalScale)
-        if not(title.button.red.menu.button1 == title.button.red.animations.normal) then
-            love.graphics.setColor(1, 0, 0)
-        else
-            love.graphics.setColor(0.15, 0.15, 0.15)
-        end
-        love.graphics.print(gui.text.back, love.graphics.getWidth() / 2 - (font:getWidth(gui.text.back) / 2 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (26 * playerCamera.globalScale), nil, playerCamera.globalScale)
-        if not(title.button.normal.menu.button2 == title.button.normal.animations.normal) then
-            love.graphics.setColor(title.mainColor)
-        else
-            love.graphics.setColor(0.15, 0.15, 0.15)
-        end
-        love.graphics.print(gui.text.settings, love.graphics.getWidth() / 2 - (font:getWidth(gui.text.settings) / 2 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (1 * playerCamera.globalScale), nil, playerCamera.globalScale)
-        if not(title.button.normal.menu.button1 == title.button.normal.animations.normal) then
-            love.graphics.setColor(title.mainColor)
-        else
-            love.graphics.setColor(0.15, 0.15, 0.15)
-        end
-        love.graphics.print(gui.text.resume, love.graphics.getWidth() / 2 - (font:getWidth(gui.text.resume) / 2 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (24 * playerCamera.globalScale), nil, playerCamera.globalScale)
     end
     love.graphics.setColor(1, 1, 1)
     gui.healthbar.anim:draw(gui.healthbar.sprite, 0, love.graphics.getHeight() - (16.5 * playerCamera.globalScale) - gui.hide.health.y * playerCamera.globalScale, nil, playerCamera.globalScale * 1.2)

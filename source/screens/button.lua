@@ -6,11 +6,13 @@ local buttonImageOutline = love.graphics.newImage("assets/textures/gui/title/but
 local file
 local settings
 local title
+local gui
 
 function button.load()
     file = require("source/data")
     settings = require("source/screens/settings")
     title = require("source/screens/title")
+    gui = require("source/gui")
 end
 
 button.activeButtons = {}
@@ -49,13 +51,13 @@ function button:action()
         settings.tab = "skin"
         settings.load()
     elseif self.id == 3 then -- back button on settings screen
-        print("Button 3 clicked")
-        print(settings.tab)
         if settings.tab == "skin" then
             settings.tab = "game"
+            settings.load()
         else
             if game.esc == true then
                 title.state = 5
+                gui.buttonLoad()
             else
                 love.window.setTitle("Ruined | Title Screen")
                 if title.mainColor[3] == 0 then
@@ -64,11 +66,37 @@ function button:action()
                     title.state = 1
                     --fix there will be the finaly (3)
                 end
+                settings.load()
             end
         end
-        settings.load()
     elseif self.id == 4 then -- removes texture pack
         file.settings.removeTexturePack()
+    elseif self.id == 5 then -- back to title screen
+        game.esc = false
+        love.window.setTitle("Ruined | Title Screen")
+        keys.esc = false
+        game.freeze = false
+        --data = file.save()
+        title.rezet()
+        enemymanager:load()
+        game.state = 1
+        if title.mainColor[3] == 0 then
+            title.state = 2
+        else
+            title.state = 1
+            --fix there will be the finaly (3)
+        end
+        gui.buttonLoad()
+    elseif self.id == 6 then -- settings button
+        title.settings.anim = title.settings.animations.normal
+        love.window.setTitle("Ruined | Settings")
+        title.state = 4
+        settings.load()
+    elseif self.id == 7 then -- quit button
+        game.esc = false
+        game.freeze = false
+        keys.esc = false
+        player.noMove = false
     end
 end
 
@@ -104,7 +132,7 @@ function button:draw(image, x, y)
 end
 
 function button:UpdateAll()
-    for _, button in ipairs(button.activeButtons) do
+    for _, button in ipairs(button.activeButtons) do 
         button:update(love.mouse.getX(), love.mouse.getY())
     end
 end
