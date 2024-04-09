@@ -92,7 +92,7 @@ function button:action()
         love.window.setTitle("Ruined | Settings")
         title.state = 4
         settings.load()
-    elseif self.id == 7 then -- quit button
+    elseif self.id == 7 then -- resume button
         game.esc = false
         game.freeze = false
         keys.esc = false
