@@ -18,6 +18,7 @@ function love.keypressed(key)
                 game.esc = false
                 player.noMove = false
                 game.freeze = false
+                gui.buttonLoad()
             else
                 keys.esc = true
                 game.esc = true

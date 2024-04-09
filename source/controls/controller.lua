@@ -103,11 +103,13 @@ function controller.update(dt)
                             game.esc = false
                             player.noMove = false
                             game.freeze = false
+                            gui.buttonLoad()
                         else
                             keys.esc = true
                             game.esc = true
                             player.noMove = true
                             game.freeze = true
+                            gui.buttonLoad()
                         end
                     end
                 else

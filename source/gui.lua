@@ -64,10 +64,16 @@ function gui.load()
 end
 
 function gui.buttonLoad()
-    local newButton
     button.activeButtons = {}
-    newButton = button.new(-40, 25, "Back", {1, 0, 0}, 3) -- back from skin to settings
-    table.insert(button.activeButtons, newButton)
+    if game.esc == true then
+        local newButton
+        newButton = button.new(-40, -25, "Title screen", {0, 1, 1}, 3) -- back from skin to settings
+        table.insert(button.activeButtons, newButton)
+        newButton = button.new(-40, 0, "Settings", {0, 1, 1}, 2) -- back from skin to settings\
+        table.insert(button.activeButtons, newButton)
+        newButton = button.new(-40, 25, "Resume", {1, 0, 0}, 3) -- back from skin to settings
+        table.insert(button.activeButtons, newButton)
+    end
 end
 
 function gui.update(dt)
@@ -76,6 +82,7 @@ function gui.update(dt)
         game.esc = true
         player.noMove = true
         game.freeze = true
+        gui.buttonLoad()
     end
     if gui.welcome.timer > 0 then
         gui.welcome.timer = gui.welcome.timer - dt
