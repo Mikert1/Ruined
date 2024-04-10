@@ -115,6 +115,13 @@ function love.keypressed(key)
             end
         end
     end
+    if key == "f11" then
+        if love.window.getFullscreen() == false then
+            love.window.setFullscreen(true)
+        else
+            love.window.setFullscreen(false)
+        end
+    end
     if key == "f12" then
         print("debugg")
         error("F12 Force Error")
