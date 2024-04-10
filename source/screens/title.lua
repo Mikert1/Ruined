@@ -237,7 +237,7 @@ function title.update(dt)
                 title.logo.anim = title.logo.animations.region2
             end
             title.logo.anim:update(dt)
-            if love.keyboard.isDown("f11") then -- DEZE WEGHALEN NA BETA
+            if love.keyboard.isDown("f5") then -- DEZE WEGHALEN NA BETA
                 file.filenumber = 1
                 game.state = 0
                 data = file.load()

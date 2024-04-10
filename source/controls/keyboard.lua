@@ -2,6 +2,7 @@ local keys = {}
 keys.tab = false
 keys.esc = false
 keys.f4 = 0
+keys.f11 = 0
 local gui = require("source/gui")
 local story = require("source/story/story")
 local title = require("source/screens/title") -- remove after easter egg remove
@@ -116,10 +117,16 @@ function love.keypressed(key)
         end
     end
     if key == "f11" then
-        if love.window.getFullscreen() == false then
+        if keys.f11 == 0 then
             love.window.setFullscreen(true)
-        else
+            keys.f11 = 1
+        elseif keys.f11 == 1 then
             love.window.setFullscreen(false)
+            love.window.setMode(love.graphics.getWidth(), love.graphics.getHeight(), {borderless = true, resizable = true})
+            keys.f11 = 2
+        elseif keys.f11 == 2 then
+            love.window.setMode(love.graphics.getWidth(), love.graphics.getHeight(), {borderless = false, resizable = true}) 
+            keys.f11 = 0
         end
     end
     if key == "f12" then
