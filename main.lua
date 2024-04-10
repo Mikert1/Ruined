@@ -76,7 +76,7 @@ function love.update(dt)
             story.slowShow(dt)
         end
     end
-    button:UpdateAll()
+    button:UpdateAll(dt)
 end
 
 function love.draw()
