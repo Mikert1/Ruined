@@ -27,6 +27,7 @@ function button.new(x, y, text, color, id)
     self.image = buttonImage
     self.imageOutline = buttonImageOutline
     self.color = color
+    self.currentColor = {0.15, 0.15, 0.15}
     self.text = text
     self.hover = false
     self.clicked = true
@@ -66,10 +67,9 @@ function button:action()
                     title.state = 1
                     --fix there will be the finaly (3)
                 end
-                game.state = 1
+                settings.load()
             end
         end
-        settings.load()
     elseif self.id == 4 then -- removes texture pack
         file.settings.removeTexturePack()
     elseif self.id == 5 then -- back to title screen
@@ -98,10 +98,11 @@ function button:action()
         game.freeze = false
         keys.esc = false
         player.noMove = false
+        gui.buttonLoad()
     end
 end
 
-function button:update()
+function button:update(dt)
     local x = love.mouse.getX()
     local y = love.mouse.getY()
     if x > love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + ((self.x + self.width) * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (self.y * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + ((self.y + self.height) * playerCamera.globalScale) then
@@ -118,23 +119,48 @@ function button:update()
     else
         self.hover = false
     end
+    if self.hover then
+        for i = 1, 3 do
+            if self.currentColor[i] < self.color[i] then
+                self.currentColor[i] = self.currentColor[i] + (dt * 4)
+                if self.currentColor[i] > self.color[i] then
+                    self.currentColor[i] = self.color[i]
+                end
+            elseif self.currentColor[i] > self.color[i] then
+                self.currentColor[i] = self.currentColor[i] - (dt * 4)
+                if self.currentColor[i] < self.color[i] then
+                    self.currentColor[i] = self.color[i]
+                end
+            end
+        end
+    else
+        for i = 1, 3 do
+            if self.currentColor[i] < 0.15 then
+                self.currentColor[i] = self.currentColor[i] + (dt * 2)
+                if self.currentColor[i] > 0.15 then
+                    self.currentColor[i] = 0.15
+                end
+            elseif self.currentColor[i] > 0.15 then
+                self.currentColor[i] = self.currentColor[i] - (dt * 2)
+                if self.currentColor[i] < 0.15 then
+                    self.currentColor[i] = 0.15
+                end
+            end
+        end
+    end
 end
 
 function button:draw(image, x, y)
     love.graphics.draw(self.image, love.graphics.getWidth() / 2 + (x * playerCamera.globalScale), love.graphics.getHeight() / 2 + (y * playerCamera.globalScale) , nil, playerCamera.globalScale)
-    if self.hover then
-        love.graphics.setColor(self.color[1], self.color[2], self.color[3])
-    else
-        love.graphics.setColor(0.15, 0.15, 0.15)
-    end
+    love.graphics.setColor(self.currentColor[1], self.currentColor[2], self.currentColor[3])
     love.graphics.draw(self.imageOutline, love.graphics.getWidth() / 2 + (x * playerCamera.globalScale), love.graphics.getHeight() / 2 + (y * playerCamera.globalScale) , nil, playerCamera.globalScale)
     love.graphics.print(self.text, love.graphics.getWidth() / 2 + ((x + 40) * playerCamera.globalScale) - (font:getWidth(self.text) * playerCamera.globalScale) / 2, love.graphics.getHeight() / 2 + ((y + 10) * playerCamera.globalScale) - (font:getHeight(self.text) * playerCamera.globalScale) / 2, nil, playerCamera.globalScale)
     love.graphics.setColor(1, 1, 1)
 end
 
-function button:UpdateAll()
+function button:UpdateAll(dt)
     for _, button in ipairs(button.activeButtons) do
-        button:update(love.mouse.getX(), love.mouse.getY())
+        button:update(dt)
     end
 end
 
