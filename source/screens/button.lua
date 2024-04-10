@@ -66,9 +66,10 @@ function button:action()
                     title.state = 1
                     --fix there will be the finaly (3)
                 end
-                settings.load()
+                game.state = 1
             end
         end
+        settings.load()
     elseif self.id == 4 then -- removes texture pack
         file.settings.removeTexturePack()
     elseif self.id == 5 then -- back to title screen
@@ -132,7 +133,7 @@ function button:draw(image, x, y)
 end
 
 function button:UpdateAll()
-    for _, button in ipairs(button.activeButtons) do 
+    for _, button in ipairs(button.activeButtons) do
         button:update(love.mouse.getX(), love.mouse.getY())
     end
 end
