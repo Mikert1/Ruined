@@ -110,7 +110,6 @@ function button:update(dt)
         if love.mouse.isDown(1) then
             if self.clicked == false then
                 self.clicked = true
-                print("Button clicked")
                 self:action(self.id)
             end
         else
