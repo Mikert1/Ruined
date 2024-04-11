@@ -203,6 +203,7 @@ end
 
 function button:draw()
     if self.info then
+        love.graphics.setColor(0.1, 0.1, 0.1)
         love.graphics.print(
             self.info, 
             love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale), 
@@ -210,6 +211,7 @@ function button:draw()
             nil, 
             playerCamera.globalScale * 0.5
         )
+        love.graphics.setColor(1, 1, 1)
     end
     love.graphics.draw(
         self.image, 
