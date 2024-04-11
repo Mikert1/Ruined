@@ -177,7 +177,7 @@ function button:draw()
     if self.text then
         love.graphics.print(self.text, love.graphics.getWidth() / 2 + ((self.x + 40) * playerCamera.globalScale) - (font:getWidth(self.text) * playerCamera.globalScale) / 2, love.graphics.getHeight() / 2 + ((self.y + 10) * playerCamera.globalScale) - (font:getHeight(self.text) * playerCamera.globalScale) / 2, nil, playerCamera.globalScale)
     else
-        love.graphics.draw(self.imageOnButton, love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale), love.graphics.getHeight() / 2 + (self.y * playerCamera.globalScale) , nil, playerCamera.globalScale)
+        love.graphics.draw(self.imageOnButton, love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale) + (self.width * playerCamera.globalScale) / 2 - (self.imageOnButton:getWidth() * playerCamera.globalScale) / 2, love.graphics.getHeight() / 2 + (self.y * playerCamera.globalScale) + (self.height * playerCamera.globalScale) / 2 - (self.imageOnButton:getHeight() * playerCamera.globalScale) / 2, nil, playerCamera.globalScale)
     end
     love.graphics.setColor(1, 1, 1)
 end
