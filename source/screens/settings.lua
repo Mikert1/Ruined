@@ -3,6 +3,7 @@ local anim8 = require("assets/library/animations")
 local title = require("source/screens/title")
 local button = require("source/screens/button")
 settings.button = love.graphics.newImage("assets/textures/gui/settings/button.png")
+settings.buttonOutline = love.graphics.newImage("assets/textures/gui/settings/buttonOutline.png")
 settings.dropFileImage = love.graphics.newImage("assets/textures/gui/settings/drop.png")
 settings.mainButtons = {}
 settings.mainButtons.game = love.graphics.newImage("assets/textures/gui/settings/game.png")
@@ -14,6 +15,8 @@ settings.tab = "game"
 function settings.load()
     local newButton
     button.activeButtons = {}
+    newButton = button.specialNew(-127, -89, "", {1, 1, 1}, 1, settings.button, settings.buttonOutline)
+    table.insert(button.activeButtons, newButton)
     if title.state == 4 then
         if settings.tab == "game" then
             if savedSettings.devmode == true then
@@ -47,7 +50,6 @@ function settings.update()
 end
 
 function settings.draw()
-    love.graphics.draw(settings.button, love.graphics.getWidth() / 2 - (settings.button:getWidth() / 2 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (settings.button:getHeight() / 2 * playerCamera.globalScale), nil, playerCamera.globalScale)
     love.graphics.draw(title.settingBackground, love.graphics.getWidth() / 2 - (title.settingBackground:getWidth() / 2) * playerCamera.globalScale, love.graphics.getHeight() / 2 - (title.settingBackground:getHeight() / 2) * playerCamera.globalScale, nil, playerCamera.globalScale)
     love.graphics.setColor(1, 1, 1)
     love.graphics.draw(settings.mainButtons.game, love.graphics.getWidth() / 2 - (126 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (88 * playerCamera.globalScale) , nil, playerCamera.globalScale * 0.9)

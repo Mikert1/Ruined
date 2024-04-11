@@ -22,9 +22,9 @@ function button.new(x, y, text, color, id)
     self.x = x
     self.y = y
     self.id = id
-    self.width = 80
-    self.height = 20
     self.image = buttonImage
+    self.width = buttonImage:getWidth()
+    self.height = buttonImage:getHeight()
     self.imageOutline = buttonImageOutline
     self.color = color
     self.currentColor = {0.15, 0.15, 0.15}
@@ -34,15 +34,15 @@ function button.new(x, y, text, color, id)
     return self
 end
 
-function button.specialNew(x, y, text, color, id, width, height)
+function button.specialNew(x, y, text, color, id, image, outline)
     local self = setmetatable({}, button)
     self.x = x
     self.y = y
     self.id = id
-    self.width = width
-    self.height = height
-    self.image = buttonImage
-    self.imageOutline = buttonImageOutline
+    self.image = image
+    self.width = image:getWidth()
+    self.height = image:getHeight()
+    self.imageOutline = outline
     self.color = color
     self.currentColor = {0.15, 0.15, 0.15}
     self.text = text
