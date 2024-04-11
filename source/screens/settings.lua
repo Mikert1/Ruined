@@ -15,7 +15,17 @@ settings.tab = "game"
 function settings.load()
     local newButton
     button.activeButtons = {}
-    newButton = button.specialNew(-127, -89, settings.mainButtons.game, {1, 1, 1}, 1, settings.button, settings.buttonOutline)
+    newButton = button.specialNew(-127, -88, settings.mainButtons.game, {1, 1, 1}, 11, settings.button, settings.buttonOutline)
+    table.insert(button.activeButtons, newButton)
+    newButton = button.specialNew(-84, -88, settings.mainButtons.video, {1, 1, 1}, 12, settings.button, settings.buttonOutline)
+    table.insert(button.activeButtons, newButton)
+    newButton = button.specialNew(-41, -88, settings.mainButtons.controls, {1, 1, 1}, 13, settings.button, settings.buttonOutline)
+    table.insert(button.activeButtons, newButton)
+    newButton = button.specialNew(2, -88, settings.mainButtons.controls, {1, 1, 1}, 14, settings.button, settings.buttonOutline)
+    table.insert(button.activeButtons, newButton)
+    newButton = button.specialNew(45, -88, settings.mainButtons.controls, {1, 1, 1}, 15, settings.button, settings.buttonOutline)
+    table.insert(button.activeButtons, newButton)
+    newButton = button.specialNew(88, -88, settings.mainButtons.controls, {1, 1, 1}, 16, settings.button, settings.buttonOutline)
     table.insert(button.activeButtons, newButton)
     if title.state == 4 then
         if settings.tab == "game" then
@@ -52,9 +62,6 @@ end
 function settings.draw()
     love.graphics.draw(title.settingBackground, love.graphics.getWidth() / 2 - (title.settingBackground:getWidth() / 2) * playerCamera.globalScale, love.graphics.getHeight() / 2 - (title.settingBackground:getHeight() / 2) * playerCamera.globalScale, nil, playerCamera.globalScale)
     love.graphics.setColor(1, 1, 1)
-    love.graphics.draw(settings.mainButtons.game, love.graphics.getWidth() / 2 - (126 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (88 * playerCamera.globalScale) , nil, playerCamera.globalScale * 0.9)
-    love.graphics.draw(settings.mainButtons.video, love.graphics.getWidth() / 2 - (80 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (88 * playerCamera.globalScale) , nil, playerCamera.globalScale * 0.9)
-    love.graphics.draw(settings.mainButtons.controls, love.graphics.getWidth() / 2 - (34 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (88 * playerCamera.globalScale) , nil, playerCamera.globalScale * 0.9)
     if settings.tab == "game" then
     elseif settings.tab == "video" then
         
