@@ -117,6 +117,24 @@ function button:action()
         keys.esc = false
         player.noMove = false
         gui.buttonLoad()
+    elseif self.id == 11 then -- quit button
+        settings.tab = "game"
+        settings.load()
+    elseif self.id == 12 then -- video button
+        settings.tab = "video"
+        settings.load()
+    elseif self.id == 13 then -- controls button
+        settings.tab = "controls"
+        settings.load()
+    elseif self.id == 14 then -- controls button
+        settings.tab = "skin"
+        settings.load()
+    elseif self.id == 15 then -- controls button
+        settings.tab = "controls"
+        settings.load()
+    elseif self.id == 16 then -- controls button
+        settings.tab = "controls"
+        settings.load()
     end
 end
 

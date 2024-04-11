@@ -9,34 +9,35 @@ settings.mainButtons = {}
 settings.mainButtons.game = love.graphics.newImage("assets/textures/gui/settings/game.png")
 settings.mainButtons.video = love.graphics.newImage("assets/textures/gui/settings/video.png")
 settings.mainButtons.controls = love.graphics.newImage("assets/textures/gui/settings/controls.png")
+settings.mainButtons.customize = love.graphics.newImage("assets/textures/gui/settings/customize.png")
 settings.mainButtons.audio = {}
 settings.tab = "game"
 
 function settings.load()
     local newButton
     button.activeButtons = {}
-    newButton = button.specialNew(-127, -88, settings.mainButtons.game, {1, 1, 1}, 11, settings.button, settings.buttonOutline)
+    newButton = button.specialNew(-127, -88, settings.mainButtons.game, {0, 1, 1}, 11, settings.button, settings.buttonOutline)
     table.insert(button.activeButtons, newButton)
-    newButton = button.specialNew(-84, -88, settings.mainButtons.video, {1, 1, 1}, 12, settings.button, settings.buttonOutline)
+    newButton = button.specialNew(-84, -88, settings.mainButtons.video, {0, 1, 1}, 12, settings.button, settings.buttonOutline)
     table.insert(button.activeButtons, newButton)
-    newButton = button.specialNew(-41, -88, settings.mainButtons.controls, {1, 1, 1}, 13, settings.button, settings.buttonOutline)
+    newButton = button.specialNew(-41, -88, settings.mainButtons.controls, {0, 1, 1}, 13, settings.button, settings.buttonOutline)
     table.insert(button.activeButtons, newButton)
-    newButton = button.specialNew(2, -88, settings.mainButtons.controls, {1, 1, 1}, 14, settings.button, settings.buttonOutline)
+    newButton = button.specialNew(2, -88, settings.mainButtons.customize, {0, 1, 1}, 14, settings.button, settings.buttonOutline)
     table.insert(button.activeButtons, newButton)
-    newButton = button.specialNew(45, -88, settings.mainButtons.controls, {1, 1, 1}, 15, settings.button, settings.buttonOutline)
+    newButton = button.specialNew(45, -88, settings.mainButtons.game, {0, 1, 1}, 15, settings.button, settings.buttonOutline)
     table.insert(button.activeButtons, newButton)
-    newButton = button.specialNew(88, -88, settings.mainButtons.controls, {1, 1, 1}, 16, settings.button, settings.buttonOutline)
+    newButton = button.specialNew(88, -88, settings.mainButtons.game, {0, 1, 1}, 16, settings.button, settings.buttonOutline)
     table.insert(button.activeButtons, newButton)
     if title.state == 4 then
         if settings.tab == "game" then
             if savedSettings.devmode == true then
-                newButton = button.new(-128, -55, "True", {0, 1, 1}, 1, "Developer Mode") -- devmode
+                newButton = button.new(-128, -53, "True", {0, 1, 1}, 1, "Developer Mode") -- devmode
             else
-                newButton = button.new(-128, -55, "False", {1, 0, 0}, 1, "Developer Mode") -- devmode
+                newButton = button.new(-128, -53, "False", {1, 0, 0}, 1, "Developer Mode") -- devmode
             end
             table.insert(button.activeButtons, newButton)
-            newButton = button.new(48, -55, "Customize", {0, 1, 1}, 2, "Skin - Beta") -- skin
-            table.insert(button.activeButtons, newButton)
+            -- newButton = button.new(48, -53, "Customize", {0, 1, 1}, 2, "Skin - Beta") -- skin
+            -- table.insert(button.activeButtons, newButton)
             newButton = button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
             table.insert(button.activeButtons, newButton)
         elseif settings.tab == "video" then
