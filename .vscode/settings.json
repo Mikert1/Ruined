@@ -8,5 +8,8 @@
     ],
     "Lua.diagnostics.disable": [
         "undefined-field"
-    ]
+    ],
+    "luahelper.colors.Global Field Color": "#00ffff",
+    "luahelper.colors.Global Fun Color": "#00ffff",
+    "luahelper.colors.Type(annotation) Color": "#569CD6"
 }

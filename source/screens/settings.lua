@@ -16,17 +16,23 @@ settings.tab = "game"
 function settings.load()
     local newButton
     button.activeButtons = {}
-    newButton = button.specialNew(-127, -88, settings.mainButtons.game, {0, 1, 1}, 11, settings.button, settings.buttonOutline)
+    newButton = button.specialNew(-127, -88, settings.mainButtons.game, {0, 1, 1}, 11, settings.button,
+        settings.buttonOutline)
     table.insert(button.activeButtons, newButton)
-    newButton = button.specialNew(-84, -88, settings.mainButtons.video, {0, 1, 1}, 12, settings.button, settings.buttonOutline)
+    newButton = button.specialNew(-84, -88, settings.mainButtons.video, {0, 1, 1}, 12, settings.button,
+        settings.buttonOutline)
     table.insert(button.activeButtons, newButton)
-    newButton = button.specialNew(-41, -88, settings.mainButtons.controls, {0, 1, 1}, 13, settings.button, settings.buttonOutline)
+    newButton = button.specialNew(-41, -88, settings.mainButtons.controls, {0, 1, 1}, 13, settings.button,
+        settings.buttonOutline)
     table.insert(button.activeButtons, newButton)
-    newButton = button.specialNew(2, -88, settings.mainButtons.customize, {0, 1, 1}, 14, settings.button, settings.buttonOutline)
+    newButton = button.specialNew(2, -88, settings.mainButtons.customize, {0, 1, 1}, 14, settings.button,
+        settings.buttonOutline)
     table.insert(button.activeButtons, newButton)
-    newButton = button.specialNew(45, -88, settings.mainButtons.game, {0, 1, 1}, 15, settings.button, settings.buttonOutline)
+    newButton = button.specialNew(45, -88, settings.mainButtons.game, {0, 1, 1}, 15, settings.button,
+        settings.buttonOutline)
     table.insert(button.activeButtons, newButton)
-    newButton = button.specialNew(88, -88, settings.mainButtons.game, {0, 1, 1}, 16, settings.button, settings.buttonOutline)
+    newButton = button.specialNew(88, -88, settings.mainButtons.game, {0, 1, 1}, 16, settings.button,
+        settings.buttonOutline)
     table.insert(button.activeButtons, newButton)
     if title.state == 4 then
         if settings.tab == "game" then
@@ -41,6 +47,17 @@ function settings.load()
             newButton = button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
             table.insert(button.activeButtons, newButton)
         elseif settings.tab == "video" then
+            print(savedSettings.window)
+            if savedSettings.window == 0 then
+                newButton = button.new(-128, -53, "Windowed", {0, 1, 1}, 20, "Window Type:") -- fullscreen
+            elseif savedSettings.window == 1 then
+                newButton = button.new(-128, -53, "Fullscreen", {1, 0, 0}, 20, "Window Type:") -- fullscreen
+            elseif savedSettings.window == 2 then
+                newButton = button.new(-128, -53, "Borderless", {1, 0, 0}, 20, "Window Type:") -- fullscreen
+            end
+            table.insert(button.activeButtons, newButton)
+            -- newButton = button.new(-128, -18, love.graphics.getWidth() .. "x" .. love.graphics.getHeight(), {0, 1, 1}, 21, "Resolution") -- resolution
+            -- table.insert(button.activeButtons, newButton)
             newButton = button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
             table.insert(button.activeButtons, newButton)
         elseif settings.tab == "controls" then
@@ -55,25 +72,34 @@ function settings.load()
     end
 end
 
-
 function settings.update()
 
 end
 
 function settings.draw()
-    love.graphics.draw(title.settingBackground, love.graphics.getWidth() / 2 - (title.settingBackground:getWidth() / 2) * playerCamera.globalScale, love.graphics.getHeight() / 2 - (title.settingBackground:getHeight() / 2) * playerCamera.globalScale, nil, playerCamera.globalScale)
+    love.graphics.draw(title.settingBackground,
+        love.graphics.getWidth() / 2 - (title.settingBackground:getWidth() / 2) * playerCamera.globalScale,
+        love.graphics.getHeight() / 2 - (title.settingBackground:getHeight() / 2) * playerCamera.globalScale, nil,
+        playerCamera.globalScale)
     love.graphics.setColor(1, 1, 1)
     if settings.tab == "game" then
     elseif settings.tab == "video" then
-        
+
     elseif settings.tab == "controls" then
-        
+
     elseif settings.tab == "skin" then
-        love.graphics.print("preview", love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (66 * playerCamera.globalScale) , nil, playerCamera.globalScale * 0.5)
-        love.graphics.draw(player.spriteSheet, love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (55 * playerCamera.globalScale) , nil, playerCamera.globalScale * 0.5)
-        love.graphics.print("Drop your file here.", love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (3 * playerCamera.globalScale), nil, playerCamera.globalScale * 0.2)
-        love.graphics.print("image 95x105 pixels (19x21 for every animation frame)", love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (0 * playerCamera.globalScale) , nil, playerCamera.globalScale * 0.2)
-        love.graphics.draw(settings.dropFileImage, love.graphics.getWidth() / 2 - (settings.dropFileImage:getWidth() / 2 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (settings.dropFileImage:getHeight() / 2 * playerCamera.globalScale) , nil, playerCamera.globalScale)
+        love.graphics.print("preview", love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale),
+            love.graphics.getHeight() / 2 - (66 * playerCamera.globalScale), nil, playerCamera.globalScale * 0.5)
+        love.graphics.draw(player.spriteSheet, love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale),
+            love.graphics.getHeight() / 2 - (55 * playerCamera.globalScale), nil, playerCamera.globalScale * 0.5)
+        love.graphics.print("Drop your file here.", love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale),
+            love.graphics.getHeight() / 2 - (3 * playerCamera.globalScale), nil, playerCamera.globalScale * 0.2)
+        love.graphics.print("image 95x105 pixels (19x21 for every animation frame)",
+            love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale),
+            love.graphics.getHeight() / 2 - (0 * playerCamera.globalScale), nil, playerCamera.globalScale * 0.2)
+        love.graphics.draw(settings.dropFileImage, love.graphics.getWidth() / 2 -
+            (settings.dropFileImage:getWidth() / 2 * playerCamera.globalScale), love.graphics.getHeight() / 2 -
+            (settings.dropFileImage:getHeight() / 2 * playerCamera.globalScale), nil, playerCamera.globalScale)
     end
     love.graphics.setColor(1, 1, 1)
 end

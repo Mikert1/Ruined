@@ -135,6 +135,22 @@ function button:action()
     elseif self.id == 16 then -- controls button
         settings.tab = "controls"
         settings.load()
+    elseif self.id == 20 then -- fullscreen button
+        if savedSettings.window == 0 then
+            love.window.setFullscreen(true)
+            savedSettings.window = 1
+            self.text = "Fullscreen"
+        elseif savedSettings.window == 1 then
+            love.window.setFullscreen(false)
+            love.window.setMode(love.graphics.getWidth(), love.graphics.getHeight(), {borderless = true, resizable = true})
+            savedSettings.window = 2
+            self.text = "Borderless"
+        elseif savedSettings.window == 2 then
+            love.window.setMode(love.graphics.getWidth(), love.graphics.getHeight(), {borderless = false, resizable = true}) 
+            savedSettings.window = 0
+            self.text = "Windowed"
+        end
+        file.settings.save()
     end
 end
 
@@ -187,15 +203,49 @@ end
 
 function button:draw()
     if self.info then
-        love.graphics.print(self.info, love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale), love.graphics.getHeight() / 2 + (self.y * playerCamera.globalScale) - (self.image:getHeight() * playerCamera.globalScale * 0.5), nil, playerCamera.globalScale * 0.5)
+        love.graphics.print(
+            self.info, 
+            love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale), 
+            love.graphics.getHeight() / 2 + (self.y * playerCamera.globalScale) - (self.image:getHeight() * playerCamera.globalScale * 0.5), 
+            nil, 
+            playerCamera.globalScale * 0.5
+        )
     end
-    love.graphics.draw(self.image, love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale), love.graphics.getHeight() / 2 + (self.y * playerCamera.globalScale) , nil, playerCamera.globalScale)
-    love.graphics.setColor(self.currentColor[1], self.currentColor[2], self.currentColor[3])
-    love.graphics.draw(self.imageOutline, love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale), love.graphics.getHeight() / 2 + (self.y * playerCamera.globalScale) , nil, playerCamera.globalScale)
+    love.graphics.draw(
+        self.image, 
+        love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale), 
+        love.graphics.getHeight() / 2 + (self.y * playerCamera.globalScale), 
+        nil, 
+        playerCamera.globalScale
+    )
+    love.graphics.setColor(
+        self.currentColor[1], 
+        self.currentColor[2], 
+        self.currentColor[3]
+    )
+    love.graphics.draw(
+        self.imageOutline, 
+        love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale), 
+        love.graphics.getHeight() / 2 + (self.y * playerCamera.globalScale), 
+        nil, 
+        playerCamera.globalScale
+    )
     if self.text then
-        love.graphics.print(self.text, love.graphics.getWidth() / 2 + ((self.x + 40) * playerCamera.globalScale) - (font:getWidth(self.text) * playerCamera.globalScale) / 2, love.graphics.getHeight() / 2 + ((self.y + 10) * playerCamera.globalScale) - (font:getHeight(self.text) * playerCamera.globalScale) / 2, nil, playerCamera.globalScale)
+        love.graphics.print(
+            self.text, 
+            love.graphics.getWidth() / 2 + ((self.x + 40) * playerCamera.globalScale) - (font:getWidth(self.text) * playerCamera.globalScale) / 2, 
+            love.graphics.getHeight() / 2 + ((self.y + 10) * playerCamera.globalScale) - (font:getHeight(self.text) * playerCamera.globalScale) / 2, 
+            nil, 
+            playerCamera.globalScale
+        )
     else
-        love.graphics.draw(self.imageOnButton, love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale) + (self.width * playerCamera.globalScale) / 2 - (self.imageOnButton:getWidth() * playerCamera.globalScale) / 2, love.graphics.getHeight() / 2 + (self.y * playerCamera.globalScale) + (self.height * playerCamera.globalScale) / 2 - (self.imageOnButton:getHeight() * playerCamera.globalScale) / 2, nil, playerCamera.globalScale)
+        love.graphics.draw(
+            self.imageOnButton, 
+            love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale) + (self.width * playerCamera.globalScale) / 2 - (self.imageOnButton:getWidth() * playerCamera.globalScale) / 2, 
+            love.graphics.getHeight() / 2 + (self.y * playerCamera.globalScale) + (self.height * playerCamera.globalScale) / 2 - (self.imageOnButton:getHeight() * playerCamera.globalScale) / 2, 
+            nil, 
+            playerCamera.globalScale
+        )
     end
     love.graphics.setColor(1, 1, 1)
 end
