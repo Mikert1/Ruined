@@ -34,6 +34,23 @@ function button.new(x, y, text, color, id)
     return self
 end
 
+function button.specialNew(x, y, text, color, id, width, height)
+    local self = setmetatable({}, button)
+    self.x = x
+    self.y = y
+    self.id = id
+    self.width = width
+    self.height = height
+    self.image = buttonImage
+    self.imageOutline = buttonImageOutline
+    self.color = color
+    self.currentColor = {0.15, 0.15, 0.15}
+    self.text = text
+    self.hover = false
+    self.clicked = true
+    return self
+end
+
 function button:action()
     if self.id == 1 then -- disables or enables devmode
         if savedSettings.devmode == false then

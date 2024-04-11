@@ -2,6 +2,7 @@ local settings = {}
 local anim8 = require("assets/library/animations")
 local title = require("source/screens/title")
 local button = require("source/screens/button")
+settings.button = love.graphics.newImage("assets/textures/gui/settings/button.png")
 settings.dropFileImage = love.graphics.newImage("assets/textures/gui/settings/drop.png")
 settings.mainButtons = {}
 settings.mainButtons.game = love.graphics.newImage("assets/textures/gui/settings/game.png")
@@ -46,6 +47,7 @@ function settings.update()
 end
 
 function settings.draw()
+    love.graphics.draw(settings.button, love.graphics.getWidth() / 2 - (settings.button:getWidth() / 2 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (settings.button:getHeight() / 2 * playerCamera.globalScale), nil, playerCamera.globalScale)
     love.graphics.draw(title.settingBackground, love.graphics.getWidth() / 2 - (title.settingBackground:getWidth() / 2) * playerCamera.globalScale, love.graphics.getHeight() / 2 - (title.settingBackground:getHeight() / 2) * playerCamera.globalScale, nil, playerCamera.globalScale)
     love.graphics.setColor(1, 1, 1)
     love.graphics.draw(settings.mainButtons.game, love.graphics.getWidth() / 2 - (126 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (88 * playerCamera.globalScale) , nil, playerCamera.globalScale * 0.9)
@@ -53,7 +55,6 @@ function settings.draw()
     love.graphics.draw(settings.mainButtons.controls, love.graphics.getWidth() / 2 - (34 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (88 * playerCamera.globalScale) , nil, playerCamera.globalScale * 0.9)
     if settings.tab == "game" then
         love.graphics.print("Developer Mode", love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (66 * playerCamera.globalScale) , nil, playerCamera.globalScale * 0.5)
-
         love.graphics.print("Skin - beta", love.graphics.getWidth() / 2 + (48 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (66 * playerCamera.globalScale) , nil, playerCamera.globalScale * 0.5)
     elseif settings.tab == "video" then
         
