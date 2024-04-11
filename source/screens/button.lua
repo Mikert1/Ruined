@@ -35,7 +35,7 @@ function button.new(x, y, text, color, id, info)
     return self
 end
 
-function button.specialNew(x, y, text, color, id, image, outline)
+function button.specialNew(x, y, imageOnButton, color, id, image, outline)
     local self = setmetatable({}, button)
     self.x = x
     self.y = y
@@ -46,7 +46,7 @@ function button.specialNew(x, y, text, color, id, image, outline)
     self.imageOutline = outline
     self.color = color
     self.currentColor = {0.15, 0.15, 0.15}
-    self.text = text
+    self.imageOnButton = imageOnButton
     self.hover = false
     self.clicked = true
     return self
@@ -171,12 +171,14 @@ function button:draw()
     if self.info then
         love.graphics.print(self.info, love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale), love.graphics.getHeight() / 2 + (self.y * playerCamera.globalScale) - (self.image:getHeight() * playerCamera.globalScale * 0.5), nil, playerCamera.globalScale * 0.5)
     end
-    if love.keyboard.isDown("lctrl") then
-        love.graphics.draw(self.image, love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale), love.graphics.getHeight() / 2 + (self.y * playerCamera.globalScale) , nil, playerCamera.globalScale)
-    end
+    love.graphics.draw(self.image, love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale), love.graphics.getHeight() / 2 + (self.y * playerCamera.globalScale) , nil, playerCamera.globalScale)
     love.graphics.setColor(self.currentColor[1], self.currentColor[2], self.currentColor[3])
     love.graphics.draw(self.imageOutline, love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale), love.graphics.getHeight() / 2 + (self.y * playerCamera.globalScale) , nil, playerCamera.globalScale)
-    love.graphics.print(self.text, love.graphics.getWidth() / 2 + ((self.x + 40) * playerCamera.globalScale) - (font:getWidth(self.text) * playerCamera.globalScale) / 2, love.graphics.getHeight() / 2 + ((self.y + 10) * playerCamera.globalScale) - (font:getHeight(self.text) * playerCamera.globalScale) / 2, nil, playerCamera.globalScale)
+    if self.text then
+        love.graphics.print(self.text, love.graphics.getWidth() / 2 + ((self.x + 40) * playerCamera.globalScale) - (font:getWidth(self.text) * playerCamera.globalScale) / 2, love.graphics.getHeight() / 2 + ((self.y + 10) * playerCamera.globalScale) - (font:getHeight(self.text) * playerCamera.globalScale) / 2, nil, playerCamera.globalScale)
+    else
+        love.graphics.draw(self.imageOnButton, love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale), love.graphics.getHeight() / 2 + (self.y * playerCamera.globalScale) , nil, playerCamera.globalScale)
+    end
     love.graphics.setColor(1, 1, 1)
 end
 

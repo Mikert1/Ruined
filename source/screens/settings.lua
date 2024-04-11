@@ -15,7 +15,7 @@ settings.tab = "game"
 function settings.load()
     local newButton
     button.activeButtons = {}
-    newButton = button.specialNew(-127, -89, "", {1, 1, 1}, 1, settings.button, settings.buttonOutline)
+    newButton = button.specialNew(-127, -89, settings.mainButtons.game, {1, 1, 1}, 1, settings.button, settings.buttonOutline)
     table.insert(button.activeButtons, newButton)
     if title.state == 4 then
         if settings.tab == "game" then
