@@ -10,7 +10,8 @@ settings.mainButtons.game = love.graphics.newImage("assets/textures/gui/settings
 settings.mainButtons.video = love.graphics.newImage("assets/textures/gui/settings/video.png")
 settings.mainButtons.controls = love.graphics.newImage("assets/textures/gui/settings/controls.png")
 settings.mainButtons.customize = love.graphics.newImage("assets/textures/gui/settings/customize.png")
-settings.mainButtons.audio = {}
+settings.mainButtons.audio = love.graphics.newImage("assets/textures/gui/settings/sound.png")
+settings.mainButtons.a = love.graphics.newImage("assets/textures/gui/settings/a.png")
 settings.tab = "game"
 
 function settings.load()
@@ -28,10 +29,10 @@ function settings.load()
     newButton = button.specialNew(2, -88, settings.mainButtons.customize, {0, 1, 1}, 14, settings.button,
         settings.buttonOutline)
     table.insert(button.activeButtons, newButton)
-    newButton = button.specialNew(45, -88, settings.mainButtons.game, {0, 1, 1}, 15, settings.button,
+    newButton = button.specialNew(45, -88, settings.mainButtons.audio, {0, 1, 1}, 15, settings.button,
         settings.buttonOutline)
     table.insert(button.activeButtons, newButton)
-    newButton = button.specialNew(88, -88, settings.mainButtons.game, {0, 1, 1}, 16, settings.button,
+    newButton = button.specialNew(88, -88, settings.mainButtons.a, {0, 1, 1}, 16, settings.button,
         settings.buttonOutline)
     table.insert(button.activeButtons, newButton)
     if title.state == 4 then
