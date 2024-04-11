@@ -20,12 +20,12 @@ function settings.load()
     if title.state == 4 then
         if settings.tab == "game" then
             if savedSettings.devmode == true then
-                newButton = button.new(-128, -55, "True", {0, 1, 1}, 1) -- devmode
+                newButton = button.new(-128, -55, "True", {0, 1, 1}, 1, "Developer Mode") -- devmode
             else
-                newButton = button.new(-128, -55, "False", {1, 0, 0}, 1) -- devmode
+                newButton = button.new(-128, -55, "False", {1, 0, 0}, 1, "Developer Mode") -- devmode
             end
             table.insert(button.activeButtons, newButton)
-            newButton = button.new(48, -55, "Customize", {0, 1, 1}, 2) -- skin
+            newButton = button.new(48, -55, "Customize", {0, 1, 1}, 2, "Skin - Beta") -- skin
             table.insert(button.activeButtons, newButton)
             newButton = button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
             table.insert(button.activeButtons, newButton)
@@ -56,8 +56,6 @@ function settings.draw()
     love.graphics.draw(settings.mainButtons.video, love.graphics.getWidth() / 2 - (80 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (88 * playerCamera.globalScale) , nil, playerCamera.globalScale * 0.9)
     love.graphics.draw(settings.mainButtons.controls, love.graphics.getWidth() / 2 - (34 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (88 * playerCamera.globalScale) , nil, playerCamera.globalScale * 0.9)
     if settings.tab == "game" then
-        love.graphics.print("Developer Mode", love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (66 * playerCamera.globalScale) , nil, playerCamera.globalScale * 0.5)
-        love.graphics.print("Skin - beta", love.graphics.getWidth() / 2 + (48 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (66 * playerCamera.globalScale) , nil, playerCamera.globalScale * 0.5)
     elseif settings.tab == "video" then
         
     elseif settings.tab == "controls" then
