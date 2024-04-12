@@ -13,8 +13,11 @@ local controls = require("source/controls/controls")
 
 function love.keypressed(key)
     if not (controls.searchForKey == nil) then
-        print("Setting key " .. key .. " for " .. controls.searchForKey)
-        print(controls.keys[controls.searchForKey])
+        if key == "escape" then
+            controls.searchForKey = nil
+            controls.save()
+            settings.load()
+        end
         controls.keys[controls.searchForKey] = key
         controls.searchForKey = nil
         controls.save()

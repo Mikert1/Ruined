@@ -169,11 +169,17 @@ function button:action()
 
     elseif self.id == 24 then -- antialiasing button
 
-    elseif self.id == 25 then -- texture pack button
-        settings.tab = "texture"
-        settings.load()
-    elseif self.id == 26 then -- reset controls button
+    elseif self.id == 25 then -- keybind button
+        controls.searchForKey = "interact"
+        self.text = "Search for key"
+    elseif self.id == 26 then -- keybind button
         controls.searchForKey = "map"
+        self.text = "Search for key"
+    elseif self.id == 27 then -- keybind button
+        controls.searchForKey = "focus"
+        self.text = "Search for key"
+    elseif self.id == 28 then -- keybind button
+        controls.searchForKey = "switchWeapon"
         self.text = "Search for key"
     end
 end
