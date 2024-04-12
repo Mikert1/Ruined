@@ -17,7 +17,7 @@ end
 
 button.activeButtons = {}
 
-function button.new(x, y, text, color, id, info)
+function button.new(x, y, text, color, id, info, scroll)
     local self = setmetatable({}, button)
     self.x = x
     self.y = y
@@ -32,6 +32,7 @@ function button.new(x, y, text, color, id, info)
     self.info = info
     self.hover = false
     self.clicked = true
+    self.scroll = scroll
     return self
 end
 
@@ -131,10 +132,10 @@ function button:action()
         settings.tab = "skin"
         settings.load()
     elseif self.id == 15 then -- controls button
-        settings.tab = "controls"
+        settings.tab = "audio"
         settings.load()
     elseif self.id == 16 then -- controls button
-        settings.tab = "controls"
+        settings.tab = "stats"
         settings.load()
     elseif self.id == 20 then -- fullscreen button
         if savedSettings.window == 0 then
@@ -203,12 +204,16 @@ function button:update(dt)
 end
 
 function button:draw()
+    local y = self.y
+    if self.scroll then
+        y = self.y + settings.scroll
+    end
     if self.info then
         love.graphics.setColor(0.1, 0.1, 0.1)
         love.graphics.print(
             self.info, 
             love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale), 
-            love.graphics.getHeight() / 2 + (self.y * playerCamera.globalScale) - (self.image:getHeight() * playerCamera.globalScale * 0.5), 
+            love.graphics.getHeight() / 2 + (y * playerCamera.globalScale) - (self.image:getHeight() * playerCamera.globalScale * 0.5), 
             nil, 
             playerCamera.globalScale * 0.5
         )
@@ -217,7 +222,7 @@ function button:draw()
     love.graphics.draw(
         self.image, 
         love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale), 
-        love.graphics.getHeight() / 2 + (self.y * playerCamera.globalScale), 
+        love.graphics.getHeight() / 2 + (y * playerCamera.globalScale), 
         nil, 
         playerCamera.globalScale
     )
@@ -229,7 +234,7 @@ function button:draw()
     love.graphics.draw(
         self.imageOutline, 
         love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale), 
-        love.graphics.getHeight() / 2 + (self.y * playerCamera.globalScale), 
+        love.graphics.getHeight() / 2 + (y * playerCamera.globalScale), 
         nil, 
         playerCamera.globalScale
     )
@@ -237,7 +242,7 @@ function button:draw()
         love.graphics.print(
             self.text, 
             love.graphics.getWidth() / 2 + ((self.x + 40) * playerCamera.globalScale) - (font:getWidth(self.text) * playerCamera.globalScale) / 2, 
-            love.graphics.getHeight() / 2 + ((self.y + 10) * playerCamera.globalScale) - (font:getHeight(self.text) * playerCamera.globalScale) / 2, 
+            love.graphics.getHeight() / 2 + ((y + 10) * playerCamera.globalScale) - (font:getHeight(self.text) * playerCamera.globalScale) / 2, 
             nil, 
             playerCamera.globalScale
         )
@@ -245,7 +250,7 @@ function button:draw()
         love.graphics.draw(
             self.imageOnButton, 
             love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale) + (self.width * playerCamera.globalScale) / 2 - (self.imageOnButton:getWidth() * playerCamera.globalScale) / 2, 
-            love.graphics.getHeight() / 2 + (self.y * playerCamera.globalScale) + (self.height * playerCamera.globalScale) / 2 - (self.imageOnButton:getHeight() * playerCamera.globalScale) / 2, 
+            love.graphics.getHeight() / 2 + (y * playerCamera.globalScale) + (self.height * playerCamera.globalScale) / 2 - (self.imageOnButton:getHeight() * playerCamera.globalScale) / 2, 
             nil, 
             playerCamera.globalScale
         )

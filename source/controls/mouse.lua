@@ -303,19 +303,17 @@ function love.mousereleased(x, y, button, istouch, presses)
 end
 
 function love.wheelmoved(x, y)
-    if title.state == 4 then
-        if settings.tab == "controls" then
-            if y > 0 then
-                settings.scroll = settings.scroll + 1
-                if settings.scroll > 3 then
-                    settings.scroll = 3
-                end
-            else
-                settings.scroll = settings.scroll - 1
-                if settings.scroll < 0 then
-                    settings.scroll = 0
-                end
-            end
+    print(y)
+    print(settings.scroll)
+    if y > 0 then
+        settings.scroll = settings.scroll + (y * 5)
+        if settings.scroll < 100 then
+            settings.scroll = 100
+        end
+    else
+        settings.scroll = settings.scroll - (y * 5)
+        if settings.scroll > 0 then
+            settings.scroll = 0
         end
     end
 end

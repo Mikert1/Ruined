@@ -63,7 +63,7 @@ function settings.load()
             newButton = button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
             table.insert(button.activeButtons, newButton)
         elseif settings.tab == "controls" then
-            newButton = button.new(-127, -53, "Key: " .. controls.keys.interact .. " ", {1, 0, 0}, 22, "Interact") -- reset controls
+            newButton = button.new(-127, -53, "Key: " .. string.upper(controls.keys.interact) .. " ", {0, 1, 1}, 22, "Interact", true) -- reset controls
             table.insert(button.activeButtons, newButton)
             newButton = button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
             table.insert(button.activeButtons, newButton)
