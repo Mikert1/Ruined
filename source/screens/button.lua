@@ -128,6 +128,7 @@ function button:action()
     elseif self.id == 13 then -- controls button
         settings.tab = "controls"
         settings.load()
+        settings.scroll = 0
     elseif self.id == 14 then -- controls button
         settings.tab = "skin"
         settings.load()
@@ -204,9 +205,19 @@ function button:update(dt)
 end
 
 function button:draw()
+    love.graphics.stencil(function() 
+        love.graphics.rectangle(
+            "fill", 
+            love.graphics.getWidth() / 2 + (-127 * playerCamera.globalScale), 
+            love.graphics.getHeight() / 2 + (-61 * playerCamera.globalScale), 
+            254 * playerCamera.globalScale, 
+            125 * playerCamera.globalScale
+        )
+    end, "replace", 1)
     local y = self.y
     if self.scroll then
         y = self.y + settings.scroll
+        love.graphics.setStencilTest("greater", 0)
     end
     if self.info then
         love.graphics.setColor(0.1, 0.1, 0.1)
@@ -255,6 +266,7 @@ function button:draw()
             playerCamera.globalScale
         )
     end
+    love.graphics.setStencilTest()
     love.graphics.setColor(1, 1, 1)
 end
 
