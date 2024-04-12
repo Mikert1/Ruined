@@ -86,6 +86,7 @@ function button:action()
                     --fix there will be the finaly (3)
                 end
                 settings.load()
+                gui.buttonLoad()
             end
         end
     elseif self.id == 4 then -- removes texture pack

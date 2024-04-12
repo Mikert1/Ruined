@@ -311,12 +311,10 @@ function file.settings.load()
             error("Oops! The save file (settings.json) failed to decode, this means the file was (probably) corrupted.")
         end
     end
-    if savedSettings.window == 0 then
-        love.window.setMode(love.graphics.getWidth(), love.graphics.getHeight(), {borderless = false, resizable = true})
+    if savedSettings.window == 2 then
+        love.window.setMode(love.graphics.getWidth(), love.graphics.getHeight(), {borderless = true, resizable = true})
     elseif savedSettings.window == 1 then
         love.window.setFullscreen(true)
-    elseif savedSettings.window == 2 then
-        love.window.setMode(love.graphics.getWidth(), love.graphics.getHeight(), {borderless = true, resizable = true})
     end
     if savedSettings.devmode == true then
         --normaly this would open the console
