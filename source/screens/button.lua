@@ -154,6 +154,27 @@ function button:action()
             self.text = "Windowed"
         end
         file.settings.save()
+    elseif self.id == 21 then -- resolution button
+
+    elseif self.id == 22 then -- vsync button
+        if savedSettings.vsync == false then
+            savedSettings.vsync = true
+            self.text = "Enabled"
+        else
+            savedSettings.vsync = false
+            self.text = "Disabled"
+        end
+        file.settings.save()
+    elseif self.id == 23 then -- fps button
+
+    elseif self.id == 24 then -- antialiasing button
+
+    elseif self.id == 25 then -- texture pack button
+        settings.tab = "texture"
+        settings.load()
+    elseif self.id == 26 then -- reset controls button
+        controls.searchForKey = "map"
+        self.text = "Search for key"
     end
 end
 

@@ -6,6 +6,13 @@ controls.keys = {
     interact = "e",
     switchWeapon = "r",
 }
+controls.default = {
+    map = "m",
+    focus = "q",
+    interact = "e",
+    switchWeapon = "r",
+}
+controls.searchForKey = nil
 
 function controls.load()
     if love.filesystem.getInfo("controls.json") then

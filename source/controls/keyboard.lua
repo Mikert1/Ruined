@@ -5,12 +5,21 @@ keys.f4 = 0
 local gui = require("source/gui")
 local story = require("source/story/story")
 local title = require("source/screens/title") -- remove after easter egg remove
+local settings = require("source/screens/settings")
 local stone = require("source/enemies/stone")
 local file = require("source/data")
 local weapon = require("source/weapons")
 local controls = require("source/controls/controls")
 
 function love.keypressed(key)
+    if not (controls.searchForKey == nil) then
+        print("Setting key " .. key .. " for " .. controls.searchForKey)
+        print(controls.keys[controls.searchForKey])
+        controls.keys[controls.searchForKey] = key
+        controls.searchForKey = nil
+        controls.save()
+        settings.load()
+    end
     if not player.isDead and title.state == 5 then
         if key == "escape" then
             if keys.esc == true then
@@ -149,7 +158,7 @@ function love.keypressed(key)
     end
 end
 function love.keyreleased(key)
-    if key == "m" then
+    if key == controls.keys.map then
         gui.map = false
     end
     if key == controls.keys.interact then
