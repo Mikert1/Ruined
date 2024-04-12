@@ -160,7 +160,11 @@ end
 function button:update(dt)
     local x = love.mouse.getX()
     local y = love.mouse.getY()
-    if x > love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + ((self.x + self.width) * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (self.y * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + ((self.y + self.height) * playerCamera.globalScale) then
+    local modifiedY = self.y
+    if self.scroll then
+        modifiedY = self.y + settings.scroll
+    end
+    if x > love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + ((self.x + self.width) * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (modifiedY * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + ((modifiedY + self.height) * playerCamera.globalScale) then
         self.hover = true
         if love.mouse.isDown(1) then
             if self.clicked == false then
