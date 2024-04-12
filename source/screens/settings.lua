@@ -39,9 +39,9 @@ function settings.load()
     if title.state == 4 then
         if settings.tab == "game" then
             if savedSettings.devmode == true then
-                newButton = button.new(-128, -53, "True", {0, 1, 1}, 1, "Developer Mode") -- devmode
+                newButton = button.new(-127, -53, "True", {0, 1, 1}, 1, "Developer Mode") -- devmode
             else
-                newButton = button.new(-128, -53, "False", {1, 0, 0}, 1, "Developer Mode") -- devmode
+                newButton = button.new(-127, -53, "False", {1, 0, 0}, 1, "Developer Mode") -- devmode
             end
             table.insert(button.activeButtons, newButton)
             -- newButton = button.new(48, -53, "Customize", {0, 1, 1}, 2, "Skin - Beta") -- skin
@@ -51,11 +51,11 @@ function settings.load()
         elseif settings.tab == "video" then
             print(savedSettings.window)
             if savedSettings.window == 0 then
-                newButton = button.new(-128, -53, "Windowed", {0, 1, 1}, 20, "Window Type:") -- fullscreen
+                newButton = button.new(-127, -53, "Windowed", {0, 1, 1}, 20, "Window Type:") -- fullscreen
             elseif savedSettings.window == 1 then
-                newButton = button.new(-128, -53, "Fullscreen", {1, 0, 0}, 20, "Window Type:") -- fullscreen
+                newButton = button.new(-127, -53, "Fullscreen", {1, 0, 0}, 20, "Window Type:") -- fullscreen
             elseif savedSettings.window == 2 then
-                newButton = button.new(-128, -53, "Borderless", {1, 0, 0}, 20, "Window Type:") -- fullscreen
+                newButton = button.new(-127, -53, "Borderless", {1, 0, 0}, 20, "Window Type:") -- fullscreen
             end
             table.insert(button.activeButtons, newButton)
             -- newButton = button.new(-128, -18, love.graphics.getWidth() .. "x" .. love.graphics.getHeight(), {0, 1, 1}, 21, "Resolution") -- resolution
@@ -63,6 +63,8 @@ function settings.load()
             newButton = button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
             table.insert(button.activeButtons, newButton)
         elseif settings.tab == "controls" then
+            newButton = button.new(-127, -53, "Key: " .. controls.keys.interact .. " ", {1, 0, 0}, 22, "Interact") -- reset controls
+            table.insert(button.activeButtons, newButton)
             newButton = button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
             table.insert(button.activeButtons, newButton)
         elseif settings.tab == "skin" then
