@@ -164,15 +164,19 @@ function button:update(dt)
     if self.scroll then
         modifiedY = self.y + settings.scroll
     end
-    if x > love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + ((self.x + self.width) * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (modifiedY * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + ((modifiedY + self.height) * playerCamera.globalScale) then
-        self.hover = true
-        if love.mouse.isDown(1) then
-            if self.clicked == false then
-                self.clicked = true
-                self:action(self.id)
+    if not self.scroll or (x > love.graphics.getWidth() / 2 + (-127 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (127 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (-61 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (64 * playerCamera.globalScale)) then
+        if x > love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + ((self.x + self.width) * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (modifiedY * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + ((modifiedY + self.height) * playerCamera.globalScale) then
+            self.hover = true
+            if love.mouse.isDown(1) then
+                if self.clicked == false then
+                    self.clicked = true
+                    self:action(self.id)
+                end
+            else
+                self.clicked = false
             end
         else
-            self.clicked = false
+            self.hover = false
         end
     else
         self.hover = false
