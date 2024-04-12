@@ -303,7 +303,7 @@ function love.mousereleased(x, y, button, istouch, presses)
 end
 
 function love.wheelmoved(x, y)
-    settings.scroll = settings.scroll - (y * 5)
+    settings.scroll = settings.scroll + (y * 5)
     -- if settings.scroll < 0 then
     --     settings.scroll = 0
     -- end

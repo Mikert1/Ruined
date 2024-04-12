@@ -210,7 +210,7 @@ function button:draw()
             "fill", 
             love.graphics.getWidth() / 2 + (-127 * playerCamera.globalScale), 
             love.graphics.getHeight() / 2 + (-61 * playerCamera.globalScale), 
-            254 * playerCamera.globalScale, 
+            254 * playerCamera.globalScale,
             125 * playerCamera.globalScale
         )
     end, "replace", 1)

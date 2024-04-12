@@ -65,6 +65,12 @@ function settings.load()
         elseif settings.tab == "controls" then
             newButton = button.new(-127, -53, "Key: " .. string.upper(controls.keys.interact) .. " ", {0, 1, 1}, 22, "Interact", true) -- reset controls
             table.insert(button.activeButtons, newButton)
+            newButton = button.new(-127, -18, "Key: " .. string.upper(controls.keys.map) .. " ", {0, 1, 1}, 23, "Map", true) -- reset controls
+            table.insert(button.activeButtons, newButton)
+            newButton = button.new(-127, 17, "Key: " .. string.upper(controls.keys.focus) .. " ", {0, 1, 1}, 24, "Focus", true) -- reset controls
+            table.insert(button.activeButtons, newButton)
+            newButton = button.new(-127, 52, "Key: " .. string.upper(controls.keys.switchWeapon) .. " ", {0, 1, 1}, 25, "Switch Weapon", true) -- reset controls
+            table.insert(button.activeButtons, newButton)
             newButton = button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
             table.insert(button.activeButtons, newButton)
         elseif settings.tab == "skin" then
