@@ -305,15 +305,11 @@ end
 function love.wheelmoved(x, y)
     print(y)
     print(settings.scroll)
-    if y > 0 then
-        settings.scroll = settings.scroll + (y * 5)
-        if settings.scroll < 100 then
-            settings.scroll = 100
-        end
-    else
-        settings.scroll = settings.scroll - (y * 5)
-        if settings.scroll > 0 then
-            settings.scroll = 0
-        end
+    settings.scroll = settings.scroll - (y * 5)
+    if settings.scroll < 0 then
+        settings.scroll = 0
+    end
+    if settings.scroll > 100 then
+        settings.scroll = 100
     end
 end
