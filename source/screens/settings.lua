@@ -114,6 +114,10 @@ function settings.draw()
             love.graphics.draw(settings.dropFileImage, love.graphics.getWidth() / 2 -
                 (settings.dropFileImage:getWidth() / 2 * playerCamera.globalScale), love.graphics.getHeight() / 2 -
                 (settings.dropFileImage:getHeight() / 2 * playerCamera.globalScale), nil, playerCamera.globalScale)
+        elseif settings.tab == "audio" then
+
+        elseif settings.tab == "stats" then
+            
         end
         love.graphics.setColor(1, 1, 1)
     end
