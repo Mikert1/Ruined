@@ -17,11 +17,13 @@ function love.keypressed(key)
             controls.searchForKey = nil
             controls.save()
             settings.load()
+            return
         end
         controls.keys[controls.searchForKey] = key
         controls.searchForKey = nil
         controls.save()
         settings.load()
+        return
     end
     if not player.isDead and title.state == 5 then
         if key == "escape" then

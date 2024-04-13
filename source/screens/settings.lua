@@ -11,7 +11,7 @@ settings.mainButtons.video = love.graphics.newImage("assets/textures/gui/setting
 settings.mainButtons.controls = love.graphics.newImage("assets/textures/gui/settings/controls.png")
 settings.mainButtons.customize = love.graphics.newImage("assets/textures/gui/settings/customize.png")
 settings.mainButtons.audio = love.graphics.newImage("assets/textures/gui/settings/sound.png")
-settings.mainButtons.a = love.graphics.newImage("assets/textures/gui/settings/a.png")
+settings.mainButtons.a = love.graphics.newImage("assets/textures/gui/settings/stats.png")
 settings.scroll = 0
 settings.tab = "game"
 
