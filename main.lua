@@ -27,6 +27,7 @@ local story = require("source/story/story")
 local scene = require("source/story/cutscene")
 local stone = require("source/enemies/stone")
 local button = require("source/screens/button")
+local settings = require("source/screens/settings")
 _G.server = require("source/network/server")
 print("Done loading")
 
@@ -110,7 +111,9 @@ function love.draw()
         end
         gui:draw()
         title:draw()
+        settings.draw()
         button:drawAll()
         debug:draw()
         file:draw()
+        settings.draw2Layer()
 end

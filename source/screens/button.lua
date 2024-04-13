@@ -191,7 +191,7 @@ function button:update(dt)
     if self.scroll then
         modifiedY = self.y + settings.scroll
     end
-    if not self.scroll or (x > love.graphics.getWidth() / 2 + (-127 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (127 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (-61 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (64 * playerCamera.globalScale)) then
+    if not self.scroll or (x > love.graphics.getWidth() / 2 + (-127 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (127 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (-61 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (69 * playerCamera.globalScale)) then
         if x > love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + ((self.x + self.width) * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (modifiedY * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + ((modifiedY + self.height) * playerCamera.globalScale) then
             self.hover = true
             if love.mouse.isDown(1) then
@@ -246,7 +246,7 @@ function button:draw()
             love.graphics.getWidth() / 2 + (-127 * playerCamera.globalScale), 
             love.graphics.getHeight() / 2 + (-61 * playerCamera.globalScale), 
             254 * playerCamera.globalScale,
-            125 * playerCamera.globalScale
+            130 * playerCamera.globalScale
         )
     end, "replace", 1)
     local y = self.y
@@ -294,7 +294,7 @@ function button:draw()
         )
     else
         love.graphics.draw(
-            self.imageOnButton, 
+            self.imageOnButton,
             love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale) + (self.width * playerCamera.globalScale) / 2 - (self.imageOnButton:getWidth() * playerCamera.globalScale) / 2, 
             love.graphics.getHeight() / 2 + (y * playerCamera.globalScale) + (self.height * playerCamera.globalScale) / 2 - (self.imageOnButton:getHeight() * playerCamera.globalScale) / 2, 
             nil, 

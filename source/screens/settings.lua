@@ -14,6 +14,7 @@ settings.mainButtons.audio = love.graphics.newImage("assets/textures/gui/setting
 settings.mainButtons.a = love.graphics.newImage("assets/textures/gui/settings/stats.png")
 settings.scroll = 0
 settings.tab = "game"
+settings.fadeImage = love.graphics.newImage("assets/textures/gui/settings/fade.png")
 
 function settings.load()
     local newButton
@@ -87,32 +88,46 @@ function settings.update()
 end
 
 function settings.draw()
-    love.graphics.draw(title.settingBackground,
-        love.graphics.getWidth() / 2 - (title.settingBackground:getWidth() / 2) * playerCamera.globalScale,
-        love.graphics.getHeight() / 2 - (title.settingBackground:getHeight() / 2) * playerCamera.globalScale, nil,
-        playerCamera.globalScale)
-    love.graphics.setColor(1, 1, 1)
-    if settings.tab == "game" then
-    elseif settings.tab == "video" then
+    if title.state == 4 then
+        love.graphics.draw(title.settingBackground,
+            love.graphics.getWidth() / 2 - (title.settingBackground:getWidth() / 2) * playerCamera.globalScale,
+            love.graphics.getHeight() / 2 - (title.settingBackground:getHeight() / 2) * playerCamera.globalScale, nil,
+            playerCamera.globalScale
+        )
+        love.graphics.setColor(1, 1, 1)
+        if settings.tab == "game" then
+        elseif settings.tab == "video" then
 
-    elseif settings.tab == "controls" then
+        elseif settings.tab == "controls" then
 
 
-    elseif settings.tab == "skin" then
-        love.graphics.print("Preview", love.graphics.getWidth() / 2 - (127 * playerCamera.globalScale),
-            love.graphics.getHeight() / 2 - (63 * playerCamera.globalScale), nil, playerCamera.globalScale * 0.5)
-        love.graphics.draw(player.spriteSheet, love.graphics.getWidth() / 2 - (127 * playerCamera.globalScale),
-            love.graphics.getHeight() / 2 - (52 * playerCamera.globalScale), nil, playerCamera.globalScale * 0.5)
-        love.graphics.print("Drop your file here.", love.graphics.getWidth() / 2 - (127 * playerCamera.globalScale),
-            love.graphics.getHeight() / 2 - (0 * playerCamera.globalScale), nil, playerCamera.globalScale * 0.2)
-        love.graphics.print("image 95x105 pixels (19x21 for every animation frame)",
-            love.graphics.getWidth() / 2 - (127 * playerCamera.globalScale),
-            love.graphics.getHeight() / 2 + (3 * playerCamera.globalScale), nil, playerCamera.globalScale * 0.2)
-        love.graphics.draw(settings.dropFileImage, love.graphics.getWidth() / 2 -
-            (settings.dropFileImage:getWidth() / 2 * playerCamera.globalScale), love.graphics.getHeight() / 2 -
-            (settings.dropFileImage:getHeight() / 2 * playerCamera.globalScale), nil, playerCamera.globalScale)
+        elseif settings.tab == "skin" then
+            love.graphics.print("Preview", love.graphics.getWidth() / 2 - (127 * playerCamera.globalScale),
+                love.graphics.getHeight() / 2 - (63 * playerCamera.globalScale), nil, playerCamera.globalScale * 0.5)
+            love.graphics.draw(player.spriteSheet, love.graphics.getWidth() / 2 - (127 * playerCamera.globalScale),
+                love.graphics.getHeight() / 2 - (52 * playerCamera.globalScale), nil, playerCamera.globalScale * 0.5)
+            love.graphics.print("Drop your file here.", love.graphics.getWidth() / 2 - (127 * playerCamera.globalScale),
+                love.graphics.getHeight() / 2 - (0 * playerCamera.globalScale), nil, playerCamera.globalScale * 0.2)
+            love.graphics.print("image 95x105 pixels (19x21 for every animation frame)",
+                love.graphics.getWidth() / 2 - (127 * playerCamera.globalScale),
+                love.graphics.getHeight() / 2 + (3 * playerCamera.globalScale), nil, playerCamera.globalScale * 0.2)
+            love.graphics.draw(settings.dropFileImage, love.graphics.getWidth() / 2 -
+                (settings.dropFileImage:getWidth() / 2 * playerCamera.globalScale), love.graphics.getHeight() / 2 -
+                (settings.dropFileImage:getHeight() / 2 * playerCamera.globalScale), nil, playerCamera.globalScale)
+        end
+        love.graphics.setColor(1, 1, 1)
     end
-    love.graphics.setColor(1, 1, 1)
+end
+
+function settings.draw2Layer()
+    if title.state == 4 then
+        love.graphics.draw(
+            settings.fadeImage,
+            love.graphics.getWidth() / 2 - (settings.fadeImage:getWidth() / 2) * playerCamera.globalScale,
+            love.graphics.getHeight() / 2 + 64 * playerCamera.globalScale, nil,
+            playerCamera.globalScale
+        )
+    end
 end
 
 return settings

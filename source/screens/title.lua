@@ -490,8 +490,6 @@ function title:draw()
                 nil, playerCamera.globalScale
             )
             love.graphics.setColor(1, 1, 1)
-        elseif title.state == 4 then
-            settings.draw()
         end
     end
 end
