@@ -7,7 +7,7 @@ local file
 local settings
 local title
 local gui
-if love.joystick.getJoysticks()[1] then
+if love.joystick.getJoystickCount() > 0 then
     local joystick = love.joystick.getJoysticks()[1]
 end
 
@@ -258,7 +258,33 @@ function button:update(dt)
             end
         end
     end
+
+    if joystick then
+        print("Controller connected")
+        local dx = joystick:getGamepadAxis("leftx")
+        local dy = joystick:getGamepadAxis("lefty")
+
+        if math.abs(dx) > 0.5 then
+            if dx > 0.5 then
+                selectedButton = selectedButton % #buttons + 1
+            else
+                selectedButton = (selectedButton - 2) % #buttons + 1
+            end
+        end
+        if math.abs(dy) > 0.5 then
+            if dy > 0.5 then
+                selectedButton = (selectedButton + math.ceil(#buttons / 2)) % #buttons + 1
+            else
+                selectedButton = (selectedButton + math.floor(#buttons / 2)) % #buttons + 1
+            end
+        end
+
+        if joystick:isGamepadDown("a") then
+            print("Button '" .. buttons[selectedButton].text .. "' pressed")
+        end
+    end
 end
+
 
 function button:draw()
     love.graphics.stencil(function() 
