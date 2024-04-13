@@ -2,6 +2,7 @@ local settings = {}
 local anim8 = require("assets/library/animations")
 local title = require("source/screens/title")
 local button = require("source/screens/button")
+local time = require("source/timer")
 settings.button = love.graphics.newImage("assets/textures/gui/settings/button.png")
 settings.buttonOutline = love.graphics.newImage("assets/textures/gui/settings/buttonOutline.png")
 settings.dropFileImage = love.graphics.newImage("assets/textures/gui/settings/drop.png")
@@ -72,12 +73,20 @@ function settings.load()
             table.insert(button.activeButtons, newButton)
             newButton = button.new(-127, 52, "Key: " .. string.upper(controls.keys.switchWeapon) .. " ", {0, 1, 1}, 28, "Switch Weapon", true) -- reset controls
             table.insert(button.activeButtons, newButton)
+            newButton = button.new(-124, 70, "Reset All", {1, 0, 0}, 24) -- remove saved skin
+            table.insert(button.activeButtons, newButton)
             newButton = button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
             table.insert(button.activeButtons, newButton)
         elseif settings.tab == "skin" then
             newButton = button.new(-124, 70, "Reset", {1, 0, 0}, 4) -- remove saved skin
             table.insert(button.activeButtons, newButton)
             newButton = button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from skin to settings
+            table.insert(button.activeButtons, newButton)
+        elseif settings.tab == "audio" then
+            newButton = button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
+            table.insert(button.activeButtons, newButton)
+        elseif settings.tab == "stats" then
+            newButton = button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
             table.insert(button.activeButtons, newButton)
         end
     end
@@ -102,22 +111,37 @@ function settings.draw()
 
 
         elseif settings.tab == "skin" then
+            love.graphics.setColor(0.1, 0.1, 0.1)
             love.graphics.print("Preview", love.graphics.getWidth() / 2 - (127 * playerCamera.globalScale),
                 love.graphics.getHeight() / 2 - (63 * playerCamera.globalScale), nil, playerCamera.globalScale * 0.5)
+            love.graphics.setColor(1, 1, 1)
             love.graphics.draw(player.spriteSheet, love.graphics.getWidth() / 2 - (127 * playerCamera.globalScale),
                 love.graphics.getHeight() / 2 - (52 * playerCamera.globalScale), nil, playerCamera.globalScale * 0.5)
+            love.graphics.setColor(0.1, 0.1, 0.1)
             love.graphics.print("Drop your file here.", love.graphics.getWidth() / 2 - (127 * playerCamera.globalScale),
                 love.graphics.getHeight() / 2 - (0 * playerCamera.globalScale), nil, playerCamera.globalScale * 0.2)
             love.graphics.print("image 95x105 pixels (19x21 for every animation frame)",
                 love.graphics.getWidth() / 2 - (127 * playerCamera.globalScale),
                 love.graphics.getHeight() / 2 + (3 * playerCamera.globalScale), nil, playerCamera.globalScale * 0.2)
+            love.graphics.setColor(1, 1, 1)
             love.graphics.draw(settings.dropFileImage, love.graphics.getWidth() / 2 -
                 (settings.dropFileImage:getWidth() / 2 * playerCamera.globalScale), love.graphics.getHeight() / 2 -
                 (settings.dropFileImage:getHeight() / 2 * playerCamera.globalScale), nil, playerCamera.globalScale)
         elseif settings.tab == "audio" then
 
         elseif settings.tab == "stats" then
-            
+            love.graphics.setColor(0.1, 0.1, 0.1)
+            if time.seconds < 10 then
+                love.graphics.print("Playtime: " .. string.sub(time.seconds, 0, 1) .. "sec ".. time.minutes .. "min " .. time.hours .. "hours", love.graphics.getWidth() / 2 - (127 * playerCamera.globalScale),
+                love.graphics.getHeight() / 2 - (63 * playerCamera.globalScale), nil, playerCamera.globalScale * 0.5)
+            else
+                love.graphics.print("Playtime: " .. string.sub(time.seconds, 0, 2) .. "sec ".. time.minutes .. "min " .. time.hours .. "hours", love.graphics.getWidth() / 2 - (127 * playerCamera.globalScale),
+                love.graphics.getHeight() / 2 - (63 * playerCamera.globalScale), nil, playerCamera.globalScale * 0.5)
+            end
+            love.graphics.print("Deaths: ", love.graphics.getWidth() / 2 - (127 * playerCamera.globalScale),
+                love.graphics.getHeight() / 2 - (53 * playerCamera.globalScale), nil, playerCamera.globalScale * 0.5)
+            love.graphics.print("Enemies Killed: ", love.graphics.getWidth() / 2 - (127 * playerCamera.globalScale),
+                love.graphics.getHeight() / 2 - (43 * playerCamera.globalScale), nil, playerCamera.globalScale * 0.5)
         end
         love.graphics.setColor(1, 1, 1)
     end

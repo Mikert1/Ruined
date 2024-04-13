@@ -7,6 +7,9 @@ local file
 local settings
 local title
 local gui
+if love.joystick.getJoysticks()[1] then
+    local joystick = love.joystick.getJoysticks()[1]
+end
 
 function button.load()
     file = require("source/data")
@@ -173,20 +176,22 @@ function button:action()
         file.settings.save()
     elseif self.id == 23 then -- fps button
 
-    elseif self.id == 24 then -- antialiasing button
-
+    elseif self.id == 24 then -- Rezet all Keybind button
+        controls.keys = controls.default
+        controls.save()
+        settings.load()
     elseif self.id == 25 then -- keybind button
         controls.searchForKey = "interact"
-        self.text = "Search for key"
+        self.text = "Press key"
     elseif self.id == 26 then -- keybind button
         controls.searchForKey = "map"
-        self.text = "Search for key"
+        self.text = "Press key"
     elseif self.id == 27 then -- keybind button
         controls.searchForKey = "focus"
-        self.text = "Search for key"
+        self.text = "Press key"
     elseif self.id == 28 then -- keybind button
         controls.searchForKey = "switchWeapon"
-        self.text = "Search for key"
+        self.text = "Press key"
     end
 end
 
@@ -198,16 +203,16 @@ function button:update(dt)
         modifiedY = self.y + settings.scroll
     end
     if not self.scroll or (
-        x > love.graphics.getWidth() / 2 + (-127 * playerCamera.globalScale) and 
-        x < love.graphics.getWidth() / 2 + (127 * playerCamera.globalScale) and 
-        y > love.graphics.getHeight() / 2 + (-61 * playerCamera.globalScale) and 
+        x > love.graphics.getWidth() / 2 + (-127 * playerCamera.globalScale) and
+        x < love.graphics.getWidth() / 2 + (127 * playerCamera.globalScale) and
+        y > love.graphics.getHeight() / 2 + (-61 * playerCamera.globalScale) and
         y < love.graphics.getHeight() / 2 + (69 * playerCamera.globalScale)
     ) then
         if 
-            x > love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale) and 
-            x < love.graphics.getWidth() / 2 + ((self.x + self.width) * playerCamera.globalScale) and 
-            y > love.graphics.getHeight() / 2 + (modifiedY * playerCamera.globalScale) and 
-            y < love.graphics.getHeight() / 2 + ((modifiedY + self.height) * playerCamera.globalScale) 
+            x > love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale) and
+            x < love.graphics.getWidth() / 2 + ((self.x + self.width) * playerCamera.globalScale) and
+            y > love.graphics.getHeight() / 2 + (modifiedY * playerCamera.globalScale) and
+            y < love.graphics.getHeight() / 2 + ((modifiedY + self.height) * playerCamera.globalScale)
         then
             self.hover = true
             if love.mouse.isDown(1) then
