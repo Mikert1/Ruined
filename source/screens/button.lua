@@ -121,22 +121,28 @@ function button:action()
         gui.buttonLoad()
     elseif self.id == 11 then -- quit button
         settings.tab = "game"
+        settings.scroll = 0
         settings.load()
     elseif self.id == 12 then -- video button
         settings.tab = "video"
+        settings.scroll = 0
         settings.load()
     elseif self.id == 13 then -- controls button
         settings.tab = "controls"
+        settings.scroll = 0
         settings.load()
         settings.scroll = 0
-    elseif self.id == 14 then -- controls button
+    elseif self.id == 14 then -- skin button
         settings.tab = "skin"
+        settings.scroll = 0
         settings.load()
-    elseif self.id == 15 then -- controls button
+    elseif self.id == 15 then -- audio button
         settings.tab = "audio"
+        settings.scroll = 0
         settings.load()
-    elseif self.id == 16 then -- controls button
+    elseif self.id == 16 then -- stats button
         settings.tab = "stats"
+        settings.scroll = 0
         settings.load()
     elseif self.id == 20 then -- fullscreen button
         if savedSettings.window == 0 then
