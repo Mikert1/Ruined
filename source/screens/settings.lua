@@ -121,6 +121,16 @@ end
 
 function settings.draw2Layer()
     if title.state == 4 then
+        if settings.scroll < 0 then
+            love.graphics.draw(
+                settings.fadeImage,
+                love.graphics.getWidth() / 2 - (settings.fadeImage:getWidth() / 2) * playerCamera.globalScale,
+                love.graphics.getHeight() / 2 - 61 * playerCamera.globalScale, 
+                nil,
+                -playerCamera.globalScale, -playerCamera.globalScale,
+                settings.fadeImage:getWidth(), settings.fadeImage:getHeight()
+            )
+        end
         love.graphics.draw(
             settings.fadeImage,
             love.graphics.getWidth() / 2 - (settings.fadeImage:getWidth() / 2) * playerCamera.globalScale,
