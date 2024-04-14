@@ -8,6 +8,7 @@ local settings
 local title
 local gui
 local joystick
+local closestButtonId = nil
 if love.joystick.getJoystickCount() > 0 then
     joystick = love.joystick.getJoysticks()[1]
 end
@@ -19,7 +20,28 @@ function button.load()
     gui = require("source/gui")
 end
 
+function button.loadAll()
+end
+
 button.activeButtons = {}
+
+function button.first()
+    local closestDistance = math.huge
+
+    for _, btn in ipairs(button.activeButtons) do
+        local distance = math.abs(btn.id - 0)
+        if distance < closestDistance then
+            closestButtonId = btn.id
+            closestDistance = distance
+        end
+    end
+
+    if closestButtonId then
+        print("Closest button id:", closestButtonId)
+    else
+        print("No buttons found")
+    end
+end
 
 function button.new(x, y, text, color, id, info, scroll)
     local self = setmetatable({}, button)
@@ -197,38 +219,40 @@ function button:action()
 end
 
 function button:update(dt)
-    local x = love.mouse.getX()
-    local y = love.mouse.getY()
-    local modifiedY = self.y
-    if self.scroll then
-        modifiedY = self.y + settings.scroll
-    end
-    if not self.scroll or (
-        x > love.graphics.getWidth() / 2 + (-127 * playerCamera.globalScale) and
-        x < love.graphics.getWidth() / 2 + (127 * playerCamera.globalScale) and
-        y > love.graphics.getHeight() / 2 + (-61 * playerCamera.globalScale) and
-        y < love.graphics.getHeight() / 2 + (69 * playerCamera.globalScale)
-    ) then
-        if 
-            x > love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale) and
-            x < love.graphics.getWidth() / 2 + ((self.x + self.width) * playerCamera.globalScale) and
-            y > love.graphics.getHeight() / 2 + (modifiedY * playerCamera.globalScale) and
-            y < love.graphics.getHeight() / 2 + ((modifiedY + self.height) * playerCamera.globalScale)
-        then
-            self.hover = true
-            if love.mouse.isDown(1) then
-                if self.clicked == false then
-                    self.clicked = true
-                    self:action(self.id)
+    if game.controlType == 0 then
+        local x = love.mouse.getX()
+        local y = love.mouse.getY()
+        local modifiedY = self.y
+        if self.scroll then
+            modifiedY = self.y + settings.scroll
+        end
+        if not self.scroll or (
+            x > love.graphics.getWidth() / 2 + (-127 * playerCamera.globalScale) and
+            x < love.graphics.getWidth() / 2 + (127 * playerCamera.globalScale) and
+            y > love.graphics.getHeight() / 2 + (-61 * playerCamera.globalScale) and
+            y < love.graphics.getHeight() / 2 + (69 * playerCamera.globalScale)
+        ) then
+            if 
+                x > love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale) and
+                x < love.graphics.getWidth() / 2 + ((self.x + self.width) * playerCamera.globalScale) and
+                y > love.graphics.getHeight() / 2 + (modifiedY * playerCamera.globalScale) and
+                y < love.graphics.getHeight() / 2 + ((modifiedY + self.height) * playerCamera.globalScale)
+            then
+                self.hover = true
+                if love.mouse.isDown(1) then
+                    if self.clicked == false then
+                        self.clicked = true
+                        self:action(self.id)
+                    end
+                else
+                    self.clicked = false
                 end
             else
-                self.clicked = false
+                self.hover = false
             end
         else
             self.hover = false
         end
-    else
-        self.hover = false
     end
     if self.hover then
         for i = 1, 3 do
@@ -259,29 +283,44 @@ function button:update(dt)
             end
         end
     end
-    print(joystick)
-    if joystick then
-        print("Controller connected")
-        local dx = joystick:getGamepadAxis("leftx")
-        local dy = joystick:getGamepadAxis("lefty")
+end
 
-        if math.abs(dx) > 0.5 then
-            if dx > 0.5 then
-                selectedButton = selectedButton % #buttons + 1
+function button:handleJoystickInput()
+    local dx = joystick:getGamepadAxis("leftx")
+    local dy = joystick:getGamepadAxis("lefty")
+    
+    if closestButtonId then
+        local btn
+        for i, button in ipairs(button.activeButtons) do
+            if button.id == closestButtonId then
+                button.hover = true
+                btn = button
             else
-                selectedButton = (selectedButton - 2) % #buttons + 1
+                button.hover = false
             end
         end
-        if math.abs(dy) > 0.5 then
-            if dy > 0.5 then
-                selectedButton = (selectedButton + math.ceil(#buttons / 2)) % #buttons + 1
+        print(btn)
+        if btn then
+            btn.hover = true
+            if joystick:isGamepadDown("a") then
+                if btn.clicked == false then
+                    btn.clicked = true
+                    btn:action(btn.id)
+                end
             else
-                selectedButton = (selectedButton + math.floor(#buttons / 2)) % #buttons + 1
+                btn.clicked = false
             end
         end
-
-        if joystick:isGamepadDown("a") then
-            print("Button '" .. buttons[selectedButton].text .. "' pressed")
+    end
+            -- if dx or dy is greater than 0.5, then i want the closest button to be the one that is in the direction of the joystick
+    if math.abs(dx) > 0.5 or math.abs(dy) > 0.5 then
+        local closestDistance = math.huge
+        for _, btn in ipairs(button.activeButtons) do
+            local distance = math.sqrt((btn.x - dx)^2 + (btn.y - dy)^2)
+            if distance < closestDistance then
+                closestButtonId = btn.id
+                closestDistance = distance
+            end
         end
     end
 end
@@ -356,6 +395,9 @@ end
 function button:UpdateAll(dt)
     for _, button in ipairs(button.activeButtons) do
         button:update(dt)
+    end
+    if game.controlType == 1 then
+        button:handleJoystickInput()
     end
 end
 

@@ -90,6 +90,7 @@ function settings.load()
             table.insert(button.activeButtons, newButton)
         end
     end
+    button.first()
 end
 
 function settings.update()

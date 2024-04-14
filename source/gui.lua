@@ -73,6 +73,7 @@ function gui.buttonLoad()
         table.insert(button.activeButtons, newButton)
         newButton = button.new(-40, 25, "Resume", {0, 1, 1}, 7) -- back from skin to settings
         table.insert(button.activeButtons, newButton)
+        button.first()
     end
 end
 
