@@ -98,14 +98,12 @@ function controller.update(dt)
                 if controller.joysticks:isGamepadDown("start") then
                     if controller.buttonReleace.start == true then
                         controller.buttonReleace.start = false
-                        if keys.esc == true then
-                            keys.esc = false
+                        if game.esc == true then
                             game.esc = false
                             player.noMove = false
                             game.freeze = false
                             gui.buttonLoad()
                         else
-                            keys.esc = true
                             game.esc = true
                             player.noMove = true
                             game.freeze = true

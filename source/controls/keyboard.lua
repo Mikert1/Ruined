@@ -1,6 +1,5 @@
 local keys = {}
 keys.tab = false
-keys.esc = false
 keys.f4 = 0
 local gui = require("source/gui")
 local story = require("source/story/story")
@@ -27,14 +26,12 @@ function love.keypressed(key)
     end
     if not player.isDead and title.state == 5 then
         if key == "escape" then
-            if keys.esc == true then
-                keys.esc = false
+            if game.esc == true then
                 game.esc = false
                 player.noMove = false
                 game.freeze = false
                 gui.buttonLoad()
             else
-                keys.esc = true
                 game.esc = true
                 player.noMove = true
                 game.freeze = true
@@ -50,7 +47,11 @@ function love.keypressed(key)
             end
         end
         if key == controls.keys.map then
-            gui.map = true
+            if gui.map == true then
+                gui.map = false
+            else
+                gui.map = true
+            end
         end
         if key == "q" and gui.focusReady == true then
             if player.focus == false then
@@ -163,9 +164,6 @@ function love.keypressed(key)
     end
 end
 function love.keyreleased(key)
-    if key == controls.keys.map then
-        gui.map = false
-    end
     if key == controls.keys.interact then
         story.skiped = false
     end	

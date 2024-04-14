@@ -124,7 +124,6 @@ function button:action()
     elseif self.id == 5 then -- back to title screen
         game.esc = false
         love.window.setTitle("Ruined | Title Screen")
-        keys.esc = false
         game.freeze = false
         --data = file.save()
         title.rezet()
@@ -145,7 +144,6 @@ function button:action()
     elseif self.id == 7 then -- resume button
         game.esc = false
         game.freeze = false
-        keys.esc = false
         player.noMove = false
         gui.buttonLoad()
     elseif self.id == 11 then -- quit button
@@ -323,8 +321,15 @@ function button:handleJoystickInput()
                 local distanceY = math.abs(btn.y - dy)
                 local distance = math.sqrt(distanceX^2 + distanceY^2) -- Euclidean distance
                 if btn.id ~= closestButtonIdCapture and distance < closestDistance then
-                    closestButtonId = btn.id
-                    closestDistance = distance
+                    -- Check if the closest button is in the direction of the current button
+                    local directionX = dx - btn.x
+                    local directionY = dy - btn.y
+                    local dotProduct = directionX * btn.x + directionY * btn.y
+                    print("Dot product:", dotProduct)
+                    if dotProduct < 0 then
+                        closestButtonId = btn.id
+                        closestDistance = distance
+                    end
                 end
             end
     
@@ -337,8 +342,6 @@ function button:handleJoystickInput()
     else
         moving = false
     end
-    
-    
 end
 
 
