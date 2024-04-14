@@ -88,12 +88,12 @@ function button:action()
             savedSettings.devmode = true
             print("Console is active")
             self.color = {0, 1, 1}
-            self.text = "True"
+            self.text = "Enabled"
         else
             savedSettings.devmode = false
             print("Console is deactivated --restart game to take effect")
             self.color = {1, 0, 0}
-            self.text = "False"
+            self.text = "Disabled"
         end
         file.settings.save()
     elseif self.id == 2 then -- opens skin change setting menu
@@ -158,7 +158,6 @@ function button:action()
         settings.tab = "controls"
         settings.scroll = 0
         settings.load()
-        settings.scroll = 0
     elseif self.id == 14 then -- skin button
         settings.tab = "skin"
         settings.scroll = 0

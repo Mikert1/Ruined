@@ -8,7 +8,8 @@ controller.buttonReleace.triggerL = true
 controller.buttonReleace.x = true
 controller.buttonReleace.y = true
 controller.buttonReleace.a = true
-controller.buttonReleace.back = 0
+controller.buttonReleace.back = true
+controller.buttonReleace.backCount = 0
 controller.buttonReleace.start = true
 controller.vibrationL = 0
 controller.vibrationR = 0
@@ -115,22 +116,31 @@ function controller.update(dt)
                 end
             end
             if controller.joysticks:isGamepadDown("back") then
-                if title.mikert.showed == false then
-                    title.mikert.showed = true
+                if controller.buttonReleace.back == true then
+                    controller.buttonReleace.back = false
+                    if game.state == 0 then
+                        if gui.map == true then
+                            gui.map = false
+                        else
+                            gui.map = true
+                        end
+                    elseif game.state == 1 then
+                        if title.mikert.showed == false then
+                            title.mikert.showed = true
+                        end
+                        file.filenumber = 1
+                        game.state = 0
+                        data = file.load()
+                        worldManagement.teleport("start")
+                        game.freeze = false
+                        title.state = 5
+                        game.esc = false
+                        data = file.save()
+                    end
                 end
-                if game.state == 1 then
-                    file.filenumber = 1
-                    game.state = 0
-                    data = file.load()
-                    worldManagement.teleport("start")
-                    game.freeze = false
-                    title.state = 5
-                    game.esc = false
-                    data = file.save()
-                end
-                controller.buttonReleace.back = controller.buttonReleace.back + dt
-                if controller.buttonReleace.back > 1 then
-                    controller.buttonReleace.back = 0
+                controller.buttonReleace.backCount = controller.buttonReleace.backCount + dt
+                if controller.buttonReleace.backCount > 1 then
+                    controller.buttonReleace.backCount = 0
                     if keys.tab == true then
                         print("Disabled Debugg mode")
                         keys.tab = false
@@ -140,7 +150,8 @@ function controller.update(dt)
                     end
                 end
             else
-                controller.buttonReleace.back = 0
+                controller.buttonReleace.backCountCount = 0
+                controller.buttonReleace.back = true
             end
         else
             game.controlType = 0

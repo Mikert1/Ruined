@@ -41,9 +41,9 @@ function settings.load()
     if title.state == 4 then
         if settings.tab == "game" then
             if savedSettings.devmode == true then
-                newButton = button.new(-127, -53, "True", {0, 1, 1}, 1, "Developer Mode") -- devmode
+                newButton = button.new(-127, -53, "Enabled", {0, 1, 1}, 1, "Developer Mode") -- devmode
             else
-                newButton = button.new(-127, -53, "False", {1, 0, 0}, 1, "Developer Mode") -- devmode
+                newButton = button.new(-127, -53, "Disabled", {1, 0, 0}, 1, "Developer Mode") -- devmode
             end
             table.insert(button.activeButtons, newButton)
             -- newButton = button.new(48, -53, "Customize", {0, 1, 1}, 2, "Skin - Beta") -- skin
