@@ -9,6 +9,7 @@ local title
 local gui
 local joystick
 local closestButtonId = nil
+local moving = false
 if love.joystick.getJoystickCount() > 0 then
     joystick = love.joystick.getJoysticks()[1]
 end
@@ -26,20 +27,22 @@ end
 button.activeButtons = {}
 
 function button.first()
-    local closestDistance = math.huge
+    if game.controlType == 1 then
+        local closestDistance = math.huge
 
-    for _, btn in ipairs(button.activeButtons) do
-        local distance = math.abs(btn.id - 0)
-        if distance < closestDistance then
-            closestButtonId = btn.id
-            closestDistance = distance
+        for _, btn in ipairs(button.activeButtons) do
+            local distance = math.abs(btn.id - 0)
+            if distance < closestDistance then
+                closestButtonId = btn.id
+                closestDistance = distance
+            end
         end
-    end
 
-    if closestButtonId then
-        print("Closest button id:", closestButtonId)
-    else
-        print("No buttons found")
+        if closestButtonId then
+            print("Closest button id:", closestButtonId)
+        else
+            print("No buttons found")
+        end
     end
 end
 
@@ -299,9 +302,7 @@ function button:handleJoystickInput()
                 button.hover = false
             end
         end
-        print(btn)
         if btn then
-            btn.hover = true
             if joystick:isGamepadDown("a") then
                 if btn.clicked == false then
                     btn.clicked = true
@@ -312,22 +313,37 @@ function button:handleJoystickInput()
             end
         end
     end
-            -- if dx or dy is greater than 0.5, then i want the closest button to be the one that is in the direction of the joystick
     if math.abs(dx) > 0.5 or math.abs(dy) > 0.5 then
-        local closestDistance = math.huge
-        for _, btn in ipairs(button.activeButtons) do
-            local distance = math.sqrt((btn.x - dx)^2 + (btn.y - dy)^2)
-            if distance < closestDistance then
-                closestButtonId = btn.id
-                closestDistance = distance
+        if not moving then
+            moving = true
+            local closestDistance = math.huge
+            local closestButtonIdCapture = closestButtonId
+            for _, btn in ipairs(button.activeButtons) do
+                local distanceX = math.abs(btn.x - dx)
+                local distanceY = math.abs(btn.y - dy)
+                local distance = math.sqrt(distanceX^2 + distanceY^2) -- Euclidean distance
+                if btn.id ~= closestButtonIdCapture and distance < closestDistance then
+                    closestButtonId = btn.id
+                    closestDistance = distance
+                end
+            end
+    
+            if closestButtonId then
+                print("Closest button id:", closestButtonId)
+            else
+                print("No buttons found")
             end
         end
+    else
+        moving = false
     end
+    
+    
 end
 
 
 function button:draw()
-    love.graphics.stencil(function() 
+    love.graphics.stencil(function()
         love.graphics.rectangle(
             "fill", 
             love.graphics.getWidth() / 2 + (-127 * playerCamera.globalScale), 
