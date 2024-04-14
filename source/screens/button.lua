@@ -7,8 +7,9 @@ local file
 local settings
 local title
 local gui
+local joystick
 if love.joystick.getJoystickCount() > 0 then
-    local joystick = love.joystick.getJoysticks()[1]
+    joystick = love.joystick.getJoysticks()[1]
 end
 
 function button.load()
@@ -258,7 +259,7 @@ function button:update(dt)
             end
         end
     end
-
+    print(joystick)
     if joystick then
         print("Controller connected")
         local dx = joystick:getGamepadAxis("leftx")
