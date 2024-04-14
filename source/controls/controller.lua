@@ -121,10 +121,12 @@ function controller.update(dt)
                 if controller.buttonReleace.back == true then
                     controller.buttonReleace.back = false
                     if game.state == 0 then
-                        if gui.map == true then
-                            gui.map = false
-                        else
-                            gui.map = true
+                        if not player.isDead and title.state == 5 then
+                            if gui.map == true then
+                                gui.map = false
+                            else
+                                gui.map = true
+                            end
                         end
                     elseif game.state == 1 then
                         if title.mikert.showed == false then
