@@ -99,16 +99,18 @@ function controller.update(dt)
                 if controller.joysticks:isGamepadDown("start") then
                     if controller.buttonReleace.start == true then
                         controller.buttonReleace.start = false
-                        if game.esc == true then
-                            game.esc = false
-                            player.noMove = false
-                            game.freeze = false
-                            gui.buttonLoad()
-                        else
-                            game.esc = true
-                            player.noMove = true
-                            game.freeze = true
-                            gui.buttonLoad()
+                        if not player.isDead and title.state == 5 then
+                            if game.esc == true then
+                                game.esc = false
+                                player.noMove = false
+                                game.freeze = false
+                                gui.buttonLoad()
+                            else
+                                game.esc = true
+                                player.noMove = true
+                                game.freeze = true
+                                gui.buttonLoad()
+                            end
                         end
                     end
                 else
