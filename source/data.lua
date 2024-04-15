@@ -8,6 +8,7 @@ local data = {}
 local preview = {}
 local savedSettings = {}
 savedSettings.devmode = false
+savedSettings.console = false
 savedSettings.window = 0
 file.filenumber = 0
 preview.file1 = {}
@@ -316,8 +317,9 @@ function file.settings.load()
     elseif savedSettings.window == 1 then
         love.window.setFullscreen(true)
     end
-    if savedSettings.devmode == true then
-        --normaly this would open the console
+    if savedSettings.console == true then
+        love._openConsole()
+        print("Console is active\n- use Tab to show more info and show colliders")
     end
     return savedSettings
 end
