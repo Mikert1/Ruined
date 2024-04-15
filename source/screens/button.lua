@@ -86,22 +86,18 @@ function button:action()
     if self.id == 1 then -- disables or enables devmode
         if savedSettings.devmode == false then
             savedSettings.devmode = true
-            print("Console is active")
             settings.load()
         else
             savedSettings.devmode = false
-            print("Console is deactivated --restart game to take effect")
             settings.load()
         end
         file.settings.save()
     elseif self.id == 16 then -- auto open console
         if savedSettings.console == false then
             savedSettings.console = true
-            print("Console is active")
             settings.load()
         else
             savedSettings.console = false
-            print("Console is deactivated --restart game to take effect")
             settings.load()
         end
         file.settings.save()
