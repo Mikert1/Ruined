@@ -20,22 +20,22 @@ settings.fadeImage = love.graphics.newImage("assets/textures/gui/settings/fade.p
 function settings.load()
     local newButton
     button.activeButtons = {}
-    newButton = button.specialNew(-127, -88, settings.mainButtons.game, {0, 1, 1}, 11, settings.button,
+    newButton = button.specialNew(-127, -88, settings.mainButtons.game, {0, 1, 1}, 101, settings.button,
         settings.buttonOutline)
     table.insert(button.activeButtons, newButton)
-    newButton = button.specialNew(-84, -88, settings.mainButtons.video, {0, 1, 1}, 12, settings.button,
+    newButton = button.specialNew(-84, -88, settings.mainButtons.video, {0, 1, 1}, 102, settings.button,
         settings.buttonOutline)
     table.insert(button.activeButtons, newButton)
-    newButton = button.specialNew(-41, -88, settings.mainButtons.controls, {0, 1, 1}, 13, settings.button,
+    newButton = button.specialNew(-41, -88, settings.mainButtons.controls, {0, 1, 1}, 103, settings.button,
         settings.buttonOutline)
     table.insert(button.activeButtons, newButton)
-    newButton = button.specialNew(2, -88, settings.mainButtons.customize, {0, 1, 1}, 14, settings.button,
+    newButton = button.specialNew(2, -88, settings.mainButtons.customize, {0, 1, 1}, 104, settings.button,
         settings.buttonOutline)
     table.insert(button.activeButtons, newButton)
-    newButton = button.specialNew(45, -88, settings.mainButtons.audio, {0, 1, 1}, 15, settings.button,
+    newButton = button.specialNew(45, -88, settings.mainButtons.audio, {0, 1, 1}, 105, settings.button,
         settings.buttonOutline)
     table.insert(button.activeButtons, newButton)
-    newButton = button.specialNew(88, -88, settings.mainButtons.a, {0, 1, 1}, 16, settings.button,
+    newButton = button.specialNew(88, -88, settings.mainButtons.a, {0, 1, 1}, 106, settings.button,
         settings.buttonOutline)
     table.insert(button.activeButtons, newButton)
     if title.state == 4 then

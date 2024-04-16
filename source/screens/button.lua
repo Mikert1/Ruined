@@ -151,27 +151,27 @@ function button:action()
         game.freeze = false
         player.noMove = false
         gui.buttonLoad()
-    elseif self.id == 11 then -- quit button
+    elseif self.id == 101 then -- quit button
         settings.tab = "game"
         settings.scroll = 0
         settings.load()
-    elseif self.id == 12 then -- video button
+    elseif self.id == 102 then -- video button
         settings.tab = "video"
         settings.scroll = 0
         settings.load()
-    elseif self.id == 13 then -- controls button
+    elseif self.id == 103 then -- controls button
         settings.tab = "controls"
         settings.scroll = 0
         settings.load()
-    elseif self.id == 14 then -- skin button
+    elseif self.id == 104 then -- skin button
         settings.tab = "skin"
         settings.scroll = 0
         settings.load()
-    elseif self.id == 15 then -- audio button
+    elseif self.id == 105 then -- audio button
         settings.tab = "audio"
         settings.scroll = 0
         settings.load()
-    elseif self.id == 16 then -- stats button
+    elseif self.id == 106 then -- stats button
         settings.tab = "stats"
         settings.scroll = 0
         settings.load()
