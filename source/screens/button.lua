@@ -11,6 +11,7 @@ local joystick
 local closestButtonId = nil
 local moving = false
 local preview
+local worldManagement
 if love.joystick.getJoystickCount() > 0 then
     joystick = love.joystick.getJoysticks()[1]
 end
@@ -21,6 +22,7 @@ function button.load()
     settings = require("source/screens/settings")
     title = require("source/screens/title")
     gui = require("source/gui")
+    worldManagement = require("source/worlds")
 end
 
 function button.loadAll()
@@ -114,50 +116,50 @@ function button.loadAll()
     elseif title.state == 1 or title.state == 2 or title.state == 3 then
         if title.delete.mode == false then
             if preview.file1.created == true then
-                newButton = button.new(-128, 43, "Play", {0, 1, 1}, 100) -- Button 1
+                newButton = button.new(-128, 43, "Play", {0, 1, 1}, 51) -- Button 1
                 table.insert(button.activeButtons, newButton)
             else
-                newButton = button.new(-128, 43, "Create", {0, 1, 1}, 100) -- Button 1
+                newButton = button.new(-128, 43, "Create", {0, 1, 1}, 51) -- Button 1
                 table.insert(button.activeButtons, newButton)
             end
             if preview.file2.created == true then
-                newButton = button.new(-40, 43, "Play", {0, 1, 1}, 101) -- Button 2
+                newButton = button.new(-40, 43, "Play", {0, 1, 1}, 52) -- Button 2
                 table.insert(button.activeButtons, newButton)
             else
-                newButton = button.new(-40, 43, "Create", {0, 1, 1}, 101) -- Button 2
+                newButton = button.new(-40, 43, "Create", {0, 1, 1}, 52) -- Button 2
                 table.insert(button.activeButtons, newButton)
             end
             if preview.file3.created == true then
-                newButton = button.new(48, 43, "Play", {0, 1, 1}, 101) -- Button 2
+                newButton = button.new(48, 43, "Play", {0, 1, 1}, 53) -- Button 2
                 table.insert(button.activeButtons, newButton)
             else
-                newButton = button.new(48, 43, "Create", {0, 1, 1}, 101) -- Button 2
+                newButton = button.new(48, 43, "Create", {0, 1, 1}, 53) -- Button 2
                 table.insert(button.activeButtons, newButton)
             end
         else
             if preview.file1.created == true then
-                newButton = button.new(-128, 43, "Delete", {0, 1, 1}, 100) -- Button 1
+                newButton = button.new(-128, 43, "Delete", {1, 0, 0}, 51) -- Button 1
                 table.insert(button.activeButtons, newButton)
             else
-                newButton = button.new(-128, 43, "X", {0, 1, 1}, 100) -- Button 1
+                newButton = button.new(-128, 43, "Empty", {0.15, 0.15, 0.15}, 51) -- Button 1
                 table.insert(button.activeButtons, newButton)
             end
             if preview.file2.created == true then
-                newButton = button.new(-40, 43, "Delete", {0, 1, 1}, 101) -- Button 2
+                newButton = button.new(-40, 43, "Delete", {1, 0, 0}, 52) -- Button 2
                 table.insert(button.activeButtons, newButton)
             else
-                newButton = button.new(-40, 43, "X", {0, 1, 1}, 101) -- Button 2
+                newButton = button.new(-40, 43, "Empty", {0.15, 0.15, 0.15}, 52) -- Button 2
                 table.insert(button.activeButtons, newButton)
             end
             if preview.file3.created == true then
-                newButton = button.new(48, 43, "Delete", {0, 1, 1}, 101) -- Button 2
+                newButton = button.new(48, 43, "Delete", {1, 0, 0}, 53) -- Button 2
                 table.insert(button.activeButtons, newButton)
             else
-                newButton = button.new(48, 43, "X", {0, 1, 1}, 101) -- Button 2
+                newButton = button.new(48, 43, "Empty", {0.15, 0.15, 0.15}, 53) -- Button 2
                 table.insert(button.activeButtons, newButton)
             end
         end
-        newButton = button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
+        newButton = button.new(-40, 70, "Back", {1, 0, 0}, 50) -- back to ruined
         table.insert(button.activeButtons, newButton)
         button.first()
     end
@@ -359,6 +361,66 @@ function button:action()
     elseif self.id == 28 then -- keybind button
         controls.searchForKey = "switchWeapon"
         self.text = "Press key"
+    elseif self.id == 50 then -- back to ruined
+        title.state = 0
+        button.loadAll()
+    elseif self.id == 51 then -- play button
+        if title.delete.mode == true then
+            love.filesystem.remove("savegame1.json")
+            love.filesystem.remove("previewcard1.json")
+            file.show()
+            title.rezet()
+            button.loadAll()
+        else
+            file.filenumber = 1
+            game.state = 0
+            data = file.load()
+            worldManagement.teleport("start")
+            game.freeze = false
+            title.state = 5
+            game.esc = false
+            data = file.save()
+            player.noMove = false
+            button.loadAll()
+        end
+    elseif self.id == 52 then -- play button
+        if title.delete.mode == true then
+            love.filesystem.remove("savegame2.json")
+            love.filesystem.remove("previewcard2.json")
+            file.show()
+            title.rezet()
+            button.loadAll()
+        else
+            file.filenumber = 2
+            game.state = 0
+            data = file.load()
+            worldManagement.teleport("start")
+            game.freeze = false
+            title.state = 5
+            game.esc = false
+            data = file.save()
+            player.noMove = false
+            button.loadAll()
+        end
+    elseif self.id == 53 then -- play button
+        if title.delete.mode == true then
+            love.filesystem.remove("savegame3.json")
+            love.filesystem.remove("previewcard3.json")
+            file.show()
+            title.rezet()
+            button.loadAll()
+        else
+            file.filenumber = 3
+            game.state = 0
+            data = file.load()
+            worldManagement.teleport("start")
+            game.freeze = false
+            title.state = 5
+            game.esc = false
+            data = file.save()
+            player.noMove = false
+            button.loadAll()
+        end
     end
 end
 
