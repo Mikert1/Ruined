@@ -25,147 +25,104 @@ function button.load()
     worldManagement = require("source/worlds")
 end
 
+button.activeButtons = {}
+
 function button.loadAll()
     button.activeButtons = {}
     local newButton
     if title.state == 5 then
         if game.esc == true then
-            newButton = button.new(-40, -25, "Title screen", {1, 0, 0}, 5) -- back from skin to settings
-            table.insert(button.activeButtons, newButton)
-            newButton = button.new(-40, 0, "Settings", {0, 1, 1}, 6) -- back from skin to settings
-            table.insert(button.activeButtons, newButton)
-            newButton = button.new(-40, 25, "Resume", {0, 1, 1}, 7) -- back from skin to settings
-            table.insert(button.activeButtons, newButton)
+            button.new(-40, -25, "Title screen", {1, 0, 0}, 5) -- back from skin to settings
+            button.new(-40, 0, "Settings", {0, 1, 1}, 6) -- back from skin to settings
+            button.new(-40, 25, "Resume", {0, 1, 1}, 7) -- back from skin to settings
             button.first()
         end
     elseif title.state == 4 then
-        newButton = button.specialNew(-127, -88, settings.mainButtons.game, {0, 1, 1}, 101, settings.button,
-            settings.buttonOutline)
-        table.insert(button.activeButtons, newButton)
-        newButton = button.specialNew(-84, -88, settings.mainButtons.video, {0, 1, 1}, 102, settings.button,
-            settings.buttonOutline)
-        table.insert(button.activeButtons, newButton)
-        newButton = button.specialNew(-41, -88, settings.mainButtons.controls, {0, 1, 1}, 103, settings.button,
-            settings.buttonOutline)
-        table.insert(button.activeButtons, newButton)
-        newButton = button.specialNew(2, -88, settings.mainButtons.customize, {0, 1, 1}, 104, settings.button,
-            settings.buttonOutline)
-        table.insert(button.activeButtons, newButton)
-        newButton = button.specialNew(45, -88, settings.mainButtons.audio, {0, 1, 1}, 105, settings.button,
-            settings.buttonOutline)
-        table.insert(button.activeButtons, newButton)
-        newButton = button.specialNew(88, -88, settings.mainButtons.a, {0, 1, 1}, 106, settings.button,
-            settings.buttonOutline)
-        table.insert(button.activeButtons, newButton)
+        button.specialNew(-127, -88, settings.mainButtons.game, {0, 1, 1}, 101, settings.button, settings.buttonOutline)
+        button.specialNew(-84, -88, settings.mainButtons.video, {0, 1, 1}, 102, settings.button, settings.buttonOutline)
+        button.specialNew(-41, -88, settings.mainButtons.controls, {0, 1, 1}, 103, settings.button, settings.buttonOutline)
+        button.specialNew(2, -88, settings.mainButtons.customize, {0, 1, 1}, 104, settings.button, settings.buttonOutline)
+        button.specialNew(45, -88, settings.mainButtons.audio, {0, 1, 1}, 105, settings.button, settings.buttonOutline)
+        button.specialNew(88, -88, settings.mainButtons.a, {0, 1, 1}, 106, settings.button, settings.buttonOutline)
         if settings.tab == "game" then
             if savedSettings.devmode == true then
                 if savedSettings.console == true then
-                    newButton = button.new(-40, -53, "Enabled", {0, 1, 1}, 16, "Auto Open Console") -- Console
+                    button.new(-40, -53, "Enabled", {0, 1, 1}, 16, "Auto Open Console") -- Console
                 else
-                    newButton = button.new(-40, -53, "Disabled", {1, 0, 0}, 16, "Auto Open Console") -- Console
+                    button.new(-40, -53, "Disabled", {1, 0, 0}, 16, "Auto Open Console") -- Console
                 end
-                table.insert(button.activeButtons, newButton)
-                newButton = button.new(-127, -53, "Enabled", {0, 1, 1}, 1, "Developer Mode") -- devmode
+                button.new(-127, -53, "Enabled", {0, 1, 1}, 1, "Developer Mode") -- devmode
             else
-                newButton = button.new(-127, -53, "Disabled", {1, 0, 0}, 1, "Developer Mode") -- devmode
+                button.new(-127, -53, "Disabled", {1, 0, 0}, 1, "Developer Mode") -- devmode
             end
-            table.insert(button.activeButtons, newButton)
-            -- newButton = button.new(48, -53, "Customize", {0, 1, 1}, 2, "Skin - Beta") -- skin
-            -- table.insert(button.activeButtons, newButton)
-            newButton = button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
-            table.insert(button.activeButtons, newButton)
+            -- button.new(48, -53, "Customize", {0, 1, 1}, 2, "Skin - Beta") -- skin
+            -- 
+            button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
         elseif settings.tab == "video" then
             print(savedSettings.window)
             if savedSettings.window == 0 then
-                newButton = button.new(-127, -53, "Windowed", {0, 1, 1}, 20, "Window Type:") -- fullscreen
+                button.new(-127, -53, "Windowed", {0, 1, 1}, 20, "Window Type:") -- fullscreen
             elseif savedSettings.window == 1 then
-                newButton = button.new(-127, -53, "Fullscreen", {1, 0, 0}, 20, "Window Type:") -- fullscreen
+                button.new(-127, -53, "Fullscreen", {1, 0, 0}, 20, "Window Type:") -- fullscreen
             elseif savedSettings.window == 2 then
-                newButton = button.new(-127, -53, "Borderless", {1, 0, 0}, 20, "Window Type:") -- fullscreen
+                button.new(-127, -53, "Borderless", {1, 0, 0}, 20, "Window Type:") -- fullscreen
             end
-            table.insert(button.activeButtons, newButton)
-            -- newButton = button.new(-128, -18, love.graphics.getWidth() .. "x" .. love.graphics.getHeight(), {0, 1, 1}, 21, "Resolution") -- resolution
-            -- table.insert(button.activeButtons, newButton)
-            newButton = button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
-            table.insert(button.activeButtons, newButton)
+            -- button.new(-128, -18, love.graphics.getWidth() .. "x" .. love.graphics.getHeight(), {0, 1, 1}, 21, "Resolution") -- resolution
+            -- 
+            button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
         elseif settings.tab == "controls" then
-            newButton = button.new(-127, -53, "Key: " .. string.upper(controls.keys.interact) .. " ", {0, 1, 1}, 25, "Interact", true) -- reset controls
-            table.insert(button.activeButtons, newButton)
-            newButton = button.new(-127, -18, "Key: " .. string.upper(controls.keys.map) .. " ", {0, 1, 1}, 26, "Map", true) -- reset controls
-            table.insert(button.activeButtons, newButton)
-            newButton = button.new(-127, 17, "Key: " .. string.upper(controls.keys.focus) .. " ", {0, 1, 1}, 27, "Focus", true) -- reset controls
-            table.insert(button.activeButtons, newButton)
-            newButton = button.new(-127, 52, "Key: " .. string.upper(controls.keys.switchWeapon) .. " ", {0, 1, 1}, 28, "Switch Weapon", true) -- reset controls
-            table.insert(button.activeButtons, newButton)
-            newButton = button.new(-124, 70, "Reset All", {1, 0, 0}, 24) -- remove saved skin
-            table.insert(button.activeButtons, newButton)
-            newButton = button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
-            table.insert(button.activeButtons, newButton)
+            button.new(-127, -53, "Key: " .. string.upper(controls.keys.interact) .. " ", {0, 1, 1}, 25, "Interact", true) -- reset controls
+            button.new(-127, -18, "Key: " .. string.upper(controls.keys.map) .. " ", {0, 1, 1}, 26, "Map", true) -- reset controls
+            button.new(-127, 17, "Key: " .. string.upper(controls.keys.focus) .. " ", {0, 1, 1}, 27, "Focus", true) -- reset controls
+            button.new(-127, 52, "Key: " .. string.upper(controls.keys.switchWeapon) .. " ", {0, 1, 1}, 28, "Switch Weapon", true) -- reset controls
+            button.new(-124, 70, "Reset All", {1, 0, 0}, 24) -- remove saved skin
+            button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
         elseif settings.tab == "skin" then
-            newButton = button.new(-124, 70, "Reset", {1, 0, 0}, 4) -- remove saved skin
-            table.insert(button.activeButtons, newButton)
-            newButton = button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from skin to settings
-            table.insert(button.activeButtons, newButton)
+            button.new(-124, 70, "Reset", {1, 0, 0}, 4) -- remove saved skin
+            button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from skin to settings
         elseif settings.tab == "audio" then
-            newButton = button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
-            table.insert(button.activeButtons, newButton)
+            button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
         elseif settings.tab == "stats" then
-            newButton = button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
-            table.insert(button.activeButtons, newButton)
+            button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
         end
     elseif title.state == 1 or title.state == 2 or title.state == 3 then
         if title.delete.mode == false then
             if preview.file1.created == true then
-                newButton = button.new(-128, 43, "Play", {0, 1, 1}, 51) -- Button 1
-                table.insert(button.activeButtons, newButton)
+                button.new(-128, 43, "Play", {0, 1, 1}, 51) -- Button 1
             else
-                newButton = button.new(-128, 43, "Create", {0, 1, 1}, 51) -- Button 1
-                table.insert(button.activeButtons, newButton)
+                button.new(-128, 43, "Create", {0, 1, 1}, 51) -- Button 1
             end
             if preview.file2.created == true then
-                newButton = button.new(-40, 43, "Play", {0, 1, 1}, 52) -- Button 2
-                table.insert(button.activeButtons, newButton)
+                button.new(-40, 43, "Play", {0, 1, 1}, 52) -- Button 2
             else
-                newButton = button.new(-40, 43, "Create", {0, 1, 1}, 52) -- Button 2
-                table.insert(button.activeButtons, newButton)
+                button.new(-40, 43, "Create", {0, 1, 1}, 52) -- Button 2
             end
             if preview.file3.created == true then
-                newButton = button.new(48, 43, "Play", {0, 1, 1}, 53) -- Button 2
-                table.insert(button.activeButtons, newButton)
+                button.new(48, 43, "Play", {0, 1, 1}, 53) -- Button 2
             else
-                newButton = button.new(48, 43, "Create", {0, 1, 1}, 53) -- Button 2
-                table.insert(button.activeButtons, newButton)
+                button.new(48, 43, "Create", {0, 1, 1}, 53) -- Button 2
             end
         else
             if preview.file1.created == true then
-                newButton = button.new(-128, 43, "Delete", {1, 0, 0}, 51) -- Button 1
-                table.insert(button.activeButtons, newButton)
+                button.new(-128, 43, "Delete", {1, 0, 0}, 51) -- Button 1
             else
-                newButton = button.new(-128, 43, "Empty", {0.15, 0.15, 0.15}, 51) -- Button 1
-                table.insert(button.activeButtons, newButton)
+                button.new(-128, 43, "Empty", {0.15, 0.15, 0.15}, 51) -- Button 1
             end
             if preview.file2.created == true then
-                newButton = button.new(-40, 43, "Delete", {1, 0, 0}, 52) -- Button 2
-                table.insert(button.activeButtons, newButton)
+                button.new(-40, 43, "Delete", {1, 0, 0}, 52) -- Button 2
             else
-                newButton = button.new(-40, 43, "Empty", {0.15, 0.15, 0.15}, 52) -- Button 2
-                table.insert(button.activeButtons, newButton)
+                button.new(-40, 43, "Empty", {0.15, 0.15, 0.15}, 52) -- Button 2
             end
             if preview.file3.created == true then
-                newButton = button.new(48, 43, "Delete", {1, 0, 0}, 53) -- Button 2
-                table.insert(button.activeButtons, newButton)
+                button.new(48, 43, "Delete", {1, 0, 0}, 53) -- Button 2
             else
-                newButton = button.new(48, 43, "Empty", {0.15, 0.15, 0.15}, 53) -- Button 2
-                table.insert(button.activeButtons, newButton)
+                button.new(48, 43, "Empty", {0.15, 0.15, 0.15}, 53) -- Button 2
             end
         end
-        newButton = button.new(-40, 70, "Back", {1, 0, 0}, 50) -- back to ruined
-        table.insert(button.activeButtons, newButton)
+        button.new(-40, 70, "Back", {1, 0, 0}, 50) -- back to ruined
         button.first()
     end
 end
-
-button.activeButtons = {}
 
 function button.first()
     if game.controlType == 1 then
@@ -203,7 +160,7 @@ function button.new(x, y, text, color, id, info, scroll)
     self.hover = false
     self.clicked = true
     self.scroll = scroll
-    return self
+    table.insert(button.activeButtons, self)
 end
 
 function button.specialNew(x, y, imageOnButton, color, id, image, outline)
@@ -220,7 +177,7 @@ function button.specialNew(x, y, imageOnButton, color, id, image, outline)
     self.imageOnButton = imageOnButton
     self.hover = false
     self.clicked = true
-    return self
+    table.insert(button.activeButtons, self)
 end
 
 function button:action()
