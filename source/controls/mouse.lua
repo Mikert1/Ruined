@@ -5,6 +5,7 @@ local worldManagement = require("source/worlds")
 local story = require("source/story/story")
 local weapon = require("source/weapons")
 local settings = require("source/screens/settings")
+local buttonVar = require("source/screens/button")
 local preview = file.show()
 function love.mousemoved(x, y)
     if title.state == 0 then
@@ -208,7 +209,7 @@ function love.mousepressed(x, y, button, istouch)
                 title.settings.anim = title.settings.animations.normal
                 love.window.setTitle("Ruined | Settings")
                 title.state = 4
-                settings.load()
+                buttonVar.loadAll()
             end
             if button == 1 and x > love.graphics.getWidth() / 2 - (40 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (40 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (70 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (90 * playerCamera.globalScale) then
                 title.state = 0

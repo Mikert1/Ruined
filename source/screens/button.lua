@@ -22,6 +22,98 @@ function button.load()
 end
 
 function button.loadAll()
+    button.activeButtons = {}
+    if title.state == 5 then
+        if game.esc == true then
+            local newButton
+            newButton = button.new(-40, -25, "Title screen", {1, 0, 0}, 5) -- back from skin to settings
+            table.insert(button.activeButtons, newButton)
+            newButton = button.new(-40, 0, "Settings", {0, 1, 1}, 6) -- back from skin to settings\
+            table.insert(button.activeButtons, newButton)
+            newButton = button.new(-40, 25, "Resume", {0, 1, 1}, 7) -- back from skin to settings
+            table.insert(button.activeButtons, newButton)
+            button.first()
+        end
+    elseif title.state == 4 then
+        local newButton
+        newButton = button.specialNew(-127, -88, settings.mainButtons.game, {0, 1, 1}, 101, settings.button,
+            settings.buttonOutline)
+        table.insert(button.activeButtons, newButton)
+        newButton = button.specialNew(-84, -88, settings.mainButtons.video, {0, 1, 1}, 102, settings.button,
+            settings.buttonOutline)
+        table.insert(button.activeButtons, newButton)
+        newButton = button.specialNew(-41, -88, settings.mainButtons.controls, {0, 1, 1}, 103, settings.button,
+            settings.buttonOutline)
+        table.insert(button.activeButtons, newButton)
+        newButton = button.specialNew(2, -88, settings.mainButtons.customize, {0, 1, 1}, 104, settings.button,
+            settings.buttonOutline)
+        table.insert(button.activeButtons, newButton)
+        newButton = button.specialNew(45, -88, settings.mainButtons.audio, {0, 1, 1}, 105, settings.button,
+            settings.buttonOutline)
+        table.insert(button.activeButtons, newButton)
+        newButton = button.specialNew(88, -88, settings.mainButtons.a, {0, 1, 1}, 106, settings.button,
+            settings.buttonOutline)
+        table.insert(button.activeButtons, newButton)
+        if title.state == 4 then
+            if settings.tab == "game" then
+                if savedSettings.devmode == true then
+                    if savedSettings.console == true then
+                        newButton = button.new(-40, -53, "Enabled", {0, 1, 1}, 16, "Auto Open Console") -- Console
+                    else
+                        newButton = button.new(-40, -53, "Disabled", {1, 0, 0}, 16, "Auto Open Console") -- Console
+                    end
+                    table.insert(button.activeButtons, newButton)
+                    newButton = button.new(-127, -53, "Enabled", {0, 1, 1}, 1, "Developer Mode") -- devmode
+                else
+                    newButton = button.new(-127, -53, "Disabled", {1, 0, 0}, 1, "Developer Mode") -- devmode
+                end
+                table.insert(button.activeButtons, newButton)
+                -- newButton = button.new(48, -53, "Customize", {0, 1, 1}, 2, "Skin - Beta") -- skin
+                -- table.insert(button.activeButtons, newButton)
+                newButton = button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
+                table.insert(button.activeButtons, newButton)
+            elseif settings.tab == "video" then
+                print(savedSettings.window)
+                if savedSettings.window == 0 then
+                    newButton = button.new(-127, -53, "Windowed", {0, 1, 1}, 20, "Window Type:") -- fullscreen
+                elseif savedSettings.window == 1 then
+                    newButton = button.new(-127, -53, "Fullscreen", {1, 0, 0}, 20, "Window Type:") -- fullscreen
+                elseif savedSettings.window == 2 then
+                    newButton = button.new(-127, -53, "Borderless", {1, 0, 0}, 20, "Window Type:") -- fullscreen
+                end
+                table.insert(button.activeButtons, newButton)
+                -- newButton = button.new(-128, -18, love.graphics.getWidth() .. "x" .. love.graphics.getHeight(), {0, 1, 1}, 21, "Resolution") -- resolution
+                -- table.insert(button.activeButtons, newButton)
+                newButton = button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
+                table.insert(button.activeButtons, newButton)
+            elseif settings.tab == "controls" then
+                newButton = button.new(-127, -53, "Key: " .. string.upper(controls.keys.interact) .. " ", {0, 1, 1}, 25, "Interact", true) -- reset controls
+                table.insert(button.activeButtons, newButton)
+                newButton = button.new(-127, -18, "Key: " .. string.upper(controls.keys.map) .. " ", {0, 1, 1}, 26, "Map", true) -- reset controls
+                table.insert(button.activeButtons, newButton)
+                newButton = button.new(-127, 17, "Key: " .. string.upper(controls.keys.focus) .. " ", {0, 1, 1}, 27, "Focus", true) -- reset controls
+                table.insert(button.activeButtons, newButton)
+                newButton = button.new(-127, 52, "Key: " .. string.upper(controls.keys.switchWeapon) .. " ", {0, 1, 1}, 28, "Switch Weapon", true) -- reset controls
+                table.insert(button.activeButtons, newButton)
+                newButton = button.new(-124, 70, "Reset All", {1, 0, 0}, 24) -- remove saved skin
+                table.insert(button.activeButtons, newButton)
+                newButton = button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
+                table.insert(button.activeButtons, newButton)
+            elseif settings.tab == "skin" then
+                newButton = button.new(-124, 70, "Reset", {1, 0, 0}, 4) -- remove saved skin
+                table.insert(button.activeButtons, newButton)
+                newButton = button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from skin to settings
+                table.insert(button.activeButtons, newButton)
+            elseif settings.tab == "audio" then
+                newButton = button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
+                table.insert(button.activeButtons, newButton)
+            elseif settings.tab == "stats" then
+                newButton = button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
+                table.insert(button.activeButtons, newButton)
+            end
+        end
+        button.first()
+    end
 end
 
 button.activeButtons = {}
@@ -86,32 +178,32 @@ function button:action()
     if self.id == 1 then -- disables or enables devmode
         if savedSettings.devmode == false then
             savedSettings.devmode = true
-            settings.load()
+            button.loadAll()
         else
             savedSettings.devmode = false
-            settings.load()
+            button.loadAll()
         end
         file.settings.save()
     elseif self.id == 16 then -- auto open console
         if savedSettings.console == false then
             savedSettings.console = true
-            settings.load()
+            button.loadAll()
         else
             savedSettings.console = false
-            settings.load()
+            button.loadAll()
         end
         file.settings.save()
     elseif self.id == 2 then -- opens skin change setting menu
         settings.tab = "skin"
-        settings.load()
+        button.loadAll()
     elseif self.id == 3 then -- back button on settings screen
         if settings.tab == "skin" then
             settings.tab = "game"
-            settings.load()
+            button.loadAll()
         else
             if game.esc == true then
                 title.state = 5
-                gui.buttonLoad()
+                button.loadAll()
             else
                 love.window.setTitle("Ruined | Title Screen")
                 if title.mainColor[3] == 0 then
@@ -120,8 +212,8 @@ function button:action()
                     title.state = 1
                     --fix there will be the finaly (3)
                 end
-                settings.load()
-                gui.buttonLoad()
+                button.loadAll()
+                button.loadAll()
             end
         end
     elseif self.id == 4 then -- removes texture pack
@@ -140,41 +232,41 @@ function button:action()
             title.state = 1
             --fix there will be the finaly (3)
         end
-        gui.buttonLoad()
+        button.loadAll()
     elseif self.id == 6 then -- settings button
         title.settings.anim = title.settings.animations.normal
         love.window.setTitle("Ruined | Settings")
         title.state = 4
-        settings.load()
+        button.loadAll()
     elseif self.id == 7 then -- resume button
         game.esc = false
         game.freeze = false
         player.noMove = false
-        gui.buttonLoad()
+        button.loadAll()
     elseif self.id == 101 then -- quit button
         settings.tab = "game"
         settings.scroll = 0
-        settings.load()
+        button.loadAll()
     elseif self.id == 102 then -- video button
         settings.tab = "video"
         settings.scroll = 0
-        settings.load()
+        button.loadAll()
     elseif self.id == 103 then -- controls button
         settings.tab = "controls"
         settings.scroll = 0
-        settings.load()
+        button.loadAll()
     elseif self.id == 104 then -- skin button
         settings.tab = "skin"
         settings.scroll = 0
-        settings.load()
+        button.loadAll()
     elseif self.id == 105 then -- audio button
         settings.tab = "audio"
         settings.scroll = 0
-        settings.load()
+        button.loadAll()
     elseif self.id == 106 then -- stats button
         settings.tab = "stats"
         settings.scroll = 0
-        settings.load()
+        button.loadAll()
     elseif self.id == 20 then -- fullscreen button
         if savedSettings.window == 0 then
             love.window.setFullscreen(true)
@@ -207,7 +299,7 @@ function button:action()
     elseif self.id == 24 then -- Rezet all Keybind button
         controls.keys = controls.default
         controls.save()
-        settings.load()
+        button.loadAll()
     elseif self.id == 25 then -- keybind button
         controls.searchForKey = "interact"
         self.text = "Press key"

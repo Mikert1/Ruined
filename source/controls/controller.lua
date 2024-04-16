@@ -21,6 +21,7 @@ local boss = require("source/enemies/boss")
 local file = require("source/data")
 local worldManagement = require("source/worlds")
 local title = require("source/screens/title")
+local button = require("source/screens/button")
 
 function controller.update(dt)
     if not (controller.vibrationL == 0) and not (controller.vibrationR == 0) then
@@ -104,12 +105,12 @@ function controller.update(dt)
                                 game.esc = false
                                 player.noMove = false
                                 game.freeze = false
-                                gui.buttonLoad()
+                                button.loadAll()
                             else
                                 game.esc = true
                                 player.noMove = true
                                 game.freeze = true
-                                gui.buttonLoad()
+                                button.loadAll()
                             end
                         end
                     end

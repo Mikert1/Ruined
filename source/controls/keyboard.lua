@@ -9,19 +9,20 @@ local stone = require("source/enemies/stone")
 local file = require("source/data")
 local weapon = require("source/weapons")
 local controls = require("source/controls/controls")
+local button = require("source/screens/button")
 
 function love.keypressed(key)
     if not (controls.searchForKey == nil) then
         if key == "escape" then
             controls.searchForKey = nil
             controls.save()
-            settings.load()
+            button.loadAll()
             return
         end
         controls.keys[controls.searchForKey] = key
         controls.searchForKey = nil
         controls.save()
-        settings.load()
+        button.loadAll()
         return
     end
     if not player.isDead and title.state == 5 then
@@ -30,12 +31,12 @@ function love.keypressed(key)
                 game.esc = false
                 player.noMove = false
                 game.freeze = false
-                gui.buttonLoad()
+                button.loadAll()
             else
                 game.esc = true
                 player.noMove = true
                 game.freeze = true
-                gui.buttonLoad()
+                button.loadAll()
             end
         end
         if key == controls.keys.interact and story.npc.interaction == true then

@@ -63,27 +63,13 @@ function gui.load()
     }
 end
 
-function gui.buttonLoad()
-    button.activeButtons = {}
-    if game.esc == true then
-        local newButton
-        newButton = button.new(-40, -25, "Title screen", {1, 0, 0}, 5) -- back from skin to settings
-        table.insert(button.activeButtons, newButton)
-        newButton = button.new(-40, 0, "Settings", {0, 1, 1}, 6) -- back from skin to settings\
-        table.insert(button.activeButtons, newButton)
-        newButton = button.new(-40, 25, "Resume", {0, 1, 1}, 7) -- back from skin to settings
-        table.insert(button.activeButtons, newButton)
-        button.first()
-    end
-end
-
 function gui.update(dt)
     if not love.window.hasFocus() then
         if game.esc == false then
             game.esc = true
             player.noMove = true
             game.freeze = true
-            gui.buttonLoad()
+            button.loadAll()
         end
     end
     if gui.welcome.timer > 0 then
