@@ -10,4 +10,11 @@ I started with no knowledge of Game Development so some code might be not as opt
 <p>If you have love installed dubble click the .love file.</p>
 <p>And if that is not the case dubble ckick the .exe file in the zip folder.</p>
 <h2>Pictures:</h2>
-<img width="50%" src="assets/textures/github/savegames.png"><img width="50%" src="assets/textures/github/story.png"><img width="50%" src="assets/textures/github/enemy.png"><img width="50%" src="assets/textures/github/path.png">
+<div>
+    <a><img width="49.5%" src="assets/textures/github/savegames.png"></a>
+    <a><img width="49.5%" src="assets/textures/github/story.png"></a>
+</div>
+<div>
+    <img width="49.5%" src="assets/textures/github/enemy.png">
+    <img width="49.5%" src="assets/textures/github/path.png">
+</div>
