@@ -157,6 +157,7 @@ function love.mousepressed(x, y, button, istouch)
                     title.state = 1
                     file.show()
                     title.rezet()
+                    buttonVar.loadAll()
                     title.icons.start.image = title.icons.start.inactive
                     title.text.name = "Ruined"
                     title.text.chapter = "Chapter 1"
@@ -168,6 +169,7 @@ function love.mousepressed(x, y, button, istouch)
                     title.state = 2
                     file.show()
                     title.rezet()
+                    buttonVar.loadAll()
                     title.icons.past.image = title.icons.past.inactive
                     title.text.name = "The days of John's"
                     title.text.chapter = "Chapter 2"
@@ -179,6 +181,7 @@ function love.mousepressed(x, y, button, istouch)
                     title.state = 3
                     file.show()
                     title.rezet()
+                    buttonVar.loadAll()
                     title.icons.final.image = title.icons.final.inactive
                     title.text.name = "Returned"
                     title.text.chapter = "Chapter 3"
@@ -193,6 +196,7 @@ function love.mousepressed(x, y, button, istouch)
             if button == 1 and x > love.graphics.getWidth() / 2 + (108 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (128 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (70 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (90 * playerCamera.globalScale) then
                 if title.delete.mode == false then
                     title.delete.mode = true
+                    buttonVar.loadAll()
                     if title.state == 1 then
                         title.delete.anim = title.delete.animations.hoverPlay
                     else
@@ -200,6 +204,7 @@ function love.mousepressed(x, y, button, istouch)
                     end
                 else
                     title.delete.mode = false
+                    buttonVar.loadAll()
                     title.delete.anim = title.delete.animations.hoverDelete
                 end
                 title.rezet()
@@ -230,6 +235,7 @@ function love.mousepressed(x, y, button, istouch)
                     game.esc = false
                     data = file.save()
                     player.noMove = false
+                    buttonVar.loadAll()
                 end
                 title.button.normal.menu.button1 = title.button.normal.animations.normal
                 title.button.red.menu.button2 = title.button.red.animations.normal
@@ -250,6 +256,7 @@ function love.mousepressed(x, y, button, istouch)
                     game.esc = false
                     data = file.save()
                     player.noMove = false
+                    buttonVar.loadAll()
                 end
                 title.button.normal.menu.button2 = title.button.normal.animations.normal
                 title.button.red.menu.button3 = title.button.red.animations.normal
@@ -270,6 +277,7 @@ function love.mousepressed(x, y, button, istouch)
                     game.esc = false
                     data = file.save()
                     player.noMove = false
+                    buttonVar.loadAll()
                 end
                 title.button.normal.menu.button3 = title.button.normal.animations.normal
                 title.button.red.menu.button4 = title.button.red.animations.normal
