@@ -18,3 +18,4 @@ I started with no knowledge of Game Development so some code might be not as opt
     <img width="49.5%" src="assets/textures/github/enemy.png">
     <img width="49.5%" src="assets/textures/github/path.png">
 </div>
+<h6>Made on a Windows Laptop. Stable Versions are Tested on linux.</h6>

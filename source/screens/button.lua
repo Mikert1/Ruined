@@ -240,7 +240,6 @@ function button:action()
         button.loadAll()
     elseif self.id == 6 then -- settings button
         title.settings.anim = title.settings.animations.normal
-        love.window.setTitle("Ruined | Settings")
         title.state = 4
         button.loadAll()
     elseif self.id == 7 then -- resume button
