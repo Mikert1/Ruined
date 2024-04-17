@@ -330,7 +330,7 @@ function title:draw()
             love.graphics.setColor(1, 1, 1, 1)
         end
         if title.state == 0 then
-            love.graphics.print("".. game.beta .. " " .. game.name .. ", Version " .. game.version, 5, 5, nil, playerCamera.globalScale / 3)
+            love.graphics.print("".. game.beta .. " " .. game.name .. " " .. game.buildName .. ", Version " .. game.version, 5, 5, nil, playerCamera.globalScale / 3)
             title.logo.anim:draw(title.logo.image, love.graphics.getWidth() / 2 - (100 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (title.logo.y * playerCamera.globalScale), nil, playerCamera.globalScale)
             love.graphics.setColor(1, 1, 1)
             if title.logo.y >= 90 then
