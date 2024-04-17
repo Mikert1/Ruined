@@ -131,7 +131,7 @@ function title.load()
     title.mikert.animation = anim8.newAnimation( title.mikert.grid('1-30', 1), 0.1 )
     title.mikert.timer = 0
     title.mikert.showed = false
-    title.loveImage = love.graphics.newImage("assets/textures/gui/title/LÖVE.png")
+    title.loveImage = love.graphics.newImage("assets/textures/gui/title/love.png")
     title.settingBackground = love.graphics.newImage("assets/textures/gui/title/background.png")
 
     shake = {
