@@ -31,6 +31,7 @@ local settings = require("source/screens/settings")
 _G.server = require("source/network/server")
 print("Done loading")
 
+story.loadAssets()
 player.load()
 file.settings.loadTexturePack()
 worldManagement.load()

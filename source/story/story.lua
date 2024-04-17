@@ -1,4 +1,5 @@
 local anim8 = require'assets/library/animations'
+local file
 local story = {}
 story.npc = {}
 story.npc.john = {}
@@ -63,6 +64,10 @@ story.dialogue.active = false
 story.lasttext = false
 story.skiped = false
 
+function story.loadAssets()
+    file = require("source/data")
+end
+
 function story.load()
     story.data.current = 1
     story.currentStory = story.dialogue[story.id][story.data.current]
@@ -91,7 +96,7 @@ function story.dialogue.update()
         story.lasttext = false
         game.state = 0
         story.load()
-        -- data = file.load()
+        data = file.save()
         -- story.data.storyTold.john1 = true
         return
     end
@@ -109,6 +114,7 @@ function story.npc:draw()
         end
     end
 end
+
 function story.dialogue:draw()
     if story.npc.interaction == true then
         if story.npc.who == "john" then
