@@ -25,6 +25,11 @@ function love.keypressed(key)
         button.loadAll()
         return
     end
+    if title.state == 0 then
+        if key == "escape" then
+            love.event.quit()
+        end
+    end
     if not player.isDead and title.state == 5 then
         if key == "escape" then
             if game.esc == true then
