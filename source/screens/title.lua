@@ -21,6 +21,7 @@ function title.load()
     title.background = {}
     title.background.blue = love.graphics.newImage("assets/textures/gui/title/backgroundBlue.png")
     title.background.green = love.graphics.newImage("assets/textures/gui/title/backgroundGreen.png")
+    title.background.storm = love.graphics.newImage("assets/textures/gui/title/storm.png")
     title.background.current = title.background.blue
     title.logo = {}
     title.logo.y = 27
@@ -324,7 +325,7 @@ function title:draw()
     else
         love.graphics.setColor(1, 1, 1)
         if title.state == 0 or  title.state == 1 or title.state == 2 or title.state == 3 or (title.state == 4 and game.esc == false) then
-            love.graphics.draw(title.background.current, 0, 0, nil, playerCamera.realScale.x, playerCamera.realScale.y)
+            love.graphics.draw(title.background.current, 0, 0, nil, love.graphics.getWidth() / title.background.current:getWidth(), love.graphics.getHeight() / title.background.current:getHeight())
             love.graphics.setColor(0, 0, 0, 1 - (title.logo.y - 27) / 63)
             love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
             love.graphics.setColor(1, 1, 1, 1)

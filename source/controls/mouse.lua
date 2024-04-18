@@ -30,7 +30,7 @@ function love.mousemoved(x, y)
             end
             if x > love.graphics.getWidth() / 2 + (71 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (99 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (50 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (88 * playerCamera.globalScale) then
                 title.icons.final.image = title.icons.final.active
-                title.background.current = title.background.blue
+                title.background.current = title.background.storm
                 title.logo.anim = title.logo.animations.region4
                 local iconImageData = love.image.newImageData("assets/textures/gui/title/logo3.png")
                 love.window.setIcon(iconImageData)
@@ -142,7 +142,7 @@ function love.mousepressed(x, y, button, istouch)
                     title.text.name = "Returned"
                     title.text.chapter = "Chapter 3"
                     title.mainColor = {0, 1, 1}
-                    title.background.current = title.background.blue
+                    title.background.current = title.background.storm
                 end
             else
                 title.logo.anim = title.logo.animations.region2
