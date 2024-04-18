@@ -33,48 +33,48 @@ function button.loadAll()
     if title.state == 5 then
         if game.esc == true then
             button.new(-40, -25, "Title screen", {1, 0, 0}, 5) -- back from skin to settings
-            button.new(-40, 0, "Settings", {0, 1, 1}, 6) -- back from skin to settings
-            button.new(-40, 25, "Resume", {0, 1, 1}, 7) -- back from skin to settings
+            button.new(-40, 0, "Settings", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 6) -- back from skin to settings
+            button.new(-40, 25, "Resume", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 7) -- back from skin to settings
             button.first()
         end
     elseif title.state == 4 then
-        button.specialNew(-127, -88, settings.mainButtons.game, {0, 1, 1}, 101, settings.button, settings.buttonOutline)
-        button.specialNew(-84, -88, settings.mainButtons.video, {0, 1, 1}, 102, settings.button, settings.buttonOutline)
-        button.specialNew(-41, -88, settings.mainButtons.controls, {0, 1, 1}, 103, settings.button, settings.buttonOutline)
-        button.specialNew(2, -88, settings.mainButtons.customize, {0, 1, 1}, 104, settings.button, settings.buttonOutline)
-        button.specialNew(45, -88, settings.mainButtons.audio, {0, 1, 1}, 105, settings.button, settings.buttonOutline)
-        button.specialNew(88, -88, settings.mainButtons.a, {0, 1, 1}, 106, settings.button, settings.buttonOutline)
+        button.specialNew(-127, -88, settings.mainButtons.game, {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 101, settings.button, settings.buttonOutline)
+        button.specialNew(-84, -88, settings.mainButtons.video, {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 102, settings.button, settings.buttonOutline)
+        button.specialNew(-41, -88, settings.mainButtons.controls, {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 103, settings.button, settings.buttonOutline)
+        button.specialNew(2, -88, settings.mainButtons.customize, {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 104, settings.button, settings.buttonOutline)
+        button.specialNew(45, -88, settings.mainButtons.audio, {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 105, settings.button, settings.buttonOutline)
+        button.specialNew(88, -88, settings.mainButtons.a, {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 106, settings.button, settings.buttonOutline)
         if settings.tab == "game" then
             if savedSettings.devmode == true then
                 if savedSettings.console == true then
-                    button.new(-40, -53, "Enabled", {0, 1, 1}, 16, "Auto Open Console") -- Console
+                    button.new(-40, -53, "Enabled", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 16, "Auto Open Console") -- Console
                 else
                     button.new(-40, -53, "Disabled", {1, 0, 0}, 16, "Auto Open Console") -- Console
                 end
-                button.new(-127, -53, "Enabled", {0, 1, 1}, 1, "Developer Mode") -- devmode
+                button.new(-127, -53, "Enabled", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 1, "Developer Mode") -- devmode
             else
                 button.new(-127, -53, "Disabled", {1, 0, 0}, 1, "Developer Mode") -- devmode
             end
-            -- button.new(48, -53, "Customize", {0, 1, 1}, 2, "Skin - Beta") -- skin
+            -- button.new(48, -53, "Customize", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 2, "Skin - Beta") -- skin
             -- 
             button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
         elseif settings.tab == "video" then
             print(savedSettings.window)
             if savedSettings.window == 0 then
-                button.new(-127, -53, "Windowed", {0, 1, 1}, 20, "Window Type:") -- fullscreen
+                button.new(-127, -53, "Windowed", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 20, "Window Type:") -- fullscreen
             elseif savedSettings.window == 1 then
                 button.new(-127, -53, "Fullscreen", {1, 0, 0}, 20, "Window Type:") -- fullscreen
             elseif savedSettings.window == 2 then
                 button.new(-127, -53, "Borderless", {1, 0, 0}, 20, "Window Type:") -- fullscreen
             end
-            -- button.new(-128, -18, love.graphics.getWidth() .. "x" .. love.graphics.getHeight(), {0, 1, 1}, 21, "Resolution") -- resolution
+            -- button.new(-128, -18, love.graphics.getWidth() .. "x" .. love.graphics.getHeight(), {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 21, "Resolution") -- resolution
             -- 
             button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
         elseif settings.tab == "controls" then
-            button.new(-127, -53, "Key: " .. string.upper(controls.keys.interact) .. " ", {0, 1, 1}, 25, "Interact", true) -- reset controls
-            button.new(-127, -18, "Key: " .. string.upper(controls.keys.map) .. " ", {0, 1, 1}, 26, "Map", true) -- reset controls
-            button.new(-127, 17, "Key: " .. string.upper(controls.keys.focus) .. " ", {0, 1, 1}, 27, "Focus", true) -- reset controls
-            button.new(-127, 52, "Key: " .. string.upper(controls.keys.switchWeapon) .. " ", {0, 1, 1}, 28, "Switch Weapon", true) -- reset controls
+            button.new(-127, -53, "Key: " .. string.upper(controls.keys.interact) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 25, "Interact", true) -- reset controls
+            button.new(-127, -18, "Key: " .. string.upper(controls.keys.map) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 26, "Map", true) -- reset controls
+            button.new(-127, 17, "Key: " .. string.upper(controls.keys.focus) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 27, "Focus", true) -- reset controls
+            button.new(-127, 52, "Key: " .. string.upper(controls.keys.switchWeapon) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 28, "Switch Weapon", true) -- reset controls
             button.new(-124, 70, "Reset All", {1, 0, 0}, 24) -- remove saved skin
             button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
         elseif settings.tab == "skin" then
@@ -88,19 +88,19 @@ function button.loadAll()
     elseif title.state == 1 or title.state == 2 or title.state == 3 then
         if title.delete.mode == false then
             if preview.file1.created == true then
-                button.new(-128, 43, "Play", {0, 1, 1}, 51) -- Button 1
+                button.new(-128, 43, "Play", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 51) -- Button 1
             else
-                button.new(-128, 43, "Create", {0, 1, 1}, 51) -- Button 1
+                button.new(-128, 43, "Create", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 51) -- Button 1
             end
             if preview.file2.created == true then
-                button.new(-40, 43, "Play", {0, 1, 1}, 52) -- Button 2
+                button.new(-40, 43, "Play", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 52) -- Button 2
             else
-                button.new(-40, 43, "Create", {0, 1, 1}, 52) -- Button 2
+                button.new(-40, 43, "Create", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 52) -- Button 2
             end
             if preview.file3.created == true then
-                button.new(48, 43, "Play", {0, 1, 1}, 53) -- Button 2
+                button.new(48, 43, "Play", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 53) -- Button 2
             else
-                button.new(48, 43, "Create", {0, 1, 1}, 53) -- Button 2
+                button.new(48, 43, "Create", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 53) -- Button 2
             end
         else
             if preview.file1.created == true then
