@@ -29,6 +29,7 @@ button.activeButtons = {}
 
 function button.loadAll()
     button.activeButtons = {}
+    settings.scroll = 0
     if title.state == 5 then
         if game.esc == true then
             button.new(-40, -25, "Title screen", {1, 0, 0}, 5) -- back from skin to settings
