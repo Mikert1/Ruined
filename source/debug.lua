@@ -7,7 +7,7 @@ local title = require("source/screens/title")
 function debug.update()
     if keys.tab == true then
         debug.gameName = "" .. love.window.getTitle()
-        debug.version = "Version: " .. game.beta .. " " .. game.version
+        debug.version = "Version: " .. game.beta .. " " .. game.version .. " " .. game.buildName
         debug.cpu = "Cpu: " .. love.system.getProcessorCount()
         debug.engine = "LÖVE " .. love.getVersion() .. "  " .. _VERSION
         debug.screen = "Screen: " .. love.graphics.getWidth() .. ", " .. love.graphics.getHeight()
