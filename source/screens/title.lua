@@ -127,9 +127,23 @@ function title.load()
     title.text.button2 = "Play"
     title.text.button3 = "Play"
     title.mikert = {}
-    title.mikert.image = love.graphics.newImage("assets/textures/gui/title/mikert-logo.png")
-    title.mikert.grid = anim8.newGrid( 884, 188, title.mikert.image:getWidth(), title.mikert.image:getHeight())
-    title.mikert.animation = anim8.newAnimation( title.mikert.grid('1-30', 1), 0.1 )
+    -- this code split up helps not so good pc's to render the image
+    title.mikert.image1 = love.graphics.newImage("assets/textures/gui/title/mikertLogo1.png")
+    title.mikert.grid1 = anim8.newGrid( 884, 188, title.mikert.image1:getWidth(), title.mikert.image1:getHeight())
+    title.mikert.image2 = love.graphics.newImage("assets/textures/gui/title/mikertLogo2.png")
+    title.mikert.grid2 = anim8.newGrid( 884, 188, title.mikert.image2:getWidth(), title.mikert.image2:getHeight())
+    local durations1 = {
+        ['1-13'] = 0.1,
+        ['14-14'] = 0.3
+    }
+    local durations2 = {
+        ['1-6'] = 0.1,
+        ['7-7'] = 0.6
+    }
+    title.mikert.animation1 = anim8.newAnimation(title.mikert.grid1("1-14", 1), durations1)
+    title.mikert.animation2 = anim8.newAnimation(title.mikert.grid2("1-7", 1), durations2)
+    --
+    title.mikert.animation = title.mikert.animation1
     title.mikert.timer = 0
     title.mikert.showed = false
     title.loveImage = love.graphics.newImage("assets/textures/gui/title/love.png")
@@ -220,6 +234,11 @@ function title.update(dt)
     if title.mikert.showed == false then
         title.mikert.timer = title.mikert.timer + dt
         if title.mikert.timer < 3 then
+            if title.mikert.timer < 1.6 then
+                title.mikert.animation = title.mikert.animation1
+            else
+                title.mikert.animation = title.mikert.animation2
+            end
             title.mikert.animation:update(dt)
         end
         if title.mikert.timer > 10 then
@@ -307,7 +326,11 @@ function title:draw()
         love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
         if title.mikert.timer < 5 then
             love.graphics.setColor(1, 1, 1, 1 -( title.mikert.timer -3) / 2)
-            title.mikert.animation:draw(title.mikert.image, (love.graphics.getWidth() / 2) - (884 / 2 * (playerCamera.globalScale / 5)), (love.graphics.getHeight() / 2) - (188 / 2 * (playerCamera.globalScale / 5)), nil, playerCamera.globalScale / 5)
+            if title.mikert.animation == title.mikert.animation1 then
+                title.mikert.animation:draw(title.mikert.image1, (love.graphics.getWidth() / 2) - (884 / 2 * (playerCamera.globalScale / 5)), (love.graphics.getHeight() / 2) - (188 / 2 * (playerCamera.globalScale / 5)), nil, playerCamera.globalScale / 5)
+            else
+                title.mikert.animation:draw(title.mikert.image2, (love.graphics.getWidth() / 2) - (884 / 2 * (playerCamera.globalScale / 5)), (love.graphics.getHeight() / 2) - (188 / 2 * (playerCamera.globalScale / 5)), nil, playerCamera.globalScale / 5)
+            end
         else
             if title.mikert.timer < 7 then
                 love.graphics.setColor(1, 1, 1, 0 + (title.mikert.timer - 5) / 2)
