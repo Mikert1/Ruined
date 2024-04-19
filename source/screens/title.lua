@@ -137,11 +137,11 @@ function title.load()
         ['14-14'] = 0.3
     }
     local durations2 = {
-        ['1-6'] = 0.1,
-        ['7-7'] = 0.6
+        ['1-8'] = 0.1,
+        ['9-9'] = 0.8
     }
     title.mikert.animation1 = anim8.newAnimation(title.mikert.grid1("1-14", 1), durations1)
-    title.mikert.animation2 = anim8.newAnimation(title.mikert.grid2("1-7", 1), durations2)
+    title.mikert.animation2 = anim8.newAnimation(title.mikert.grid2("1-9", 1), durations2)
     --
     title.mikert.animation = title.mikert.animation1
     title.mikert.timer = 0
