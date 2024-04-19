@@ -318,7 +318,7 @@ function file.settings.load()
         love.window.setFullscreen(true)
     end
     if savedSettings.devmode == true and savedSettings.console == true then
-        love._openConsole()
+        if love.system.getOS() == "Windows" then love._openConsole() end
         print("Console is active\n- use Tab to show more info and show colliders")
     end
     return savedSettings

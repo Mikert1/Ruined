@@ -161,7 +161,7 @@ function love.keypressed(key)
         table.insert(enemymanager.activeEnemies, newStone)
     end
     if key == "f10" then
-        love._openConsole()
+        if love.system.getOS() == "Windows" then love._openConsole() end
         print("Console is active\n- use Tab to show more info and show colliders")
     end
     if love.keyboard.isDown("m") and love.keyboard.isDown("r") and love.keyboard.isDown("t") then
