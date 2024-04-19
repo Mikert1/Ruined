@@ -1,8 +1,8 @@
 local game = {}
-game.version = "1.5"
+game.version = "1.6"
 game.name = "Ruined"
 game.beta = "Early Developer Bèta"
-game.buildName = "(Stable Build)"
+game.buildName = "(DEV Build)"
 game.chapter = 1
 game.state = 1
 -- 0 = main gameplay
