@@ -158,7 +158,7 @@ function button.new(x, y, text, color, id, info, scroll)
     self.text = text
     self.info = info
     self.hover = false
-    self.clicked = true
+    self.clicked = false
     self.scroll = scroll
     table.insert(button.activeButtons, self)
 end
@@ -176,7 +176,7 @@ function button.specialNew(x, y, imageOnButton, color, id, image, outline)
     self.currentColor = {0.15, 0.15, 0.15}
     self.imageOnButton = imageOnButton
     self.hover = false
-    self.clicked = true
+    self.clicked = false
     table.insert(button.activeButtons, self)
 end
 
@@ -394,7 +394,7 @@ function button:update(dt)
             y > love.graphics.getHeight() / 2 + (-61 * playerCamera.globalScale) and
             y < love.graphics.getHeight() / 2 + (69 * playerCamera.globalScale)
         ) then
-            if 
+            if
                 x > love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale) and
                 x < love.graphics.getWidth() / 2 + ((self.x + self.width) * playerCamera.globalScale) and
                 y > love.graphics.getHeight() / 2 + (modifiedY * playerCamera.globalScale) and
@@ -402,12 +402,12 @@ function button:update(dt)
             then
                 self.hover = true
                 if love.mouse.isDown(1) then
-                    if self.clicked == false then
-                        self.clicked = true
+                    self.clicked = true
+                else
+                    if self.clicked == true then
+                        self.clicked = false
                         self:action(self.id)
                     end
-                else
-                    self.clicked = false
                 end
             else
                 self.hover = false
