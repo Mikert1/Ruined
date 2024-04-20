@@ -59,12 +59,12 @@ function love.keypressed(key)
                 gui.map = true
             end
         end
-        if key == "q" and gui.focusReady == true then
+        if key == controls.keys.focus and gui.focusReady == true then
             if player.focus == false then
                 player.focusAnim = true
             end
         end
-        if key == "r" and player.focus == false then
+        if key == controls.keys.switchWeapon and player.focus == false then
             if weapon.equipment == 1 then
                 weapon.equipment = 2
             else
@@ -73,7 +73,7 @@ function love.keypressed(key)
                 weapon.bow.holdCounter = 0
             end
         end
-        if key == "c" then
+        if key == "p" then
             server.sendData("Hello, other player!")
             server.receiveData()
         end
@@ -95,7 +95,7 @@ function love.keypressed(key)
         end
     end
     if savedSettings.devmode == true then
-        if key == "tab" then
+        if key == controls.keys.devMode then
             if keys.tab == true then
                 print("Disabled Debugg mode")
                 keys.tab = false

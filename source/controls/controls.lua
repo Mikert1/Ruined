@@ -9,6 +9,7 @@ controls.keys = {
     left = "a",
     down = "s",
     right = "d",
+    devMode = "tab",
 }
 controls.default = {
     map = "m",
@@ -19,6 +20,7 @@ controls.default = {
     left = "a",
     down = "s",
     right = "d",
+    devMode = "tab",
 }
 controls.searchForKey = nil
 
