@@ -106,8 +106,8 @@ function player.movement(dt)
     local dx, dy = 0, 0
     if game.controlType == 0 then
         if player.noMove == false then
-            if love.keyboard.isDown("right","d") then
-                if love.keyboard.isDown("s","w","up","down") then
+            if love.keyboard.isDown("right", controls.keys.right) then
+                if love.keyboard.isDown(controls.keys.down, controls.keys.up,"up","down") then
                     dx = player.sideSpeed * dt
                 else
                     dx = player.speed * dt
@@ -123,8 +123,8 @@ function player.movement(dt)
                 player.isLeft = false
                 player.isMoving = true
             end
-            if love.keyboard.isDown("left","a") then
-                if love.keyboard.isDown("s","w","down","up") then
+            if love.keyboard.isDown("left", controls.keys.left) then
+                if love.keyboard.isDown(controls.keys.down, controls.keys.up, "down","up") then
                     dx = player.sideSpeed * -1 * dt
                 else
                     dx = player.speed * -1 * dt
@@ -140,8 +140,8 @@ function player.movement(dt)
                 player.isLeft = true
                 player.isMoving = true
             end
-            if love.keyboard.isDown("up","w") then
-                if love.keyboard.isDown("a","d","left","right") then
+            if love.keyboard.isDown("up",controls.keys.up) then
+                if love.keyboard.isDown(controls.keys.left,controls.keys.right,"left","right") then
                     dy = player.sideSpeed * -1 * dt
                 else
                     dy = player.speed * -1 * dt
@@ -157,8 +157,8 @@ function player.movement(dt)
                 player.isUp = true
                 player.isMoving = true
             end
-            if love.keyboard.isDown("down","s") then
-                if love.keyboard.isDown("a","d","left","right") then
+            if love.keyboard.isDown("down", controls.keys.down) then
+                if love.keyboard.isDown(controls.keys.left, controls.keys.right, "left", "right") then
                     dy = player.sideSpeed * dt
                 else
                     dy = player.speed * dt

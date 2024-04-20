@@ -5,12 +5,20 @@ controls.keys = {
     focus = "q",
     interact = "e",
     switchWeapon = "r",
+    up = "w",
+    down = "s",
+    left = "a",
+    right = "d",
 }
 controls.default = {
     map = "m",
     focus = "q",
     interact = "e",
     switchWeapon = "r",
+    up = "w",
+    down = "s",
+    left = "a",
+    right = "d",
 }
 controls.searchForKey = nil
 
