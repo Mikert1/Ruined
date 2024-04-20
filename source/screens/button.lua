@@ -67,7 +67,7 @@ function button.loadAll()
             elseif savedSettings.window == 2 then
                 button.new(-127, -53, "Borderless", {1, 0, 0}, 20, "Window Type:") -- fullscreen
             end
-            button.new(-127, -18, savedSettings.windowIndex, {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 21, "Window Index") -- resolution
+            button.new(-127, -18, savedSettings.windowIndex, {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 21, "Window Index:") -- resolution
             -- button.new(-128, -18, love.graphics.getWidth() .. "x" .. love.graphics.getHeight(), {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 21, "Resolution") -- resolution
             -- 
             button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
