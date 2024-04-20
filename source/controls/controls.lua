@@ -6,8 +6,8 @@ controls.keys = {
     interact = "e",
     switchWeapon = "r",
     up = "w",
-    down = "s",
     left = "a",
+    down = "s",
     right = "d",
 }
 controls.default = {
@@ -16,8 +16,8 @@ controls.default = {
     interact = "e",
     switchWeapon = "r",
     up = "w",
-    down = "s",
     left = "a",
+    down = "s",
     right = "d",
 }
 controls.searchForKey = nil
