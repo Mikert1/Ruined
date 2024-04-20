@@ -67,6 +67,7 @@ function button.loadAll()
             elseif savedSettings.window == 2 then
                 button.new(-127, -53, "Borderless", {1, 0, 0}, 20, "Window Type:") -- fullscreen
             end
+            button.new(-127, -18, savedSettings.windowIndex, {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 21, "Window Index") -- resolution
             -- button.new(-128, -18, love.graphics.getWidth() .. "x" .. love.graphics.getHeight(), {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 21, "Resolution") -- resolution
             -- 
             button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
@@ -293,8 +294,17 @@ function button:action()
             self.text = "Windowed"
         end
         file.settings.save()
-    elseif self.id == 21 then -- resolution button
-
+    elseif self.id == 21 then -- window index button
+        if savedSettings.windowIndex < love.window.getDisplayCount() then
+            savedSettings.windowIndex = savedSettings.windowIndex + 1
+            love.window.setMode(love.graphics.getWidth(), love.graphics.getHeight(), {display = savedSettings.windowIndex})
+            self.text = savedSettings.windowIndex
+        else
+            savedSettings.windowIndex = 1
+            love.window.setMode(love.graphics.getWidth(), love.graphics.getHeight(), {display = savedSettings.windowIndex})
+            self.text = savedSettings.windowIndex
+        end
+        file.settings.save()
     elseif self.id == 22 then -- vsync button
         if savedSettings.vsync == false then
             savedSettings.vsync = true
