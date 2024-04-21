@@ -142,10 +142,10 @@ function love.keypressed(key)
             savedSettings.window = 1
         elseif savedSettings.window == 1 then
             love.window.setFullscreen(false)
-            love.window.setMode(love.graphics.getWidth(), love.graphics.getHeight(), {borderless = true, resizable = true})
+            love.window.setMode(800, 600, {borderless = true, resizable = true, display = savedSettings.windowIndex})
             savedSettings.window = 2
         elseif savedSettings.window == 2 then
-            love.window.setMode(love.graphics.getWidth(), love.graphics.getHeight(), {borderless = false, resizable = true}) 
+            love.window.setMode(800, 600, {borderless = false, resizable = true, display = savedSettings.windowIndex}) 
             savedSettings.window = 0
         end
     end

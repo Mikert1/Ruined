@@ -59,7 +59,6 @@ function button.loadAll()
             -- 
             button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
         elseif settings.tab == "video" then
-            print(savedSettings.window)
             if savedSettings.window == 0 then
                 button.new(-127, -53, "Windowed", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 20, "Window Type:") -- fullscreen
             elseif savedSettings.window == 1 then
@@ -279,17 +278,19 @@ function button:action()
         settings.scroll = 0
         button.loadAll()
     elseif self.id == 20 then -- fullscreen button
+        print(savedSettings.window)
         if savedSettings.window == 0 then
             love.window.setFullscreen(true)
             savedSettings.window = 1
             self.text = "Fullscreen"
         elseif savedSettings.window == 1 then
             love.window.setFullscreen(false)
-            love.window.setMode(love.graphics.getWidth(), love.graphics.getHeight(), {borderless = true, resizable = true})
+            love.window.setMode(800, 600, {borderless = true, resizable = true, display = savedSettings.windowIndex})
             savedSettings.window = 2
             self.text = "Borderless"
         elseif savedSettings.window == 2 then
-            love.window.setMode(love.graphics.getWidth(), love.graphics.getHeight(), {borderless = false, resizable = true}) 
+            love.window.setFullscreen(false)
+            love.window.setMode(800, 600, {borderless = false, resizable = true, display = savedSettings.windowIndex}) 
             savedSettings.window = 0
             self.text = "Windowed"
         end
@@ -297,11 +298,11 @@ function button:action()
     elseif self.id == 21 then -- window index button
         if savedSettings.windowIndex < love.window.getDisplayCount() then
             savedSettings.windowIndex = savedSettings.windowIndex + 1
-            love.window.setMode(love.graphics.getWidth(), love.graphics.getHeight(), {display = savedSettings.windowIndex})
+            love.window.setMode(love.graphics.getWidth(), love.graphics.getHeight(), {display = savedSettings.windowIndex, resizable = true})
             self.text = savedSettings.windowIndex
         else
             savedSettings.windowIndex = 1
-            love.window.setMode(love.graphics.getWidth(), love.graphics.getHeight(), {display = savedSettings.windowIndex})
+            love.window.setMode(love.graphics.getWidth(), love.graphics.getHeight(), {display = savedSettings.windowIndex, resizable = true})
             self.text = savedSettings.windowIndex
         end
         file.settings.save()

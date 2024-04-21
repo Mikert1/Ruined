@@ -314,12 +314,12 @@ function file.settings.load()
         end
     end
     if savedSettings.window == 2 then
-        love.window.setMode(love.graphics.getWidth(), love.graphics.getHeight(), {borderless = true, resizable = true})
+        love.window.setMode(love.graphics.getWidth(), love.graphics.getHeight(), {borderless = true, resizable = true, display = savedSettings.windowIndex})
     elseif savedSettings.window == 1 then
         love.window.setFullscreen(true)
     end
     if savedSettings.windowIndex <= love.window.getDisplayCount() then
-        love.window.setMode(love.graphics.getWidth(), love.graphics.getHeight(), {display = savedSettings.windowIndex})
+        love.window.setMode(love.graphics.getWidth(), love.graphics.getHeight(), {display = savedSettings.windowIndex, resizable = true})
     end
     if savedSettings.devmode == true and savedSettings.console == true then
         if love.system.getOS() == "Windows" then love._openConsole() end
