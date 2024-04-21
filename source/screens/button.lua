@@ -30,7 +30,14 @@ button.activeButtons = {}
 function button.loadAll()
     button.activeButtons = {}
     settings.scroll = 0
-    if title.state == 5 then
+    if title.state == 0 then
+        if title.logo.y >= 90 then
+            button.new(-40, 0, "Start", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 5) -- start button
+            button.new(-40, 25, "Settings", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 6) -- settings button
+            button.new(-40, 50, "Quit", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 7) -- quit button
+            button.specialNew(-127, -88, title.icons.start.image, {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 1, title.icons.start.image, nil)
+        end
+    elseif title.state == 5 then
         if game.esc == true then
             button.new(-40, -25, "Title screen", {1, 0, 0}, 5) -- back from skin to settings
             button.new(-40, 0, "Settings", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 6) -- back from skin to settings
@@ -577,7 +584,7 @@ function button:draw()
             nil, 
             playerCamera.globalScale
         )
-    else
+    elseif self.imageOnButton then
         love.graphics.draw(
             self.imageOnButton,
             love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale) + (self.width * playerCamera.globalScale) / 2 - (self.imageOnButton:getWidth() * playerCamera.globalScale) / 2, 

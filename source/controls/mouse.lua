@@ -11,31 +11,22 @@ function love.mousemoved(x, y)
     if title.state == 0 then
         if title.logo.y >= 90 then
             if x > love.graphics.getWidth() / 2 - (100 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 - (72 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (50 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (88 * playerCamera.globalScale) then
-                title.icons.start.image = title.icons.start.active
                 title.background.current = title.background.blue
                 title.logo.anim = title.logo.animations.region2
                 local iconImageData = love.image.newImageData("assets/textures/gui/title/logo1.png")
                 love.window.setIcon(iconImageData)
-            else
-                title.icons.start.image = title.icons.start.inactive
             end
             if x > love.graphics.getWidth() / 2 - (12.5 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (12.5 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (50 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (88 * playerCamera.globalScale) then
-                title.icons.past.image = title.icons.past.active
                 title.background.current = title.background.green
                 title.logo.anim = title.logo.animations.region3
                 local iconImageData = love.image.newImageData("assets/textures/gui/title/logo2.png")
                 love.window.setIcon(iconImageData)
-            else
-                title.icons.past.image = title.icons.past.inactive
             end
             if x > love.graphics.getWidth() / 2 + (71 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (99 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (50 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (88 * playerCamera.globalScale) then
-                title.icons.final.image = title.icons.final.active
                 title.background.current = title.background.storm
                 title.logo.anim = title.logo.animations.region4
                 local iconImageData = love.image.newImageData("assets/textures/gui/title/logo3.png")
                 love.window.setIcon(iconImageData)
-            else
-                title.icons.final.image = title.icons.final.inactive
             end
         end
     elseif title.state >= 1 and title.state <= 3 then
@@ -106,6 +97,7 @@ end
 function love.mousepressed(x, y, button, istouch)
     if title.mikert.showed == false then
         title.mikert.showed = true
+        buttonVar.loadAll()
     else
         if title.state == 0 then
             if title.logo.y >= 90 then
