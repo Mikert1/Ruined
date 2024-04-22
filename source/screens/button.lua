@@ -53,27 +53,27 @@ function button.loadAll()
                 if savedSettings.console == true then
                     button.new(-40, -53, "Enabled", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 16, "Auto Open Console") -- Console
                 else
-                    button.new(-40, -53, "Disabled", {1, 0, 0}, 16, "Auto Open Console") -- Console
+                    button.new(-40, -53, "Disabled", {1, 0.5, 0}, 16, "Auto Open Console") -- Console
                 end
                 button.new(-127, -53, "Enabled", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 1, "Developer Mode") -- devmode
             else
-                button.new(-127, -53, "Disabled", {1, 0, 0}, 1, "Developer Mode") -- devmode
+                button.new(-127, -53, "Disabled", {1, 0.5, 0}, 1, "Developer Mode") -- devmode
             end
             -- button.new(48, -53, "Customize", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 2, "Skin - Beta") -- skin
             -- 
-            button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
+            button.new(-40, 70, "Back", {1, 0.5, 0}, 3) -- back from settings to main menu or game
         elseif settings.tab == "video" then
             if savedSettings.window == 0 then
                 button.new(-127, -53, "Windowed", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 20, "Window Type:") -- fullscreen
             elseif savedSettings.window == 1 then
-                button.new(-127, -53, "Fullscreen", {1, 0, 0}, 20, "Window Type:") -- fullscreen
+                button.new(-127, -53, "Fullscreen", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 20, "Window Type:") -- fullscreen
             elseif savedSettings.window == 2 then
-                button.new(-127, -53, "Borderless", {1, 0, 0}, 20, "Window Type:") -- fullscreen
+                button.new(-127, -53, "Borderless", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 20, "Window Type:") -- fullscreen
             end
             button.new(-127, -18, savedSettings.windowIndex, {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 21, "Window Index:") -- resolution
             -- button.new(-128, -18, love.graphics.getWidth() .. "x" .. love.graphics.getHeight(), {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 21, "Resolution") -- resolution
             -- 
-            button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
+            button.new(-40, 70, "Back", {1, 0.5, 0}, 3) -- back from settings to main menu or game
         elseif settings.tab == "controls" then
             button.new(-127, -53, "Key: " .. string.upper(controls.keys.interact) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 25, "Interact", true) -- 
             button.new(-127, -18, "Key: " .. string.upper(controls.keys.map) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 26, "Map", true) -- 
@@ -85,14 +85,14 @@ function button.loadAll()
             button.new(-127, 157, "Key: " .. string.upper(controls.keys.down) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 28, "Move Down", true) --
             button.new(-127, 192, "Key: " .. string.upper(controls.keys.right) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 28, "Move Right", true) --
             button.new(-124, 70, "Reset All", {1, 0, 0}, 24) -- remove saved skin
-            button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
+            button.new(-40, 70, "Back", {1, 0.5, 0}, 3) -- back from settings to main menu or game
         elseif settings.tab == "skin" then
             button.new(-124, 70, "Reset", {1, 0, 0}, 4) -- remove saved skin
-            button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from skin to settings
+            button.new(-40, 70, "Back", {1, 0.5, 0}, 3) -- back from skin to settings
         elseif settings.tab == "audio" then
-            button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
+            button.new(-40, 70, "Back", {1, 0.5, 0}, 3) -- back from settings to main menu or game
         elseif settings.tab == "stats" then
-            button.new(-40, 70, "Back", {1, 0, 0}, 3) -- back from settings to main menu or game
+            button.new(-40, 70, "Back", {1, 0.5, 0}, 3) -- back from settings to main menu or game
         end
     elseif title.state == 1 or title.state == 2 or title.state == 3 then
         if title.delete.mode == false then
@@ -128,7 +128,7 @@ function button.loadAll()
                 button.new(48, 43, "Empty", {0.15, 0.15, 0.15}, 53) -- Button 2
             end
         end
-        button.new(-40, 70, "Back", {1, 0, 0}, 50) -- back to ruined
+        button.new(-40, 70, "Back", {1, 0.5, 0}, 50) -- back to ruined
         button.first()
     end
 end

@@ -236,7 +236,6 @@ function title.update(dt)
         end
         if title.mikert.timer > 10 then
             title.mikert.showed = true
-            print("Mikert showed")
             button.loadAll()
         end
     else
