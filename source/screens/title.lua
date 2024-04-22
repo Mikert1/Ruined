@@ -5,8 +5,10 @@ local file = require("source/data")
 local preview = file.show()
 local settings
 local shake
+local button
 require("source/data")
 function title.load()
+    button = require("source/screens/button")
     settings = require("source/screens/settings")
     local anim8 = require("assets/library/animations")
     worldManagement = require("source/worlds")
@@ -28,19 +30,16 @@ function title.load()
     title.logo.image = love.graphics.newImage("assets/textures/gui/title/mikert.png")
     title.logo.grid = anim8.newGrid( 200, 53, title.logo.image:getWidth(), title.logo.image:getHeight() )
     title.logo.animations = {}
-    title.logo.animations.region1 = anim8.newAnimation( title.logo.grid('1-62', 1), 0.03 )
+    title.logo.animations.region1 = anim8.newAnimation( title.logo.grid('1-62', 1), 0.013 )
     title.logo.animations.region2 = anim8.newAnimation( title.logo.grid('1-8', 2), 0.1 )
     title.logo.animations.region3 = anim8.newAnimation( title.logo.grid('1-8', 3), 0.1 )
     title.logo.animations.region4 = anim8.newAnimation( title.logo.grid('1-32', 4), 0.1 )
     title.logo.anim = title.logo.animations.region1
     title.mainColor = {0, 1, 1}
     title.icons = {}
-    title.icons.start = {}
-    title.icons.start.image = love.graphics.newImage("assets/textures/gui/title/start.png")
-    title.icons.past = {}
-    title.icons.past.image = love.graphics.newImage("assets/textures/gui/title/past.png")
-    title.icons.final = {}
-    title.icons.final.image = love.graphics.newImage("assets/textures/gui/title/final.png")
+    title.icons.start = love.graphics.newImage("assets/textures/gui/title/start.png")
+    title.icons.past = love.graphics.newImage("assets/textures/gui/title/past.png")
+    title.icons.final = love.graphics.newImage("assets/textures/gui/title/final.png")
     title.rune = {}
     title.rune.image1 = love.graphics.newImage("assets/textures/gui/title/rune1.png")
     title.rune.image2 = love.graphics.newImage("assets/textures/gui/title/rune2.png")
@@ -237,12 +236,13 @@ function title.update(dt)
         end
         if title.mikert.timer > 10 then
             title.mikert.showed = true
+            print("Mikert showed")
+            button.loadAll()
         end
     else
         if title.state == 0 then
             if title.logo.y <= 89 then
                 title.logo.y = title.logo.y + (dt * 80)
-                title.logo.anim:gotoFrame(1)
             else
                 title.logo.y = 90
             end
@@ -351,14 +351,12 @@ function title:draw()
             love.graphics.print("".. game.beta .. " " .. game.name .. " " .. game.buildName .. ", Version " .. game.version, 5, 5, nil, playerCamera.globalScale / 3)
             title.logo.anim:draw(title.logo.image, love.graphics.getWidth() / 2 - (100 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (title.logo.y * playerCamera.globalScale), nil, playerCamera.globalScale)
             love.graphics.setColor(1, 1, 1)
-            if title.logo.y >= 90 then
-                love.graphics.draw(title.rune.image1, love.graphics.getWidth() / 2 - (112 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (40 * playerCamera.globalScale) , nil, playerCamera.globalScale)
-                love.graphics.draw(title.rune.image2, love.graphics.getWidth() / 2 - (28.5 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (36 * playerCamera.globalScale) , nil, playerCamera.globalScale)
-                love.graphics.draw(title.rune.image3, love.graphics.getWidth() / 2 + (60 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (40 * playerCamera.globalScale) , nil, playerCamera.globalScale)
-                love.graphics.draw(title.icons.start.image, love.graphics.getWidth() / 2 - (100 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (50 * playerCamera.globalScale) , nil, playerCamera.globalScale)
-                love.graphics.draw(title.icons.past.image, love.graphics.getWidth() / 2 - (12.5 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (50 * playerCamera.globalScale) , nil, playerCamera.globalScale)
-                love.graphics.draw(title.icons.final.image, love.graphics.getWidth() / 2 + (71 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (50 * playerCamera.globalScale) , nil, playerCamera.globalScale)
-            end
+            love.graphics.draw(title.rune.image1, love.graphics.getWidth() / 2 - (112 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (40 * playerCamera.globalScale) , nil, playerCamera.globalScale)
+            love.graphics.draw(title.rune.image2, love.graphics.getWidth() / 2 - (28.5 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (36 * playerCamera.globalScale) , nil, playerCamera.globalScale)
+            love.graphics.draw(title.rune.image3, love.graphics.getWidth() / 2 + (60 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (40 * playerCamera.globalScale) , nil, playerCamera.globalScale)
+            love.graphics.draw(title.icons.start, love.graphics.getWidth() / 2 - (100 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (50 * playerCamera.globalScale) , nil, playerCamera.globalScale)
+            love.graphics.draw(title.icons.past, love.graphics.getWidth() / 2 - (12.5 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (50 * playerCamera.globalScale) , nil, playerCamera.globalScale)
+            love.graphics.draw(title.icons.final, love.graphics.getWidth() / 2 + (71 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (50 * playerCamera.globalScale) , nil, playerCamera.globalScale)
         elseif title.state >= 1 and title.state <= 3 then
             -- show title
             love.graphics.setColor(title.mainColor)

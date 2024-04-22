@@ -31,12 +31,9 @@ function button.loadAll()
     button.activeButtons = {}
     settings.scroll = 0
     if title.state == 0 then
-        if title.logo.y >= 90 then
-            button.new(-40, 0, "Start", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 5) -- start button
-            button.new(-40, 25, "Settings", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 6) -- settings button
-            button.new(-40, 50, "Quit", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 7) -- quit button
-            button.specialNew(-127, -88, title.icons.start.image, {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 1, title.icons.start.image, nil)
-        end
+        button.specialNew(-100, 50, title.icons.start, {0, 1, 1}, 1)
+        button.specialNew(-12.5, 50, title.icons.past, {0, 1, 0}, 1)
+        button.specialNew(71, 50, title.icons.final, {0, 1, 1}, 1)
     elseif title.state == 5 then
         if game.esc == true then
             button.new(-40, -25, "Title screen", {1, 0, 0}, 5) -- back from skin to settings
@@ -181,8 +178,13 @@ function button.specialNew(x, y, imageOnButton, color, id, image, outline)
     self.y = y
     self.id = id
     self.image = image
-    self.width = image:getWidth()
-    self.height = image:getHeight()
+    if image then
+        self.width = image:getWidth()
+        self.height = image:getHeight()
+    else
+        self.width = imageOnButton:getWidth()
+        self.height = imageOnButton:getHeight()
+    end
     self.imageOutline = outline
     self.color = color
     self.currentColor = {0.15, 0.15, 0.15}
@@ -401,6 +403,7 @@ function button:action()
             button.loadAll()
         end
     end
+    controls.searchForKey = nil
 end
 
 function button:update(dt)
@@ -557,25 +560,29 @@ function button:draw()
         )
         love.graphics.setColor(1, 1, 1)
     end
-    love.graphics.draw(
-        self.image, 
-        love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale), 
-        love.graphics.getHeight() / 2 + (y * playerCamera.globalScale), 
-        nil, 
-        playerCamera.globalScale
-    )
+    if self.image then
+        love.graphics.draw(
+            self.image, 
+            love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale), 
+            love.graphics.getHeight() / 2 + (y * playerCamera.globalScale), 
+            nil, 
+            playerCamera.globalScale
+        )
+    end
     love.graphics.setColor(
         self.currentColor[1], 
         self.currentColor[2], 
         self.currentColor[3]
     )
-    love.graphics.draw(
-        self.imageOutline, 
-        love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale), 
-        love.graphics.getHeight() / 2 + (y * playerCamera.globalScale), 
-        nil, 
-        playerCamera.globalScale
-    )
+    if self.imageOutline then
+        love.graphics.draw(
+            self.imageOutline, 
+            love.graphics.getWidth() / 2 + (self.x * playerCamera.globalScale), 
+            love.graphics.getHeight() / 2 + (y * playerCamera.globalScale), 
+            nil, 
+            playerCamera.globalScale
+        )
+    end
     if self.text then
         love.graphics.print(
             self.text, 

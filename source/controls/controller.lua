@@ -132,6 +132,7 @@ function controller.update(dt)
                     elseif game.state == 1 then
                         if title.mikert.showed == false then
                             title.mikert.showed = true
+                            button.loadAll()
                         end
                         file.filenumber = 1
                         game.state = 0

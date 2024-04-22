@@ -105,7 +105,6 @@ function love.mousepressed(x, y, button, istouch)
                     title.state = 1
                     file.show()
                     title.rezet()
-                    title.icons.start.image = title.icons.start.inactive
                     title.text.name = "Ruined"
                     title.text.chapter = "Chapter 1"
                     title.mainColor = {0, 1, 1}
@@ -117,7 +116,6 @@ function love.mousepressed(x, y, button, istouch)
                     title.state = 2
                     file.show()
                     title.rezet()
-                    title.icons.past.image = title.icons.past.inactive
                     title.text.name = "The days of John's"
                     title.text.chapter = "Chapter 2"
                     title.mainColor = {0, 1, 0}
@@ -129,7 +127,6 @@ function love.mousepressed(x, y, button, istouch)
                     title.state = 3
                     file.show()
                     title.rezet()
-                    title.icons.final.image = title.icons.final.inactive
                     title.text.name = "Returned"
                     title.text.chapter = "Chapter 3"
                     title.mainColor = {0, 1, 1}
