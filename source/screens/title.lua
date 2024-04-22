@@ -354,9 +354,6 @@ function title:draw()
             love.graphics.draw(title.rune.image1, love.graphics.getWidth() / 2 - (112 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (40 * playerCamera.globalScale) , nil, playerCamera.globalScale)
             love.graphics.draw(title.rune.image2, love.graphics.getWidth() / 2 - (28.5 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (36 * playerCamera.globalScale) , nil, playerCamera.globalScale)
             love.graphics.draw(title.rune.image3, love.graphics.getWidth() / 2 + (60 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (40 * playerCamera.globalScale) , nil, playerCamera.globalScale)
-            love.graphics.draw(title.icons.start, love.graphics.getWidth() / 2 - (100 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (50 * playerCamera.globalScale) , nil, playerCamera.globalScale)
-            love.graphics.draw(title.icons.past, love.graphics.getWidth() / 2 - (12.5 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (50 * playerCamera.globalScale) , nil, playerCamera.globalScale)
-            love.graphics.draw(title.icons.final, love.graphics.getWidth() / 2 + (71 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (50 * playerCamera.globalScale) , nil, playerCamera.globalScale)
         elseif title.state >= 1 and title.state <= 3 then
             -- show title
             love.graphics.setColor(title.mainColor)

@@ -100,40 +100,7 @@ function love.mousepressed(x, y, button, istouch)
         buttonVar.loadAll()
     else
         if title.state == 0 then
-            if title.logo.y >= 90 then
-                if button == 1 and x > love.graphics.getWidth() / 2 - (100 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 - (72 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (50 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (88 * playerCamera.globalScale) then
-                    title.state = 1
-                    file.show()
-                    title.rezet()
-                    title.text.name = "Ruined"
-                    title.text.chapter = "Chapter 1"
-                    title.mainColor = {0, 1, 1}
-                    title.background.current = title.background.blue
-                    buttonVar.loadAll()
-                end
-                if button == 1 and x > love.graphics.getWidth() / 2 - (12.5 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (12.5 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (50 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (88 * playerCamera.globalScale) then
-                    print("chapter 2 is not unlocked, finish chapter 1 to play chapter 2.")
-                    title.state = 2
-                    file.show()
-                    title.rezet()
-                    title.text.name = "The days of John's"
-                    title.text.chapter = "Chapter 2"
-                    title.mainColor = {0, 0.8, 0}
-                    title.background.current = title.background.green
-                    buttonVar.loadAll()
-                end
-                if x > love.graphics.getWidth() / 2 + (71 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (96 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (50 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (88 * playerCamera.globalScale) then
-                    print("chapter 3 is not unlocked, finish chapter 2 to play chapter 3.")
-                    title.state = 3
-                    file.show()
-                    title.rezet()
-                    title.text.name = "Returned"
-                    title.text.chapter = "Chapter 3"
-                    title.mainColor = {0, 1, 1}
-                    title.background.current = title.background.storm
-                    buttonVar.loadAll()
-                end
-            else
+            if not (title.logo.y < 90) then
                 title.logo.anim = title.logo.animations.region2
                 title.logo.y = 90
             end

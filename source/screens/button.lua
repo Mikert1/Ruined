@@ -31,9 +31,9 @@ function button.loadAll()
     button.activeButtons = {}
     settings.scroll = 0
     if title.state == 0 then
-        button.specialNew(-100, 50, title.icons.start, {0, 1, 1}, 1)
-        button.specialNew(-12.5, 50, title.icons.past, {0, 0.8, 0}, 1)
-        button.specialNew(71, 50, title.icons.final, {0, 1, 1}, 1)
+        button.specialNew(-100, 50, title.icons.start, {0, 1, 1}, 61)
+        button.specialNew(-12.5, 50, title.icons.past, {0, 0.8, 0}, 62)
+        button.specialNew(71, 50, title.icons.final, {0, 1, 1}, 63)
     elseif title.state == 5 then
         if game.esc == true then
             button.new(-40, -25, "Title screen", {1, 0, 0}, 5) -- back from skin to settings
@@ -402,6 +402,35 @@ function button:action()
             player.noMove = false
             button.loadAll()
         end
+    elseif self.id == 61 then -- chapter button
+        title.state = 1
+        file.show()
+        title.rezet()
+        title.text.name = "Ruined"
+        title.text.chapter = "Chapter 1"
+        title.mainColor = {0, 1, 1}
+        title.background.current = title.background.blue
+        button.loadAll()
+    elseif self.id == 62 then -- chapter button
+        print("chapter 2 is not unlocked, finish chapter 1 to play chapter 2.")
+        title.state = 2
+        file.show()
+        title.rezet()
+        title.text.name = "The days of John's"
+        title.text.chapter = "Chapter 2"
+        title.mainColor = {0, 0.8, 0}
+        title.background.current = title.background.green
+        button.loadAll()
+    elseif self.id == 63 then -- chapter button 
+        print("chapter 3 is not unlocked, finish chapter 2 to play chapter 3.")
+        title.state = 3
+        file.show()
+        title.rezet()
+        title.text.name = "Returned"
+        title.text.chapter = "Chapter 3"
+        title.mainColor = {0, 1, 1}
+        title.background.current = title.background.storm
+        button.loadAll()
     end
     controls.searchForKey = nil
 end
