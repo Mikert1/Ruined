@@ -32,7 +32,7 @@ function button.loadAll()
     settings.scroll = 0
     if title.state == 0 then
         button.specialNew(-100, 50, title.icons.start, {0, 1, 1}, 1)
-        button.specialNew(-12.5, 50, title.icons.past, {0, 1, 0}, 1)
+        button.specialNew(-12.5, 50, title.icons.past, {0, 0.8, 0}, 1)
         button.specialNew(71, 50, title.icons.final, {0, 1, 1}, 1)
     elseif title.state == 5 then
         if game.esc == true then

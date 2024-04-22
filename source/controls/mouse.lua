@@ -118,7 +118,7 @@ function love.mousepressed(x, y, button, istouch)
                     title.rezet()
                     title.text.name = "The days of John's"
                     title.text.chapter = "Chapter 2"
-                    title.mainColor = {0, 1, 0}
+                    title.mainColor = {0, 0.8, 0}
                     title.background.current = title.background.green
                     buttonVar.loadAll()
                 end
