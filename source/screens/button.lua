@@ -64,11 +64,11 @@ function button.loadAll()
             button.new(-40, 70, "Back", {1, 0.5, 0}, 3) -- back from settings to main menu or game
         elseif settings.tab == "video" then
             if savedSettings.window == 0 then
-                button.new(-127, -53, "Windowed", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 20, "Window Type:") -- fullscreen
+                button.new(-127, -53, "Windowed", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 20, "Window Type:") -- Windowed
             elseif savedSettings.window == 1 then
-                button.new(-127, -53, "Fullscreen", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 20, "Window Type:") -- fullscreen
+                button.new(-127, -53, "Fullscreen", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 20, "Window Type:") -- Fullscreen
             elseif savedSettings.window == 2 then
-                button.new(-127, -53, "Borderless", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 20, "Window Type:") -- fullscreen
+                button.new(-127, -53, "Borderless", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 20, "Window Type:") -- Borderless
             end
             button.new(-127, -18, savedSettings.windowIndex, {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 21, "Window Index:") -- resolution
             -- button.new(-128, -18, love.graphics.getWidth() .. "x" .. love.graphics.getHeight(), {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 21, "Resolution") -- resolution
@@ -97,38 +97,38 @@ function button.loadAll()
     elseif title.state == 1 or title.state == 2 or title.state == 3 then
         if title.delete.mode == false then
             if preview.file1.created == true then
-                button.new(-128, 43, "Play", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 51) -- Button 1
+                button.new(-128, 43, "Play", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 51) -- Play game button for save 1
             else
-                button.new(-128, 43, "Create", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 51) -- Button 1
+                button.new(-128, 43, "Create", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 51) -- Create game button for save 1
             end
             if preview.file2.created == true then
-                button.new(-40, 43, "Play", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 52) -- Button 2
+                button.new(-40, 43, "Play", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 52) -- Play game button for save 2
             else
-                button.new(-40, 43, "Create", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 52) -- Button 2
+                button.new(-40, 43, "Create", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 52) -- Create game button for save 2
             end
             if preview.file3.created == true then
-                button.new(48, 43, "Play", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 53) -- Button 2
+                button.new(48, 43, "Play", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 53) -- Play game button for save 3
             else
-                button.new(48, 43, "Create", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 53) -- Button 2
+                button.new(48, 43, "Create", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 53) -- Create game button for save 3
             end
         else
             if preview.file1.created == true then
-                button.new(-128, 43, "Delete", {1, 0, 0}, 51) -- Button 1
+                button.new(-128, 43, "Delete", {1, 0, 0}, 51) -- Delete savefile button for save 1
             else
-                button.new(-128, 43, "Empty", {0.15, 0.15, 0.15}, 51) -- Button 1
+                button.new(-128, 43, "Empty", {0.15, 0.15, 0.15}, 51) -- Empty that indicates that there is no savefile for save 1
             end
             if preview.file2.created == true then
-                button.new(-40, 43, "Delete", {1, 0, 0}, 52) -- Button 2
+                button.new(-40, 43, "Delete", {1, 0, 0}, 52) -- Delete savefile button for save 2
             else
-                button.new(-40, 43, "Empty", {0.15, 0.15, 0.15}, 52) -- Button 2
+                button.new(-40, 43, "Empty", {0.15, 0.15, 0.15}, 52) -- Empty that indicates that there is no savefile for save 2
             end
             if preview.file3.created == true then
-                button.new(48, 43, "Delete", {1, 0, 0}, 53) -- Button 2
+                button.new(48, 43, "Delete", {1, 0, 0}, 53) -- Delete savefile button for save 3
             else
-                button.new(48, 43, "Empty", {0.15, 0.15, 0.15}, 53) -- Button 2
+                button.new(48, 43, "Empty", {0.15, 0.15, 0.15}, 53) -- Empty that indicates that there is no savefile for save 3
             end
         end
-        button.new(-40, 70, "Back", {1, 0.5, 0}, 50) -- back to ruined
+        button.new(-40, 70, "Back", {1, 0.5, 0}, 50) -- back to ruined Title screen
         button.first()
     end
 end

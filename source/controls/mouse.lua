@@ -100,7 +100,7 @@ function love.mousepressed(x, y, button, istouch)
         buttonVar.loadAll()
     else
         if title.state == 0 then
-            if not (title.logo.y < 90) then
+            if title.logo.y < 90 then
                 title.logo.anim = title.logo.animations.region2
                 title.logo.y = 90
             end
