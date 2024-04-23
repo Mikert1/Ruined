@@ -326,6 +326,28 @@ function file.settings.load()
         if love.system.getOS() == "Windows" then love._openConsole() end
         print("Console is active\n- use Tab to show more info and show colliders")
     end
+    local x, y = love.window.getDesktopDimensions(savedSettings.windowIndex)
+    if savedSettings.resolution == 1 then
+        if (x > 800) and (y > 600) then
+            love.window.setMode(800, 600, {borderless = false, resizable = true, display = savedSettings.windowIndex})
+        else
+            love.window.setMode(x, y, {borderless = false, resizable = true, display = savedSettings.windowIndex})
+        end
+    elseif savedSettings.resolution == 2 then
+        if (x > 1024) and (y > 768) then
+            love.window.setMode(1024, 768, {borderless = false, resizable = true, display = savedSettings.windowIndex})
+        else
+            love.window.setMode(x, y, {borderless = false, resizable = true, display = savedSettings.windowIndex})
+        end
+    elseif savedSettings.resolution == 3 then
+        if (x > 1280) and (y > 720) then
+            love.window.setMode(1280, 720, {borderless = false, resizable = true, display = savedSettings.windowIndex})
+        else
+            love.window.setMode(x, y, {borderless = false, resizable = true, display = savedSettings.windowIndex})
+        end
+    elseif savedSettings.resolution == 4 then
+        love.window.setMode(x, y, {borderless = false, resizable = true, display = savedSettings.windowIndex})
+    end
     return savedSettings
 end
 
