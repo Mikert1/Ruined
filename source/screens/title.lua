@@ -37,37 +37,13 @@ function title.load()
     title.logo.anim = title.logo.animations.region1
     title.mainColor = {0, 1, 1}
     title.icons = {}
-    title.icons.start = love.graphics.newImage("assets/textures/gui/title/start.png")
-    title.icons.past = love.graphics.newImage("assets/textures/gui/title/past.png")
-    title.icons.final = love.graphics.newImage("assets/textures/gui/title/final.png")
+    title.icons.start = love.graphics.newImage("assets/textures/gui/title/buttons/start.png")
+    title.icons.past = love.graphics.newImage("assets/textures/gui/title/buttons/past.png")
+    title.icons.final = love.graphics.newImage("assets/textures/gui/title/buttons/final.png")
     title.rune = {}
     title.rune.image1 = love.graphics.newImage("assets/textures/gui/title/rune1.png")
     title.rune.image2 = love.graphics.newImage("assets/textures/gui/title/rune2.png")
     title.rune.image3 = love.graphics.newImage("assets/textures/gui/title/rune3.png")
-
-    title.button = {}
-    title.button.normal = {}
-    title.button.normal.image = love.graphics.newImage("assets/textures/gui/title/buttonBlue.png")
-    title.button.normal.grid = anim8.newGrid( 80, 20, title.button.normal.image:getWidth(), title.button.normal.image:getHeight() )
-    title.button.normal.animations = {}
-    title.button.normal.animations.normal = anim8.newAnimation( title.button.normal.grid('1-1', 1), 1 )
-    title.button.normal.animations.activeBlue = anim8.newAnimation( title.button.normal.grid('1-1', 2), 1 )
-    title.button.normal.animations.activeGreen = anim8.newAnimation( title.button.normal.grid('1-1', 3), 1 )
-    title.button.normal.menu = {}
-    title.button.normal.menu.button1 = title.button.normal.animations.normal
-    title.button.normal.menu.button2 = title.button.normal.animations.normal
-    title.button.normal.menu.button3 = title.button.normal.animations.normal
-    title.button.red = {}
-    title.button.red.image = love.graphics.newImage("assets/textures/gui/title/redbutton.png")
-    title.button.red.grid = anim8.newGrid( 80, 20, title.button.red.image:getWidth(), title.button.red.image:getHeight() )
-    title.button.red.animations = {}
-    title.button.red.animations.normal = anim8.newAnimation( title.button.red.grid('1-1', 1), 1 )
-    title.button.red.animations.active = anim8.newAnimation( title.button.red.grid('1-1', 2), 1 )
-    title.button.red.menu = {}
-    title.button.red.menu.button1 = title.button.red.animations.normal
-    title.button.red.menu.button2 = title.button.red.animations.normal
-    title.button.red.menu.button3 = title.button.red.animations.normal
-    title.button.red.menu.button4 = title.button.red.animations.normal
 
     title.delete = {}
     title.delete.mode = false
@@ -429,71 +405,6 @@ function title:draw()
             end
             love.graphics.print("Save 3", love.graphics.getWidth() / 2 + (67 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (30 * playerCamera.globalScale), nil, playerCamera.globalScale)
             -- play, create ect. text,s and back text
-            if not(title.button.normal.menu.button1 == title.button.normal.animations.normal) then
-                if title.delete.mode == false then
-                    love.graphics.setColor(title.mainColor)
-                else
-                    if preview.file1.created == true then
-                        love.graphics.setColor(1, 0, 0)
-                    else
-                        love.graphics.setColor(0.15, 0.15, 0.15)
-                    end
-                end
-            else
-                love.graphics.setColor(0.15, 0.15, 0.15)
-            end
-            love.graphics.print(title.text.button1,
-                love.graphics.getWidth() / 2 - ((46 + title.savetile.image:getWidth() / 2) * playerCamera.globalScale) - (font:getWidth(title.text.button1) / 2 * playerCamera.globalScale), 
-                love.graphics.getHeight() / 2 + ((47 - title.button.normal.image:getHeight() / 4) * playerCamera.globalScale) + (font:getHeight(title.text.button1) / 2 * playerCamera.globalScale), 
-                nil, playerCamera.globalScale
-            )
-
-            if not(title.button.normal.menu.button2 == title.button.normal.animations.normal) then
-                if title.delete.mode == false then
-                    love.graphics.setColor(title.mainColor)
-                else
-                    if preview.file2.created == true then
-                        love.graphics.setColor(1, 0, 0)
-                    else
-                        love.graphics.setColor(0.15, 0.15, 0.15)
-                    end
-                end
-            else
-                love.graphics.setColor(0.15, 0.15, 0.15)
-            end
-            love.graphics.print(title.text.button2,
-                love.graphics.getWidth() / 2 - (font:getWidth(title.text.button2) / 2 * playerCamera.globalScale),
-                love.graphics.getHeight() / 2 + ((47 - title.button.normal.image:getHeight() / 4) * playerCamera.globalScale) + (font:getHeight(title.text.button2) / 2 * playerCamera.globalScale),
-                nil, playerCamera.globalScale
-            )
-            if not(title.button.normal.menu.button3 == title.button.normal.animations.normal) then
-                if title.delete.mode == false then
-                    love.graphics.setColor(title.mainColor)
-                else
-                    if preview.file3.created == true then
-                        love.graphics.setColor(1, 0, 0)
-                    else
-                        love.graphics.setColor(0.15, 0.15, 0.15)
-                    end
-                end
-            else
-                love.graphics.setColor(0.15, 0.15, 0.15)
-            end
-            love.graphics.print(title.text.button3,
-                love.graphics.getWidth() / 2 + ((46 + title.savetile.image:getWidth() / 2) * playerCamera.globalScale) - (font:getWidth(title.text.button3) / 2 * playerCamera.globalScale),
-                love.graphics.getHeight() / 2 + ((47 - title.button.normal.image:getHeight() / 4) * playerCamera.globalScale) + (font:getHeight(title.text.button3) / 2 * playerCamera.globalScale),
-                nil, playerCamera.globalScale
-            )
-            if title.button.red.menu.button1 == title.button.red.animations.active then
-                love.graphics.setColor(1, 0, 0)
-            else
-                love.graphics.setColor(0.15, 0.15, 0.15)
-            end
-            love.graphics.print("Back",
-                love.graphics.getWidth() / 2 - (font:getWidth("Back") / 2 * playerCamera.globalScale),
-                love.graphics.getHeight() / 2 + (59 * playerCamera.globalScale) + (font:getHeight("Back") / 2 * playerCamera.globalScale),
-                nil, playerCamera.globalScale
-            )
             love.graphics.setColor(1, 1, 1)
         end
     end

@@ -5,27 +5,26 @@ local errorm = {}
 local scaleX = 6 / 1200 * love.graphics.getWidth()
 local scaleY = 6 / 1200 * love.graphics.getHeight()
 errorm.background = love.graphics.newImage("assets/textures/gui/title/backgroundBlue.png")
-errorm.button = {}
+local buttonImage = love.graphics.newImage("assets/textures/gui/title/buttons/button.png")
+local buttonImageOutline = love.graphics.newImage("assets/textures/gui/title/buttons/buttonOutline.png")
+errorm.button = {
+	image = buttonImage,
+	outline = buttonImageOutline,
+	text = "Hold to copy",
+	color = {1, 1, 1}
+}
 errorm.image = love.graphics.newImage("assets/textures/gui/title/brokenRune.png")
-errorm.button.image = love.graphics.newImage("assets/textures/gui/title/buttonBlue.png")
-errorm.button.grid = anim8.newGrid( 80, 20, errorm.button.image:getWidth(), errorm.button.image:getHeight() )
-errorm.button.animations = {}
-errorm.button.animations.normal = anim8.newAnimation( errorm.button.grid('1-1', 1), 1 )
-errorm.button.animations.active = anim8.newAnimation( errorm.button.grid('1-1', 2), 1 )
-errorm.button.copy = errorm.button.animations.normal
-errorm.button.text = "Hold to copy"
 errorm.copied = false
 
 function update(dt)
     local x, y = love.mouse.getPosition()
     if x > love.graphics.getWidth() / 3 - (30 * scaleX) and x < love.graphics.getWidth() / 3 + (30 * scaleX) and y > love.graphics.getHeight() / 2 + (49 * scaleY) and y < love.graphics.getHeight() / 2 + (69 * scaleY) then
-        errorm.button.copy = errorm.button.animations.active
         if love.mouse.isDown(1) == true then
             errorm.copied = true
             errorm.button.text = "Copied"
         end
     else
-        errorm.button.copy = errorm.button.animations.normal
+
     end
 end
 
@@ -118,13 +117,10 @@ function love.errorhandler(msg)
 		love.graphics.printf(p, love.graphics.getWidth() / 2 - font:getWidth(p) / 2, pos + 40, love.graphics.getWidth() - pos)
         love.graphics.setColor(1, 1, 1)
         love.graphics.print(errorm.help, love.graphics.getWidth() / 2 - font:getWidth(p) / 2, pos + 200)
-        errorm.button.copy:draw(errorm.button.image, love.graphics.getWidth() / 3 - errorm.button.image:getWidth() / 2 * 3, 450, nil, 3)
+        love.graphics.draw(errorm.button.image, love.graphics.getWidth() / 3 - errorm.button.image:getWidth() / 2 * 3, 450, nil, 3)
+		love.graphics.draw(errorm.button.outline, love.graphics.getWidth() / 3 - errorm.button.image:getWidth() / 2 * 3, 450, nil, 3)
 		love.graphics.draw(errorm.image, love.graphics.getWidth() - (errorm.image:getWidth() * scaleX), love.graphics.getHeight() - (errorm.image:getHeight() * scaleY), nil, scaleY, scaleY)
-        if errorm.button.copy == errorm.button.animations.active then
-            love.graphics.setColor(0, 1, 1)
-        else
-            love.graphics.setColor(0.15, 0.15, 0.15)
-        end
+		-- colors for text
         love.graphics.print(errorm.button.text, love.graphics.getWidth() / 3 - font:getWidth(errorm.button.text) / 2, pos + 400)
         love.graphics.setColor(1, 1, 1)
 		love.graphics.present()

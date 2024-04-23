@@ -1,7 +1,7 @@
 local button = {}
 button.__index = button
-local buttonImage = love.graphics.newImage("assets/textures/gui/title/button.png")
-local buttonImageOutline = love.graphics.newImage("assets/textures/gui/title/buttonOutline.png")
+local buttonImage = love.graphics.newImage("assets/textures/gui/title/buttons/button.png")
+local buttonImageOutline = love.graphics.newImage("assets/textures/gui/title/buttons/buttonOutline.png")
 
 local file
 local settings

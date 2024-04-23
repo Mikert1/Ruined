@@ -57,41 +57,6 @@ function love.mousemoved(x, y)
             title.settings.anim = title.settings.animations.normal
         end
     elseif title.state == 4 then
-        -- setting buttons
-        if x > love.graphics.getWidth() / 2 - (40 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (40 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (70 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (90 * playerCamera.globalScale) then
-            title.button.red.menu.button1 = title.button.red.animations.active
-        else
-            title.button.red.menu.button1 = title.button.red.animations.normal
-        end
-        if not settings.tab == "skin" then
-            if x > love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 - (48 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 - (55 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 - (35 * playerCamera.globalScale) then
-                if savedSettings.devmode == true then
-                    if title.mainColor[3] == 1 then
-                        title.button.normal.menu.button2 = title.button.normal.animations.activeBlue
-                    else
-                        title.button.normal.menu.button2 = title.button.normal.animations.activeGreen
-                    end
-                else
-                    if title.mainColor[3] == 1 then
-                        title.button.red.menu.button2 = title.button.red.animations.active
-                    else
-                        title.button.red.menu.button2 = title.button.red.animations.active
-                    end
-                end
-            else
-                title.button.red.menu.button2 = title.button.red.animations.normal
-                title.button.normal.menu.button2 = title.button.normal.animations.normal
-            end
-            if x > love.graphics.getWidth() / 2 + (48 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (128 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 - (55 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 - (35 * playerCamera.globalScale) then
-                if title.mainColor[3] == 1 then
-                    title.button.normal.menu.button3 = title.button.normal.animations.activeBlue
-                else
-                    title.button.normal.menu.button3 = title.button.normal.animations.activeGreen
-                end
-            else
-                title.button.normal.menu.button3 = title.button.normal.animations.normal
-            end
-        end
     end
 end
 function love.mousepressed(x, y, buttonClicked, istouch)
