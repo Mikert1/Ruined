@@ -315,20 +315,33 @@ function button:action()
         end
         file.settings.save()
     elseif self.id == 22 then -- resolution button
+        local x, y = love.window.getDesktopDimensions(savedSettings.windowIndex)
         if savedSettings.resolution == 0 then
-            love.window.setMode(800, 600, {borderless = false, resizable = true, display = savedSettings.windowIndex})
             savedSettings.resolution = 1
+            if (x > 800) and (y > 600) then
+                love.window.setMode(800, 600, {borderless = false, resizable = true, display = savedSettings.windowIndex})
+            else
+                love.window.setMode(x, y, {borderless = false, resizable = true, display = savedSettings.windowIndex})
+                savedSettings.resolution = 0
+            end
         elseif savedSettings.resolution == 1 then
-            love.window.setMode(1024, 768, {borderless = false, resizable = true, display = savedSettings.windowIndex})
             savedSettings.resolution = 2
+            if (x > 1024) and (y > 768) then
+                love.window.setMode(1024, 768, {borderless = false, resizable = true, display = savedSettings.windowIndex})
+            else
+                love.window.setMode(x, y, {borderless = false, resizable = true, display = savedSettings.windowIndex})
+                savedSettings.resolution = 0
+            end
         elseif savedSettings.resolution == 2 then
-            love.window.setMode(1280, 720, {borderless = false, resizable = true, display = savedSettings.windowIndex})
             savedSettings.resolution = 3
+            if (x > 1280) and (y > 720) then
+                love.window.setMode(1280, 720, {borderless = false, resizable = true, display = savedSettings.windowIndex})
+            else
+                love.window.setMode(x, y, {borderless = false, resizable = true, display = savedSettings.windowIndex})
+                savedSettings.resolution = 0
+            end
         elseif savedSettings.resolution == 3 then
-            local x, y = love.window.getDesktopDimensions(savedSettings.windowIndex)
             love.window.setMode(x, y, {borderless = false, resizable = true, display = savedSettings.windowIndex})
-            savedSettings.resolution = 0
-        else
             savedSettings.resolution = 0
         end
         button.loadAll()
