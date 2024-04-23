@@ -475,33 +475,26 @@ function button:update(dt)
     end
     if self.hover then
         for i = 1, 3 do
+            local colorDifference = math.abs(self.currentColor[i] - self.color[i])
+            local transitionSpeed = dt * 6 * colorDifference
             if self.currentColor[i] < self.color[i] then
-                self.currentColor[i] = self.currentColor[i] + (dt * 4)
-                if self.currentColor[i] > self.color[i] then
-                    self.currentColor[i] = self.color[i]
-                end
+                self.currentColor[i] = math.min(self.currentColor[i] + transitionSpeed, self.color[i])
             elseif self.currentColor[i] > self.color[i] then
-                self.currentColor[i] = self.currentColor[i] - (dt * 4)
-                if self.currentColor[i] < self.color[i] then
-                    self.currentColor[i] = self.color[i]
-                end
+                self.currentColor[i] = math.max(self.currentColor[i] - transitionSpeed, self.color[i])
             end
         end
     else
         for i = 1, 3 do
+            local colorDifference = math.abs(self.currentColor[i] - 0.15)
+            local transitionSpeed = dt * 3 * colorDifference
             if self.currentColor[i] < 0.15 then
-                self.currentColor[i] = self.currentColor[i] + (dt * 2)
-                if self.currentColor[i] > 0.15 then
-                    self.currentColor[i] = 0.15
-                end
+                self.currentColor[i] = math.min(self.currentColor[i] + transitionSpeed, 0.15)
             elseif self.currentColor[i] > 0.15 then
-                self.currentColor[i] = self.currentColor[i] - (dt * 2)
-                if self.currentColor[i] < 0.15 then
-                    self.currentColor[i] = 0.15
-                end
+                self.currentColor[i] = math.max(self.currentColor[i] - transitionSpeed, 0.15)
             end
         end
     end
+    
 end
 
 function button:handleJoystickInput()
