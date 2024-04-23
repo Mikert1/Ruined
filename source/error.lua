@@ -11,20 +11,39 @@ errorm.button = {
 	image = buttonImage,
 	outline = buttonImageOutline,
 	text = "Hold to copy",
-	color = {1, 1, 1}
+	color = {0, 1, 1},
+	currentColor = {0.15, 0.15, 0.15}
 }
 errorm.image = love.graphics.newImage("assets/textures/gui/title/brokenRune.png")
 errorm.copied = false
 
-function update(dt)
+function update()
+	dt = love.timer.getDelta()
     local x, y = love.mouse.getPosition()
     if x > love.graphics.getWidth() / 3 - (30 * scaleX) and x < love.graphics.getWidth() / 3 + (30 * scaleX) and y > love.graphics.getHeight() / 2 + (49 * scaleY) and y < love.graphics.getHeight() / 2 + (69 * scaleY) then
+		for i = 1, 3 do
+			local colorDifference = math.abs(errorm.button.currentColor[i] - errorm.button.color[i])
+			local transitionSpeed = dt * 20 * colorDifference
+			if errorm.button.currentColor[i] < errorm.button.color[i] then
+				errorm.button.currentColor[i] = math.min(errorm.button.currentColor[i] + transitionSpeed, errorm.button.color[i])
+			elseif errorm.button.currentColor[i] > errorm.button.color[i] then
+				errorm.button.currentColor[i] = math.max(errorm.button.currentColor[i] - transitionSpeed, errorm.button.color[i])
+			end
+		end
         if love.mouse.isDown(1) == true then
             errorm.copied = true
             errorm.button.text = "Copied"
         end
     else
-
+		for i = 1, 3 do
+			local colorDifference = math.abs(errorm.button.currentColor[i] - 0.15)
+			local transitionSpeed = dt * 10 * colorDifference
+			if errorm.button.currentColor[i] < 0.15 then
+				errorm.button.currentColor[i] = math.min(errorm.button.currentColor[i] + transitionSpeed, 0.15)
+			elseif errorm.button.currentColor[i] > 0.15 then
+				errorm.button.currentColor[i] = math.max(errorm.button.currentColor[i] - transitionSpeed, 0.15)
+			end
+		end
     end
 end
 
@@ -106,7 +125,7 @@ function love.errorhandler(msg)
 	p = p:gsub("%[string \"(.-)\"%]", "%1")
 
 	local function draw()
-        update()
+        update(dt)
 		local pos = 70
         scaleX = 6 / 1200 * love.graphics.getWidth()
         scaleY = 6 / 1200 * love.graphics.getHeight()
@@ -117,9 +136,10 @@ function love.errorhandler(msg)
 		love.graphics.printf(p, love.graphics.getWidth() / 2 - font:getWidth(p) / 2, pos + 40, love.graphics.getWidth() - pos)
         love.graphics.setColor(1, 1, 1)
         love.graphics.print(errorm.help, love.graphics.getWidth() / 2 - font:getWidth(p) / 2, pos + 200)
-        love.graphics.draw(errorm.button.image, love.graphics.getWidth() / 3 - errorm.button.image:getWidth() / 2 * 3, 450, nil, 3)
-		love.graphics.draw(errorm.button.outline, love.graphics.getWidth() / 3 - errorm.button.image:getWidth() / 2 * 3, 450, nil, 3)
 		love.graphics.draw(errorm.image, love.graphics.getWidth() - (errorm.image:getWidth() * scaleX), love.graphics.getHeight() - (errorm.image:getHeight() * scaleY), nil, scaleY, scaleY)
+		love.graphics.draw(errorm.button.image, love.graphics.getWidth() / 3 - errorm.button.image:getWidth() / 2 * 3, 450, nil, 3)
+        love.graphics.setColor(errorm.button.currentColor)
+		love.graphics.draw(errorm.button.outline, love.graphics.getWidth() / 3 - errorm.button.image:getWidth() / 2 * 3, 450, nil, 3)
 		-- colors for text
         love.graphics.print(errorm.button.text, love.graphics.getWidth() / 3 - font:getWidth(errorm.button.text) / 2, pos + 400)
         love.graphics.setColor(1, 1, 1)
