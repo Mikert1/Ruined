@@ -5,7 +5,7 @@ local worldManagement = require("source/worlds")
 local story = require("source/story/story")
 local weapon = require("source/weapons")
 local settings = require("source/screens/settings")
-local buttonVar = require("source/screens/button")
+local button = require("source/screens/button")
 local preview = file.show()
 function love.mousemoved(x, y)
     if title.state == 0 then
@@ -94,10 +94,10 @@ function love.mousemoved(x, y)
         end
     end
 end
-function love.mousepressed(x, y, button, istouch)
+function love.mousepressed(x, y, buttonClicked, istouch)
     if title.mikert.showed == false then
         title.mikert.showed = true
-        buttonVar.loadAll()
+        button.loadAll()
     else
         if title.state == 0 then
             if title.logo.y < 90 then
@@ -105,10 +105,10 @@ function love.mousepressed(x, y, button, istouch)
                 title.logo.y = 90
             end
         elseif title.state >= 1 and title.state <= 3 then
-            if button == 1 and x > love.graphics.getWidth() / 2 + (108 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (128 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (70 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (90 * playerCamera.globalScale) then
+            if buttonClicked == 1 and x > love.graphics.getWidth() / 2 + (108 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (128 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (70 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (90 * playerCamera.globalScale) then
                 if title.delete.mode == false then
                     title.delete.mode = true
-                    buttonVar.loadAll()
+                    button.loadAll()
                     if title.state == 1 then
                         title.delete.anim = title.delete.animations.hoverPlay
                     else
@@ -116,17 +116,17 @@ function love.mousepressed(x, y, button, istouch)
                     end
                 else
                     title.delete.mode = false
-                    buttonVar.loadAll()
+                    button.loadAll()
                     title.delete.anim = title.delete.animations.hoverDelete
                 end
                 title.rezet()
             end
-            if button == 1 and x > love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 - (108 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (70 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (90 * playerCamera.globalScale) then
+            if buttonClicked == 1 and x > love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 - (108 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (70 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (90 * playerCamera.globalScale) then
                 -- settings
                 title.settings.anim = title.settings.animations.normal
                 love.window.setTitle("Ruined | Settings")
                 title.state = 4
-                buttonVar.loadAll()
+                button.loadAll()
             end
         elseif title.state == 4 then
 -- normaly this would be settings but moved it to button.lua
@@ -139,7 +139,7 @@ function love.mousepressed(x, y, button, istouch)
                         story.dialogue.update()
                     end
                 end
-                if button == 1 and game.freeze == false then
+                if buttonClicked == 1 and game.freeze == false then
                     if weapon.equipment == 1 then
                         weapon.sword.use()
                     elseif weapon.equipment == 2 then
@@ -151,8 +151,8 @@ function love.mousepressed(x, y, button, istouch)
     end
 end
 
-function love.mousereleased(x, y, button, istouch, presses)
-    if button == 1 and weapon.equipment == 2 and weapon.bow.hold == true then
+function love.mousereleased(x, y, buttonClicked, istouch, presses)
+    if buttonClicked == 1 and weapon.equipment == 2 and weapon.bow.hold == true then
         weapon.bow.use()
     end
 end

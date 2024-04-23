@@ -494,7 +494,6 @@ function button:update(dt)
             end
         end
     end
-    
 end
 
 function button:handleJoystickInput()
