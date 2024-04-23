@@ -32,35 +32,54 @@ function update()
 	dt = love.timer.getDelta()
     local x, y = love.mouse.getPosition()
     if x > love.graphics.getWidth() / 3 - (30 * scaleX) and x < love.graphics.getWidth() / 3 + (30 * scaleX) and y > love.graphics.getHeight() / 2 + (49 * scaleY) and y < love.graphics.getHeight() / 2 + (69 * scaleY) then
-		for j = 1, #errorm.button do
 			for i = 1, 3 do
-				local colorDifference = math.abs(errorm.button[j].currentColor[i] - errorm.button[j].color[i])
+				local colorDifference = math.abs(errorm.button[1].currentColor[i] - errorm.button[1].color[i])
 				local transitionSpeed = dt * 20 * colorDifference
-				if errorm.button[j].currentColor[i] < errorm.button[j].color[i] then
-					errorm.button[j].currentColor[i] = math.min(errorm.button[j].currentColor[i] + transitionSpeed, errorm.button[j].color[i])
-				elseif errorm.button[j].currentColor[i] > errorm.button[j].color[i] then
-					errorm.button[j].currentColor[i] = math.max(errorm.button[j].currentColor[i] - transitionSpeed, errorm.button[j].color[i])
+				if errorm.button[1].currentColor[i] < errorm.button[1].color[i] then
+					errorm.button[1].currentColor[i] = math.min(errorm.button[1].currentColor[i] + transitionSpeed, errorm.button[1].color[i])
+				elseif errorm.button[1].currentColor[i] > errorm.button[1].color[i] then
+					errorm.button[1].currentColor[i] = math.max(errorm.button[1].currentColor[i] - transitionSpeed, errorm.button[1].color[i])
 				end
 			end
-		end
         if love.mouse.isDown(1) == true then
             errorm.copied = true
-            errorm.button[j].text = "Copied"
+            errorm.button[1].text = "Copied"
         end
     else
-		for j = 1, #errorm.button do
 			for i = 1, 3 do
-				local colorDifference = math.abs(errorm.button[j].currentColor[i] - 0.15)
+				local colorDifference = math.abs(errorm.button[1].currentColor[i] - 0.15)
 				local transitionSpeed = dt * 10 * colorDifference
-				if errorm.button[j].currentColor[i] < 0.15 then
-					errorm.button[j].currentColor[i] = math.min(errorm.button[j].currentColor[i] + transitionSpeed, 0.15)
-				elseif errorm.button[j].currentColor[i] > 0.15 then
-					errorm.button[j].currentColor[i] = math.max(errorm.button[j].currentColor[i] - transitionSpeed, 0.15)
+				if errorm.button[1].currentColor[i] < 0.15 then
+					errorm.button[1].currentColor[i] = math.min(errorm.button[1].currentColor[i] + transitionSpeed, 0.15)
+				elseif errorm.button[1].currentColor[i] > 0.15 then
+					errorm.button[1].currentColor[i] = math.max(errorm.button[1].currentColor[i] - transitionSpeed, 0.15)
 				end
 			end
-		end
     end
-	
+	if x > love.graphics.getWidth() / 3 - (30 * scaleX) and x < love.graphics.getWidth() / 3 + (30 * scaleX) and y > love.graphics.getHeight() / 2 + (73 * scaleY) and y < love.graphics.getHeight() / 2 + (93 * scaleY) then
+			for i = 1, 3 do
+				local colorDifference = math.abs(errorm.button[2].currentColor[i] - errorm.button[2].color[i])
+				local transitionSpeed = dt * 20 * colorDifference
+				if errorm.button[2].currentColor[i] < errorm.button[2].color[i] then
+					errorm.button[2].currentColor[i] = math.min(errorm.button[2].currentColor[i] + transitionSpeed, errorm.button[2].color[i])
+				elseif errorm.button[2].currentColor[i] > errorm.button[2].color[i] then
+					errorm.button[2].currentColor[i] = math.max(errorm.button[2].currentColor[i] - transitionSpeed, errorm.button[2].color[i])
+				end
+			end
+        if love.mouse.isDown(1) == true then
+            love.event.quit()
+        end
+    else
+			for i = 1, 3 do
+				local colorDifference = math.abs(errorm.button[2].currentColor[i] - 0.15)
+				local transitionSpeed = dt * 10 * colorDifference
+				if errorm.button[2].currentColor[i] < 0.15 then
+					errorm.button[2].currentColor[i] = math.min(errorm.button[2].currentColor[i] + transitionSpeed, 0.15)
+				elseif errorm.button[2].currentColor[i] > 0.15 then
+					errorm.button[2].currentColor[i] = math.max(errorm.button[2].currentColor[i] - transitionSpeed, 0.15)
+				end
+			end
+    end
 end
 
 local function error_printer(msg, layer)
@@ -161,7 +180,7 @@ function love.errorhandler(msg)
 		love.graphics.draw(errorm.button[2].image, love.graphics.getWidth() / 3 - errorm.button[1].image:getWidth() / 2 * 3, 520, nil, 3)
         love.graphics.setColor(errorm.button[2].currentColor)
 		love.graphics.draw(errorm.button[2].outline, love.graphics.getWidth() / 3 - errorm.button[1].image:getWidth() / 2 * 3, 520, nil, 3)
-        love.graphics.print(errorm.button[2].text, love.graphics.getWidth() / 3 - font:getWidth(errorm.button[1].text) / 2, pos + 520)
+        love.graphics.print(errorm.button[2].text, love.graphics.getWidth() / 3 - font:getWidth(errorm.button[1].text) / 2, pos + 480)
         love.graphics.setColor(1, 1, 1)
 		love.graphics.present()
 	end
