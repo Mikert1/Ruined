@@ -70,9 +70,8 @@ function button.loadAll()
             elseif savedSettings.window == 2 then
                 button.new(-127, -53, "Borderless", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 20, "Window Type:") -- Borderless
             end
-            button.new(-127, -18, savedSettings.windowIndex, {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 21, "Window Index:") -- resolution
-            -- button.new(-128, -18, love.graphics.getWidth() .. "x" .. love.graphics.getHeight(), {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 21, "Resolution") -- resolution
-            -- 
+            button.new(-40, -53, savedSettings.windowIndex, {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 21, "Window Index:") -- resolution
+            button.new(47, -53, love.graphics.getWidth() .. "x" .. love.graphics.getHeight(), {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 22, "Window Resolution:") -- resolution
             button.new(-40, 70, "Back", {1, 0.5, 0}, 3) -- back from settings to main menu or game
         elseif settings.tab == "controls" then
             button.new(-127, -53, "Key: " .. string.upper(controls.keys.interact) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 25, "Interact", true) -- 
@@ -315,14 +314,24 @@ function button:action()
             self.text = savedSettings.windowIndex
         end
         file.settings.save()
-    elseif self.id == 22 then -- vsync button
-        if savedSettings.vsync == false then
-            savedSettings.vsync = true
-            self.text = "Enabled"
+    elseif self.id == 22 then -- resolution button
+        if savedSettings.resolution == 0 then
+            love.window.setMode(800, 600, {borderless = false, resizable = true, display = savedSettings.windowIndex})
+            savedSettings.resolution = 1
+        elseif savedSettings.resolution == 1 then
+            love.window.setMode(1024, 768, {borderless = false, resizable = true, display = savedSettings.windowIndex})
+            savedSettings.resolution = 2
+        elseif savedSettings.resolution == 2 then
+            love.window.setMode(1280, 720, {borderless = false, resizable = true, display = savedSettings.windowIndex})
+            savedSettings.resolution = 3
+        elseif savedSettings.resolution == 3 then
+            local x, y = love.window.getDesktopDimensions(savedSettings.windowIndex)
+            love.window.setMode(x, y, {borderless = false, resizable = true, display = savedSettings.windowIndex})
+            savedSettings.resolution = 0
         else
-            savedSettings.vsync = false
-            self.text = "Disabled"
+            savedSettings.resolution = 0
         end
+        button.loadAll()
         file.settings.save()
     elseif self.id == 23 then -- fps button
 

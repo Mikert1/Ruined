@@ -11,6 +11,7 @@ savedSettings.devmode = false
 savedSettings.console = false
 savedSettings.window = 0
 savedSettings.windowIndex = 1
+savedSettings.resolution = 0
 file.filenumber = 0
 preview.file1 = {}
 preview.file2 = {}
