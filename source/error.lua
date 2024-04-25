@@ -98,7 +98,7 @@ function love.errorhandler(msg)
 	end
 
 	if not love.graphics.isCreated() or not love.window.isOpen() then
-		local success, status = pcall(love.window.setMode, 800, 600)
+		local success, status = pcall(love.window.setMode, 800, 600, {resizable = false})
 		if not success or not status then
 			return
 		end
