@@ -71,7 +71,9 @@ function button.loadAll()
                 button.new(-127, -53, "Borderless", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 20, "Window Type:") -- Borderless
             end
             button.new(-40, -53, savedSettings.windowIndex, {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 21, "Window Index:") -- resolution
-            button.new(47, -53, love.graphics.getWidth() .. "x" .. love.graphics.getHeight(), {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 22, "Window Resolution:") -- resolution
+            if not (savedSettings.window == 1) then
+                button.new(47, -53, love.graphics.getWidth() .. "x" .. love.graphics.getHeight(), {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 22, "Window Resolution:") -- resolution
+            end
             button.new(-40, 70, "Back", {1, 0.5, 0}, 3) -- back from settings to main menu or game
         elseif settings.tab == "controls" then
             button.new(-127, -53, "Key: " .. string.upper(controls.keys.interact) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 25, "Interact", true) -- 
@@ -290,18 +292,16 @@ function button:action()
         if savedSettings.window == 0 then
             love.window.setFullscreen(true)
             savedSettings.window = 1
-            self.text = "Fullscreen"
         elseif savedSettings.window == 1 then
             love.window.setFullscreen(false)
             love.window.setMode(800, 600, {borderless = true, resizable = true, display = savedSettings.windowIndex})
             savedSettings.window = 2
-            self.text = "Borderless"
         elseif savedSettings.window == 2 then
             love.window.setFullscreen(false)
             love.window.setMode(800, 600, {borderless = false, resizable = true, display = savedSettings.windowIndex}) 
             savedSettings.window = 0
-            self.text = "Windowed"
         end
+        button.loadAll()
         file.settings.save()
     elseif self.id == 21 then -- window index button
         if savedSettings.windowIndex < love.window.getDisplayCount() then
