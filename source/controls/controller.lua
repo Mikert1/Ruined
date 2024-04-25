@@ -142,6 +142,7 @@ function controller.update(dt)
                         title.state = 5
                         game.esc = false
                         data = file.save()
+                        button.loadAll()
                     end
                 end
                 controller.buttonReleace.backCount = controller.buttonReleace.backCount + dt
