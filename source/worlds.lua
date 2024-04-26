@@ -8,7 +8,6 @@ local gui
 local stone
 local boss
 local file
-
 function worldManagement.loadAssets()
     bump = require 'assets/library/bump'
     sti = require 'assets/library/sti'
@@ -35,16 +34,18 @@ function worldManagement.load()
     _G.snow = sti("assets/maps/snow.lua", { "bump" })
     _G.currentWorld = village
     currentWorld:bump_init(world)
-    saveStone.x = 0
-    saveStone.y = 0
-    saveStone.width = 50
-    saveStone.height = 50
-    saveStone.radius = 35
-    saveStone.active = false
-    saveStone.healing = 0 -- timer
-    saveStone.timer = 0
-    saveStone.imageActive = love.graphics.newImage("assets/textures/world/structures/saveStone.png")
-    saveStone.imageInactive = love.graphics.newImage("assets/textures/world/structures/inactiveStone.png")
+    saveStone = {
+        x = 0,
+        y = 0,
+        width = 50,
+        height = 50,
+        radius = 35,
+        active = false,
+        healing = 0,
+        timer = 0, -- timer
+        imageActive = love.graphics.newImage("assets/textures/world/structures/saveStone.png"),
+        imageInactive = love.graphics.newImage("assets/textures/world/structures/inactiveStone.png"),
+    }
     saveStone.image = saveStone.imageInactive
 
     structures.s1 = {
@@ -59,7 +60,6 @@ function worldManagement.load()
     shader.light:send("lightPositions", unpack(lightPositions))
     shader.light:send("lightRadii", unpack(lightRadii))
 end
-
 
 local function checkCircleCollision(rect, circle)
     local rectCenterX = rect.x + rect.width / 2
@@ -581,13 +581,8 @@ function worldManagement.update(dt)
             player.speed = 10 * player.speedMultiplier / 2
             player.sideSpeed = 7.71067812 * player.speedMultiplier / 2
         else
-            -- if weapon.bow.hold then
-            --     player.speed = 10 * player.speedMultiplier / 3
-            --     player.sideSpeed = 7.71067812 * player.speedMultiplier / 3
-            -- else
-                player.speed = 10 * player.speedMultiplier
-                player.sideSpeed = 7.71067812 * player.speedMultiplier
-            -- end
+            player.speed = 10 * player.speedMultiplier
+            player.sideSpeed = 7.71067812 * player.speedMultiplier
         end
     end
     checkPortals()
@@ -657,6 +652,5 @@ function worldManagement:drawDarkness()
         love.graphics.setShader()
     end
 end
-
 
 return worldManagement
