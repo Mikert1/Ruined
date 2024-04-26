@@ -1,51 +1,57 @@
 local worldManagement = {}
-worldManagement.thisWorld = "Title"
 local sti = require "assets/library/sti"
 local bump = require 'assets/library/bump'
-local camera = require 'assets/library/cam'
-local story = require("source/story/story")
-local shader = require("source/shaders")
-local gui = require("source/gui")
+local camera
+local story
+local shader
+local gui
 local stone
 local boss
 local file
-_G.world = bump.newWorld(16)
-_G.village = sti("assets/maps/village.lua", { "bump" })
-_G.mountains = sti("assets/maps/mountains.lua", { "bump" })
-_G.forrest = sti("assets/maps/forrest.lua", { "bump" })
-_G.snow = sti("assets/maps/snow.lua", { "bump" })
-_G.currentWorld = village
-currentWorld:bump_init(world)
+
 local saveStone = {}
-saveStone.x = 0
-saveStone.y = 0
-saveStone.width = 50
-saveStone.height = 50
-saveStone.radius = 35
-saveStone.active = false
-saveStone.healing = 0 -- timer
-saveStone.timer = 0
-saveStone.imageActive = love.graphics.newImage("assets/textures/world/structures/saveStone.png")
-saveStone.imageInactive = love.graphics.newImage("assets/textures/world/structures/inactiveStone.png")
-saveStone.image = saveStone.imageInactive
-
 local structures = {}
-structures.s1 = {
-    image = love.graphics.newImage("assets/textures/world/structures/tent.png"),
-    imageBackground = love.graphics.newImage("assets/textures/world/structures/tentBackground.png")
-}
-local playerCircleRadius = 10
-local lightPositions = {{0, 0}, {0, 0}}
-local lightRadii = {0, 0}
-local MAX_LIGHTS = 3
-shader.light:send("numLights", #lightPositions)
-shader.light:send("lightPositions", unpack(lightPositions))
-shader.light:send("lightRadii", unpack(lightRadii))
-
 function worldManagement.load()
+    worldManagement.thisWorld = "Title"
+    _G.world = bump.newWorld(16)
+    _G.village = sti("assets/maps/village.lua", { "bump" })
+    _G.mountains = sti("assets/maps/mountains.lua", { "bump" })
+    _G.forrest = sti("assets/maps/forrest.lua", { "bump" })
+    _G.snow = sti("assets/maps/snow.lua", { "bump" })
+    _G.currentWorld = village
+    currentWorld:bump_init(world)
+    saveStone.x = 0
+    saveStone.y = 0
+    saveStone.width = 50
+    saveStone.height = 50
+    saveStone.radius = 35
+    saveStone.active = false
+    saveStone.healing = 0 -- timer
+    saveStone.timer = 0
+    saveStone.imageActive = love.graphics.newImage("assets/textures/world/structures/saveStone.png")
+    saveStone.imageInactive = love.graphics.newImage("assets/textures/world/structures/inactiveStone.png")
+    saveStone.image = saveStone.imageInactive
+
+    structures.s1 = {
+        image = love.graphics.newImage("assets/textures/world/structures/tent.png"),
+        imageBackground = love.graphics.newImage("assets/textures/world/structures/tentBackground.png")
+    }
+    local playerCircleRadius = 10
+    local lightPositions = {{0, 0}, {0, 0}}
+    local lightRadii = {0, 0}
+    local MAX_LIGHTS = 3
+    shader.light:send("numLights", #lightPositions)
+    shader.light:send("lightPositions", unpack(lightPositions))
+    shader.light:send("lightRadii", unpack(lightRadii))
+end
+
+function worldManagement.loadAssets()
+    shader = require("source/shaders")
+    gui = require("source/gui")
     stone = require("source/enemies/stone")
     boss = require("source/enemies/boss")
     file = require("source/data")
+    camera = require 'assets/library/cam'
 end
 
 local function checkCircleCollision(rect, circle)

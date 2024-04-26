@@ -32,12 +32,16 @@ _G.server = require("source/network/server")
 print("Done loading")
 
 story.loadAssets()
-player.load()
+player.loadAssets()
+worldManagement.loadAssets()
+
 file.settings.loadTexturePack()
+_G.savedSettings = file.settings.load()
+
 worldManagement.load()
+player.load()
 gui.load()
 title.load()
-_G.savedSettings = file.settings.load()
 controls.load()
 enemymanager:load()
 button.load()

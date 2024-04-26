@@ -1,14 +1,23 @@
-local anim8 = require 'assets/library/animations'
-local bump = require 'assets/library/bump'
-local file = require("source/data")
-local worldManagement = require("source/worlds")
-local weapon = require("source/weapons")
+local anim8
+local bump
+local file
+local worldManagement
+local weapon
 local player = {}
 local gui
 local sword = {}
 
-function player.load()
+function player.loadAssets()
+    anim8 = require 'assets/library/animations'
+    bump = require 'assets/library/bump'
+    
+    file = require("source/data")
+    worldManagement = require("source/worlds")
+    weapon = require("source/weapons")
     gui = require ("source/gui")
+end
+
+function player.load()
     player.x = 71.9
     player.y = 165.5
     player.width = 12
