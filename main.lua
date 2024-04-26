@@ -32,8 +32,8 @@ _G.server = require("source/network/server")
 print("Done loading")
 
 story.loadAssets()
-player.loadAssets()
 worldManagement.loadAssets()
+player.loadAssets()
 
 file.settings.loadTexturePack()
 _G.savedSettings = file.settings.load()

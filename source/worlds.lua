@@ -1,6 +1,6 @@
 local worldManagement = {}
-local sti = require "assets/library/sti"
-local bump = require 'assets/library/bump'
+local sti
+local bump
 local camera
 local story
 local shader
@@ -9,8 +9,23 @@ local stone
 local boss
 local file
 
+function worldManagement.loadAssets()
+    bump = require 'assets/library/bump'
+    sti = require 'assets/library/sti'
+    camera = require 'assets/library/cam'
+    shader = require("source/shaders")
+    gui = require("source/gui")
+    stone = require("source/enemies/stone")
+    boss = require("source/enemies/boss")
+    file = require("source/data")
+    story = require("source/story/story")
+end
+
 local saveStone = {}
 local structures = {}
+local playerCircleRadius
+local lightPositions
+local lightRadii
 function worldManagement.load()
     worldManagement.thisWorld = "Title"
     _G.world = bump.newWorld(16)
@@ -36,23 +51,15 @@ function worldManagement.load()
         image = love.graphics.newImage("assets/textures/world/structures/tent.png"),
         imageBackground = love.graphics.newImage("assets/textures/world/structures/tentBackground.png")
     }
-    local playerCircleRadius = 10
-    local lightPositions = {{0, 0}, {0, 0}}
-    local lightRadii = {0, 0}
+    playerCircleRadius = 10
+    lightPositions = {{0, 0}, {0, 0}}
+    lightRadii = {0, 0}
     local MAX_LIGHTS = 3
     shader.light:send("numLights", #lightPositions)
     shader.light:send("lightPositions", unpack(lightPositions))
     shader.light:send("lightRadii", unpack(lightRadii))
 end
 
-function worldManagement.loadAssets()
-    shader = require("source/shaders")
-    gui = require("source/gui")
-    stone = require("source/enemies/stone")
-    boss = require("source/enemies/boss")
-    file = require("source/data")
-    camera = require 'assets/library/cam'
-end
 
 local function checkCircleCollision(rect, circle)
     local rectCenterX = rect.x + rect.width / 2
