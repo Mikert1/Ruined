@@ -132,6 +132,9 @@ function button.loadAll()
         button.new(-40, 70, "Back", {1, 0.5, 0}, 50) -- back to ruined Title screen
         button.first()
     end
+    if not (button.warning.id == 0) then
+        button.new(-40, 70, "Yes", {1, 0.5, 0}, 200) -- back to ruined Title screen
+    end
 end
 
 function button.first()
@@ -194,6 +197,11 @@ function button.specialNew(x, y, imageOnButton, color, id, image, outline)
     self.clicked = false
     table.insert(button.activeButtons, self)
 end
+
+button.warning = {
+    id = 0,
+    text = "",
+}
 
 function button.actionWarning(id)
     if id == 51 then
@@ -384,11 +392,7 @@ function button:action()
         button.loadAll()
     elseif self.id == 51 then -- play button
         if title.delete.mode == true then
-            love.filesystem.remove("savegame1.json")
-            love.filesystem.remove("previewcard1.json")
-            file.show()
-            title.rezet()
-            button.loadAll()
+            button.warning.id = self.id
         else
             file.filenumber = 1
             game.state = 0
@@ -403,7 +407,7 @@ function button:action()
         end
     elseif self.id == 52 then -- play button
         if title.delete.mode == true then
-            button.actionWarning(self.id)
+            button.warning.id = self.id
         else
             file.filenumber = 2
             game.state = 0
@@ -418,7 +422,7 @@ function button:action()
         end
     elseif self.id == 53 then -- play button
         if title.delete.mode == true then
-            button.actionWarning(self.id)
+            button.warning.id = self.id
         else
             file.filenumber = 3
             game.state = 0
@@ -460,11 +464,17 @@ function button:action()
         title.mainColor = {0, 1, 1}
         title.background.current = title.background.storm
         button.loadAll()
+    elseif self.id == 200 then -- yes button
+        button.actionWarning(button.warning.id)
+        button.warning.id = 0
     end
     controls.searchForKey = nil
 end
 
 function button:update(dt)
+    if not (button.warning.id == self.id) and not (button.warning.id == 0) then
+        return
+    end
     if game.controlType == 0 then
         local x = love.mouse.getX()
         local y = love.mouse.getY()
