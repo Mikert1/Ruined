@@ -218,24 +218,19 @@ function button:action()
         settings.tab = "skin"
         button.loadAll()
     elseif self.id == 3 then -- back button on settings screen
-        if settings.tab == "skin" then
-            settings.tab = "game"
+        if game.esc == true then
+            title.state = 5
             button.loadAll()
         else
-            if game.esc == true then
-                title.state = 5
-                button.loadAll()
+            love.window.setTitle("Ruined | Title Screen")
+            if title.mainColor[3] == 0 then
+                title.state = 2
             else
-                love.window.setTitle("Ruined | Title Screen")
-                if title.mainColor[3] == 0 then
-                    title.state = 2
-                else
-                    title.state = 1
-                    --fix there will be the finaly (3)
-                end
-                button.loadAll()
-                button.loadAll()
+                title.state = 1
+                --fix there will be the finaly (3)
             end
+            button.loadAll()
+            button.loadAll()
         end
     elseif self.id == 4 then -- removes texture pack
         file.settings.removeTexturePack()
