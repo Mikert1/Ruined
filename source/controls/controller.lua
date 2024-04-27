@@ -111,6 +111,7 @@ function controller.update(dt)
                                 player.noMove = true
                                 game.freeze = true
                                 button.loadAll()
+                                gui.map = false
                             end
                         end
                     end

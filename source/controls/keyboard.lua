@@ -42,6 +42,7 @@ function love.keypressed(key)
                 player.noMove = true
                 game.freeze = true
                 button.loadAll()
+                gui.map = false
             end
         end
         if key == controls.keys.interact and story.npc.interaction == true then
@@ -56,7 +57,9 @@ function love.keypressed(key)
             if gui.map == true then
                 gui.map = false
             else
-                gui.map = true
+                if game.freeze == false then
+                    gui.map = true
+                end
             end
         end
         if key == controls.keys.focus and gui.focusReady == true then
