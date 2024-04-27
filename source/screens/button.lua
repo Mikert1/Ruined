@@ -195,6 +195,28 @@ function button.specialNew(x, y, imageOnButton, color, id, image, outline)
     table.insert(button.activeButtons, self)
 end
 
+function button.actionWarning(id)
+    if id == 51 then
+        love.filesystem.remove("savegame1.json")
+        love.filesystem.remove("previewcard1.json")
+        file.show()
+        title.rezet()
+        button.loadAll()
+    elseif id == 52 then
+        love.filesystem.remove("savegame2.json")
+        love.filesystem.remove("previewcard2.json")
+        file.show()
+        title.rezet()
+        button.loadAll()
+    elseif id == 53 then
+        love.filesystem.remove("savegame3.json")
+        love.filesystem.remove("previewcard3.json")
+        file.show()
+        title.rezet()
+        button.loadAll()
+    end
+end
+
 function button:action()
     if self.id == 1 then -- disables or enables devmode
         if savedSettings.devmode == false then
@@ -381,11 +403,7 @@ function button:action()
         end
     elseif self.id == 52 then -- play button
         if title.delete.mode == true then
-            love.filesystem.remove("savegame2.json")
-            love.filesystem.remove("previewcard2.json")
-            file.show()
-            title.rezet()
-            button.loadAll()
+            button.actionWarning(self.id)
         else
             file.filenumber = 2
             game.state = 0
@@ -400,11 +418,7 @@ function button:action()
         end
     elseif self.id == 53 then -- play button
         if title.delete.mode == true then
-            love.filesystem.remove("savegame3.json")
-            love.filesystem.remove("previewcard3.json")
-            file.show()
-            title.rezet()
-            button.loadAll()
+            button.actionWarning(self.id)
         else
             file.filenumber = 3
             game.state = 0
