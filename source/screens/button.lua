@@ -220,7 +220,6 @@ function button:action()
     elseif self.id == 3 then -- back button on settings screen
         if game.esc == true then
             title.state = 5
-            button.loadAll()
         else
             love.window.setTitle("Ruined | Title Screen")
             if title.mainColor[3] == 0 then
@@ -229,9 +228,8 @@ function button:action()
                 title.state = 1
                 --fix there will be the finaly (3)
             end
-            button.loadAll()
-            button.loadAll()
         end
+        button.loadAll()
     elseif self.id == 4 then -- removes texture pack
         file.settings.removeTexturePack()
     elseif self.id == 5 then -- back to title screen
