@@ -27,6 +27,7 @@ local lightPositions
 local lightRadii
 function worldManagement.load()
     worldManagement.thisWorld = "Title"
+    worldManagement.saved = false
     _G.world = bump.newWorld(16)
     _G.village = sti("assets/maps/village.lua", { "bump" })
     _G.mountains = sti("assets/maps/mountains.lua", { "bump" })
@@ -588,8 +589,9 @@ function worldManagement.update(dt)
     checkPortals()
     checkNpc(dt)
     if checkCircleCollision(player, saveStone) then
-        if saveStone.active == false then
+        if worldManagement.saved == false then
             saveStone.active = true
+            worldManagement.saved = true
             saveStone.image = saveStone.imageActive
             data = file.save()
         end
@@ -606,9 +608,8 @@ function worldManagement.update(dt)
                 saveStone.healing = saveStone.healing + dt
             end
         end
-        worldManagement.standingSave = true
     else
-        worldManagement.standingSave = false
+        worldManagement.saved = false
     end
     if saveStone.timer >= 1 then
         saveStone.timer = 0

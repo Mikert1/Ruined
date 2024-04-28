@@ -1,5 +1,6 @@
 local anim8 = require'assets/library/animations'
 local file
+local worldManagement
 local story = {}
 story.npc = {}
 story.npc.john = {}
@@ -66,6 +67,7 @@ story.skiped = false
 
 function story.loadAssets()
     file = require("source/data")
+    worldManagement = require("source/worlds")
 end
 
 function story.load()
@@ -96,7 +98,7 @@ function story.dialogue.update()
         story.lasttext = false
         game.state = 0
         story.load()
-        data = file.save()
+        worldManagement.saved = false
         -- story.data.storyTold.john1 = true
         return
     end
