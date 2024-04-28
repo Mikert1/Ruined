@@ -281,9 +281,13 @@ function button:action()
     elseif self.id == 4 then -- removes texture pack
         file.settings.removeTexturePack()
     elseif self.id == 5 then -- back to title screen
-        button.warning.id = self.id
-        button.warning.text = "You are not standing on a savestone? You will lose all unsaved progress."
-        button.loadAll()
+        if worldManagement.standingSave == false then
+            button.warning.id = self.id
+            button.warning.text = "You are not standing on a savestone? You will lose all unsaved progress."
+            button.loadAll()
+        else
+            button.actionWarning(self.id)
+        end
     elseif self.id == 6 then -- settings button
         title.settings.anim = title.settings.animations.normal
         title.state = 4

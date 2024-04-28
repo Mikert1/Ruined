@@ -606,6 +606,9 @@ function worldManagement.update(dt)
                 saveStone.healing = saveStone.healing + dt
             end
         end
+        worldManagement.standingSave = true
+    else
+        worldManagement.standingSave = false
     end
     if saveStone.timer >= 1 then
         saveStone.timer = 0
