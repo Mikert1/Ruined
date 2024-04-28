@@ -209,20 +209,20 @@ function button.actionWarning(id)
         love.filesystem.remove("previewcard1.json")
         file.show()
         title.rezet()
-        button.loadAll()
     elseif id == 52 then
         love.filesystem.remove("savegame2.json")
         love.filesystem.remove("previewcard2.json")
         file.show()
         title.rezet()
-        button.loadAll()
     elseif id == 53 then
         love.filesystem.remove("savegame3.json")
         love.filesystem.remove("previewcard3.json")
         file.show()
         title.rezet()
-        button.loadAll()
     end
+    button.warning.id = 0
+    button.warning.text = ""
+    button.loadAll()
 end
 
 function button:action()
@@ -395,6 +395,8 @@ function button:action()
     elseif self.id == 51 then -- play button
         if title.delete.mode == true then
             button.warning.id = self.id
+            button.warning.text = "Are you sure you want to delete this Savefile 1?"
+            button.loadAll()
         else
             file.filenumber = 1
             game.state = 0
@@ -410,6 +412,8 @@ function button:action()
     elseif self.id == 52 then -- play button
         if title.delete.mode == true then
             button.warning.id = self.id
+            button.warning.text = "Are you sure you want to delete this Savefile 2?"
+            button.loadAll()
         else
             file.filenumber = 2
             game.state = 0
@@ -425,6 +429,8 @@ function button:action()
     elseif self.id == 53 then -- play button
         if title.delete.mode == true then
             button.warning.id = self.id
+            button.warning.text = "Are you sure you want to delete this Savefile 3?"
+            button.loadAll()
         else
             file.filenumber = 3
             game.state = 0
@@ -474,9 +480,6 @@ function button:action()
 end
 
 function button:update(dt)
-    if not (button.warning.id == self.id) and not (button.warning.id == 0) then
-        return
-    end
     if game.controlType == 0 then
         local x = love.mouse.getX()
         local y = love.mouse.getY()
@@ -668,7 +671,9 @@ end
 
 function button:UpdateAll(dt)
     for _, button in ipairs(button.activeButtons) do
-        button:update(dt)
+        if button.warning.id == 0 or button.id == 200 then
+            button:update(dt)
+        end
     end
     if game.controlType == 1 then
         button:handleJoystickInput()
