@@ -258,6 +258,7 @@ function button:action()
                 title.state = 1
                 --fix there will be the finaly (3)
             end
+            title.delete.mode = false
         end
         button.loadAll()
     elseif self.id == 4 then -- removes texture pack
@@ -286,7 +287,7 @@ function button:action()
         game.freeze = false
         player.noMove = false
         button.loadAll()
-    elseif self.id == 101 then -- quit button
+    elseif self.id == 101 then -- game button
         settings.tab = "game"
         settings.scroll = 0
         button.loadAll()
@@ -389,6 +390,7 @@ function button:action()
         self.text = "Press key"
     elseif self.id == 50 then -- back to ruined
         title.state = 0
+        title.delete.mode = false
         button.loadAll()
     elseif self.id == 51 then -- play button
         if title.delete.mode == true then

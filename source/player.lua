@@ -34,7 +34,7 @@ function player.load()
     player.spriteSheetfocus = love.graphics.newImage("assets/textures/player/playerfocus.png")
     player.shadow = love.graphics.newImage("assets/textures/player/shadow.png")
     player.sheet = player.spriteSheet
-    player.grid = anim8.newGrid( 19, 21, player.spriteSheet:getWidth(), player.spriteSheet:getHeight() )
+    player.grid = anim8.newGrid(19, 21, player.spriteSheet:getWidth(), player.spriteSheet:getHeight())
     player.animations = {}
     player.animations.upRight = anim8.newAnimation( player.grid('1-3', 2), 0.2 )
     player.animations.upLeft = anim8.newAnimation( player.grid('1-3', 2), 0.2 )
