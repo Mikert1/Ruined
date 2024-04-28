@@ -133,7 +133,8 @@ function button.loadAll()
         button.first()
     end
     if not (button.warning.id == 0) then
-        button.new(-40, 70, "Yes", {1, 0.5, 0}, 200) -- back to ruined Title screen
+        button.new(-112, 38, "Don't", {0, 1, 1}, 199) -- back to ruined Title screen
+        button.new(32, 38, "Do it", {1, 0, 0}, 200) -- back to ruined Title screen
     end
 end
 
@@ -202,6 +203,7 @@ button.warning = {
     id = 0,
     text = "",
 }
+button.notification = love.graphics.newImage("assets/textures/gui/title/buttons/notification.png")
 
 function button.actionWarning(id)
     if id == 51 then
@@ -472,6 +474,10 @@ function button:action()
         title.mainColor = {0, 1, 1}
         title.background.current = title.background.storm
         button.loadAll()
+    elseif self.id == 199 then -- no button
+        button.warning.id = 0
+        button.warning.text = ""
+        button.loadAll()
     elseif self.id == 200 then -- yes button
         button.actionWarning(button.warning.id)
         button.warning.id = 0
@@ -671,7 +677,7 @@ end
 
 function button:UpdateAll(dt)
     for _, button in ipairs(button.activeButtons) do
-        if button.warning.id == 0 or button.id == 200 then
+        if button.warning.id == 0 or (button.id == 200 or button.id == 199) then
             button:update(dt)
         end
     end
@@ -682,7 +688,40 @@ end
 
 function button:drawAll()
     for _, button in ipairs(button.activeButtons) do
-        button:draw()
+        if not (button.id == 200 or button.id == 199) then
+            button:draw()
+        end
+    end
+    if not (button.warning.id == 0) then
+        love.graphics.setColor(0, 0, 0, 0.5)
+        love.graphics.rectangle(
+            "fill", 
+            0,
+            0,
+            love.graphics.getWidth(),
+            love.graphics.getHeight()
+        )
+        love.graphics.setColor(1, 1, 1)
+        love.graphics.draw(
+            button.notification,
+            love.graphics.getWidth() / 2 - (button.notification:getWidth() * playerCamera.globalScale) / 2,
+            love.graphics.getHeight() / 2 - (button.notification:getHeight() * playerCamera.globalScale) / 2,
+            nil,
+            playerCamera.globalScale
+        )
+        love.graphics.print(
+            button.warning.text, 
+            love.graphics.getWidth() / 2 - ((font:getWidth(button.warning.text) * (playerCamera.globalScale / 3)) / 2), 
+            love.graphics.getHeight() / 2 - ((font:getHeight(button.warning.text) * (playerCamera.globalScale / 3)) / 2 + (button.notification:getHeight() / 2 / 100 * 80) * playerCamera.globalScale),
+            nil,
+            playerCamera.globalScale / 3
+        )
+
+        for _, button in ipairs(button.activeButtons) do
+            if button.id == 200 or button.id == 199 then
+                button:draw()
+            end
+        end
     end
 end
 
