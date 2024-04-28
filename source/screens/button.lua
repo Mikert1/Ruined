@@ -133,8 +133,8 @@ function button.loadAll()
         button.first()
     end
     if not (button.warning.id == 0) then
-        button.new(-96, 30, "Don't", {0, 1, 1}, 199) -- Cancel the action
-        button.new(16, 30, "Do it", {1, 0, 0}, 200) -- Continue with the action
+        button.new(-96, 30, "Go Back", {0, 1, 1}, 199) -- Cancel the action
+        button.new(16, 30, "Continue", {1, 0, 0}, 200) -- Continue with the action
     end
 end
 
@@ -284,7 +284,7 @@ function button:action()
     elseif self.id == 5 then -- back to title screen
         if worldManagement.saved == false then
             button.warning.id = self.id
-            button.warning.text = "You are not standing on a savestone. You will lose all unsaved progress."
+            button.warning.text = "You are not standing on a savestone. \nAll unsaved progress will be lost."
             button.loadAll()
         else
             button.actionWarning(self.id)
@@ -406,7 +406,7 @@ function button:action()
     elseif self.id == 51 then -- play button
         if title.delete.mode == true then
             button.warning.id = self.id
-            button.warning.text = "Are you sure you want to delete this Savefile 1?"
+            button.warning.text = "Your about to delete Savefile 1?"
             button.loadAll()
         else
             file.filenumber = 1
@@ -423,7 +423,7 @@ function button:action()
     elseif self.id == 52 then -- play button
         if title.delete.mode == true then
             button.warning.id = self.id
-            button.warning.text = "Are you sure you want to delete this Savefile 2?"
+            button.warning.text = "Your about to delete Savefile 2?"
             button.loadAll()
         else
             file.filenumber = 2
@@ -440,7 +440,7 @@ function button:action()
     elseif self.id == 53 then -- play button
         if title.delete.mode == true then
             button.warning.id = self.id
-            button.warning.text = "Are you sure you want to delete this Savefile 3?"
+            button.warning.text = "Your about to delete Savefile 3?"
             button.loadAll()
         else
             file.filenumber = 3
@@ -727,11 +727,11 @@ function button:drawAll()
         )
         love.graphics.setColor(0.15, 0.15, 0.15)
         love.graphics.print(
-            button.warning.text, 
-            love.graphics.getWidth() / 2 - ((font:getWidth(button.warning.text) * (playerCamera.globalScale / 3)) / 2), 
-            love.graphics.getHeight() / 2 - ((font:getHeight(button.warning.text) * (playerCamera.globalScale / 3)) / 2 + (button.notification:getHeight() / 2 / 100 * 50) * playerCamera.globalScale),
+            button.warning.text,
+            love.graphics.getWidth() / 2 - ((font:getWidth(button.warning.text) * (playerCamera.globalScale / 1.5)) / 2),
+            love.graphics.getHeight() / 2 - ((font:getHeight(button.warning.text) * (playerCamera.globalScale / 1.5)) / 2 + (button.notification:getHeight() / 2 / 100 * 50) * playerCamera.globalScale),
             nil,
-            playerCamera.globalScale / 3
+            playerCamera.globalScale / 1.5
         )
         love.graphics.setColor(1, 1, 1)
         for _, button in ipairs(button.activeButtons) do
