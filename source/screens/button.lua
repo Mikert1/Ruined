@@ -204,6 +204,7 @@ button.warning = {
     text = "",
 }
 button.notification = love.graphics.newImage("assets/textures/gui/title/buttons/notification.png")
+button.dangerIcon = love.graphics.newImage("assets/textures/gui/title/buttons/danger.png")
 
 function button.actionWarning(id)
     if id == 5 then
@@ -717,11 +718,18 @@ function button:drawAll()
             nil,
             playerCamera.globalScale
         )
+        love.graphics.draw(
+            button.dangerIcon,
+            love.graphics.getWidth() / 2 - (button.dangerIcon:getWidth() * playerCamera.globalScale) / 2,
+            love.graphics.getHeight() / 2 - (button.dangerIcon:getHeight() * playerCamera.globalScale) / 2 - (button.notification:getHeight() / 2) * playerCamera.globalScale,
+            nil,
+            playerCamera.globalScale
+        )
         love.graphics.setColor(0.15, 0.15, 0.15)
         love.graphics.print(
             button.warning.text, 
             love.graphics.getWidth() / 2 - ((font:getWidth(button.warning.text) * (playerCamera.globalScale / 3)) / 2), 
-            love.graphics.getHeight() / 2 - ((font:getHeight(button.warning.text) * (playerCamera.globalScale / 3)) / 2 + (button.notification:getHeight() / 2 / 100 * 80) * playerCamera.globalScale),
+            love.graphics.getHeight() / 2 - ((font:getHeight(button.warning.text) * (playerCamera.globalScale / 3)) / 2 + (button.notification:getHeight() / 2 / 100 * 50) * playerCamera.globalScale),
             nil,
             playerCamera.globalScale / 3
         )
