@@ -206,7 +206,22 @@ button.warning = {
 button.notification = love.graphics.newImage("assets/textures/gui/title/buttons/notification.png")
 
 function button.actionWarning(id)
-    if id == 51 then
+    if id == 5 then
+        game.esc = false
+        love.window.setTitle("Ruined | Title Screen")
+        game.freeze = false
+        --data = file.save()
+        title.rezet()
+        enemymanager:load()
+        game.state = 1
+        if title.mainColor[3] == 0 then
+            title.state = 2
+        else
+            title.state = 1
+            --fix there will be the finaly (3)
+        end
+        button.loadAll()
+    elseif id == 51 then
         love.filesystem.remove("savegame1.json")
         love.filesystem.remove("previewcard1.json")
         file.show()
@@ -266,19 +281,8 @@ function button:action()
     elseif self.id == 4 then -- removes texture pack
         file.settings.removeTexturePack()
     elseif self.id == 5 then -- back to title screen
-        game.esc = false
-        love.window.setTitle("Ruined | Title Screen")
-        game.freeze = false
-        --data = file.save()
-        title.rezet()
-        enemymanager:load()
-        game.state = 1
-        if title.mainColor[3] == 0 then
-            title.state = 2
-        else
-            title.state = 1
-            --fix there will be the finaly (3)
-        end
+        button.warning.id = self.id
+        button.warning.text = "Are you sure you want to Quit to the savegames? You will lose all unsaved progress."
         button.loadAll()
     elseif self.id == 6 then -- settings button
         title.settings.anim = title.settings.animations.normal
