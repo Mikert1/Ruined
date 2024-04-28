@@ -133,8 +133,8 @@ function button.loadAll()
         button.first()
     end
     if not (button.warning.id == 0) then
-        button.new(-112, 38, "Don't", {0, 1, 1}, 199) -- back to ruined Title screen
-        button.new(32, 38, "Do it", {1, 0, 0}, 200) -- back to ruined Title screen
+        button.new(-96, 30, "Don't", {0, 1, 1}, 199) -- Cancel the action
+        button.new(16, 30, "Do it", {1, 0, 0}, 200) -- Continue with the action
     end
 end
 
@@ -282,7 +282,7 @@ function button:action()
         file.settings.removeTexturePack()
     elseif self.id == 5 then -- back to title screen
         button.warning.id = self.id
-        button.warning.text = "Are you sure you want to Quit to the savegames? You will lose all unsaved progress."
+        button.warning.text = "You are not standing on a savestone? You will lose all unsaved progress."
         button.loadAll()
     elseif self.id == 6 then -- settings button
         title.settings.anim = title.settings.animations.normal
@@ -713,6 +713,7 @@ function button:drawAll()
             nil,
             playerCamera.globalScale
         )
+        love.graphics.setColor(0.15, 0.15, 0.15)
         love.graphics.print(
             button.warning.text, 
             love.graphics.getWidth() / 2 - ((font:getWidth(button.warning.text) * (playerCamera.globalScale / 3)) / 2), 
@@ -720,7 +721,7 @@ function button:drawAll()
             nil,
             playerCamera.globalScale / 3
         )
-
+        love.graphics.setColor(1, 1, 1)
         for _, button in ipairs(button.activeButtons) do
             if button.id == 200 or button.id == 199 then
                 button:draw()
