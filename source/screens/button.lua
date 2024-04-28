@@ -29,7 +29,6 @@ button.activeButtons = {}
 
 function button.loadAll()
     button.activeButtons = {}
-    settings.scroll = 0
     if title.state == 0 then
         button.specialNew(-100, 50, title.icons.start, {0, 1, 1}, 61)
         button.specialNew(-12.5, 50, title.icons.past, {0, 0.8, 0}, 62)
@@ -76,15 +75,55 @@ function button.loadAll()
             end
             button.new(-40, 70, "Back", {1, 0.5, 0}, 3) -- back from settings to main menu or game
         elseif settings.tab == "controls" then
-            button.new(-127, -53, "Key: " .. string.upper(controls.keys.interact) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 25, "Interact", true) -- 
-            button.new(-127, -18, "Key: " .. string.upper(controls.keys.map) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 26, "Map", true) -- 
-            button.new(-127, 17, "Key: " .. string.upper(controls.keys.focus) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 27, "Focus", true) -- 
-            button.new(-127, 52, "Key: " .. string.upper(controls.keys.switchWeapon) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 28, "Switch Weapon", true) -- 
+            if controls.searchForKey == "interact" then
+                button.new(-127, -53, "Press key", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 25, "Interact", true) -- 
+            else
+                button.new(-127, -53, "Key: " .. string.upper(controls.keys.interact) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 25, "Interact", true) --
+            end
+            if controls.searchForKey == "map" then
+                button.new(-127, -18, "Press key", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 26, "Map", true) -- 
+            else
+                button.new(-127, -18, "Key: " .. string.upper(controls.keys.map) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 26, "Map", true) -- 
+            end
+            if controls.searchForKey == "focus" then
+                button.new(-127, 17, "Press key", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 27, "Focus", true) -- 
+            else
+                button.new(-127, 17, "Key: " .. string.upper(controls.keys.focus) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 27, "Focus", true) -- 
+            end
+            if controls.searchForKey == "switchWeapon" then
+                button.new(-127, 52, "Press key", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 28, "Switch Weapon", true) -- 
+            else
+                button.new(-127, 52, "Key: " .. string.upper(controls.keys.switchWeapon) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 28, "Switch Weapon", true) -- 
+            end 
             -- keybind wasd keys
-            button.new(-127, 87, "Key: " .. string.upper(controls.keys.up) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 28, "Move Up", true) -- 
-            button.new(-127, 122, "Key: " .. string.upper(controls.keys.left) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 28, "Move Left", true) --
-            button.new(-127, 157, "Key: " .. string.upper(controls.keys.down) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 28, "Move Down", true) --
-            button.new(-127, 192, "Key: " .. string.upper(controls.keys.right) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 28, "Move Right", true) --
+            if controls.searchForKey == "up" then
+                button.new(-127, 87, "Press key", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 29, "Move Up", true) -- 
+            else
+                button.new(-127, 87, "Key: " .. string.upper(controls.keys.up) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 29, "Move Up", true) -- 
+            end
+            if controls.searchForKey == "left" then
+                button.new(-127, 122, "Press key", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 30, "Move Left", true) -- 
+            else
+                button.new(-127, 122, "Key: " .. string.upper(controls.keys.left) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 30, "Move Left", true) -- 
+            end
+            if controls.searchForKey == "down" then
+                button.new(-127, 157, "Press key", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 31, "Move Down", true) -- 
+            else
+                button.new(-127, 157, "Key: " .. string.upper(controls.keys.down) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 31, "Move Down", true) -- 
+            end
+            if controls.searchForKey == "right" then
+                button.new(-127, 192, "Press key", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 32, "Move Right", true) -- 
+            else
+                button.new(-127, 192, "Key: " .. string.upper(controls.keys.right) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 32, "Move Right", true) -- 
+            end
+            if savedSettings.devmode == true then
+                if controls.searchForKey == "devMode" then
+                    button.new(-127, 227, "Press key", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 33, "Dev info", true) -- 
+                else
+                    button.new(-127, 227, "Key: " .. string.upper(controls.keys.devMode) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 33, "Dev info", true) -- 
+                end
+            end
+
             button.new(-124, 70, "Reset All", {1, 0, 0}, 24) -- remove saved skin
             button.new(-40, 70, "Back", {1, 0.5, 0}, 3) -- back from settings to main menu or game
         elseif settings.tab == "skin" then
@@ -300,27 +339,33 @@ function button:action()
         button.loadAll()
     elseif self.id == 101 then -- game button
         settings.tab = "game"
+        controls.searchForKey = nil
         settings.scroll = 0
         button.loadAll()
     elseif self.id == 102 then -- video button
         settings.tab = "video"
+        controls.searchForKey = nil
         settings.scroll = 0
         button.loadAll()
     elseif self.id == 103 then -- controls button
         settings.tab = "controls"
+        controls.searchForKey = nil
         settings.scroll = 0
         button.loadAll()
     elseif self.id == 104 then -- skin button
         settings.tab = "skin"
         settings.scroll = 0
+        controls.searchForKey = nil
         button.loadAll()
     elseif self.id == 105 then -- audio button
         settings.tab = "audio"
         settings.scroll = 0
+        controls.searchForKey = nil
         button.loadAll()
     elseif self.id == 106 then -- stats button
         settings.tab = "stats"
         settings.scroll = 0
+        controls.searchForKey = nil
         button.loadAll()
     elseif self.id == 20 then -- fullscreen button
         print(savedSettings.window)
@@ -389,19 +434,35 @@ function button:action()
         button.loadAll()
     elseif self.id == 25 then -- keybind button
         controls.searchForKey = "interact"
-        self.text = "Press key"
+        button.loadAll()
     elseif self.id == 26 then -- keybind button
         controls.searchForKey = "map"
-        self.text = "Press key"
+        button.loadAll()
     elseif self.id == 27 then -- keybind button
         controls.searchForKey = "focus"
-        self.text = "Press key"
+        button.loadAll()
     elseif self.id == 28 then -- keybind button
         controls.searchForKey = "switchWeapon"
-        self.text = "Press key"
+        button.loadAll()
+    elseif self.id == 29 then -- keybind button
+        controls.searchForKey = "up"
+        button.loadAll()
+    elseif self.id == 30 then -- keybind button
+        controls.searchForKey = "left"
+        button.loadAll()
+    elseif self.id == 31 then -- keybind button
+        controls.searchForKey = "down"
+        button.loadAll()
+    elseif self.id == 32 then -- keybind button
+        controls.searchForKey = "right"
+        button.loadAll()
+    elseif self.id == 33 then -- keybind button
+        controls.searchForKey = "devMode"
+        button.loadAll()
     elseif self.id == 50 then -- back to ruined
         title.state = 0
         title.delete.mode = false
+        controls.searchForKey = nil
         button.loadAll()
     elseif self.id == 51 then -- play button
         if title.delete.mode == true then
@@ -491,7 +552,6 @@ function button:action()
         button.actionWarning(button.warning.id)
         button.warning.id = 0
     end
-    controls.searchForKey = nil
 end
 
 function button:update(dt)
