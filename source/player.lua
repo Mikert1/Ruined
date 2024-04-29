@@ -35,14 +35,15 @@ function player.load()
     player.shadow = love.graphics.newImage("assets/textures/player/shadow.png")
     player.sheet = player.spriteSheet
     player.grid = anim8.newGrid(19, 21, player.spriteSheet:getWidth(), player.spriteSheet:getHeight())
-    player.animations = {}
-    player.animations.upRight = anim8.newAnimation( player.grid('1-3', 2), 0.2 )
-    player.animations.upLeft = anim8.newAnimation( player.grid('1-3', 2), 0.2 )
-    player.animations.downRight = anim8.newAnimation( player.grid('1-4', 1), 0.2 )
-    player.animations.downLeft = anim8.newAnimation( player.grid('1-4', 1), 0.2 )
-    player.animations.Swimming = anim8.newAnimation( player.grid('1-2', 5), 0.2 )
-    player.animations.focus = anim8.newAnimation( player.grid('1-5', 4), 0.3 )
-    player.animations.dead = anim8.newAnimation( player.grid('1-2', 3), 0.3 )
+    player.animations = {
+        downRight = anim8.newAnimation( player.grid('1-4', 1), 0.2 ),
+        downLeft  = anim8.newAnimation( player.grid('1-4', 1), 0.2 ),
+        upRight   = anim8.newAnimation( player.grid('1-3', 2), 0.2 ),
+        upLeft    = anim8.newAnimation( player.grid('1-3', 2), 0.2 ),
+        Swimming  = anim8.newAnimation( player.grid('1-2', 5), 0.2 ),
+        focus     = anim8.newAnimation( player.grid('1-5', 4), 0.3 ),
+        dead      = anim8.newAnimation( player.grid('1-2', 3), 0.3 )
+    }
     player.anim = player.animations.downLeft
     player.isUp = false
     player.isLeft = false

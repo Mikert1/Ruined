@@ -261,6 +261,10 @@ function button.actionWarning(id)
             --fix there will be the finaly (3)
         end
         button.loadAll()
+    elseif id == 24 then
+        controls.keys = controls.default
+        controls.save()
+        button.loadAll()
     elseif id == 51 then
         love.filesystem.remove("savegame1.json")
         love.filesystem.remove("previewcard1.json")
@@ -429,8 +433,12 @@ function button:action()
     elseif self.id == 23 then -- fps button
 
     elseif self.id == 24 then -- Rezet all Keybind button
-        controls.keys = controls.default
-        controls.save()
+        button.warning.id = self.id
+        if controls.keys == controls.default then
+            button.warning.text = "All keybinds are already set to default."
+        else
+            button.warning.text = "Are you sure you want to reset all keybinds?"
+        end
         button.loadAll()
     elseif self.id == 25 then -- keybind button
         controls.searchForKey = "interact"
