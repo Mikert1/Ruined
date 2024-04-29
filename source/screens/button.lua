@@ -238,12 +238,15 @@ function button.specialNew(x, y, imageOnButton, color, id, image, outline)
     table.insert(button.activeButtons, self)
 end
 
+button.icons = {}
+button.icons.danger = love.graphics.newImage("assets/textures/gui/title/buttons/danger.png")
+button.icons.info = love.graphics.newImage("assets/textures/gui/title/buttons/info.png")
 button.warning = {
     id = 0,
     text = "",
+    icon = button.icons.danger
 }
 button.notification = love.graphics.newImage("assets/textures/gui/title/buttons/notification.png")
-button.dangerIcon = love.graphics.newImage("assets/textures/gui/title/buttons/danger.png")
 
 function button.actionWarning(id)
     if id == 5 then
@@ -327,6 +330,7 @@ function button:action()
     elseif self.id == 5 then -- back to title screen
         if worldManagement.saved == false then
             button.warning.id = self.id
+            button.warning.icon = button.icons.danger
             button.warning.text = "You are not standing on a savestone. \nAll unsaved progress will be lost."
             button.loadAll()
         else
@@ -437,10 +441,12 @@ function button:action()
         for key, value in pairs(controls.keys) do
             if controls.keys[key] ~= controls.default[key] then
                 button.warning.text = "Are you sure you want to reset all keybinds?"
+                button.warning.icon = button.icons.danger
                 button.loadAll()
                 return
             else
                 button.warning.text = "All keybinds are already set to default."
+                button.warning.icon = button.icons.info
             end
         end
         button.loadAll()
@@ -479,6 +485,7 @@ function button:action()
     elseif self.id == 51 then -- play button
         if title.delete.mode == true then
             button.warning.id = self.id
+            button.warning.icon = button.icons.danger
             button.warning.text = "Your about to delete Savefile 1?"
             button.loadAll()
         else
@@ -496,6 +503,7 @@ function button:action()
     elseif self.id == 52 then -- play button
         if title.delete.mode == true then
             button.warning.id = self.id
+            button.warning.icon = button.icons.danger
             button.warning.text = "Your about to delete Savefile 2?"
             button.loadAll()
         else
@@ -513,6 +521,7 @@ function button:action()
     elseif self.id == 53 then -- play button
         if title.delete.mode == true then
             button.warning.id = self.id
+            button.warning.icon = button.icons.danger
             button.warning.text = "Your about to delete Savefile 3?"
             button.loadAll()
         else
@@ -791,9 +800,9 @@ function button:drawAll()
             playerCamera.globalScale
         )
         love.graphics.draw(
-            button.dangerIcon,
-            love.graphics.getWidth() / 2 - (button.dangerIcon:getWidth() * playerCamera.globalScale) / 2,
-            love.graphics.getHeight() / 2 - (button.dangerIcon:getHeight() * playerCamera.globalScale) / 2 - (button.notification:getHeight() / 2) * playerCamera.globalScale,
+            button.warning.icon,
+            love.graphics.getWidth() / 2 - (button.warning.icon:getWidth() * playerCamera.globalScale) / 2,
+            love.graphics.getHeight() / 2 - (button.warning.icon:getHeight() * playerCamera.globalScale) / 2 - (button.notification:getHeight() / 2) * playerCamera.globalScale,
             nil,
             playerCamera.globalScale
         )
