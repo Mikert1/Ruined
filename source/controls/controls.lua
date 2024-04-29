@@ -1,26 +1,26 @@
 local controls = {}
 local json = require("assets/library/json")
 controls.keys = {
-    map = "m",
-    focus = "q",
     interact = "e",
     switchWeapon = "r",
-    up = "w",
     left = "a",
-    down = "s",
+    up = "w",
     right = "d",
+    down = "s",
     devMode = "tab",
+    focus = "q",
+    map = "m",
 }
 controls.default = {
-    map = "m",
-    focus = "q",
     interact = "e",
     switchWeapon = "r",
-    up = "w",
     left = "a",
-    down = "s",
+    up = "w",
     right = "d",
+    down = "s",
     devMode = "tab",
+    focus = "q",
+    map = "m",
 }
 controls.searchForKey = nil
 

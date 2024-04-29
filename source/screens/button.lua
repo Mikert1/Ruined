@@ -434,10 +434,14 @@ function button:action()
 
     elseif self.id == 24 then -- Rezet all Keybind button
         button.warning.id = self.id
-        if controls.keys == controls.default then
-            button.warning.text = "All keybinds are already set to default."
-        else
-            button.warning.text = "Are you sure you want to reset all keybinds?"
+        for key, value in pairs(controls.keys) do
+            if controls.keys[key] ~= controls.default[key] then
+                button.warning.text = "Are you sure you want to reset all keybinds?"
+                button.loadAll()
+                return
+            else
+                button.warning.text = "All keybinds are already set to default."
+            end
         end
         button.loadAll()
     elseif self.id == 25 then -- keybind button
