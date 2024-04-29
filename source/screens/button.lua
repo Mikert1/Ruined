@@ -172,8 +172,12 @@ function button.loadAll()
         button.first()
     end
     if not (button.warning.id == 0) then
-        button.new(-96, 30, "Go Back", {0, 1, 1}, 199) -- Cancel the action
-        button.new(16, 30, "Continue", {1, 0, 0}, 200) -- Continue with the action
+        if button.warning.icon == button.icons.danger then
+            button.new(-96, 30, "Go Back", {0, 1, 1}, 199) -- Cancel the action
+            button.new(16, 30, "Continue", {1, 0, 0}, 200) -- Continue with the action
+        else
+            button.new(-40, 30, "Oke", {0, 1, 1}, 199) -- Continue with the action
+        end
     end
 end
 
