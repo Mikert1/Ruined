@@ -2,6 +2,8 @@ local button = {}
 button.__index = button
 local buttonImage = love.graphics.newImage("assets/textures/gui/title/buttons/button.png")
 local buttonImageOutline = love.graphics.newImage("assets/textures/gui/title/buttons/buttonOutline.png")
+local miniButtonImage = love.graphics.newImage("assets/textures/gui/title/buttons/miniButton.png")
+local miniButtonImageOutline = love.graphics.newImage("assets/textures/gui/title/buttons/miniButtonOutline.png")
 
 local file
 local settings
@@ -168,6 +170,7 @@ function button.loadAll()
                 button.new(48, 43, "Empty", {0.15, 0.15, 0.15}, 53) -- Empty that indicates that there is no savefile for save 3
             end
         end
+        button.specialNew(-128, 70, nil, {0, 1, 1}, 61, miniButtonImage, miniButtonImageOutline)
         button.new(-40, 70, "Back", {1, 0.5, 0}, 50) -- back to ruined Title screen
         button.first()
     end
@@ -569,6 +572,8 @@ function button:action()
         title.mainColor = {0, 1, 1}
         title.background.current = title.background.storm
         button.loadAll()
+    elseif self.id == 64 then -- setting button
+        
     elseif self.id == 199 then -- no button
         button.warning.id = 0
         button.warning.text = ""
@@ -789,7 +794,7 @@ function button:drawAll()
     if not (button.warning.id == 0) then
         love.graphics.setColor(0, 0, 0, 0.5)
         love.graphics.rectangle(
-            "fill", 
+            "fill",
             0,
             0,
             love.graphics.getWidth(),

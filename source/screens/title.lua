@@ -40,6 +40,8 @@ function title.load()
     title.icons.start = love.graphics.newImage("assets/textures/gui/title/buttons/start.png")
     title.icons.past = love.graphics.newImage("assets/textures/gui/title/buttons/past.png")
     title.icons.final = love.graphics.newImage("assets/textures/gui/title/buttons/final.png")
+    -- title.icons.settings = love.graphics.newImage("assets/textures/gui/title/buttons/settings.png")
+    -- title.icons.delete = love.graphics.newImage("assets/textures/gui/title/buttons/delete.png")
     title.rune = {}
     title.rune.image1 = love.graphics.newImage("assets/textures/gui/title/rune1.png")
     title.rune.image2 = love.graphics.newImage("assets/textures/gui/title/rune2.png")
