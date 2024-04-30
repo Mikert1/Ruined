@@ -171,6 +171,7 @@ function button.loadAll()
             end
         end
         button.specialNew(-128, 70, nil, {0, 1, 1}, 64, miniButtonImage, miniButtonImageOutline)
+        button.specialNew(108, 70, nil, {0, 1, 1}, 65, miniButtonImage, miniButtonImageOutline)
         button.new(-40, 70, "Back", {1, 0.5, 0}, 50) -- back to ruined Title screen
         button.first()
     end
@@ -577,6 +578,21 @@ function button:action()
         love.window.setTitle("Ruined | Settings")
         title.state = 4
         button.loadAll()
+    elseif self.id == 65 then -- setting button
+        if title.delete.mode == false then
+            title.delete.mode = true
+            button.loadAll()
+            if title.state == 1 then
+                title.delete.anim = title.delete.animations.hoverPlay
+            else
+                title.delete.anim = title.delete.animations.hoverPlayG
+            end
+        else
+            title.delete.mode = false
+            button.loadAll()
+            title.delete.anim = title.delete.animations.hoverDelete
+        end
+        title.rezet()
     elseif self.id == 199 then -- no button
         button.warning.id = 0
         button.warning.text = ""

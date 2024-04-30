@@ -67,23 +67,6 @@ function love.mousepressed(x, y, buttonClicked, istouch)
                 title.logo.anim = title.logo.animations.region2
                 title.logo.y = 90
             end
-        elseif title.state >= 1 and title.state <= 3 then
-            if buttonClicked == 1 and x > love.graphics.getWidth() / 2 + (108 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (128 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (70 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (90 * playerCamera.globalScale) then
-                if title.delete.mode == false then
-                    title.delete.mode = true
-                    button.loadAll()
-                    if title.state == 1 then
-                        title.delete.anim = title.delete.animations.hoverPlay
-                    else
-                        title.delete.anim = title.delete.animations.hoverPlayG
-                    end
-                else
-                    title.delete.mode = false
-                    button.loadAll()
-                    title.delete.anim = title.delete.animations.hoverDelete
-                end
-                title.rezet()
-            end
         elseif title.state == 4 then
 -- normaly this would be settings but moved it to button.lua
         elseif title.state == 5 then
