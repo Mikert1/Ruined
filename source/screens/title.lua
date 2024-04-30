@@ -53,14 +53,6 @@ function title.load()
 
     title.delete = {}
     title.delete.mode = false
-    title.settings = {}
-    title.settings.image = love.graphics.newImage("assets/textures/gui/title/settings.png")
-    title.settings.grid = anim8.newGrid( 20, 20, title.settings.image:getWidth(), title.settings.image:getHeight() )
-    title.settings.animations = {}
-    title.settings.animations.normal = anim8.newAnimation( title.settings.grid('1-1', 1), 1 )
-    title.settings.animations.hover = anim8.newAnimation( title.settings.grid('1-1', 2), 1 )
-    title.settings.animations.hoverG = anim8.newAnimation( title.settings.grid('1-1', 3), 1 )
-    title.settings.anim = title.settings.animations.normal
     title.preview = {}
     title.preview.locationGray = love.graphics.newImage("assets/textures/gui/title/locatie.png")
     title.preview.locationBlue = love.graphics.newImage("assets/textures/gui/title/locatie2.png")

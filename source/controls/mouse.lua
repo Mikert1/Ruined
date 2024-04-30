@@ -42,13 +42,13 @@ function love.mousemoved(x, y)
         --     end
         end
         if x > love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 - (108 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (70 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (90 * playerCamera.globalScale) then
-            if title.mainColor[3] == 1 then
-                title.settings.anim = title.settings.animations.hover
-            else
-                title.settings.anim = title.settings.animations.hoverG
-            end
-        else
-            title.settings.anim = title.settings.animations.normal
+        --     if title.mainColor[3] == 1 then
+        --         title.settings.anim = title.settings.animations.hover
+        --     else
+        --         title.settings.anim = title.settings.animations.hoverG
+        --     end
+        -- else
+        --     title.settings.anim = title.settings.animations.normal
         end
     elseif title.state == 4 then
     end

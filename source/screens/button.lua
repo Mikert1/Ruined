@@ -349,7 +349,6 @@ function button:action()
             button.actionWarning(self.id)
         end
     elseif self.id == 6 then -- settings button
-        title.settings.anim = title.settings.animations.normal
         title.state = 4
         button.loadAll()
     elseif self.id == 7 then -- resume button
@@ -578,7 +577,6 @@ function button:action()
         title.background.current = title.background.storm
         button.loadAll()
     elseif self.id == 64 then -- setting button
-        title.settings.anim = title.settings.animations.normal
         love.window.setTitle("Ruined | Settings")
         title.state = 4
         button.loadAll()
