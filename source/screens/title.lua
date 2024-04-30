@@ -46,8 +46,6 @@ function title.load()
     title.icons.delete1 = love.graphics.newImage("assets/textures/gui/title/buttons/delete1.png")
     title.icons.delete2 = love.graphics.newImage("assets/textures/gui/title/buttons/delete2.png")
     title.icons.currentDelete = title.icons.delete1
-    -- title.icons.settings = love.graphics.newImage("assets/textures/gui/title/buttons/settings.png")
-    -- title.icons.delete = love.graphics.newImage("assets/textures/gui/title/buttons/delete.png")
     title.rune = {}
     title.rune.image1 = love.graphics.newImage("assets/textures/gui/title/rune1.png")
     title.rune.image2 = love.graphics.newImage("assets/textures/gui/title/rune2.png")
@@ -55,15 +53,6 @@ function title.load()
 
     title.delete = {}
     title.delete.mode = false
-    title.delete.image = love.graphics.newImage("assets/textures/gui/title/delete.png")
-    title.delete.grid = anim8.newGrid( 20, 20, title.delete.image:getWidth(), title.delete.image:getHeight() )
-    title.delete.animations = {}
-    title.delete.animations.delete = anim8.newAnimation( title.delete.grid('1-1', 1), 1 )
-    title.delete.animations.hoverDelete = anim8.newAnimation( title.delete.grid('1-1', 2), 1 )
-    title.delete.animations.play = anim8.newAnimation( title.delete.grid('1-1', 3), 1 )
-    title.delete.animations.hoverPlay = anim8.newAnimation( title.delete.grid('1-1', 4), 1 )
-    title.delete.animations.hoverPlayG = anim8.newAnimation( title.delete.grid('1-1', 5), 1 )
-    title.delete.anim = title.delete.animations.delete
     title.settings = {}
     title.settings.image = love.graphics.newImage("assets/textures/gui/title/settings.png")
     title.settings.grid = anim8.newGrid( 20, 20, title.settings.image:getWidth(), title.settings.image:getHeight() )
@@ -354,8 +343,6 @@ function title:draw()
                 love.graphics.draw(title.savetile.image, love.graphics.getWidth() / 2 - (42 * playerCamera.globalScale) + title.savetile.image:getWidth() / 2 * playerCamera.globalScale, love.graphics.getHeight() / 2 - (33 * playerCamera.globalScale) + title.savetile.image:getHeight() / 2 * playerCamera.globalScale, shake[2].currentPosition / 100, playerCamera.globalScale, nil, title.savetile.image:getWidth() / 2, title.savetile.image:getHeight() / 2)
                 love.graphics.draw(title.savetile.image, love.graphics.getWidth() / 2 + (46 * playerCamera.globalScale) + title.savetile.image:getWidth() / 2 * playerCamera.globalScale, love.graphics.getHeight() / 2 - (33 * playerCamera.globalScale) + title.savetile.image:getHeight() / 2 * playerCamera.globalScale, shake[3].currentPosition / 100, playerCamera.globalScale, nil, title.savetile.image:getWidth() / 2, title.savetile.image:getHeight() / 2)
             end
-            title.delete.anim:draw(title.delete.image, love.graphics.getWidth() / 2 + (108 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (70 * playerCamera.globalScale) , nil, playerCamera.globalScale)
-            title.settings.anim:draw(title.settings.image, love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (70 * playerCamera.globalScale) , nil, playerCamera.globalScale)
             --show location
             if preview.file1.created == true then
                 love.graphics.setColor(title.mainColor)
