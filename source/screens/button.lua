@@ -170,8 +170,8 @@ function button.loadAll()
                 button.new(48, 43, "Empty", {0.15, 0.15, 0.15}, 53) -- Empty that indicates that there is no savefile for save 3
             end
         end
-        button.specialNew(-128, 70, nil, {0, 1, 1}, 64, miniButtonImage, miniButtonImageOutline)
-        button.specialNew(108, 70, nil, {0, 1, 1}, 65, miniButtonImage, miniButtonImageOutline)
+        button.specialNew(-128, 70, title.icons.currentSettings, {0, 1, 1}, 64, miniButtonImage, miniButtonImageOutline)
+        button.specialNew(108, 70, title.icons.currentDelete, {0, 1, 1}, 65, miniButtonImage, miniButtonImageOutline)
         button.new(-40, 70, "Back", {1, 0.5, 0}, 50) -- back to ruined Title screen
         button.first()
     end
@@ -180,7 +180,7 @@ function button.loadAll()
             button.new(-96, 30, "Go Back", {0, 1, 1}, 199) -- Cancel the action
             button.new(16, 30, "Continue", {1, 0, 0}, 200) -- Continue with the action
         else
-            button.new(-40, 30, "Oke", {0, 1, 1}, 199) -- Continue with the action
+            button.new(-40, 30, "Oke", {0, 1, 1}, 199) -- Accepting that there is no action to be done
         end
     end
 end
