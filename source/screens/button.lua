@@ -170,7 +170,7 @@ function button.loadAll()
                 button.new(48, 43, "Empty", {0.15, 0.15, 0.15}, 53) -- Empty that indicates that there is no savefile for save 3
             end
         end
-        button.specialNew(-128, 70, nil, {0, 1, 1}, 61, miniButtonImage, miniButtonImageOutline)
+        button.specialNew(-128, 70, nil, {0, 1, 1}, 64, miniButtonImage, miniButtonImageOutline)
         button.new(-40, 70, "Back", {1, 0.5, 0}, 50) -- back to ruined Title screen
         button.first()
     end
@@ -573,7 +573,10 @@ function button:action()
         title.background.current = title.background.storm
         button.loadAll()
     elseif self.id == 64 then -- setting button
-        
+        title.settings.anim = title.settings.animations.normal
+        love.window.setTitle("Ruined | Settings")
+        title.state = 4
+        button.loadAll()
     elseif self.id == 199 then -- no button
         button.warning.id = 0
         button.warning.text = ""

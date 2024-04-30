@@ -84,13 +84,6 @@ function love.mousepressed(x, y, buttonClicked, istouch)
                 end
                 title.rezet()
             end
-            if buttonClicked == 1 and x > love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 - (108 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (70 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (90 * playerCamera.globalScale) then
-                -- settings
-                title.settings.anim = title.settings.animations.normal
-                love.window.setTitle("Ruined | Settings")
-                title.state = 4
-                button.loadAll()
-            end
         elseif title.state == 4 then
 -- normaly this would be settings but moved it to button.lua
         elseif title.state == 5 then
