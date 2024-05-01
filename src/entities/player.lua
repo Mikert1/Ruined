@@ -11,10 +11,10 @@ function player.loadAssets()
     anim8 = require 'src/library/animations'
     bump = require 'src/library/bump'
     
-    file = require("src/data")
-    worldManagement = require("src/worlds")
-    weapon = require("src/weapons")
-    gui = require ("src/gui")
+    file = require("src/system/data")
+    worldManagement = require("src/gameplay/worldmanager")
+    weapon = require("src/gameplay/weapons")
+    gui = require("src/gui/gui")
 end
 
 function player.load()
@@ -30,9 +30,9 @@ function player.load()
     player.isDead = false
     player.invincibleTimer = 0
     world:add(player, player.x, player.y, 12, 2)
-    player.spriteSheet = love.graphics.newImage("assets/textures/player/player.png")
-    player.spriteSheetfocus = love.graphics.newImage("assets/textures/player/playerfocus.png")
-    player.shadow = love.graphics.newImage("assets/textures/player/shadow.png")
+    player.spriteSheet = love.graphics.newImage("assets/textures/entities/player/player.png")
+    player.spriteSheetfocus = love.graphics.newImage("assets/textures/entities/player/playerfocus.png")
+    player.shadow = love.graphics.newImage("assets/textures/entities/player/shadow.png")
     player.sheet = player.spriteSheet
     player.grid = anim8.newGrid(19, 21, player.spriteSheet:getWidth(), player.spriteSheet:getHeight())
     player.animations = {

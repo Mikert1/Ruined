@@ -1,7 +1,7 @@
 local enemymanager = {}
-local stone = require("src/enemies/stone")
-local boss = require("src/enemies/boss")
-local worldManagement = require("src/worlds")
+local stone = require("src/entities/enemies/stone")
+local boss = require("src/entities/enemies/boss")
+local worldManagement = require("src/gameplay/worldmanager")
 enemymanager.enemyGotHit = 0
 
 function enemymanager:load()

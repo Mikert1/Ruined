@@ -1,9 +1,9 @@
 local debug = {}
 debug.world = {}
-local time = require("src/timer")
-local worldManagement = require("src/worlds")
-local file = require("src/data")
-local title = require("src/screens/title")
+local time = require("src/system/timer")
+local worldManagement = require("src/gameplay/worldmanager")
+local file = require("src/system/data")
+local title = require("src/gui/title")
 function debug.update()
     if keys.tab == true then
         debug.gameName = "" .. love.window.getTitle()

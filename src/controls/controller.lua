@@ -13,15 +13,15 @@ controller.buttonReleace.backCount = 0
 controller.buttonReleace.start = true
 controller.vibrationL = 0
 controller.vibrationR = 0
-local gui = require("src/gui")
-local story = require("src/story/story")
-local weapon = require("src/weapons")
-local stone = require("src/enemies/stone")
-local boss = require("src/enemies/boss")
-local file = require("src/data")
-local worldManagement = require("src/worlds")
-local title = require("src/screens/title")
-local button = require("src/screens/button")
+local gui = require("src/gui/gui")
+local story = require("src/gameplay/story")
+local weapon = require("src/gameplay/weapons")
+local stone = require("src/entities/enemies/stone")
+local boss = require("src/entities/enemies/boss")
+local file = require("src/system/data")
+local worldManagement = require("src/gameplay/worldmanager")
+local title = require("src/gui/title")
+local button = require("src/gui/button")
 
 function controller.update(dt)
     if not (controller.vibrationL == 0) and not (controller.vibrationR == 0) then

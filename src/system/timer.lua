@@ -1,4 +1,4 @@
-local gui = require("src/gui")
+local gui = require("src/gui/gui")
 local time = {}
 time.seconds = 0
 time.minutes = 0

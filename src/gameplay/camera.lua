@@ -1,6 +1,6 @@
 local playerCamera = {}
 local camera = require 'src/library/cam'
-local scene = require("src/story/cutscene")
+local scene = require("src/gameplay/cutscene")
 playerCamera.cam = camera()
 playerCamera.globalScaleFactor = 6
 playerCamera.globalScale = (playerCamera.globalScaleFactor / 1200) * love.graphics.getHeight()

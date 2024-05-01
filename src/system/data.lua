@@ -1,8 +1,8 @@
-local story = require("src/story/story")
+local story = require("src/gameplay/story")
 local json = require("src/library/json")
-local time = require("src/timer")
-local scene = require("src/story/cutscene")
-local worldManagement = require("src/worlds")
+local time = require("src/system/timer")
+local scene = require("src/gameplay/cutscene")
+local worldManagement = require("src/gameplay/worldmanager")
 local file = {}
 local data = {}
 local preview = {}
@@ -368,7 +368,7 @@ end
 
 function file.settings.removeTexturePack()
     love.filesystem.remove("player.png")
-    player.spriteSheet = love.graphics.newImage("assets/textures/player/player.png")
+    player.spriteSheet = love.graphics.newImage("assets/textures/entities/player/entities/player.png")
 end
 
 function file.update(dt)

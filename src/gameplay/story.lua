@@ -66,8 +66,8 @@ story.lasttext = false
 story.skiped = false
 
 function story.loadAssets()
-    file = require("src/data")
-    worldManagement = require("src/worlds")
+    file = require("src/system/data")
+    worldManagement = require("src/gameplay/worldmanager")
 end
 
 function story.load()

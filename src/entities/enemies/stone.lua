@@ -1,5 +1,5 @@
-local worldManagement = require("src/worlds")
-local stone = {image = love.graphics.newImage("assets/textures/enemies/stone.png")}
+local worldManagement = require("src/gameplay/worldmanager")
+local stone = {image = love.graphics.newImage("assets/textures/entities/enemies/stone.png")}
 stone.__index = stone
 
 function stone.new(x,y)

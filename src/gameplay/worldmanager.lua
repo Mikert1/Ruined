@@ -12,12 +12,12 @@ function worldManagement.loadAssets()
     bump = require 'src/library/bump'
     sti = require 'src/library/sti'
     camera = require 'src/library/cam'
-    shader = require("src/shaders")
-    gui = require("src/gui")
-    stone = require("src/enemies/stone")
-    boss = require("src/enemies/boss")
-    file = require("src/data")
-    story = require("src/story/story")
+    shader = require("src/system/shaders")
+    gui = require("src/gui/gui")
+    stone = require("src/entities/enemies/stone")
+    boss = require("src/entities/enemies/boss")
+    file = require("src/system/data")
+    story = require("src/gameplay/story")
 end
 
 local saveStone = {}

@@ -1,15 +1,15 @@
 local keys = {}
 keys.tab = false
 keys.f4 = 0
-local gui = require("src/gui")
-local story = require("src/story/story")
-local title = require("src/screens/title") -- remove after easter egg remove
-local settings = require("src/screens/settings")
-local stone = require("src/enemies/stone")
-local file = require("src/data")
-local weapon = require("src/weapons")
+local gui = require("src/gui/gui")
+local story = require("src/gameplay/story")
+local title = require("src/gui/title") -- remove after easter egg remove
+local settings = require("src/gui/settings")
+local stone = require("src/entities/enemies/stone")
+local file = require("src/system/data")
+local weapon = require("src/gameplay/weapons")
 local controls = require("src/controls/controls")
-local button = require("src/screens/button")
+local button = require("src/gui/button")
 
 function love.keypressed(key)
     if not (controls.searchForKey == nil) then

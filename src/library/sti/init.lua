@@ -1543,7 +1543,7 @@ end
 --	-- Add data to Custom Layer
 --	spriteLayer.sprites = {
 --		player = {
---			image = lg.newImage("assets/sprites/player.png"),
+--			image = lg.newImage("assets/sprites/entities/player.png"),
 --			x = 64,
 --			y = 64,
 --			r = 0,

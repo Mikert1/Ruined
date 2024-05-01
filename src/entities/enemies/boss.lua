@@ -1,5 +1,5 @@
-local worldManagement = require("src/worlds")
-local boss = {image = love.graphics.newImage("assets/textures/enemies/boss.png")}
+local worldManagement = require("src/gameplay/worldmanager")
+local boss = {image = love.graphics.newImage("assets/textures/entities/enemies/boss.png")}
 boss.__index = boss
 
 function boss.new(x,y)
