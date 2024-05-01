@@ -1,5 +1,5 @@
 local controls = {}
-local json = require("assets/library/json")
+local json = require("src/library/json")
 controls.keys = {
     interact = "e",
     switchWeapon = "r",

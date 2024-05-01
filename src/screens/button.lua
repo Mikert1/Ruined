@@ -19,12 +19,12 @@ if love.joystick.getJoystickCount() > 0 then
 end
 
 function button.load()
-    file = require("source/data")
+    file = require("src/data")
     preview = file.show()
-    settings = require("source/screens/settings")
-    title = require("source/screens/title")
-    gui = require("source/gui")
-    worldManagement = require("source/worlds")
+    settings = require("src/screens/settings")
+    title = require("src/screens/title")
+    gui = require("src/gui")
+    worldManagement = require("src/worlds")
 end
 
 button.activeButtons = {}

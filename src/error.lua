@@ -1,6 +1,6 @@
 love.graphics.setDefaultFilter("nearest", "nearest")
 local utf8 = require("utf8")
-local anim8 = require("assets/library/animations")
+local anim8 = require("src/library/animations")
 local errorm = {}
 local scaleX = 6 / 1200 * love.graphics.getWidth()
 local scaleY = 6 / 1200 * love.graphics.getHeight()

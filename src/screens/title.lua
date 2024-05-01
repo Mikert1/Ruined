@@ -1,18 +1,18 @@
 local title = {}
 local worldManagement
 local gui
-local file = require("source/data")
+local file = require("src/data")
 local preview = file.show()
 local settings
 local shake
 local button
-require("source/data")
+require("src/data")
 function title.load()
-    button = require("source/screens/button")
-    settings = require("source/screens/settings")
-    local anim8 = require("assets/library/animations")
-    worldManagement = require("source/worlds")
-    gui = require("source/gui")
+    button = require("src/screens/button")
+    settings = require("src/screens/settings")
+    local anim8 = require("src/library/animations")
+    worldManagement = require("src/worlds")
+    gui = require("src/gui")
     title.state = 0
     -- 0 = main title screen
     -- 1 = save game menu | main story
@@ -130,7 +130,7 @@ function title.load()
 end
 
 function title.rezet()
-    local time = require("source/timer")
+    local time = require("src/timer")
     time.seconds = 0
     time.minutes = 0
     time.hours = 0

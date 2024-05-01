@@ -1,4 +1,4 @@
-local anim8 = require'assets/library/animations'
+local anim8 = require'src/library/animations'
 local file
 local worldManagement
 local story = {}
@@ -66,8 +66,8 @@ story.lasttext = false
 story.skiped = false
 
 function story.loadAssets()
-    file = require("source/data")
-    worldManagement = require("source/worlds")
+    file = require("src/data")
+    worldManagement = require("src/worlds")
 end
 
 function story.load()

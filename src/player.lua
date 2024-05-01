@@ -8,13 +8,13 @@ local gui
 local sword = {}
 
 function player.loadAssets()
-    anim8 = require 'assets/library/animations'
-    bump = require 'assets/library/bump'
+    anim8 = require 'src/library/animations'
+    bump = require 'src/library/bump'
     
-    file = require("source/data")
-    worldManagement = require("source/worlds")
-    weapon = require("source/weapons")
-    gui = require ("source/gui")
+    file = require("src/data")
+    worldManagement = require("src/worlds")
+    weapon = require("src/weapons")
+    gui = require ("src/gui")
 end
 
 function player.load()

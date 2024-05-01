@@ -9,15 +9,15 @@ local stone
 local boss
 local file
 function worldManagement.loadAssets()
-    bump = require 'assets/library/bump'
-    sti = require 'assets/library/sti'
-    camera = require 'assets/library/cam'
-    shader = require("source/shaders")
-    gui = require("source/gui")
-    stone = require("source/enemies/stone")
-    boss = require("source/enemies/boss")
-    file = require("source/data")
-    story = require("source/story/story")
+    bump = require 'src/library/bump'
+    sti = require 'src/library/sti'
+    camera = require 'src/library/cam'
+    shader = require("src/shaders")
+    gui = require("src/gui")
+    stone = require("src/enemies/stone")
+    boss = require("src/enemies/boss")
+    file = require("src/data")
+    story = require("src/story/story")
 end
 
 local saveStone = {}

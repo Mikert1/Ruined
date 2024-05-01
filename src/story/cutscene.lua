@@ -1,4 +1,4 @@
-local story = require("source/story/story")
+local story = require("src/story/story")
 local scene = {}
 scene.camera = {}
 scene.x = 0

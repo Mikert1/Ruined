@@ -2,13 +2,13 @@ local gui = {}
 local title
 local settings
 local weapon
-local button = require("source/screens/button")
+local button = require("src/screens/button")
 
 function gui.load()
-    title = require("source/screens/title")
-    settings = require("source/screens/settings")
-    weapon = require("source/weapons")
-    local anim8 = require("assets/library/animations")
+    title = require("src/screens/title")
+    settings = require("src/screens/settings")
+    weapon = require("src/weapons")
+    local anim8 = require("src/library/animations")
     gui.pressE = love.graphics.newImage("assets/textures/npc/pressE.png")
     gui.welcome = {}
     gui.welcome.timer = 0

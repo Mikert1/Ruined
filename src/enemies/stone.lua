@@ -1,4 +1,4 @@
-local worldManagement = require("source/worlds")
+local worldManagement = require("src/worlds")
 local stone = {image = love.graphics.newImage("assets/textures/enemies/stone.png")}
 stone.__index = stone
 

@@ -1,6 +1,6 @@
-local anim8 = require("assets/library/animations")
-local time = require("source/timer")
-local bump = require 'assets/library/bump'
+local anim8 = require("src/library/animations")
+local time = require("src/timer")
+local bump = require 'src/library/bump'
 local weapon = {}
 weapon.equipment = 1
 weapon.sword = {}
