@@ -256,25 +256,25 @@ function love.filedropped(droppedFile)
         local ext = filename:match("%.%w+$")
 
         if ext == ".png" then
-            print("file is png")
+            print("[Info  ] file is png")
             droppedFile:open("r")
             fileData = droppedFile:read("data")
             local img = love.image.newImageData(fileData)
             file.settings.saveTexturePack(img)
             img = love.graphics.newImage(img)
             if img:getWidth() == 95 and img:getHeight() == 105 then
-                print("dimentions are oke.")
+                print("[Info  ] dimentions are oke.")
                 player.spriteSheet = img
-                print("Succesfully changed your skin")
+                print("[Info  ] Succesfully changed your skin")
             else
-                print("your file is" .. img:getWidth() .. "x" .. img:getHeight())
+                print("[Warn  ] your file is" .. img:getWidth() .. "x" .. img:getHeight())
                 print("try a image whith the dimentions 95x105")
             end
         else
-            print("try a png file")
+            print("[Warn  ] try a png file")
         end
     else
-        print("not in texture mode (go to settings > general > skin - beta)")
+        print("[Warn  ] not in texture mode (go to settings > general > skin - beta)")
     end
 end
 

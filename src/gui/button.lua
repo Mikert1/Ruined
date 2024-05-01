@@ -557,7 +557,7 @@ function button:action()
         title.background.current = title.background.blue
         button.loadAll()
     elseif self.id == 62 then -- chapter button
-        print("chapter 2 is not unlocked, finish chapter 1 to play chapter 2.")
+        print("[Warn  ] chapter 2 is not unlocked, finish chapter 1 to play chapter 2.")
         title.state = 2
         file.show()
         title.rezet()
@@ -567,7 +567,7 @@ function button:action()
         title.background.current = title.background.green
         button.loadAll()
     elseif self.id == 63 then -- chapter button 
-        print("chapter 3 is not unlocked, finish chapter 2 to play chapter 3.")
+        print("[Warn  ] chapter 3 is not unlocked, finish chapter 2 to play chapter 3.")
         title.state = 3
         file.show()
         title.rezet()

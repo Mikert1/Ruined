@@ -28,11 +28,11 @@ function server.receiveData()
     udp:settimeout(0) -- Stel de timeout in op 0 om niet-blokkerend te zijn
     local data, msg = udp:receivefrom()
     if data then
-        print("Received data from other player: " .. data)
+        print("[Server] Received data from other player: " .. data)
     elseif msg ~= "timeout" then
-        print("Error receiving data: " .. msg)
+        print("[Server] Error receiving data: " .. msg)
     else
-        print("No data received")
+        print("[Server] No data received")
     end
 end
 

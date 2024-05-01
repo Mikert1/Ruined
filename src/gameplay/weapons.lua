@@ -173,7 +173,6 @@ function Projectile:update(dt, i)
         end
         if isColliding(self.collider) then
             if self.speed < 5 then
-                print("colliding")
                 self.collider.y = self.collider.y - (50 * dt)
             else
                 if dy > 0 then

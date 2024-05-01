@@ -190,7 +190,7 @@ function love.errorhandler(msg)
 		if not love.system then return end
 		love.system.setClipboardText(fullErrorText)
         errorm.help = "\nCopied to clipboard! please send it to Mikert."
-        print("Added to clipboard")
+        print("[Info  ] Added to clipboard")
 		draw()
 	end
 

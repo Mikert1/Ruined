@@ -100,10 +100,10 @@ function love.keypressed(key)
     if savedSettings.devmode == true then
         if key == controls.keys.devMode then
             if keys.tab == true then
-                print("Disabled Debugg mode")
+                print("[Info  ] Disabled Debugg mode")
                 keys.tab = false
             else
-                print("Enabled Debugg mode")
+                print("[Info  ] Enabled Debugg mode")
                 keys.tab = true
             end
         end
@@ -115,25 +115,25 @@ function love.keypressed(key)
                 currentWorld:bump_removeLayer("wall")
             end
         end
-        print("walls removed")
+        print("[Info  ] walls removed")
     end
     if key == "f3" then
         data = file.save()
     end
     if key == "f4" then
         if keys.f4 == 3 then
-            print("Enabled Player view")
+            print("[Info  ] Enabled Player view")
             keys.f4 = 0
         else
             if keys.f4 == 0 then
-                print("Enabled Player view (degrid)")
+                print("[Info  ] Enabled Player view (degrid)")
                 keys.f4 = 1
             else
                 if keys.f4 == 1 then
-                    print("Enabled Map view")
+                    print("[Info  ] Enabled Map view")
                     keys.f4 = 2
                 else
-                    print("Enabled Map view (degrid)")
+                    print("[Info  ] Enabled Map view (degrid)")
                     keys.f4 = 3
                 end
             end
@@ -153,11 +153,10 @@ function love.keypressed(key)
         end
     end
     if key == "f12" then
-        print("debugg")
         error("F12 Force Error")
     end
     if key == "f8" then
-        print("testing shake -- use 1 or 0 to schale shake")
+        print("[Info  ] testing shake -- use 1 or 0 to schale shake")
     end
     if key == "f9" then
         local newStone = stone.new(love.math.random(1, 800),love.math.random(1, 157))
@@ -165,10 +164,10 @@ function love.keypressed(key)
     end
     if key == "f10" then
         if love.system.getOS() == "Windows" then love._openConsole() end
-        print("Console is active\n- use Tab to show more info and show colliders")
+        print("[Info  ] Console is active\n- use Tab to show more info and show colliders")
     end
     if love.keyboard.isDown("m") and love.keyboard.isDown("r") and love.keyboard.isDown("t") then
-        print("Hello Mikert!")
+        print("[Easter egg] Hello Mikert!")
         title.swordicon.savegame3 = title.swordicon.animations.progress4
     end
 end

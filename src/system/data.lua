@@ -53,7 +53,7 @@ function file.save()
         local jsonString2 = json.encode(preview.file1)
         love.filesystem.write("savegame1.json", jsonString)
         love.filesystem.write("previewcard1.json", jsonString2)
-        print("Savegame 1 Saved!")
+        print("[Info  ] Savegame 1 Saved!")
         file.status = "File 1 saved"
     elseif file.filenumber == 2 then
         preview.file2.world = worldManagement.thisWorld
@@ -68,7 +68,7 @@ function file.save()
         local jsonString2 = json.encode(preview.file2)
         love.filesystem.write("savegame2.json", jsonString)
         love.filesystem.write("previewcard2.json", jsonString2)
-        print("Savegame 2 Saved!")
+        print("[Info  ] Savegame 2 Saved!")
         file.status = "File 2 saved"
     elseif file.filenumber == 3 then
         preview.file3.world = worldManagement.thisWorld
@@ -83,11 +83,11 @@ function file.save()
         local jsonString2 = json.encode(preview.file3)
         love.filesystem.write("savegame3.json", jsonString)
         love.filesystem.write("previewcard3.json", jsonString2)
-        print("Savegame 3 Saved!")
+        print("[Info  ] Savegame 3 Saved!")
         file.status = "File 3 saved"
     else
         file.status = "Saving Error"
-        print("Savegame error (filenumer cant be 0)")
+        print("[Warn  ] Savegame error (filenumer cant be 0)")
     end
     file.message = 0
     return data
@@ -297,7 +297,6 @@ function file.show()
 end
 
 function file.settings.save()
-    print("saveing settings")
     local jsonString = json.encode(savedSettings)
     love.filesystem.write("settings.json", jsonString)
     file.status = "Settings saved"
@@ -324,7 +323,6 @@ function file.settings.load()
     end
     if savedSettings.devmode == true and savedSettings.console == true then
         if love.system.getOS() == "Windows" then love._openConsole() end
-        print("Console is active\n- use Tab to show more info and show colliders")
     end
     local x, y = love.window.getDesktopDimensions(savedSettings.windowIndex)
     if not (savedSettings.window == 1) then

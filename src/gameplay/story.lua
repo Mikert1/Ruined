@@ -92,7 +92,6 @@ end
 
 function story.dialogue.update()
     if story.arrayLength < story.data.current then
-        print("story told")
         story.npc.interaction = false
         player.item.sword = true
         story.lasttext = false

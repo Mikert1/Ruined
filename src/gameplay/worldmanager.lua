@@ -307,7 +307,7 @@ function worldManagement.teleport(loc)
                 y = 0
             }
         else
-            print("world not found. spawning player in The Village")
+            print("[Warn  ] world not found. spawning player in The Village")
             currentWorld = village
             gui.mapWorld = {
                 x = 0,
@@ -324,7 +324,6 @@ function worldManagement.teleport(loc)
         player.x, player.y = world:move(player, player.x, 795)
         worldManagement.thisWorld = "Mountains"
         love.window.setTitle("Ruined | Overworld - Mountains")
-        print("player is in the Mountains")
         gui.welcome.timer = 3
         gui.welcome.animations.region1:gotoFrame(1)
         gui.mapWorld = {
@@ -336,7 +335,6 @@ function worldManagement.teleport(loc)
         player.x, player.y = world:move(player, 2, player.y)
         worldManagement.thisWorld = "Mountains"
         love.window.setTitle("Ruined | Overworld - Mountains")
-        print("player is in the Mountains")
         gui.welcome.timer = 3
         gui.welcome.animations.region1:gotoFrame(1)
         gui.mapWorld = {
@@ -348,7 +346,6 @@ function worldManagement.teleport(loc)
         player.x, player.y = world:move(player, currentWorld.width * currentWorld.tilewidth - 14, player.y)
         worldManagement.thisWorld = "Mountains"
         love.window.setTitle("Ruined | Overworld - Mountains")
-        print("player is in the Mountains")
         gui.welcome.timer = 3
         gui.welcome.animations.region1:gotoFrame(1)
         gui.mapWorld = {
@@ -360,7 +357,6 @@ function worldManagement.teleport(loc)
         player.x, player.y = world:move(player, player.x, 3)
         worldManagement.thisWorld = "Village"
         love.window.setTitle("Ruined | Overworld - The Village")
-        print("player is in the Village")
         gui.welcome.timer = 3
         gui.welcome.animations.region1:gotoFrame(1)
         gui.mapWorld = {
@@ -373,7 +369,6 @@ function worldManagement.teleport(loc)
         player.x, player.y = world:move(player, currentWorld.width * currentWorld.tilewidth - 13, player.y)
         worldManagement.thisWorld = "Forrest"
         love.window.setTitle("Ruined | Overworld - Forrest")
-        print("player is in the Forrest")
         gui.welcome.timer = 3
         gui.welcome.animations.region1:gotoFrame(1)
         gui.mapWorld = {
@@ -386,7 +381,6 @@ function worldManagement.teleport(loc)
         player.x, player.y = world:move(player, 2, player.y)
         worldManagement.thisWorld = "Snow"
         love.window.setTitle("Ruined | Overworld - Snowy Mountains")
-        print("player is in the Snowy Mountains")
         gui.welcome.timer = 3
         gui.welcome.animations.region1:gotoFrame(1)
         gui.mapWorld = {

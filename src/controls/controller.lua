@@ -150,10 +150,10 @@ function controller.update(dt)
                 if controller.buttonReleace.backCount > 1 then
                     controller.buttonReleace.backCount = 0
                     if keys.tab == true then
-                        print("Disabled Debugg mode")
+                        print("[Info  ] Disabled Debugg mode")
                         keys.tab = false
                     else
-                        print("Enabled Debugg mode")
+                        print("[Info  ] Enabled Debugg mode")
                         keys.tab = true
                     end
                 end
