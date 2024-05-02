@@ -337,19 +337,19 @@ function title:draw()
             end
             --show location
             if preview.file1.created == true then
-                love.graphics.setColor(title.mainColor)
+                love.graphics.setColor(title.mainColor[1] * button.fader, title.mainColor[2] * button.fader, title.mainColor[3] * button.fader)
             end
             love.graphics.draw(title.preview.location1, love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (14 * playerCamera.globalScale) , nil, playerCamera.globalScale / 2)
             love.graphics.draw(title.preview.time1, love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (34 * playerCamera.globalScale) , nil, playerCamera.globalScale / 2)
             love.graphics.setColor(1, 1, 1)
             if preview.file2.created == true then
-                love.graphics.setColor(title.mainColor)
+                love.graphics.setColor(title.mainColor[1] * button.fader, title.mainColor[2] * button.fader, title.mainColor[3]* button.fader)
             end
             love.graphics.draw(title.preview.location2, love.graphics.getWidth() / 2 - (40 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (14 * playerCamera.globalScale) , nil, playerCamera.globalScale / 2)
             love.graphics.draw(title.preview.time2, love.graphics.getWidth() / 2 - (40 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (34 * playerCamera.globalScale) , nil, playerCamera.globalScale / 2)
             love.graphics.setColor(1, 1, 1)
             if preview.file3.created == true then
-                love.graphics.setColor(title.mainColor)
+                love.graphics.setColor(title.mainColor[1] * button.fader, title.mainColor[2] * button.fader, title.mainColor[3] * button.fader)
             end
             love.graphics.draw(title.preview.location3, love.graphics.getWidth() / 2 + (48 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (14 * playerCamera.globalScale) , nil, playerCamera.globalScale / 2)
             love.graphics.draw(title.preview.time3, love.graphics.getWidth() / 2 + (48 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (34 * playerCamera.globalScale) , nil, playerCamera.globalScale / 2)
@@ -365,6 +365,7 @@ function title:draw()
                 title.swordicon.savegame3:draw(title.swordicon.image, love.graphics.getWidth() / 2 + (108 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (14 * playerCamera.globalScale) , 2.35, playerCamera.globalScale * 0.9)
             end
             -- Time preview
+            
             love.graphics.setColor(0.15, 0.15, 0.15)
             love.graphics.print(preview.file1.world, love.graphics.getWidth() / 2 - (118 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (14 * playerCamera.globalScale) , nil, playerCamera.globalScale / 2)
             love.graphics.print(preview.file2.world, love.graphics.getWidth() / 2 - (30 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (14 * playerCamera.globalScale) , nil, playerCamera.globalScale / 2)

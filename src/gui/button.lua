@@ -28,8 +28,10 @@ function button.load()
 end
 
 button.activeButtons = {}
+button.fader = 0
 
 function button.loadAll()
+    button.fader = 0.26
     button.activeButtons = {}
     if title.state == 0 then
         button.specialNew(-100, 50, title.icons.start, {0, 1, 1}, 61)
@@ -219,7 +221,7 @@ function button.new(x, y, text, color, id, info, scroll)
     self.height = buttonImage:getHeight()
     self.imageOutline = buttonImageOutline
     self.color = color
-    self.currentColor = {0.15, 0.15, 0.15}
+    self.currentColor = {0.26, 0.26, 0.26}
     self.text = text
     self.info = info
     self.hover = false
@@ -243,7 +245,7 @@ function button.specialNew(x, y, imageOnButton, color, id, image, outline)
     end
     self.imageOutline = outline
     self.color = color
-    self.currentColor = {0.15, 0.15, 0.15}
+    self.currentColor = {0.26, 0.26, 0.26}
     self.imageOnButton = imageOnButton
     self.hover = false
     self.clicked = false
@@ -601,6 +603,11 @@ function button:action()
 end
 
 function button:update(dt)
+    if button.fader < 1 then
+        button.fader = button.fader + (dt / 3)
+    else
+        button.fader = 1
+    end
     if game.controlType == 0 then
         local x = love.mouse.getX()
         local y = love.mouse.getY()
