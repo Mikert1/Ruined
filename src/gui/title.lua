@@ -375,19 +375,19 @@ function title:draw()
             love.graphics.print("h" .. preview.file3.hours .. ", m" .. preview.file3.minutes .. ", s" .. string.sub(preview.file3.seconds, 0, 2) , love.graphics.getWidth() / 2 + (58 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (34 * playerCamera.globalScale) , nil, playerCamera.globalScale / 2)
             -- show savegame name
             if preview.file1.created == true then
-                love.graphics.setColor(title.mainColor)
+                love.graphics.setColor(title.mainColor[1] * button.fader, title.mainColor[2] * button.fader, title.mainColor[3] * button.fader)
             else
                 love.graphics.setColor(0.15, 0.15, 0.15)
             end
             love.graphics.print("Save 1", love.graphics.getWidth() / 2 - (109 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (30 * playerCamera.globalScale), nil, playerCamera.globalScale)
             if preview.file2.created == true then
-                love.graphics.setColor(title.mainColor)
+                love.graphics.setColor(title.mainColor[1] * button.fader, title.mainColor[2] * button.fader, title.mainColor[3] * button.fader)
             else
                 love.graphics.setColor(0.15, 0.15, 0.15)
             end
             love.graphics.print("Save 2", love.graphics.getWidth() / 2 - (21 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (30 * playerCamera.globalScale), nil, playerCamera.globalScale)
             if preview.file3.created == true then
-                love.graphics.setColor(title.mainColor)
+                love.graphics.setColor(title.mainColor[1] * button.fader, title.mainColor[2] * button.fader, title.mainColor[3] * button.fader)
             else
                 love.graphics.setColor(0.15, 0.15, 0.15)
             end
