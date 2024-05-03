@@ -91,9 +91,10 @@ end
 
 function love.draw()
     love.graphics.setFont(font)
-    love.graphics.setShader()
     if player.focus == true then 
         love.graphics.setShader(shader.focus)
+    else
+        love.graphics.setShader()
     end
     playerCamera.cam:attach()
         worldManagement:draw()
@@ -102,7 +103,11 @@ function love.draw()
         weapon.draw()
         enemymanager:draw()
         -- Player
+        love.graphics.setShader()
         player:draw()
+        if player.focus == true then 
+            love.graphics.setShader(shader.focus)
+        end
         --
         worldManagement:draw2dLayer()
         enemymanager:draw2L()

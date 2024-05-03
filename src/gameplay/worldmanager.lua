@@ -46,6 +46,7 @@ function worldManagement.load()
         timer = 0, -- timer
         imageActive = love.graphics.newImage("assets/textures/world/structures/saveStone.png"),
         imageInactive = love.graphics.newImage("assets/textures/world/structures/inactiveStone.png"),
+        ellipseCut = 1.2
     }
     saveStone.image = saveStone.imageInactive
 
@@ -73,7 +74,7 @@ local function checkEllipseCollision(rect, ellipse)
         return false
     end
 
-    if ellipseDistanceY > (rect.height / 2 + ellipse.radius / 1.2) then
+    if ellipseDistanceY > (rect.height / 2 + ellipse.radius / ellipse.ellipseCut) then
         return false
     end
 
@@ -623,14 +624,14 @@ function worldManagement:draw()
     if currentWorld.layers["objective1"] then
         currentWorld:drawLayer(currentWorld.layers["objective1"])
     end
+    love.graphics.setColor(0, 1, 1, 0 + (saveStone.timer / 2))
+    love.graphics.ellipse("line", saveStone.x + 13.5, saveStone.y + 21 + (saveStone.timer * 10), saveStone.radius, saveStone.radius / saveStone.ellipseCut)
+    love.graphics.setColor(0, 1, 1, 0.5)
+    love.graphics.ellipse("line", saveStone.x + 13.5, saveStone.y + 31, saveStone.radius, saveStone.radius / saveStone.ellipseCut)
+    love.graphics.setColor(1, 1, 1)
     if saveStone.y + 30 < player.y then
         love.graphics.draw(saveStone.image, saveStone.x, saveStone.y)
     end
-    love.graphics.setColor(0, 1, 1, 0 + (saveStone.timer / 2))
-    love.graphics.ellipse("line", saveStone.x + 13.5, saveStone.y + 21 + (saveStone.timer * 10), saveStone.radius, saveStone.radius / 1.2)
-    love.graphics.setColor(0, 1, 1, 0.5)
-    love.graphics.ellipse("line", saveStone.x + 13.5, saveStone.y + 31, saveStone.radius, saveStone.radius / 1.2)
-    love.graphics.setColor(1, 1, 1)
     Structures(1)
 end
 
