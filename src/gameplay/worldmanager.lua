@@ -62,33 +62,33 @@ function worldManagement.load()
     shader.light:send("lightRadii", unpack(lightRadii))
 end
 
-local function checkCircleCollision(rect, circle)
+local function checkEllipseCollision(rect, ellipse)
     local rectCenterX = rect.x + rect.width / 2
     local rectCenterY = rect.y + rect.height / 2
 
-    local circleDistanceX = math.abs(saveStone.x + 13.5 - rectCenterX)
-    local circleDistanceY = math.abs(saveStone.y + 31 - rectCenterY)
+    local ellipseDistanceX = math.abs(saveStone.x + 13.5 - rectCenterX)
+    local ellipseDistanceY = math.abs(saveStone.y + 31 - rectCenterY)
 
-    if circleDistanceX > (rect.width / 2 + circle.radius) then
+    if ellipseDistanceX > (rect.width / 2 + ellipse.radius) then
         return false
     end
 
-    if circleDistanceY > (rect.height / 2 + circle.radius) then
+    if ellipseDistanceY > (rect.height / 2 + ellipse.radius / 1.2) then
         return false
     end
 
-    if circleDistanceX <= (rect.width / 2) then
+    if ellipseDistanceX <= (rect.width / 2) then
         return true
     end
 
-    if circleDistanceY <= (rect.height / 2) then
+    if ellipseDistanceY <= (rect.height / 2) then
         return true
     end
 
-    local cornerDistanceSquared = (circleDistanceX - rect.width / 2)^2 +
-                                  (circleDistanceY - rect.height / 2)^2
+    local cornerDistanceSquared = (ellipseDistanceX - rect.width / 2)^2 +
+                                  (ellipseDistanceY - rect.height / 2)^2
 
-    return cornerDistanceSquared <= (circle.radius^2)
+    return cornerDistanceSquared <= (ellipse.radius^2)
 end
 
 local function checkCollision(rect1, rect2)
@@ -582,7 +582,7 @@ function worldManagement.update(dt)
     end
     checkPortals()
     checkNpc(dt)
-    if checkCircleCollision(player, saveStone) then
+    if checkEllipseCollision(player, saveStone) then
         if worldManagement.saved == false then
             saveStone.active = true
             worldManagement.saved = true
@@ -627,9 +627,9 @@ function worldManagement:draw()
         love.graphics.draw(saveStone.image, saveStone.x, saveStone.y)
     end
     love.graphics.setColor(0, 1, 1, 0 + (saveStone.timer / 2))
-    love.graphics.ellipse("line", saveStone.x + 13.5, saveStone.y + 21 + (saveStone.timer * 10), saveStone.radius, saveStone.radius / 1.3)
+    love.graphics.ellipse("line", saveStone.x + 13.5, saveStone.y + 21 + (saveStone.timer * 10), saveStone.radius, saveStone.radius / 1.2)
     love.graphics.setColor(0, 1, 1, 0.5)
-    love.graphics.ellipse("line", saveStone.x + 13.5, saveStone.y + 31, saveStone.radius, saveStone.radius / 1.3)
+    love.graphics.ellipse("line", saveStone.x + 13.5, saveStone.y + 31, saveStone.radius, saveStone.radius / 1.2)
     love.graphics.setColor(1, 1, 1)
     Structures(1)
 end
