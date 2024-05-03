@@ -156,7 +156,8 @@ function love.keypressed(key)
         error("F12 Force Error")
     end
     if key == "f8" then
-        print("[Info  ] testing shake -- use 1 or 0 to schale shake")
+        print("[Info  ] testing shake")
+        playerCamera.shaker = 1
     end
     if key == "f9" then
         local newStone = stone.new(love.math.random(1, 800),love.math.random(1, 157))
