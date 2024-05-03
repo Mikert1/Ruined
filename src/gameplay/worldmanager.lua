@@ -627,9 +627,9 @@ function worldManagement:draw()
         love.graphics.draw(saveStone.image, saveStone.x, saveStone.y)
     end
     love.graphics.setColor(0, 1, 1, 0 + (saveStone.timer / 2))
-    love.graphics.circle("line", saveStone.x + 13.5, saveStone.y + 21 + (saveStone.timer * 10), saveStone.radius)
+    love.graphics.ellipse("line", saveStone.x + 13.5, saveStone.y + 21 + (saveStone.timer * 10), saveStone.radius, saveStone.radius / 1.3)
     love.graphics.setColor(0, 1, 1, 0.5)
-    love.graphics.circle("line", saveStone.x + 13.5, saveStone.y + 31, saveStone.radius)
+    love.graphics.ellipse("line", saveStone.x + 13.5, saveStone.y + 31, saveStone.radius, saveStone.radius / 1.3)
     love.graphics.setColor(1, 1, 1)
     Structures(1)
 end
