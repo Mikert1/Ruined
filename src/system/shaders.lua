@@ -36,6 +36,8 @@ shader.focusAnim:send("circleRadius", 0)
 shader.light = love.graphics.newShader([[
     #define MAX_LIGHTS 3
 
+extern number ellipseXScale;
+extern number ellipseYScale;
 extern vec2 lightPositions[MAX_LIGHTS];
 extern number lightRadii[MAX_LIGHTS];
 extern int numLights;
@@ -52,16 +54,15 @@ vec4 effect(vec4 color, Image texture, vec2 texture_coords, vec2 screen_coords) 
             break;
         }
 
-        vec2 circleCenter = lightPositions[i];
-        number circleRadius = lightRadii[i];
+        vec2 ellipseCenter = lightPositions[i];
+        vec2 ellipseScale = vec2(ellipseXScale, ellipseYScale);
+
+        vec2 delta = (screen_coords - ellipseCenter) / ellipseScale;
+        number distance = length(delta);
         
-        number distance = length(screen_coords - circleCenter);
+        // There is no longer a circle radius comparison
         
-        if (distance > circleRadius) {
-            continue;
-        }
-        
-        number fadeFactor = 1.0 - (distance / circleRadius);
+        number fadeFactor = 1.0 - (distance / lightRadii[i]);
         fadeFactor = max(fadeFactor, 0.0);
         fadeFactor = 1.0 - fadeFactor;
         

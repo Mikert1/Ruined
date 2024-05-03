@@ -57,7 +57,11 @@ function worldManagement.load()
     playerCircleRadius = 10
     lightPositions = {{0, 0}, {0, 0}}
     lightRadii = {0, 0}
+    ellipseXScale = 1.0
+    ellipseYScale = 0.8
     local MAX_LIGHTS = 3
+    shader.light:send("ellipseXScale", ellipseXScale)
+    shader.light:send("ellipseYScale", ellipseYScale)
     shader.light:send("numLights", #lightPositions)
     shader.light:send("lightPositions", unpack(lightPositions))
     shader.light:send("lightRadii", unpack(lightRadii))
