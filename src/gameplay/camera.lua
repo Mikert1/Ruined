@@ -10,7 +10,38 @@ playerCamera.realScale.y = (playerCamera.globalScaleFactor / 1200) * love.graphi
 playerCamera.shaker = 0
 
 function playerCamera.shake(intensity)
-    playerCamera.cam:lookAt(player.x + 6 + love.math.random(-intensity, intensity), player.y - 8 + love.math.random(-intensity, intensity))
+    local w = love.graphics.getWidth()
+    local h = love.graphics.getHeight()
+
+    w, h = w / playerCamera.globalScale, h / playerCamera.globalScale
+    local x
+    local y
+    if keys.f4 == 0 or keys.f4 == 2 then -- debugg keys remove when done
+        if playerCamera.cam.x < w/2 then
+            x = w/2 + love.math.random(intensity, intensity + intensity)
+        end
+        if playerCamera.cam.y < h/2 then
+            y = h/2 + love.math.random(intensity, intensity + intensity)
+        end
+        local mapW = currentWorld.width * currentWorld.tilewidth
+        local mapH = currentWorld.height * currentWorld.tileheight
+        if playerCamera.cam.x > (mapW - w/2) then
+            x = (mapW - w/2) - love.math.random(intensity, intensity + intensity)
+        end
+        if playerCamera.cam.y > (mapH - h/2) then
+            y = (mapH - h/2) - love.math.random(intensity, intensity + intensity)
+        end
+        if x == nil then
+            x = player.x + 6 + love.math.random(-intensity, intensity)
+        end
+        if y == nil then
+            y = player.y - 8 + love.math.random(-intensity, intensity)
+        end
+    else
+        x = player.x + 6 + love.math.random(-intensity, intensity)
+        y = player.y - 8 + love.math.random(-intensity, intensity)
+    end
+    playerCamera.cam:lookAt(x, y)
 end
 
 
@@ -20,16 +51,16 @@ function playerCamera.follow(dt)
             playerCamera.shaker = 1
         end
     end
+    if game.state == 0 then
+        playerCamera.cam:lookAt(player.x + 6, player.y - 8)
+    else
+        playerCamera.cam:lookAt(player.x + scene.x + 6, player.y + scene.y - 8)
+    end
     if playerCamera.shaker > 0 then
         playerCamera.shaker = playerCamera.shaker - dt
         playerCamera.shake(playerCamera.shaker * playerCamera.globalScale)
     else
         playerCamera.shaker = 0
-        if game.state == 0 then
-            playerCamera.cam:lookAt(player.x + 6, player.y - 8)
-        else
-            playerCamera.cam:lookAt(player.x + scene.x + 6, player.y + scene.y - 8)
-        end
     end
     if player.focus == true then
         playerCamera.globalScaleFactor = playerCamera.globalScaleFactor + 0.05
@@ -50,29 +81,29 @@ function playerCamera.follow(dt)
     if keys.f4 == 2 or keys.f4 == 3 then -- debugg keys remove when done
         playerCamera.cam:zoomTo(1)
     end
-    local w = love.graphics.getWidth()
-    local h = love.graphics.getHeight()
-    
-    --local w, h = love.graphics.getDimensions()
-    w, h = w / playerCamera.globalScale, h / playerCamera.globalScale
-    
-    if keys.f4 == 0 or keys.f4 == 2 then -- debugg keys remove when done
-        if playerCamera.cam.x < w/2 then
-            playerCamera.cam.x = w/2
-        end
-        
-        if playerCamera.cam.y < h/2 then
-            playerCamera.cam.y = h/2
-        end
-        
-        local mapW = currentWorld.width * currentWorld.tilewidth
-        local mapH = currentWorld.height * currentWorld.tileheight
-        if playerCamera.cam.x > (mapW - w/2) then
-            playerCamera.cam.x = (mapW - w/2)
-        end
-        
-        if playerCamera.cam.y > (mapH - h/2) then
-            playerCamera.cam.y = (mapH - h/2)
+    if playerCamera.shaker <= 0 then
+        local w = love.graphics.getWidth()
+        local h = love.graphics.getHeight()
+
+        w, h = w / playerCamera.globalScale, h / playerCamera.globalScale
+        if keys.f4 == 0 or keys.f4 == 2 then -- debugg keys remove when done
+            if playerCamera.cam.x < w/2 then
+                playerCamera.cam.x = w/2
+            end
+            
+            if playerCamera.cam.y < h/2 then
+                playerCamera.cam.y = h/2
+            end
+            
+            local mapW = currentWorld.width * currentWorld.tilewidth
+            local mapH = currentWorld.height * currentWorld.tileheight
+            if playerCamera.cam.x > (mapW - w/2) then
+                playerCamera.cam.x = (mapW - w/2)
+            end
+            
+            if playerCamera.cam.y > (mapH - h/2) then
+                playerCamera.cam.y = (mapH - h/2)
+            end
         end
     end
 end
