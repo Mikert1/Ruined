@@ -25,8 +25,8 @@ function love.keypressed(key)
         button.loadAll()
         return
     end
-    if title.state == 0 then
-        if key == "escape" then
+    if key == "escape" then
+        if title.state == 0 or love.keyboard.isDown("lshift") then
             love.event.quit()
         end
     end
