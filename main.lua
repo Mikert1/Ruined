@@ -101,16 +101,16 @@ function love.draw()
         debug.world:draw()
         story.npc:draw()
         weapon.draw()
-        enemymanager:draw()
-        -- Player
+
         love.graphics.setShader()
+        enemymanager:draw()
         player:draw()
+        enemymanager:draw2L()
         if player.focus == true then 
             love.graphics.setShader(shader.focus)
         end
-        --
+
         worldManagement:draw2dLayer()
-        enemymanager:draw2L()
         weapon.draw2L()
         story.npc:draw2L()
 
