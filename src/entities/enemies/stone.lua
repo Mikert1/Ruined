@@ -1,8 +1,11 @@
 local worldManagement = require("src/gameplay/worldmanager")
-local stone = {image = love.graphics.newImage("assets/textures/entities/enemies/stone.png")}
+local stone = {
+    image = love.graphics.newImage("assets/textures/entities/enemies/stone/body.png"),
+    eyes = love.graphics.newImage("assets/textures/entities/enemies/stone/eyes.png")
+}
 stone.__index = stone
 
-function stone.new(x,y)
+function stone.new(x, y, calorLVL)
     local instance = setmetatable({}, stone)
     instance.x = x
     instance.y = y
@@ -10,8 +13,19 @@ function stone.new(x,y)
     instance.offsetY = 6
     instance.height = 2
     world:add(instance, instance.x, instance.y, instance.width, instance.height)
-    instance.health = 2
-    instance.speed = 40
+    if calorLVL == 1 then
+        instance.health = 1
+        instance.speed = 30
+        instance.eyeColor = {1, 1, 0}
+    elseif calorLVL == 2 then
+        instance.health = 2
+        instance.speed = 40
+        instance.eyeColor = {1, 0.5, 0}
+    elseif calorLVL == 3 then
+        instance.health = 4
+        instance.speed = 50
+        instance.eyeColor = {1, 0, 0}
+    end
     instance.isLeft = false
     instance.stepTimer = 5
     instance.collider = {
@@ -72,14 +86,18 @@ end
 function stone:draw()
     if self.isLeft == false then
         love.graphics.draw(self.image, self.x, self.y - self.offsetY)
+        love.graphics.setColor(self.eyeColor)
+        love.graphics.draw(self.eyes, self.x, self.y - self.offsetY)
     else
         love.graphics.draw(self.image, self.x + self.width , self.y - self.offsetY, nil, -1, 1)
+        love.graphics.setColor(self.eyeColor)
+        love.graphics.draw(self.eyes, self.x + self.width , self.y - self.offsetY, nil, -1, 1)
     end
     if keys.tab == true then
         love.graphics.setColor(1, 0, 0)
         love.graphics.rectangle("line", self.collider.x, self.collider.y, self.collider.width, self.collider.height)
-        love.graphics.setColor(1, 1, 1)
     end
+    love.graphics.setColor(1, 1, 1)
 end
 
 return stone

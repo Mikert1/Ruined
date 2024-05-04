@@ -405,10 +405,8 @@ function weapon.draw()
             local scalingFactor = 1 - angleNurf / 1.66
         else
             local mouseX, mouseY = playerCamera.cam:mousePosition()
-
             dx = mouseX - centerX
             dy = mouseY - centerY
-
         end
         local fixedAngle = math.pi / 4 + math.atan2(dy, dx) - 0.7853981633974483
         local radius = (weapon.bow.arrow.speed * speedNurf) * 0.46

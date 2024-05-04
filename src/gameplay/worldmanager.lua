@@ -476,11 +476,11 @@ function worldManagement.spawn()
     if correctLayer then
         for _, object in ipairs(correctLayer.objects) do
             if object.name == "stone" then
-                local newStone = stone.new(object.x, object.y)
+                local newStone = stone.new(object.x, object.y, object.properties.calorLVL)
                 table.insert(enemymanager.activeEnemies, newStone)
             end
             if object.name == "boss" then
-                local newBoss = boss.new(object.x, object.y)
+                local newBoss = boss.new(object.x, object.y, object.properties.calorLVL)
                 table.insert(enemymanager.activeEnemies, newBoss)
             end
         end

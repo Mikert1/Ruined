@@ -10,7 +10,7 @@ return {
   tilewidth = 16,
   tileheight = 16,
   nextlayerid = 10,
-  nextobjectid = 57,
+  nextobjectid = 62,
   properties = {},
   tilesets = {
     {
@@ -786,56 +786,94 @@ return {
       properties = {},
       objects = {
         {
-          id = 12,
-          name = "stone",
-          type = "",
-          shape = "point",
-          x = 1227,
-          y = 35,
-          width = 0,
-          height = 0,
-          rotation = 0,
-          visible = true,
-          properties = {}
-        },
-        {
-          id = 13,
-          name = "stone",
-          type = "",
-          shape = "point",
-          x = 1273,
-          y = 114,
-          width = 0,
-          height = 0,
-          rotation = 0,
-          visible = true,
-          properties = {}
-        },
-        {
           id = 14,
           name = "stone",
           type = "",
           shape = "point",
-          x = 1235,
-          y = 164,
+          x = 1223,
+          y = 370,
           width = 0,
           height = 0,
           rotation = 0,
           visible = true,
-          properties = {}
+          properties = {
+            ["calorLVL"] = 2
+          }
         },
         {
-          id = 15,
+          id = 57,
           name = "stone",
           type = "",
           shape = "point",
-          x = 1329,
-          y = 54,
+          x = 1130,
+          y = 428,
           width = 0,
           height = 0,
           rotation = 0,
           visible = true,
-          properties = {}
+          properties = {
+            ["calorLVL"] = 3
+          }
+        },
+        {
+          id = 58,
+          name = "stone",
+          type = "",
+          shape = "point",
+          x = 1207.33,
+          y = 459.333,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["calorLVL"] = 2
+          }
+        },
+        {
+          id = 59,
+          name = "stone",
+          type = "",
+          shape = "point",
+          x = 1261.33,
+          y = 411.333,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["calorLVL"] = 1
+          }
+        },
+        {
+          id = 60,
+          name = "stone",
+          type = "",
+          shape = "point",
+          x = 1284,
+          y = 466,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["calorLVL"] = 1
+          }
+        },
+        {
+          id = 61,
+          name = "stone",
+          type = "",
+          shape = "point",
+          x = 1342,
+          y = 318,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["calorLVL"] = 1
+          }
         }
       }
     },
