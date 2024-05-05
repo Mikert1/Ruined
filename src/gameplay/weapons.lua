@@ -267,6 +267,7 @@ end
 
 function weapon.sword.use()
     if weapon.sword.slash.active == false and weapon.sword.cooldown == false and player.item.sword == true then
+        weapon.enemyGotHit = false
         weapon.sword.anim:gotoFrame(1)
         weapon.sword.slash.active = true
         local playerCenterX = player.x + player.width / 2
