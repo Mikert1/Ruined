@@ -333,7 +333,7 @@ function weapon.sword.use()
             weapon.sword.downTimer = 0
             weapon.sword.anim = weapon.sword.animations.slash3
             weapon.sword.combo.current = 1
-            playerCamera.shaker = 0.5
+            playerCamera.shaker = 0.2
         end
     end
 end
