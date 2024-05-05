@@ -315,6 +315,10 @@ function weapon.sword.use()
                 applyKnockback(enemy, angle)
             end
         end
+        if weapon.enemyGotHit == false then
+            weapon.sword.cooldown = true
+            weapon.sword.downTimer = 0
+        end
         player.speed = 2 * player.speedMultiplier
         player.sideSpeed = 1.54213562 * 0.80
         if weapon.sword.combo.current == 1 then
