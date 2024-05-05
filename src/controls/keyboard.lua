@@ -139,6 +139,10 @@ function love.keypressed(key)
             end
         end
     end
+    if key == "f6" then
+        gui.focusTime = 8
+        gui.focusReady = true
+    end
     if key == "f11" then
         if savedSettings.window == 0 then
             love.window.setFullscreen(true)

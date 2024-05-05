@@ -32,7 +32,7 @@ function time.everySecond()
             gui.focusTime = 8
             gui.focusReady = true
         else
-            gui.focusTime = gui.focusTime + 0.5
+            gui.focusTime = gui.focusTime + 0.25
             if gui.focusTime >= 8 then
                 gui.focusTime = 8
                 gui.focusReady = true
