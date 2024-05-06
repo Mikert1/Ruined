@@ -64,6 +64,7 @@ function player.load()
     player.walkingOnGrass = love.audio.newSource("assets/audio/grass3.wav", "static")
     player.walkingOnGrass:setVolume(0.3)
     player.walkingOnGrass:setLooping(true)
+    
 end
 
 local function checkCollision(rect1, rect2)
