@@ -61,7 +61,8 @@ function player.load()
 
     player.item = {}
     player.item.sword = false
-
+    player.walkingOnGrass = love.audio.newSource("assets/audio/grass.wav", "static")
+    player.walkingOnGrass:setLooping(true)
 end
 
 local function checkCollision(rect1, rect2)
@@ -246,8 +247,10 @@ function player.movement(dt)
         end
     end
     if (player.focusAnim == true or player.isMoving) == true and player.isDead == false then
+        player.walkingOnGrass:play()
         player.anim:update(dt)
     else
+        player.walkingOnGrass:stop()
         player.anim:gotoFrame(1)
     end
 end
