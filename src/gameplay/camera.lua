@@ -10,6 +10,9 @@ playerCamera.realScale.y = (playerCamera.globalScaleFactor / 1200) * love.graphi
 playerCamera.shaker = 0
 
 function playerCamera.shake(intensity)
+    if savedSettings.screenShake == false then
+        return
+    end
     local w = love.graphics.getWidth()
     local h = love.graphics.getHeight()
 
