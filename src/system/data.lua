@@ -9,6 +9,7 @@ local preview = {}
 local savedSettings = {}
 savedSettings.devmode = false
 savedSettings.console = false
+savedSettings.screenShake = true
 savedSettings.window = 0
 savedSettings.windowIndex = 1
 savedSettings.resolution = 0

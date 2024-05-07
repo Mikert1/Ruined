@@ -77,6 +77,11 @@ function button.loadAll()
             if not (savedSettings.window == 1) then
                 button.new(47, -53, love.graphics.getWidth() .. "x" .. love.graphics.getHeight(), {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 22, "Window Resolution:") -- resolution
             end
+            if savedSettings.screenShake == true then
+                button.new(-127, -18, "Enabled", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 23, "Screen shake") -- screen shake
+            else
+                button.new(-127, -18, "Disabled", {1, 0.5, 0}, 23, "Screen shake") -- screen shake
+            end
             button.new(-40, 70, "Back", {1, 0.5, 0}, 3) -- back from settings to main menu or game
         elseif settings.tab == "controls" then
             if controls.searchForKey == "interact" then
@@ -447,7 +452,15 @@ function button:action()
         end
         button.loadAll()
         file.settings.save()
-    elseif self.id == 23 then -- fps button
+    elseif self.id == 23 then -- screen shake button
+        if savedSettings.screenShake == false then
+            savedSettings.screenShake = true
+            button.loadAll()
+        else
+            savedSettings.screenShake = false
+            button.loadAll()
+        end
+        file.settings.save()
 
     elseif self.id == 24 then -- Rezet all Keybind button
         button.warning.id = self.id
