@@ -16,6 +16,10 @@ settings.mainButtons.a = love.graphics.newImage("assets/textures/gui/settings/bu
 settings.scroll = 0
 settings.tab = "game"
 settings.fadeImage = love.graphics.newImage("assets/textures/gui/settings/fade.png")
+settings.slider = {
+    x = 0,
+    hold = false
+}
 
 function settings.update()
 
@@ -53,7 +57,23 @@ function settings.draw()
                 (settings.dropFileImage:getWidth() / 2 * playerCamera.globalScale), love.graphics.getHeight() / 2 -
                 (settings.dropFileImage:getHeight() / 2 * playerCamera.globalScale), nil, playerCamera.globalScale)
         elseif settings.tab == "audio" then
-
+            -- making a slider
+            love.graphics.setColor(0.1, 0.1, 0.1)
+            love.graphics.rectangle(
+                "fill",
+                love.graphics.getWidth() / 2 - (127 * playerCamera.globalScale),
+                love.graphics.getHeight() / 2 - (35 * playerCamera.globalScale),
+                80 * playerCamera.globalScale,
+                2 * playerCamera.globalScale
+            )
+            love.graphics.setColor(0, 1, 1)
+            love.graphics.circle(
+                "fill",
+                love.graphics.getWidth() / 2 - (127 * playerCamera.globalScale) + settings.slider.x / 100 * 80 * playerCamera.globalScale,
+                love.graphics.getHeight() / 2 - (35 * playerCamera.globalScale) + 1 * playerCamera.globalScale,
+                2 * playerCamera.globalScale
+            )
+            love.graphics.setColor(1, 1, 1)
         elseif settings.tab == "stats" then
             love.graphics.setColor(0.1, 0.1, 0.1)
             if time.seconds < 10 then
