@@ -29,10 +29,13 @@ settings.slider = {
     hover = false
 }
 function settings.isMouseOverKnob(mx, my)
-    return mx >= love.graphics.getWidth() / 2 + (settings.slider.x * playerCamera.globalScale) + (settings.slider.width * settings.slider.value / (settings.slider.maxValue - settings.slider.minValue)) - settings.slider.knobRadius and
-           mx <= love.graphics.getWidth() / 2 + (settings.slider.x * playerCamera.globalScale) + (settings.slider.width * settings.slider.value / (settings.slider.maxValue - settings.slider.minValue)) + settings.slider.knobRadius and
-           my >= love.graphics.getHeight() / 2 + (settings.slider.y * playerCamera.globalScale) and
-           my <= love.graphics.getHeight() / 2 + (settings.slider.y * playerCamera.globalScale) + settings.slider.height
+    if mx > love.graphics.getWidth() / 2 + (settings.slider.x * playerCamera.globalScale) + (settings.slider.width * playerCamera.globalScale) * settings.slider.value / (settings.slider.maxValue - settings.slider.minValue) - settings.slider.knobRadius and
+        mx < love.graphics.getWidth() / 2 + (settings.slider.x * playerCamera.globalScale) + (settings.slider.width * playerCamera.globalScale) * settings.slider.value / (settings.slider.maxValue - settings.slider.minValue) + settings.slider.knobRadius and
+        my > love.graphics.getHeight() / 2 + (settings.slider.y * playerCamera.globalScale) and
+        my < love.graphics.getHeight() / 2 + (settings.slider.y * playerCamera.globalScale) + (settings.slider.height * playerCamera.globalScale) then
+        return true
+    end
+    return false
 end
 
 function settings.update()

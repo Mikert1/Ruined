@@ -57,7 +57,7 @@ function love.mousemoved(x, y)
             settings.slider.hover = false
         end
         if settings.slider.dragging then
-            settings.slider.value = (x - love.graphics.getWidth() / 2 - (settings.slider.x * playerCamera.globalScale)) / (settings.slider.width) * (settings.slider.maxValue - settings.slider.minValue)
+            settings.slider.value = (x - love.graphics.getWidth() / 2 - (settings.slider.x * playerCamera.globalScale)) / ((settings.slider.width * playerCamera.globalScale)) * (settings.slider.maxValue - settings.slider.minValue)
             if settings.slider.value < settings.slider.minValue then
                 settings.slider.value = settings.slider.minValue
             end
