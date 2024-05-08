@@ -19,8 +19,8 @@ settings.fadeImage = love.graphics.newImage("assets/textures/gui/settings/fade.p
 settings.slider = {
     x = -127,
     y = -45,
-    width = 100,
-    height = 5,
+    width = 80,
+    height = 2,
     knobRadius = 10,
     minValue = 0,
     maxValue = 100,
@@ -29,13 +29,10 @@ settings.slider = {
     hover = false
 }
 function settings.isMouseOverKnob(mx, my)
-    if mx > love.graphics.getWidth() / 2 + (settings.slider.x * playerCamera.globalScale) + (settings.slider.width * playerCamera.globalScale) * settings.slider.value / (settings.slider.maxValue - settings.slider.minValue) - settings.slider.knobRadius and
-        mx < love.graphics.getWidth() / 2 + (settings.slider.x * playerCamera.globalScale) + (settings.slider.width * playerCamera.globalScale) * settings.slider.value / (settings.slider.maxValue - settings.slider.minValue) + settings.slider.knobRadius and
-        my > love.graphics.getHeight() / 2 + (settings.slider.y * playerCamera.globalScale) and
-        my < love.graphics.getHeight() / 2 + (settings.slider.y * playerCamera.globalScale) + (settings.slider.height * playerCamera.globalScale) then
-        return true
-    end
-    return false
+    return mx > love.graphics.getWidth() / 2 + (settings.slider.x * playerCamera.globalScale) + (settings.slider.width * playerCamera.globalScale) * settings.slider.value / (settings.slider.maxValue - settings.slider.minValue) - (settings.slider.knobRadius * playerCamera.globalScale) and
+           mx < love.graphics.getWidth() / 2 + (settings.slider.x * playerCamera.globalScale) + (settings.slider.width * playerCamera.globalScale) * settings.slider.value / (settings.slider.maxValue - settings.slider.minValue) + (settings.slider.knobRadius * playerCamera.globalScale) and
+           my > love.graphics.getHeight() / 2 + (settings.slider.y * playerCamera.globalScale) and
+           my < love.graphics.getHeight() / 2 + (settings.slider.y * playerCamera.globalScale) + (settings.slider.height * playerCamera.globalScale)
 end
 
 function settings.update()
@@ -77,17 +74,10 @@ function settings.draw()
             love.graphics.print("Master Volume", love.graphics.getWidth() / 2 - (127 * playerCamera.globalScale),
                 love.graphics.getHeight() / 2 - (63 * playerCamera.globalScale), nil, playerCamera.globalScale * 0.5)
             love.graphics.rectangle(
-                "fill", 
+                "fill",
                 love.graphics.getWidth() / 2 + (settings.slider.x * playerCamera.globalScale), 
                 love.graphics.getHeight() / 2 + (settings.slider.y * playerCamera.globalScale), 
                 settings.slider.width * playerCamera.globalScale, 
-                settings.slider.height * playerCamera.globalScale
-            )
-            love.graphics.rectangle(
-                "line", 
-                love.graphics.getWidth() / 2 + (settings.slider.x * playerCamera.globalScale) + (settings.slider.width * settings.slider.value / (settings.slider.maxValue - settings.slider.minValue)) - settings.slider.knobRadius,
-                love.graphics.getHeight() / 2 + (settings.slider.y * playerCamera.globalScale),
-                (settings.slider.knobRadius * 2) * playerCamera.globalScale,
                 settings.slider.height * playerCamera.globalScale
             )
             if settings.slider.dragging then
@@ -96,10 +86,10 @@ function settings.draw()
                 love.graphics.setColor(0.15, 0.15, 0.15)
             end
             love.graphics.circle(
-                "fill", 
+                "fill",
                 love.graphics.getWidth() / 2 + ((settings.slider.x * playerCamera.globalScale) + ((settings.slider.width * playerCamera.globalScale) * settings.slider.value / (settings.slider.maxValue - settings.slider.minValue))),
                 love.graphics.getHeight() / 2 + ((settings.slider.y * playerCamera.globalScale)  + (settings.slider.height * playerCamera.globalScale) / 2),
-                settings.slider.knobRadius
+                settings.slider.knobRadius / 4 * playerCamera.globalScale
             )
             love.graphics.setColor(1, 1, 1)
         elseif settings.tab == "stats" then
