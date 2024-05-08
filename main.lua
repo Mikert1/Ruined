@@ -86,6 +86,7 @@ function love.update(dt)
             story.slowShow(dt)
         end
     end
+    settings.update()
     button:UpdateAll(dt)
 end
 

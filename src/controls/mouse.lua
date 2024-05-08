@@ -64,7 +64,9 @@ function love.mousepressed(x, y, buttonClicked, istouch)
                 title.logo.y = 90
             end
         elseif title.state == 4 then
--- normaly this would be settings but moved it to button.lua
+            if x > love.graphics.getWidth() / 2 - (127 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 - (47 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 - (35 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (35 * playerCamera.globalScale) then
+                settings.slider.hold = true
+            end
         elseif title.state == 5 then
             if not player.isDead then
                 if story.npc.interaction == true then
@@ -87,6 +89,7 @@ function love.mousepressed(x, y, buttonClicked, istouch)
 end
 
 function love.mousereleased(x, y, buttonClicked, istouch, presses)
+    settings.slider.hold = false
     if buttonClicked == 1 and weapon.equipment == 2 and weapon.bow.hold == true then
         weapon.bow.use()
     end

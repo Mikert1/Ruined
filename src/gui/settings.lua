@@ -22,7 +22,15 @@ settings.slider = {
 }
 
 function settings.update()
-
+    if settings.slider.hold == true then
+        local x, y = love.mouse.getPosition()
+        settings.slider.x = x - love.graphics.getWidth() / 2 + (127 * playerCamera.globalScale)
+        if settings.slider.x < 0 then
+            settings.slider.x = 0
+        elseif settings.slider.x > 80 * playerCamera.globalScale then
+            settings.slider.x = 80 * playerCamera.globalScale
+        end
+    end
 end
 
 function settings.draw()
@@ -69,7 +77,7 @@ function settings.draw()
             love.graphics.setColor(0, 1, 1)
             love.graphics.circle(
                 "fill",
-                love.graphics.getWidth() / 2 - (127 * playerCamera.globalScale) + settings.slider.x / 100 * 80 * playerCamera.globalScale,
+                love.graphics.getWidth() / 2 - (127 * playerCamera.globalScale) + settings.slider.x,
                 love.graphics.getHeight() / 2 - (35 * playerCamera.globalScale) + 1 * playerCamera.globalScale,
                 2 * playerCamera.globalScale
             )
