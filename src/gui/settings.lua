@@ -17,20 +17,25 @@ settings.scroll = 0
 settings.tab = "game"
 settings.fadeImage = love.graphics.newImage("assets/textures/gui/settings/fade.png")
 settings.slider = {
-    x = 0,
-    hold = false
+    x = -127,
+    y = -45,
+    width = 100,
+    height = 5,
+    knobRadius = 10,
+    minValue = 0,
+    maxValue = 100,
+    value = 0,
+    dragging = false,
+    hover = false
 }
+function settings.isMouseOverKnob(mx, my)
+    return mx >= love.graphics.getWidth() / 2 + (settings.slider.x * playerCamera.globalScale) + (settings.slider.width * settings.slider.value / (settings.slider.maxValue - settings.slider.minValue)) - settings.slider.knobRadius and
+           mx <= love.graphics.getWidth() / 2 + (settings.slider.x * playerCamera.globalScale) + (settings.slider.width * settings.slider.value / (settings.slider.maxValue - settings.slider.minValue)) + settings.slider.knobRadius and
+           my >= love.graphics.getHeight() / 2 + (settings.slider.y * playerCamera.globalScale) and
+           my <= love.graphics.getHeight() / 2 + (settings.slider.y * playerCamera.globalScale) + settings.slider.height
+end
 
 function settings.update()
-    if settings.slider.hold == true then
-        local x, y = love.mouse.getPosition()
-        settings.slider.x = x - love.graphics.getWidth() / 2 + (127 * playerCamera.globalScale)
-        if settings.slider.x < 0 then
-            settings.slider.x = 0
-        elseif settings.slider.x > 80 * playerCamera.globalScale then
-            settings.slider.x = 80 * playerCamera.globalScale
-        end
-    end
 end
 
 function settings.draw()
@@ -65,21 +70,33 @@ function settings.draw()
                 (settings.dropFileImage:getWidth() / 2 * playerCamera.globalScale), love.graphics.getHeight() / 2 -
                 (settings.dropFileImage:getHeight() / 2 * playerCamera.globalScale), nil, playerCamera.globalScale)
         elseif settings.tab == "audio" then
-            -- making a slider
             love.graphics.setColor(0.1, 0.1, 0.1)
+            love.graphics.print("Master Volume", love.graphics.getWidth() / 2 - (127 * playerCamera.globalScale),
+                love.graphics.getHeight() / 2 - (63 * playerCamera.globalScale), nil, playerCamera.globalScale * 0.5)
             love.graphics.rectangle(
-                "fill",
-                love.graphics.getWidth() / 2 - (127 * playerCamera.globalScale),
-                love.graphics.getHeight() / 2 - (35 * playerCamera.globalScale),
-                80 * playerCamera.globalScale,
-                2 * playerCamera.globalScale
+                "fill", 
+                love.graphics.getWidth() / 2 + (settings.slider.x * playerCamera.globalScale), 
+                love.graphics.getHeight() / 2 + (settings.slider.y * playerCamera.globalScale), 
+                settings.slider.width * playerCamera.globalScale, 
+                settings.slider.height * playerCamera.globalScale
             )
-            love.graphics.setColor(0, 1, 1)
+            love.graphics.rectangle(
+                "line", 
+                love.graphics.getWidth() / 2 + (settings.slider.x * playerCamera.globalScale) + (settings.slider.width * settings.slider.value / (settings.slider.maxValue - settings.slider.minValue)) - settings.slider.knobRadius,
+                love.graphics.getHeight() / 2 + (settings.slider.y * playerCamera.globalScale),
+                (settings.slider.knobRadius * 2) * playerCamera.globalScale,
+                settings.slider.height * playerCamera.globalScale
+            )
+            if settings.slider.dragging then
+                love.graphics.setColor(0, 1, 1)
+            else
+                love.graphics.setColor(0.15, 0.15, 0.15)
+            end
             love.graphics.circle(
-                "fill",
-                love.graphics.getWidth() / 2 - (127 * playerCamera.globalScale) + settings.slider.x,
-                love.graphics.getHeight() / 2 - (35 * playerCamera.globalScale) + 1 * playerCamera.globalScale,
-                2 * playerCamera.globalScale
+                "fill", 
+                love.graphics.getWidth() / 2 + ((settings.slider.x * playerCamera.globalScale) + ((settings.slider.width * playerCamera.globalScale) * settings.slider.value / (settings.slider.maxValue - settings.slider.minValue))),
+                love.graphics.getHeight() / 2 + ((settings.slider.y * playerCamera.globalScale)  + (settings.slider.height * playerCamera.globalScale) / 2),
+                settings.slider.knobRadius
             )
             love.graphics.setColor(1, 1, 1)
         elseif settings.tab == "stats" then

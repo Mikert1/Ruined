@@ -51,6 +51,20 @@ function love.mousemoved(x, y)
         --     title.settings.anim = title.settings.animations.normal
         end
     elseif title.state == 4 then
+        if settings.isMouseOverKnob(x, y) then
+            settings.slider.hover = true
+        else
+            settings.slider.hover = false
+        end
+        if settings.slider.dragging then
+            settings.slider.value = (x - love.graphics.getWidth() / 2 - (settings.slider.x * playerCamera.globalScale)) / (settings.slider.width) * (settings.slider.maxValue - settings.slider.minValue)
+            if settings.slider.value < settings.slider.minValue then
+                settings.slider.value = settings.slider.minValue
+            end
+            if settings.slider.value > settings.slider.maxValue then
+                settings.slider.value = settings.slider.maxValue
+            end
+        end
     end
 end
 function love.mousepressed(x, y, buttonClicked, istouch)
@@ -64,8 +78,9 @@ function love.mousepressed(x, y, buttonClicked, istouch)
                 title.logo.y = 90
             end
         elseif title.state == 4 then
-            if x > love.graphics.getWidth() / 2 - (127 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 - (47 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 - (35 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (35 * playerCamera.globalScale) then
-                settings.slider.hold = true
+            if buttonClicked == 1 and settings.isMouseOverKnob(x, y) then
+                print("clicked")
+                settings.slider.dragging = true
             end
         elseif title.state == 5 then
             if not player.isDead then
@@ -89,7 +104,9 @@ function love.mousepressed(x, y, buttonClicked, istouch)
 end
 
 function love.mousereleased(x, y, buttonClicked, istouch, presses)
-    settings.slider.hold = false
+    if buttonClicked == 1 then
+       settings.slider.dragging = false
+    end
     if buttonClicked == 1 and weapon.equipment == 2 and weapon.bow.hold == true then
         weapon.bow.use()
     end

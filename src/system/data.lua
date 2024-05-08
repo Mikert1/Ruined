@@ -10,6 +10,7 @@ local savedSettings = {}
 savedSettings.devmode = false
 savedSettings.console = false
 savedSettings.screenShake = true
+savedSettings.music = 100
 savedSettings.window = 0
 savedSettings.windowIndex = 1
 savedSettings.resolution = 0
