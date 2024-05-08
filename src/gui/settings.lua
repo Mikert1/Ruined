@@ -3,6 +3,7 @@ local anim8 = require("src/library/animations")
 local title = require("src/gui/title")
 local button = require("src/gui/button")
 local time = require("src/system/timer")
+
 settings.button = love.graphics.newImage("assets/textures/gui/settings/buttons/button.png")
 settings.buttonOutline = love.graphics.newImage("assets/textures/gui/settings/buttons/buttonOutline.png")
 settings.dropFileImage = love.graphics.newImage("assets/textures/gui/settings/drop.png")
@@ -24,7 +25,7 @@ settings.slider = {
     knobRadius = 10,
     minValue = 0,
     maxValue = 100,
-    value = 0,
+    value = savedSettings.masterVolume,
     dragging = false,
     hover = false
 }
@@ -36,6 +37,7 @@ function settings.isMouseOverKnob(mx, my)
 end
 
 function settings.update()
+    print(settings.slider.value)
 end
 
 function settings.draw()

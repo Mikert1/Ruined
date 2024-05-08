@@ -106,6 +106,9 @@ end
 function love.mousereleased(x, y, buttonClicked, istouch, presses)
     if buttonClicked == 1 then
        settings.slider.dragging = false
+       savedSettings.masterVolume = settings.slider.value
+       love.audio.setVolume(savedSettings.masterVolume / 100)
+       file.settings.save()
     end
     if buttonClicked == 1 and weapon.equipment == 2 and weapon.bow.hold == true then
         weapon.bow.use()

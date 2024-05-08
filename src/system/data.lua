@@ -10,7 +10,7 @@ local savedSettings = {}
 savedSettings.devmode = false
 savedSettings.console = false
 savedSettings.screenShake = true
-savedSettings.music = 100
+savedSettings.masterVolume = 100
 savedSettings.window = 0
 savedSettings.windowIndex = 1
 savedSettings.resolution = 0
@@ -349,6 +349,11 @@ function file.settings.load()
         elseif savedSettings.resolution == 4 then
             love.window.setMode(x, y, {borderless = false, resizable = true, display = savedSettings.windowIndex})
         end
+    end
+    if savedSettings.masterVolume then
+        love.audio.setVolume(savedSettings.masterVolume / 100)
+    else
+        savedSettings.masterVolume = 100
     end
     return savedSettings
 end
