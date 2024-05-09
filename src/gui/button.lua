@@ -572,25 +572,33 @@ function button:action()
         title.background.current = title.background.blue
         button.loadAll()
     elseif self.id == 62 then -- chapter button
-        print("[Warn  ] chapter 2 is not unlocked, finish chapter 1 to play chapter 2.")
-        title.state = 2
-        file.show()
-        title.rezet()
-        title.text.name = "The days of John's"
-        title.text.chapter = "Chapter 2"
-        title.mainColor = {0, 0.8, 0}
-        title.background.current = title.background.green
+        button.warning.id = self.id
+        button.warning.text = "This chapter is locked for now. \nWork in progress."
+        button.warning.icon = button.icons.info
         button.loadAll()
+        -- print("[Warn  ] chapter 2 is not unlocked, finish chapter 1 to play chapter 2.")
+        -- title.state = 2
+        -- file.show()
+        -- title.rezet()
+        -- title.text.name = "The days of John's"
+        -- title.text.chapter = "Chapter 2"
+        -- title.mainColor = {0, 0.8, 0}
+        -- title.background.current = title.background.green
+        -- button.loadAll()
     elseif self.id == 63 then -- chapter button 
-        print("[Warn  ] chapter 3 is not unlocked, finish chapter 2 to play chapter 3.")
-        title.state = 3
-        file.show()
-        title.rezet()
-        title.text.name = "Returned"
-        title.text.chapter = "Chapter 3"
-        title.mainColor = {0, 1, 1}
-        title.background.current = title.background.storm
+        button.warning.id = self.id
+        button.warning.text = "All keybinds are already set to default. \nWork in progress."
+        button.warning.icon = button.icons.info
         button.loadAll()
+        -- print("[Warn  ] chapter 3 is not unlocked, finish chapter 2 to play chapter 3.")
+        -- title.state = 3
+        -- file.show()
+        -- title.rezet()
+        -- title.text.name = "Returned"
+        -- title.text.chapter = "Chapter 3"
+        -- title.mainColor = {0, 1, 1}
+        -- title.background.current = title.background.storm
+        -- button.loadAll()
     elseif self.id == 64 then -- setting button
         love.window.setTitle("Ruined | Settings")
         title.state = 4
