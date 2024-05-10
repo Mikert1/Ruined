@@ -29,6 +29,7 @@ settings.slider = {
     dragging = false,
     hover = false
 }
+settings.loveImage = love.graphics.newImage("assets/textures/gui/title/love.png")
 function settings.isMouseOverKnob(mx, my)
     return mx > love.graphics.getWidth() / 2 + (settings.slider.x * playerCamera.globalScale) + (settings.slider.width * playerCamera.globalScale) * settings.slider.value / (settings.slider.maxValue - settings.slider.minValue) - (settings.slider.knobRadius * playerCamera.globalScale) and
            mx < love.graphics.getWidth() / 2 + (settings.slider.x * playerCamera.globalScale) + (settings.slider.width * playerCamera.globalScale) * settings.slider.value / (settings.slider.maxValue - settings.slider.minValue) + (settings.slider.knobRadius * playerCamera.globalScale) and
@@ -107,6 +108,9 @@ function settings.draw()
                 love.graphics.getHeight() / 2 - (53 * playerCamera.globalScale), nil, playerCamera.globalScale * 0.5)
             love.graphics.print("Enemies Killed: ", love.graphics.getWidth() / 2 - (127 * playerCamera.globalScale),
                 love.graphics.getHeight() / 2 - (43 * playerCamera.globalScale), nil, playerCamera.globalScale * 0.5)
+            love.graphics.setColor(1, 1, 1)
+            love.graphics.draw(settings.loveImage , love.graphics.getWidth() / 2 - (127 * playerCamera.globalScale),
+                love.graphics.getHeight() / 2 + (40 * playerCamera.globalScale), nil, playerCamera.globalScale * 0.1)
         end
         love.graphics.setColor(1, 1, 1)
     end

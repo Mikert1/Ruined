@@ -104,7 +104,6 @@ function title.load()
     title.mikert.animation = title.mikert.animation1
     title.mikert.timer = 0
     title.mikert.showed = false
-    title.loveImage = love.graphics.newImage("assets/textures/gui/title/love.png")
     title.settingBackground = love.graphics.newImage("assets/textures/gui/title/background.png")
 
     shake = {
