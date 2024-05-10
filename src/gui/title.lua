@@ -198,7 +198,7 @@ function title.update(dt)
             end
             title.mikert.animation:update(dt)
         end
-        if title.mikert.timer > 10 then
+        if title.mikert.timer > 5 then
             title.mikert.showed = true
             button.loadAll()
         end
@@ -287,19 +287,6 @@ function title:draw()
                 title.mikert.animation:draw(title.mikert.image1, (love.graphics.getWidth() / 2) - (884 / 2 * (playerCamera.globalScale / 5)), (love.graphics.getHeight() / 2) - (188 / 2 * (playerCamera.globalScale / 5)), nil, playerCamera.globalScale / 5)
             else
                 title.mikert.animation:draw(title.mikert.image2, (love.graphics.getWidth() / 2) - (884 / 2 * (playerCamera.globalScale / 5)), (love.graphics.getHeight() / 2) - (188 / 2 * (playerCamera.globalScale / 5)), nil, playerCamera.globalScale / 5)
-            end
-        else
-            if title.mikert.timer < 7 then
-                love.graphics.setColor(1, 1, 1, 0 + (title.mikert.timer - 5) / 2)
-                love.graphics.draw(title.loveImage, (love.graphics.getWidth() / 2) - (title.loveImage:getWidth() / 2 * (playerCamera.globalScale / 5)), (love.graphics.getHeight() / 2) - (title.loveImage:getHeight() / 2 * (playerCamera.globalScale / 5)), nil, playerCamera.globalScale / 5)
-            else
-                if title.mikert.timer < 8 then
-                    love.graphics.setColor(1, 1, 1, 1)
-                    love.graphics.draw(title.loveImage, (love.graphics.getWidth() / 2) - (title.loveImage:getWidth() / 2 * (playerCamera.globalScale / 5)), (love.graphics.getHeight() / 2) - (title.loveImage:getHeight() / 2 * (playerCamera.globalScale / 5)), nil, playerCamera.globalScale / 5)
-                else
-                    love.graphics.setColor(1, 1, 1, 1 - (title.mikert.timer - 8) / 2)
-                    love.graphics.draw(title.loveImage, (love.graphics.getWidth() / 2) - (title.loveImage:getWidth() / 2 * (playerCamera.globalScale / 5)), (love.graphics.getHeight() / 2) - (title.loveImage:getHeight() / 2 * (playerCamera.globalScale / 5)), nil, playerCamera.globalScale / 5)
-                end
             end
         end
     else
