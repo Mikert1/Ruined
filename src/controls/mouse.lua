@@ -68,35 +68,30 @@ function love.mousemoved(x, y)
     end
 end
 function love.mousepressed(x, y, buttonClicked, istouch)
-    if title.mikert.showed == false then
-        title.mikert.showed = true
-        button.loadAll()
-    else
-        if title.state == 0 then
-            if title.logo.y < 90 then
-                title.logo.anim = title.logo.animations.region2
-                title.logo.y = 90
-            end
-        elseif title.state == 4 then
-            if buttonClicked == 1 and settings.isMouseOverKnob(x, y) then
-                print("clicked")
-                settings.slider.dragging = true
-            end
-        elseif title.state == 5 then
-            if not player.isDead then
-                if story.npc.interaction == true then
-                    if story.dialogue.length < story.dialogue.position then
-                        story.data.current = story.data.current + 1
-                        story.dialogue.position = 0
-                        story.dialogue.update()
-                    end
+    if title.state == 0 then
+        if title.logo.y < 90 then
+            title.logo.anim = title.logo.animations.region2
+            title.logo.y = 90
+        end
+    elseif title.state == 4 then
+        if buttonClicked == 1 and settings.isMouseOverKnob(x, y) then
+            print("clicked")
+            settings.slider.dragging = true
+        end
+    elseif title.state == 5 then
+        if not player.isDead then
+            if story.npc.interaction == true then
+                if story.dialogue.length < story.dialogue.position then
+                    story.data.current = story.data.current + 1
+                    story.dialogue.position = 0
+                    story.dialogue.update()
                 end
-                if buttonClicked == 1 and game.freeze == false then
-                    if weapon.equipment == 1 then
-                        weapon.sword.use()
-                    elseif weapon.equipment == 2 then
-                        weapon.bow.charge()
-                    end
+            end
+            if buttonClicked == 1 and game.freeze == false then
+                if weapon.equipment == 1 then
+                    weapon.sword.use()
+                elseif weapon.equipment == 2 then
+                    weapon.bow.charge()
                 end
             end
         end
@@ -104,14 +99,19 @@ function love.mousepressed(x, y, buttonClicked, istouch)
 end
 
 function love.mousereleased(x, y, buttonClicked, istouch, presses)
-    if buttonClicked == 1 then
-       settings.slider.dragging = false
-       savedSettings.masterVolume = settings.slider.value
-       love.audio.setVolume(savedSettings.masterVolume / 100)
-       file.settings.save()
-    end
-    if buttonClicked == 1 and weapon.equipment == 2 and weapon.bow.hold == true then
-        weapon.bow.use()
+    if title.mikert.showed == false then
+        title.mikert.showed = true
+        button.loadAll()
+    else
+        if buttonClicked == 1 then
+        settings.slider.dragging = false
+        savedSettings.masterVolume = settings.slider.value
+        love.audio.setVolume(savedSettings.masterVolume / 100)
+        file.settings.save()
+        end
+        if buttonClicked == 1 and weapon.equipment == 2 and weapon.bow.hold == true then
+            weapon.bow.use()
+        end
     end
 end
 
