@@ -594,7 +594,7 @@ function button:action()
     elseif self.id == 62 then -- chapter button
         button.warning.id = self.id
         if savedSettings.devmode == true then
-            button.warning.text = "Becouse of DEVMODE \nyou can play chapter 2. \nWork in progress. (not recomanded)"
+            button.warning.text = "Because of DEVMODE \nyou can play chapter 2. \nWork in progress. (not recomanded)"
             button.warning.icon = button.icons.danger
         else
             button.warning.text = "This chapter is locked for now. \nWork in progress.\nIf you want to look turn on DEVMODE."
@@ -604,7 +604,7 @@ function button:action()
     elseif self.id == 63 then -- chapter button 
         button.warning.id = self.id
         if savedSettings.devmode == true then
-            button.warning.text = "Becouse of DEVMODE \nyou can play chapter 3. \nWork in progress. (not recomanded)"
+            button.warning.text = "Because of DEVMODE \nyou can play chapter 3. \nWork in progress. (not recomanded)"
             button.warning.icon = button.icons.danger
         else
             button.warning.text = "This chapter is locked for now. \nWork in progress.\nIf you want to look turn on DEVMODE."
