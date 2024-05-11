@@ -38,7 +38,6 @@ function settings.isMouseOverKnob(mx, my)
 end
 
 function settings.update()
-    print(settings.slider.value)
 end
 
 function settings.draw()

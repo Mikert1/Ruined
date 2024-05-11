@@ -103,7 +103,7 @@ function love.mousereleased(x, y, buttonClicked, istouch, presses)
         title.mikert.showed = true
         button.loadAll()
     else
-        if buttonClicked == 1 then
+        if buttonClicked == 1 and title.state == 4 and settings.tab == "audio" then
         settings.slider.dragging = false
         savedSettings.masterVolume = settings.slider.value
         love.audio.setVolume(savedSettings.masterVolume / 100)

@@ -64,14 +64,6 @@ function gui.load()
 end
 
 function gui.update(dt)
-    -- if not love.window.hasFocus() then
-    --     if game.esc == false then
-    --         game.esc = true
-    --         player.noMove = true
-    --         game.freeze = true
-    --         button.loadAll()
-    --     end
-    -- end
     if gui.welcome.timer > 0 then
         gui.welcome.timer = gui.welcome.timer - dt
         gui.welcome.animations.region1:update(dt)
