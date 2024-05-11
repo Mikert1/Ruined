@@ -32,6 +32,7 @@ weapon.sword.collider = {
     height = 30
 }
 weapon.sword.colliderActive = false
+weapon.sword.sound = love.audio.newSource("assets/audio/hit.wav", "static")
 
 weapon.bow = {}
 -- weapon.bow.image = love.graphics.newImage("assets/textures/entities/player/cryonium_bow.png")
@@ -319,6 +320,8 @@ function weapon.sword.use()
         if weapon.enemyGotHit == false then
             weapon.sword.cooldown = true
             weapon.sword.downTimer = 0
+        else
+            weapon.sword.sound:play()
         end
         player.speed = 2 * player.speedMultiplier
         player.sideSpeed = 1.54213562 * 0.80
