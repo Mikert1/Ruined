@@ -112,6 +112,7 @@ function controller.update(dt)
                                 game.freeze = true
                                 button.loadAll()
                                 gui.map = false
+                                player.walkingOnGrass:stop()
                             end
                         end
                     end

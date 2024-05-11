@@ -43,6 +43,7 @@ function love.keypressed(key)
                 game.freeze = true
                 button.loadAll()
                 gui.map = false
+                player.walkingOnGrass:stop()
             end
         end
         if key == controls.keys.interact and story.npc.interaction == true then
