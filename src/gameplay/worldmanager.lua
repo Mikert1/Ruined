@@ -33,6 +33,7 @@ function worldManagement.load()
     _G.mountains = sti("assets/maps/mountains.lua", { "bump" })
     _G.forrest = sti("assets/maps/forrest.lua", { "bump" })
     _G.snow = sti("assets/maps/snow.lua", { "bump" })
+    _G.naamloos = sti("assets/maps/naamloos.lua", { "bump" })
     _G.currentWorld = village
     currentWorld:bump_init(world)
     saveStone = {
@@ -310,6 +311,13 @@ function worldManagement.teleport(loc)
             gui.mapWorld = {
                 x = 150,
                 y = 0
+            }
+        elseif data.world == "naamloos" then
+            currentWorld = naamloos
+            love.window.setTitle("Ruined | Overworld - TEST")
+            gui.mapWorld = {
+                x = 100,
+                y = 50
             }
         else
             print("[Warn  ] world not found. spawning player in The Village")

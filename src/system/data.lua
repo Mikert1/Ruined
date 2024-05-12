@@ -183,7 +183,7 @@ function file.load()
                 },
                 isUp = false,
                 isLeft = true,
-                world = "Village",
+                world = "naamloos",
                 hearts = 8,
                 storyTold = {
                     john1 = false
