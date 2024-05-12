@@ -235,6 +235,10 @@ local function saveStones()
                 saveStone.y = object.y
             end
         end
+    else
+        print("[Warn  ] saveStone not found")
+        saveStone.x = 0
+        saveStone.y = 0
     end
 end
 
