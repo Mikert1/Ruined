@@ -22,7 +22,7 @@ return {
       spacing = 0,
       margin = 0,
       columns = 21,
-      image = "../textures/world/world.png",
+      image = "../textures/world/worldOLD.png",
       imagewidth = 336,
       imageheight = 224,
       objectalignment = "unspecified",
