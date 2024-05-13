@@ -574,6 +574,7 @@ local function inDarkness(dt)
 end
 
 function worldManagement.update(dt)
+    currentWorld:update(dt)
     if worldManagement.thisWorld == "Forrest" then
         inDarkness(dt)
     end
@@ -636,6 +637,9 @@ function worldManagement:draw()
     end
     if currentWorld.layers["walls"] then
         currentWorld:drawLayer(currentWorld.layers["walls"])
+    end
+    if currentWorld.layers["groundL2"] then
+        currentWorld:drawLayer(currentWorld.layers["groundL2"])
     end
     if currentWorld.layers["objective1"] then
         currentWorld:drawLayer(currentWorld.layers["objective1"])
