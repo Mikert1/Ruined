@@ -56,7 +56,7 @@ function file.save()
         love.filesystem.write("savegame1.json", jsonString)
         love.filesystem.write("previewcard1.json", jsonString2)
         print("[Info  ] Savegame 1 Saved!")
-        file.status = "File 1 saved"
+        file.status = "Progress Saved!"
     elseif file.filenumber == 2 then
         preview.file2.world = worldManagement.thisWorld
         preview.file2.seconds = time.seconds
@@ -71,7 +71,7 @@ function file.save()
         love.filesystem.write("savegame2.json", jsonString)
         love.filesystem.write("previewcard2.json", jsonString2)
         print("[Info  ] Savegame 2 Saved!")
-        file.status = "File 2 saved"
+        file.status = "Progress Saved!"
     elseif file.filenumber == 3 then
         preview.file3.world = worldManagement.thisWorld
         preview.file3.seconds = time.seconds
@@ -86,7 +86,7 @@ function file.save()
         love.filesystem.write("savegame3.json", jsonString)
         love.filesystem.write("previewcard3.json", jsonString2)
         print("[Info  ] Savegame 3 Saved!")
-        file.status = "File 3 saved"
+        file.status = "Progress Saved!"
     else
         file.status = "Saving Error"
         print("[Warn  ] Savegame error (filenumer cant be 0)")
@@ -299,6 +299,7 @@ function file.show()
 end
 
 function file.settings.save()
+    file.message = 0
     local jsonString = json.encode(savedSettings)
     love.filesystem.write("settings.json", jsonString)
     file.status = "Settings saved"
