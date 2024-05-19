@@ -9,7 +9,6 @@ function gui.load()
     settings = require("src/gui/settings")
     weapon = require("src/gameplay/weapons")
     local anim8 = require("src/library/animations")
-    gui.pressE = love.graphics.newImage("assets/textures/npc/pressE.png")
     gui.welcome = {}
     gui.welcome.timer = 0
     gui.welcome.image = love.graphics.newImage("assets/textures/gui/gameplay/welcome.png")
@@ -51,8 +50,8 @@ function gui.load()
     gui.text.resume = "Resume"
 
     gui.map = false
-    gui.mapImage = love.graphics.newImage("assets/textures/world/map.png")
-    gui.mapImageBackground = love.graphics.newImage("assets/textures/world/mapBackground.png")
+    gui.mapImage = love.graphics.newImage("assets/textures/world/minimap/map.png")
+    gui.mapImageBackground = love.graphics.newImage("assets/textures/world/minimap/background.png")
     gui.mapPoint = {}
     -- gui.mapPoint.image = love.graphics.newImage("assets/textures/world/mapPoint.png")
     gui.mapPoint.x = player.x / 100
