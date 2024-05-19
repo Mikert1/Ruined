@@ -12,13 +12,13 @@ function gui.load()
     gui.pressE = love.graphics.newImage("assets/textures/npc/pressE.png")
     gui.welcome = {}
     gui.welcome.timer = 0
-    gui.welcome.image = love.graphics.newImage("assets/textures/gui/welcome.png")
+    gui.welcome.image = love.graphics.newImage("assets/textures/gui/gameplay/welcome.png")
     gui.welcome.grid = anim8.newGrid( 75, 20, gui.welcome.image:getWidth(), gui.welcome.image:getHeight() )
     gui.welcome.animations = {}
     gui.welcome.animations.region1 = anim8.newAnimation( gui.welcome.grid('1-10', 1), 0.3 )
 
     gui.healthbar = {}
-    gui.healthbar.sprite = love.graphics.newImage("assets/textures/gui/healthbarplayer.png")
+    gui.healthbar.sprite = love.graphics.newImage("assets/textures/gui/gameplay/healthbarplayer.png")
     gui.healthbar.grid = anim8.newGrid( 78, 14, gui.healthbar.sprite:getWidth(), gui.healthbar.sprite:getHeight() )
     gui.healthbar.animations = {}
     gui.healthbar.animations.normal = anim8.newAnimation(gui.healthbar.grid('1-9', 1), 0.3)
@@ -26,7 +26,7 @@ function gui.load()
     gui.healthbar.anim = gui.healthbar.animations.normal
 
     gui.focusbar = {}
-    gui.focusbar.sprite = love.graphics.newImage("assets/textures/gui/specialbar.png")
+    gui.focusbar.sprite = love.graphics.newImage("assets/textures/gui/gameplay/specialbar.png")
     gui.focusbar.grid = anim8.newGrid( 78, 14, gui.focusbar.sprite:getWidth(), gui.focusbar.sprite:getHeight())
     gui.focusbar.animations = {}
     gui.focusbar.animations.normal = anim8.newAnimation(gui.focusbar.grid('1-9', 1), 1)
@@ -37,7 +37,7 @@ function gui.load()
     gui.focusbar.lightActive = false
     gui.focusReady = false
     gui.focusTime = 0
-    gui.gameover = love.graphics.newImage("assets/textures/gui/gameover.png")
+    gui.gameover = love.graphics.newImage("assets/textures/gui/gameplay/gameover.png")
 
     gui.hide = {}
     gui.hide.sword = {}
