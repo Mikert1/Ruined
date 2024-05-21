@@ -39,9 +39,9 @@ function button.loadAll()
         button.specialNew(71, 50, title.icons.final, {0, 1, 1}, 63)
     elseif title.state == 5 then
         if game.esc == true then
-            button.new(-40, -25, "Title screen", {1, 0, 0}, 5) -- back from skin to settings
+            button.new(-40, -25, "Resume", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 7) -- back from skin to settings
             button.new(-40, 0, "Settings", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 6) -- back from skin to settings
-            button.new(-40, 25, "Resume", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 7) -- back from skin to settings
+            button.new(-40, 25, "Title screen", {1, 0, 0}, 5) -- back from skin to settings
             button.first()
         end
     elseif title.state == 4 then
