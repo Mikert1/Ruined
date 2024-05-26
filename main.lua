@@ -29,7 +29,7 @@ local scene = require("src/gameplay/cutscene")
 local stone = require("src/entities/enemies/stone")
 local button = require("src/gui/button")
 local settings = require("src/gui/settings")
-_G.server = require("src/network/server")
+_G.lan = require("src/network/lan")
 local LOADTIMER2 = os.clock()
 
 story.loadAssets()

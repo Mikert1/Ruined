@@ -78,8 +78,7 @@ function love.keypressed(key)
             end
         end
         if key == "p" then
-            server.sendData("Hello, other player!")
-            server.receiveData()
+            lan.sendData("Hello, other player!")
         end
         if story.npc.interaction == true then
             if key == "right" or key == controls.keys.interact then
