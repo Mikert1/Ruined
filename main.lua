@@ -56,6 +56,7 @@ end
 
 function love.update(dt)
     lan.receiveData()
+    lan.sendData()
     controller.update(dt)
     file.update(dt)
     if game.state == 0 then
@@ -132,4 +133,5 @@ function love.draw()
         debug:draw()
         file:draw()
         settings.draw2Layer()
+        lan.draw()
     end

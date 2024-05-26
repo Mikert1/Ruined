@@ -2,9 +2,9 @@ local lan = {}
 local json = require("src/library/json")
 local socket = require("socket")
 
-local port = 54321
+local hostPort = 54321
 socket = require "socket" .udp()
-socket:setsockname("0.0.0.0", port)
+socket:setsockname("0.0.0.0", hostPort)
 socket:setoption("broadcast", true)
 function lan.connect()
     if game.lanEnabled == true then
@@ -15,17 +15,26 @@ function lan.connect()
             print("Received: " .. msg .. " from " .. ip .. ":" .. port)
             socket:setpeername(ip, port)
             game.lanEnabled = true
+            message = "connect"
+            socket:send(message)
+            socket:settimeout(0)
         end
-        socket:settimeout(0)
     end
 end
 
 function lan.host()
-    local hostPort = 54321
     message = "host"
     socket:sendto(message, "255.255.255.255", hostPort)
-    game.lanEnabled = true
-    socket:settimeout(0)
+    while true do
+        local msg, ip, port = socket:receivefrom()
+        if msg == "connect" then
+            print("Received: " .. msg .. " from " .. ip .. ":" .. port)
+            socket:setpeername(ip, port)
+            game.lanEnabled = true
+            socket:settimeout(0)
+            break
+        end
+    end
 end
 
 function lan.receiveData()
@@ -42,6 +51,12 @@ function lan.sendData()
         message = {x = player.x, y = player.y}
         message = json.encode(message)
         socket:send(message)
+    end
+end
+
+function lan.draw()
+    if game.lanEnabled == true then
+        love.graphics.print("LAN Enabled", 10, 10)
     end
 end
 
