@@ -17,4 +17,6 @@
     <img width="49.5%" src="assets/textures/github/enemy.png">
     <img width="49.5%" src="assets/textures/github/path.png">
 </div>
+<h2>Beta Website:</h2>
+<p><a href="http://mikert.com/game.html">Mikert.com</a></p>
 <h6>Made on a Windows Laptop. Stable Versions are Tested on linux.</h6>
