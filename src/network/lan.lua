@@ -25,6 +25,7 @@ function lan.host()
     message = "host"
     socket:sendto(message, "255.255.255.255", hostPort)
     game.lanEnabled = true
+    socket:settimeout(0)
 end
 
 function lan.receiveData()
