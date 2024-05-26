@@ -55,6 +55,7 @@ function love.load()
 end
 
 function love.update(dt)
+    lan.receiveData()
     controller.update(dt)
     file.update(dt)
     if game.state == 0 then

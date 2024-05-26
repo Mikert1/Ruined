@@ -14,6 +14,7 @@ game.state = 1
 -- 2.4 = show and camera
 -- 2.5 = show and talk
 -- 2.6 = talk and camera
+game.lanEnabled = false
 game.esc = false
 game.controlType = 0
 -- 0 = keyboard and mouse
