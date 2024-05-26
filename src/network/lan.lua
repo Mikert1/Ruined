@@ -2,7 +2,7 @@ local lan = {}
 local json = require("src/library/json")
 local socket = require("socket")
 
-local port = 12345
+local port = 54321
 socket = require "socket" .udp()
 socket:setsockname("0.0.0.0", port)
 socket:setoption("broadcast", true)
@@ -21,10 +21,10 @@ function lan.connect()
 end
 
 function lan.host()
-    if game.lanEnabled == true then
-        message = "host"
-        socket:sendto(message, "255.255.255.255", port)
-    end
+    local hostPort = 54321
+    message = "host"
+    socket:sendto(message, "255.255.255.255", hostPort)
+    game.lanEnabled = true
 end
 
 function lan.receiveData()
