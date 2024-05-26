@@ -3,19 +3,20 @@ local json = require("src/library/json")
 local socket = require("socket")
 
 local port = 12345
+function lan.connect()
+    socket = require "socket" .udp()
+    socket:setsockname("0.0.0.0", port)
+    socket:setoption("broadcast", true)
+    socket:settimeout(1)
+    if game.lanEnabled == true then
 
-socket = require "socket" .udp()
-socket:setsockname("0.0.0.0", port)
-socket:setoption("broadcast", true)
-socket:settimeout(1)
-if game.lanEnabled == true then
-
-else
-    local msg, ip, port = socket:receivefrom()
-    if msg then
-        print("Received: " .. msg .. " from " .. ip .. ":" .. port)
-        socket:setpeername(ip, port)
-        game.lanEnabled = true
+    else
+        local msg, ip, port = socket:receivefrom()
+        if msg then
+            print("Received: " .. msg .. " from " .. ip .. ":" .. port)
+            socket:setpeername(ip, port)
+            game.lanEnabled = true
+        end
     end
 end
 

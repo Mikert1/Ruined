@@ -77,6 +77,9 @@ function love.keypressed(key)
                 weapon.bow.holdCounter = 0
             end
         end
+        if key == "o" then
+            lan.connect()
+        end
         if key == "p" then
             lan.sendData("Hello, other player!")
         end
