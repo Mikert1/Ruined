@@ -80,6 +80,9 @@ function love.keypressed(key)
         if key == "o" then
             lan.connect()
         end
+        if key == "i" then
+            lan.host()
+        end
         if key == "p" then
             lan.sendData("Hello, other player!")
         end
