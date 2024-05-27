@@ -1,5 +1,6 @@
 local lan = {}
 local json = require("src/library/json")
+local worldManagement = require("src/gameplay/worldmanager")
 local socket = require("socket")
 lan.player = {
     x = 0,
@@ -55,7 +56,7 @@ end
 
 function lan.sendData()
     if game.lanEnabled == true then
-        message = {x = player.x, y = player.y}
+        message = {x = player.x, y = player.y, world = worldManagement.thisWorld, isLeft = player.isLeft}
         message = json.encode(message)
         socket:send(message)
         
@@ -70,8 +71,14 @@ end
 
 function lan.drawPlayer2()
     if game.lanEnabled == true then
-        love.graphics.rectangle("line", lan.player.x, lan.player.y, player.width, player.height) -- player 2
-        player.anim1:draw(player.sheet, lan.player.x + 6, lan.player.y - 6, nil, 1, 1, 9.5, 10.5)
+        if lan.player.world == worldManagement.thisWorld then
+            love.graphics.draw(player.shadow, lan.player.x, lan.player.y)
+            if lan.player.isLeft == false then
+                player.anim1:draw(player.sheet, lan.player.x + 6, lan.player.y - 6, nil, 1, 1, 9.5, 10.5)
+            else
+                player.anim1:draw(player.sheet, lan.player.x + 6, lan.player.y - 6, nil, -1, 1, 9.5, 10.5)
+            end
+        end
     end
 end
 
