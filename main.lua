@@ -108,6 +108,7 @@ function love.draw()
         love.graphics.setShader()
         enemymanager:draw()
         player:draw()
+        lan.drawPlayer2()
         enemymanager:draw2L()
         if player.focus == true then 
             love.graphics.setShader(shader.focus)
