@@ -46,9 +46,9 @@ function lan.receiveData()
         local msg, error = socket:receive()
         if msg then
             print("Received: " .. msg)
-        end
-        if msg:sub(1, 1) == "{" then
-            lan.player = json.decode(msg)
+            if msg:sub(1, 1) == "{" then
+                lan.player = json.decode(msg)
+            end
         end
     end
 end
@@ -71,6 +71,7 @@ end
 function lan.drawPlayer2()
     if game.lanEnabled == true then
         love.graphics.rectangle("line", lan.player.x, lan.player.y, player.width, player.height) -- player 2
+        player.anim1:draw(player.sheet, lan.player.x + 6, lan.player.y - 6, nil, 1, 1, 9.5, 10.5)
     end
 end
 

@@ -45,6 +45,7 @@ function player.load()
         dead      = anim8.newAnimation( player.grid('1-2', 3), 0.3 )
     }
     player.anim = player.animations.downLeft
+    player.anim1 = player.animations.downLeft
     player.isUp = false
     player.isLeft = false
     player.isSwimming = false
