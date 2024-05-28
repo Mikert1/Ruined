@@ -1,4 +1,4 @@
-<img width="100%" src="assets/textures/github/README.png">
+<img width="100%" src="assets/textures/github/game.png">
 <h1>Ruined</h1>
 <p>“Ruined” the game is a hobby project that i started so i could learn Game Development. In early versions the code might not be perfect but i will try to improve every aspect of my game as i grow in skills.</p>
 <h2>Version:</h2>
@@ -19,4 +19,4 @@
 </div>
 <h2>Beta Website:</h2>
 <p><a href="http://mikert.com/game.html">Mikert.com</a></p>
-<h6>Made on a Windows Laptop. Stable Versions are Tested on linux.</h6>
+<h6>Made on a Windows Laptop. Stable Versions are Tested on linux and mac.</h6>
