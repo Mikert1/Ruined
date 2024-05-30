@@ -85,25 +85,16 @@ function title.load()
     title.text.button2 = "Play"
     title.text.button3 = "Play"
     title.mikert = {}
-    -- this code split up helps not so good pc's to render the image
-    title.mikert.image1 = love.graphics.newImage("assets/textures/gui/title/mikertLogo1.png")
-    title.mikert.grid1 = anim8.newGrid( 884, 188, title.mikert.image1:getWidth(), title.mikert.image1:getHeight())
-    title.mikert.image2 = love.graphics.newImage("assets/textures/gui/title/mikertLogo2.png")
-    title.mikert.grid2 = anim8.newGrid( 884, 188, title.mikert.image2:getWidth(), title.mikert.image2:getHeight())
-    local durations1 = {
-        ['1-13'] = 0.1,
-        ['14-14'] = 0.3
-    }
-    local durations2 = {
-        ['1-8'] = 0.1,
-        ['9-9'] = 0.8
-    }
-    title.mikert.animation1 = anim8.newAnimation(title.mikert.grid1("1-14", 1), durations1)
-    title.mikert.animation2 = anim8.newAnimation(title.mikert.grid2("1-9", 1), durations2)
-    --
-    title.mikert.animation = title.mikert.animation1
     title.mikert.timer = 0
     title.mikert.showed = false
+    title.mikert.order = {
+        1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 13, 14, 14, 14, 15, 16, 16, 16, 17, 16, 16, 16, 17, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,
+    }
+    title.mikert.image = {}
+    for i = 1, 17 do
+        title.mikert.image[i] = love.graphics.newImage("assets/textures/gui/title/mikert/" .. i .. ".png")
+    end
+
     title.settingBackground = love.graphics.newImage("assets/textures/gui/title/background.png")
 
     shake = {
@@ -190,14 +181,6 @@ end
 function title.update(dt)
     if title.mikert.showed == false then
         title.mikert.timer = title.mikert.timer + dt
-        if title.mikert.timer < 3 then
-            if title.mikert.timer < 1.6 then
-                title.mikert.animation = title.mikert.animation1
-            else
-                title.mikert.animation = title.mikert.animation2
-            end
-            title.mikert.animation:update(dt)
-        end
         if title.mikert.timer > 5 then
             title.mikert.showed = true
             button.loadAll()
@@ -283,11 +266,8 @@ function title:draw()
         love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
         if title.mikert.timer < 5 then
             love.graphics.setColor(1, 1, 1, 1 -( title.mikert.timer -3) / 2)
-            if title.mikert.animation == title.mikert.animation1 then
-                title.mikert.animation:draw(title.mikert.image1, (love.graphics.getWidth() / 2) - (884 / 2 * (playerCamera.globalScale / 5)), (love.graphics.getHeight() / 2) - (188 / 2 * (playerCamera.globalScale / 5)), nil, playerCamera.globalScale / 5)
-            else
-                title.mikert.animation:draw(title.mikert.image2, (love.graphics.getWidth() / 2) - (884 / 2 * (playerCamera.globalScale / 5)), (love.graphics.getHeight() / 2) - (188 / 2 * (playerCamera.globalScale / 5)), nil, playerCamera.globalScale / 5)
-            end
+                --make a nice fade
+                love.graphics.draw(title.mikert.image[title.mikert.order[math.floor(title.mikert.timer * 7) + 1]], (love.graphics.getWidth() / 2) - (884 / 2 * (playerCamera.globalScale / 5)), (love.graphics.getHeight() / 2) - (188 / 2 * (playerCamera.globalScale / 5)), nil, playerCamera.globalScale / 5)
         end
     else
         love.graphics.setColor(1, 1, 1)
