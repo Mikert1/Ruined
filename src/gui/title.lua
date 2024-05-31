@@ -88,7 +88,7 @@ function title.load()
     title.mikert.timer = 0
     title.mikert.showed = false
     title.mikert.order = {
-        1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 13, 14, 14, 14, 15, 16, 16, 16, 17, 16, 16, 16, 17, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,
+        1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 13, 14, 14, 14, 15, 16, 16, 16, 17, 16, 16, 16, 17, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14
     }
     title.mikert.image = {}
     for i = 1, 17 do
@@ -266,8 +266,7 @@ function title:draw()
         love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
         if title.mikert.timer < 5 then
             love.graphics.setColor(1, 1, 1, 1 -( title.mikert.timer -3) / 2)
-                --make a nice fade
-                love.graphics.draw(title.mikert.image[title.mikert.order[math.floor(title.mikert.timer * 7) + 1]], (love.graphics.getWidth() / 2) - (884 / 2 * (playerCamera.globalScale / 5)), (love.graphics.getHeight() / 2) - (188 / 2 * (playerCamera.globalScale / 5)), nil, playerCamera.globalScale / 5)
+            love.graphics.draw(title.mikert.image[title.mikert.order[math.floor(title.mikert.timer * 10) + 1]], (love.graphics.getWidth() / 2) - (884 / 2 * (playerCamera.globalScale / 5)), (love.graphics.getHeight() / 2) - (188 / 2 * (playerCamera.globalScale / 5)), nil, playerCamera.globalScale / 5)
         end
     else
         love.graphics.setColor(1, 1, 1)
