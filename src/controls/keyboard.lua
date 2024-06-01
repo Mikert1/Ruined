@@ -37,6 +37,7 @@ function love.keypressed(key)
                 player.noMove = false
                 game.freeze = false
                 button.loadAll()
+                love.mouse.setVisible(false)
             else
                 game.esc = true
                 player.noMove = true
@@ -44,6 +45,7 @@ function love.keypressed(key)
                 button.loadAll()
                 gui.map = false
                 player.walkingOnGrass:stop()
+                love.mouse.setVisible(true)
             end
         end
         if key == controls.keys.interact and story.npc.interaction == true then

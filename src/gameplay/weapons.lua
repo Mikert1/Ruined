@@ -281,7 +281,7 @@ function weapon.sword.use()
             angle = math.atan2(mouseY - playerCenterY, mouseX - playerCenterX)
         end
 
-        
+              
         local colliderDistance = 15
         local imageDistance = 25
 
@@ -427,6 +427,13 @@ function weapon.draw()
         love.graphics.arc("fill", centerX, centerY, radius, startAngle, endAngle)
         love.graphics.setColor(1, 1, 1)
     end
+    local playerCenterX = player.x + player.width / 2
+    local playerCenterY = player.y + player.height / 2
+    local mouseX, mouseY = playerCamera.cam:mousePosition()
+    angle = math.atan2(mouseY - playerCenterY, mouseX - playerCenterX)
+    love.graphics.setColor(1, 1, 1, 0.5)
+    love.graphics.circle("fill", playerCenterX + 20 * math.cos(angle), playerCenterY + 15 * math.sin(angle), playerCamera.globalScale / 3)
+    love.graphics.setColor(1, 1, 1)
 end
 
 function weapon.draw2L()
