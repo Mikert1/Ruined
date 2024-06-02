@@ -545,7 +545,7 @@ function button:action()
             data = file.save()
             player.noMove = false
             button.loadAll()
-            love.mouse.setVisible(false)
+            -- love.mouse.setVisible(false)
         end
     elseif self.id == 52 then -- play button
         if title.delete.mode == true then
@@ -564,7 +564,7 @@ function button:action()
             data = file.save()
             player.noMove = false
             button.loadAll()
-            love.mouse.setVisible(false)
+            -- love.mouse.setVisible(false)
         end
     elseif self.id == 53 then -- play button
         if title.delete.mode == true then
@@ -583,7 +583,7 @@ function button:action()
             data = file.save()
             player.noMove = false
             button.loadAll()
-            love.mouse.setVisible(false)
+            -- love.mouse.setVisible(false)
         end
     elseif self.id == 61 then -- chapter button
         title.state = 1
