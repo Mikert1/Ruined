@@ -105,14 +105,59 @@ function Projectile:new(x, y, speed, angle, image, hold)
     local angleNurf
     if hold > 1 then
         hold = hold - 1
-        speedNurf = 1 * 2
+        speedNurf = 2
         angleNurf = hold * 2
     else
         speedNurf = hold * 2
         angleNurf = 0
     end
 
-    local angleRange = math.pi / 8 * (1 - angleNurf) / 1.66
+    -- Define the range for the angle randomization based on angleNurf
+    local maxAngleRange = math.pi / 8
+    local angleRange = maxAngleRange * (1 - angleNurf)
+
+    -- Generate a random angle within the range
+    local randomAngleOffset = (math.random() * 2 - 1) * angleRange
+    local randomizedAngle = angle + randomAngleOffset
+
+    local projectile = {
+        collider = {
+            x = x,
+            y = y,
+            width = image:getHeight(),
+            height = image:getHeight()
+        },
+        speed = speed * speedNurf,
+        angle = randomizedAngle,
+        image = image,
+    }
+
+    local dx = projectile.speed * math.cos(projectile.angle) * 0.02
+    local dy = projectile.speed * math.sin(projectile.angle) * 0.02
+    
+    projectile.collider.x = projectile.collider.x + dx
+    projectile.collider.y = projectile.collider.y + dy
+    setmetatable(projectile, self)
+    self.__index = self
+    return projectile
+end
+
+function Projectile:new(x, y, speed, angle, image, hold)
+    local speedNurf
+    local angleNurf
+    if hold > 1 then
+        hold = hold - 1
+        speedNurf = 2
+        angleNurf = hold * 2
+    else
+        speedNurf = hold * 2
+        angleNurf = 0
+    end
+
+    angleNurf = math.min(math.max(angleNurf, 0), 1)
+
+    local maxAngleRange = math.pi / 8
+    local angleRange = maxAngleRange * (1 - angleNurf)
 
     local randomAngleOffset = (math.random() * 2 - 1) * angleRange
     local randomizedAngle = angle + randomAngleOffset
@@ -138,6 +183,7 @@ function Projectile:new(x, y, speed, angle, image, hold)
     self.__index = self
     return projectile
 end
+
 
 function Projectile:update(dt, i)
     self.speed = self.speed * 0.98 * (1 - dt)
