@@ -424,7 +424,7 @@ function weapon.draw()
         local endAngle = fixedAngle + (math.pi / 8) * scalingFactor
         
         love.graphics.setColor(1, 1 - weapon.bow.holdCounter / 2, 0, 0.2)
-        love.graphics.arc("fill", centerX, centerY, radius, startAngle, endAngle)
+        love.graphics.arc("line", centerX, centerY, radius, startAngle, endAngle)
         love.graphics.setColor(1, 1, 1)
     end
     local playerCenterX = player.x + player.width / 2
@@ -432,7 +432,7 @@ function weapon.draw()
     local mouseX, mouseY = playerCamera.cam:mousePosition()
     angle = math.atan2(mouseY - playerCenterY, mouseX - playerCenterX)
     love.graphics.setColor(1, 1, 1, 0.5)
-    love.graphics.circle("fill", playerCenterX + 20 * math.cos(angle), playerCenterY + 15 * math.sin(angle), playerCamera.globalScale / 3)
+    love.graphics.circle("fill", playerCenterX + 20 * math.cos(angle), playerCenterY + 20 * math.sin(angle), playerCamera.globalScale / 6)
     love.graphics.setColor(1, 1, 1)
 end
 
