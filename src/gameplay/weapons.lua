@@ -111,10 +111,11 @@ function Projectile:new(x, y, speed, angle, image, hold)
         speedNurf = hold * 2
         angleNurf = 0
     end
-    -- local scalingFactor = (1 - angleNurf) / 1.66
 
-    -- local startAngle = ((math.pi / 8) * scalingFactor)
-    -- local endAngle = ((math.pi / 8) * scalingFactor)
+    local angleRange = math.pi / 8 * (1 - angleNurf) / 1.66
+
+    local randomAngleOffset = (math.random() * 2 - 1) * angleRange
+    local randomizedAngle = angle + randomAngleOffset
 
     local projectile = {
         collider = {
@@ -124,12 +125,12 @@ function Projectile:new(x, y, speed, angle, image, hold)
             height = image:getHeight()
         },
         speed = speed * speedNurf,
-        angle = angle --[[ - love.math.randomNormal(startAngle, endAngle)]],
+        angle = randomizedAngle,
         image = image,
     }
 
-    local dx = (speed) * math.cos(angle) * (0.02)
-    local dy = (speed) * math.sin(angle) * (0.02)
+    local dx = projectile.speed * math.cos(projectile.angle) * 0.02
+    local dy = projectile.speed * math.sin(projectile.angle) * 0.02
     
     projectile.collider.x = projectile.collider.x + dx
     projectile.collider.y = projectile.collider.y + dy
