@@ -55,22 +55,25 @@ function applyKnockback(target, angle)
     target.knockback.y = target.knockback.force * math.sin(angle)
 end
 
-local function checkCollision(rect1, rect2)
-    local rect1_right = rect1.x + rect1.width
-    local rect1_bottom = rect1.y + rect1.height
+local function checkCollision(rect1, rect2, offsetX, offsetY)
+    offsetX = offsetX or 0
+    offsetY = offsetY or 0
+    local rect1_right = rect1.x + rect1.width + offsetX
+    local rect1_bottom = rect1.y + rect1.height + offsetY
 
     local rect2_right = rect2.x + rect2.width
     local rect2_bottom = rect2.y + rect2.height
 
-    if rect1.x < rect2_right and
-        rect1_right > rect2.x and
-        rect1.y < rect2_bottom and
-        rect1_bottom > rect2.y then
+    if (rect1.x + offsetX) < rect2_right and
+       rect1_right > rect2.x and
+       (rect1.y + offsetY) < rect2_bottom and
+       rect1_bottom > rect2.y then
         return true
     end
 
     return false
 end
+
 
 local function findWallLayer()
     local correctLayer
@@ -112,48 +115,6 @@ function Projectile:new(x, y, speed, angle, image, hold)
         angleNurf = 0
     end
 
-    -- Define the range for the angle randomization based on angleNurf
-    local maxAngleRange = math.pi / 8
-    local angleRange = maxAngleRange * (1 - angleNurf)
-
-    -- Generate a random angle within the range
-    local randomAngleOffset = (math.random() * 2 - 1) * angleRange
-    local randomizedAngle = angle + randomAngleOffset
-
-    local projectile = {
-        collider = {
-            x = x,
-            y = y,
-            width = image:getHeight(),
-            height = image:getHeight()
-        },
-        speed = speed * speedNurf,
-        angle = randomizedAngle,
-        image = image,
-    }
-
-    local dx = projectile.speed * math.cos(projectile.angle) * 0.02
-    local dy = projectile.speed * math.sin(projectile.angle) * 0.02
-    
-    projectile.collider.x = projectile.collider.x + dx
-    projectile.collider.y = projectile.collider.y + dy
-    setmetatable(projectile, self)
-    self.__index = self
-    return projectile
-end
-
-function Projectile:new(x, y, speed, angle, image, hold)
-    local speedNurf
-    local angleNurf
-    if hold > 1 then
-        hold = hold - 1
-        speedNurf = 2
-        angleNurf = hold * 2
-    else
-        speedNurf = hold * 2
-        angleNurf = 0
-    end
-
     angleNurf = math.min(math.max(angleNurf, 0), 1)
 
     local maxAngleRange = math.pi / 8
@@ -172,6 +133,7 @@ function Projectile:new(x, y, speed, angle, image, hold)
         speed = speed * speedNurf,
         angle = randomizedAngle,
         image = image,
+        isActive = true
     }
 
     local dx = projectile.speed * math.cos(projectile.angle) * 0.02
@@ -179,6 +141,7 @@ function Projectile:new(x, y, speed, angle, image, hold)
     
     projectile.collider.x = projectile.collider.x + dx
     projectile.collider.y = projectile.collider.y + dy
+    world:add(projectile, projectile.collider.x, projectile.collider.y, 1, 1)
     setmetatable(projectile, self)
     self.__index = self
     return projectile
@@ -189,22 +152,33 @@ function Projectile:update(dt, i)
     self.speed = self.speed * 0.98 * (1 - dt)
     local dx = self.speed * math.cos(self.angle) * dt
     local dy = self.speed * math.sin(self.angle) * dt
-    self.collider.x = self.collider.x + dx
-    self.collider.y = self.collider.y + dy
+    if self.isActive then
+        self.collider.x, self.collider.y = world:move(self, self.collider.x - 0.5 + dx, self.collider.y - 0.5 + dy, function(item, other)
+            return "touch"
+        end)
+        self.collider.x = self.collider.x + 0.5
+        self.collider.y = self.collider.y + 0.5
+    end
     if self.speed < 5 then
+        if world:hasItem(self) then
+            world:remove(self)
+            self.isActive = false
+        end
         for _, projectile in ipairs(projectiles) do
-            if checkCollision(player, self.collider) then
+            if checkCollision(player, self.collider, 1.5, 1.5) then
                 table.remove(projectiles, i)
                 weapon.bow.arrow.count = weapon.bow.arrow.count + 1
                 return
             end
         end
     else
+        -- if the world (self) exists is not true then dont remove the projectile
         for _, enemy in ipairs(enemymanager.activeEnemies) do
-            if checkCollision(enemy, self.collider) then
+            if checkCollision(enemy, self.collider, 1.5, 1.5) then
                 if enemy.arrowInvincible then
                     weapon.dammage = 0.5
                     table.remove(projectiles, i)
+                    world:remove(self)
                 else
                     enemymanager.enemyGotHit = 0.5
                     self.speed = 0
@@ -219,26 +193,15 @@ function Projectile:update(dt, i)
                 weapon.dammageDisplay.y = enemy.y + love.math.random(0, 10)
             end
         end
-        if isColliding(self.collider) then
-            if self.speed < 5 then
-                self.collider.y = self.collider.y - (50 * dt)
-            else
-                if dy > 0 then
-                    self.collider.y = self.collider.y + (50 * dt)
-                else
-                    self.speed = self.speed * 0.90 * (1 - dt)
-                end
-            end
-        end
     end
 end
 
 function Projectile:draw()
-    love.graphics.draw(self.image, self.collider.x, self.collider.y, self.angle, 1, 1, self.collider.width * 4.2 , self.collider.height / 2)
+    love.graphics.draw(self.image, self.collider.x , self.collider.y, self.angle, 1, 1, self.collider.width * 3, self.collider.height / 2)
     if keys.tab == true then
-		love.graphics.setColor(1,0,1)
+		love.graphics.setColor(1, 0, 1, 0.3)
             love.graphics.rectangle("line", self.collider.x - self.collider.width / 2, self.collider.y - self.collider.height / 2, self.collider.width, self.collider.height, 0, 0)
-        love.graphics.setColor(1,1,1)
+        love.graphics.setColor(1, 1, 1)
     end
 end
 
@@ -328,7 +291,6 @@ function weapon.sword.use()
             angle = math.atan2(mouseY - playerCenterY, mouseX - playerCenterX)
         end
 
-              
         local colliderDistance = 15
         local imageDistance = 25
 
