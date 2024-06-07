@@ -301,18 +301,18 @@ end
 function file.settings.save()
     file.message = 0
     local jsonString = json.encode(savedSettings)
-    love.filesystem.write("settings.json", jsonString)
+    love.filesystem.write("settings" .. game.version .. ".json", jsonString)
     file.status = "Settings saved"
 end
 
 function file.settings.load()
-    local jsonString = love.filesystem.read("settings.json")
+    local jsonString = love.filesystem.read("settings" .. game.version .. ".json")
     if jsonString then
         local success, decodedData = pcall(json.decode, jsonString)
         if success then
             savedSettings = decodedData
         else
-            love.filesystem.remove("settings.json")
+            love.filesystem.remove("settings" .. game.version .. ".json")
             error("Oops! The save file (settings.json) failed to decode, this means the file was (probably) corrupted.")
         end
     end

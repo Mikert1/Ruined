@@ -153,7 +153,7 @@ function Projectile:update(dt, i)
     local dx = self.speed * math.cos(self.angle) * dt
     local dy = self.speed * math.sin(self.angle) * dt
     if self.isActive then
-        self.collider.x, self.collider.y = world:move(self, self.collider.x - 0.5 + dxsss, self.collider.y - 0.5 + dy, function(item, other)
+        self.collider.x, self.collider.y = world:move(self, self.collider.x - 0.5 + dx, self.collider.y - 0.5 + dy, function(item, other)
             return "touch"
         end)
         self.collider.x = self.collider.x + 0.5
