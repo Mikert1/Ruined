@@ -53,7 +53,6 @@ function gui.load()
     gui.mapImage = love.graphics.newImage("assets/textures/world/minimap/map.png")
     gui.mapImageBackground = love.graphics.newImage("assets/textures/world/minimap/background.png")
     gui.mapPoint = {}
-    -- gui.mapPoint.image = love.graphics.newImage("assets/textures/world/mapPoint.png")
     gui.mapPoint.x = player.x / 100
     gui.mapPoint.y = player.y / 100
     gui.mapWorld = {
@@ -176,9 +175,9 @@ function gui:draw()
     love.graphics.setColor(1, 1, 1)
     gui.healthbar.anim:draw(gui.healthbar.sprite, 0, love.graphics.getHeight() - (16.5 * playerCamera.globalScale) - gui.hide.health.y * playerCamera.globalScale, nil, playerCamera.globalScale * 1.2)
     gui.focusbar.anim:draw(gui.focusbar.sprite, love.graphics.getWidth() - (93.5 * playerCamera.globalScale), love.graphics.getHeight() - (16.5 * playerCamera.globalScale) - gui.hide.sword.y * playerCamera.globalScale, nil, playerCamera.globalScale * 1.2)
-    -- if gui.welcome.timer > 0 then
-    --     gui.welcome.animations.region1:draw(gui.welcome.image, love.graphics.getWidth() / 2 - (75 / 2 * playerCamera.globalScale), love.graphics.getHeight() / 4 - (20 / 2 * playerCamera.globalScale), nil, playerCamera.globalScale)
-    -- end
+    if gui.welcome.timer > 0 then
+        gui.welcome.animations.region1:draw(gui.welcome.image, love.graphics.getWidth() / 2 - (75 / 2 * playerCamera.globalScale), love.graphics.getHeight() / 4 - (20 / 2 * playerCamera.globalScale), nil, playerCamera.globalScale)
+    end
     if gui.map == true then
         if player.isMoving == false then
             love.graphics.setColor(0, 0, 0, 0.5)
