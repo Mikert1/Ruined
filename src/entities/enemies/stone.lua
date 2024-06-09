@@ -40,7 +40,6 @@ function stone.new(x, y, calorLVL)
         force = 150
     }
     instance.arrowInvincible = true
-    
     return instance
 end
 
