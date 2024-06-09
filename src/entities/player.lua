@@ -156,9 +156,9 @@ function player.movement(dt)
             end
             if love.keyboard.isDown("up",controls.keys.up) then
                 if love.keyboard.isDown(controls.keys.left,controls.keys.right,"left","right") then
-                    dy = player.sideSpeed * -1 * dt
+                    dy = (player.sideSpeed * -1 * dt) * 0.8
                 else
-                    dy = player.speed * -1 * dt
+                    dy = (player.speed * -1 * dt) * 0.8
                 end
                 if player.isLeft == false then
                     player.anim = player.animations.upRight
@@ -173,9 +173,9 @@ function player.movement(dt)
             end
             if love.keyboard.isDown("down", controls.keys.down) then
                 if love.keyboard.isDown(controls.keys.left, controls.keys.right, "left", "right") then
-                    dy = player.sideSpeed * dt
+                    dy = (player.sideSpeed * dt) * 0.8
                 else
-                    dy = player.speed * dt
+                    dy = (player.speed * dt) * 0.8
                 end
                 if player.isLeft == true then
                     player.anim = player.animations.downRight
