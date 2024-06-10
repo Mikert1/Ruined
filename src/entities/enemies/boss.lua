@@ -2,7 +2,8 @@ local worldManagement = require("src/gameplay/worldmanager")
 local boss = {image = love.graphics.newImage("assets/textures/entities/enemies/boss.png")}
 boss.__index = boss
 
-function boss.new(x,y)
+function boss.new(x, y, calorLVL)
+    calorLVL = calorLVL or 1
     local instance = setmetatable({}, boss)
     instance.x = x
     instance.y = y
@@ -10,8 +11,19 @@ function boss.new(x,y)
     instance.height = 3
     instance.offsetY = boss.image:getHeight() - instance.height
     world:add(instance, instance.x, instance.y, instance.width, instance.height)
-    instance.health = 40
-    instance.speed = 40
+    if calorLVL == 1 then
+        instance.health = 20
+        instance.speed = 30
+        instance.eyeColor = {1, 1, 0}
+    elseif calorLVL == 2 then
+        instance.health = 30
+        instance.speed = 40
+        instance.eyeColor = {1, 0.5, 0}
+    elseif calorLVL == 3 then
+        instance.health = 50
+        instance.speed = 50
+        instance.eyeColor = {1, 0, 0}
+    end
     instance.isLeft = false
     instance.stepTimer = 5
     instance.collider = {
@@ -26,6 +38,7 @@ function boss.new(x,y)
         force = 100
     }
     instance.arrowInvincible = false
+    instance.attackTimer = 0
     
     return instance
 end
@@ -38,8 +51,11 @@ function boss:takeDamage(damage, i)
     end
 end
 
-function boss:update()
-    
+function boss:attack(dt)
+    if self.attackTimer <= 0 then
+        self.attackTimer = 1
+    end
+    self.attackTimer = self.attackTimer - dt
 end
 
 function boss:walk(playerX, playerY, dt) 
@@ -82,6 +98,13 @@ function boss:walk(playerX, playerY, dt)
         height = self.height + 1
     }
 
+end
+
+--
+
+function boss:update(dt)
+    self:walk(player.x, player.y - 6, dt)
+    self:attack(dt)
 end
 
 function boss:draw()

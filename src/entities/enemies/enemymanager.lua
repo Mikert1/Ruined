@@ -16,7 +16,6 @@ end
 function enemymanager:update(dt)
     for _, entity in ipairs(self.activeEnemies) do
         entity:update(dt)
-        entity:walk(player.x, player.y - 6, dt)
     end
 end
 

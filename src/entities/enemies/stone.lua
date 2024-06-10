@@ -50,7 +50,8 @@ function stone:takeDamage(damage, i)
         table.remove(enemymanager.activeEnemies, i)
     end
 end
-
+        
+        
 function stone:walk(playerX, playerY, dt)
     local dx = playerX - self.x
     local dy = (playerY + self.offsetY) - self.y
@@ -86,8 +87,10 @@ function stone:walk(playerX, playerY, dt)
     }
 end
 
-function stone:update(dt)
+--
 
+function stone:update(dt)
+    self:walk(player.x, player.y - 6, dt)
 end
 
 function stone:draw()
