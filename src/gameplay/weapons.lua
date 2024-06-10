@@ -172,7 +172,7 @@ function Projectile:update(dt, i)
             end
         end
     else
-        for _, enemy in ipairs(enemymanager.activeEnemies) do
+        for i, enemy in ipairs(enemymanager.activeEnemies) do
             if checkCollision(enemy, self.collider, 1.5, 1.5) then
                 if enemy.arrowInvincible then
                     weapon.dammage = 0.5
@@ -185,9 +185,9 @@ function Projectile:update(dt, i)
                     local angle = math.atan2(enemy.y - player.y, enemy.x - player.x)
                     applyKnockback(enemy, angle)
                 end
+                enemy:takeDamage(weapon.dammage, i)
                 weapon.enemyGotHit = true
                 enemymanager.enemyGotHit = 0.5
-                enemy.health = enemy.health - weapon.dammage
                 weapon.dammageDisplay.x = enemy.x + love.math.random(-5, 5)
                 weapon.dammageDisplay.y = enemy.y + love.math.random(0, 10)
             end
@@ -303,7 +303,7 @@ function weapon.sword.use()
             player.x, player.y = world:move(player, weapon.sword.collider.x + weapon.sword.collider.width / 2 - player.width / 2, weapon.sword.collider.y + weapon.sword.collider.height / 2)
         end
 
-        for _, enemy in ipairs(enemymanager.activeEnemies) do
+        for i, enemy in ipairs(enemymanager.activeEnemies) do
             if checkCollision(weapon.sword.collider, enemy.collider) then
                 weapon.sword.combo.timer = 1
                 enemymanager.enemyGotHit = 0.5
@@ -317,12 +317,12 @@ function weapon.sword.use()
                         weapon.dammage = 4
                     end
                 end
-                enemy.health = enemy.health - weapon.dammage
+                local angle = math.atan2(enemy.y - player.y, enemy.x - player.x)
+                enemy:takeDamage(weapon.dammage, i)
+                applyKnockback(enemy, angle)
                 weapon.enemyGotHit = true
                 weapon.dammageDisplay.x = (enemy.x + (enemy.width / 2)) + love.math.random(-5, 5)
                 weapon.dammageDisplay.y = (enemy.y + (enemy.height / 2)) + love.math.random(0, 10)
-                local angle = math.atan2(enemy.y - player.y, enemy.x - player.x)
-                applyKnockback(enemy, angle)
             end
         end
         if weapon.enemyGotHit == false then

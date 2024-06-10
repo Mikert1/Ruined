@@ -6,7 +6,7 @@ enemymanager.enemyGotHit = 0
 
 function enemymanager:load()
     if self.activeEnemies then
-        for i, entity in ipairs(self.activeEnemies) do
+        for _, entity in ipairs(self.activeEnemies) do
             world:remove(entity)
         end
     end
@@ -17,12 +17,6 @@ function enemymanager:update(dt)
     for _, entity in ipairs(self.activeEnemies) do
         entity:update(dt)
         entity:walk(player.x, player.y - 6, dt)
-    end
-    for i, entity in ipairs(self.activeEnemies) do
-        if entity.health <= 0 then
-            world:remove(entity)
-            table.remove(self.activeEnemies, i)
-        end
     end
 end
 

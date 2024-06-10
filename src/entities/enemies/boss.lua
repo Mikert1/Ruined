@@ -30,6 +30,14 @@ function boss.new(x,y)
     return instance
 end
 
+function boss:takeDamage(damage, i)
+    self.health = self.health - damage
+    if self.health <= 0 then
+        world:remove(self)
+        table.remove(enemymanager.activeEnemies, i)
+    end
+end
+
 function boss:update()
     
 end
