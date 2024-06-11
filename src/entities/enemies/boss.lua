@@ -1,6 +1,7 @@
 local worldManagement = require("src/gameplay/worldmanager")
 local boss = {image = love.graphics.newImage("assets/textures/entities/enemies/boss.png")}
 boss.__index = boss
+local stone = require("src/entities/enemies/stone") -- for the summon function
 
 function boss.new(x, y, calorLVL)
     calorLVL = calorLVL or 1
@@ -39,6 +40,7 @@ function boss.new(x, y, calorLVL)
     }
     instance.arrowInvincible = false
     instance.attackTimer = 0
+    instance.distanceFromPlayer = 200
     
     return instance
 end
@@ -51,9 +53,20 @@ function boss:takeDamage(damage, i)
     end
 end
 
+function boss:summon()
+    for i = 1, 5 do
+        local x = math.random(self.x - 10, self.x + 10)
+        local y = math.random(self.y - 10, self.y + 10)
+        table.insert(enemymanager.activeEnemies, stone.new(x, y, 2))
+    end
+end
+
 function boss:attack(dt)
     if self.attackTimer <= 0 then
         self.attackTimer = 10
+        if self.distanceFromPlayer <= 200 then
+            self:summon()
+        end
     end
     self.attackTimer = self.attackTimer - dt
 end
@@ -61,19 +74,19 @@ end
 function boss:walk(playerX, playerY, dt) 
     local dx = playerX - (self.x + self.width / 2)
     local dy = (playerY + self.offsetY) - self.y
-    local distance = math.sqrt(dx * dx + dy * dy)
+    self.distanceFromPlayer = math.sqrt(dx * dx + dy * dy)
 
-    if distance <= 200 then
+    if self.distanceFromPlayer <= 200 then
         if dx < 0 then
             self.isLeft = true
         else
             self.isLeft = false
         end
-        local dirX = dx / distance
-        local dirY = dy / distance
-        if distance > 81 then
+        local dirX = dx / self.distanceFromPlayer
+        local dirY = dy / self.distanceFromPlayer
+        if self.distanceFromPlayer > 81 then
             self.x, self.y = world:move(self, self.x + dirX * self.speed * dt, self.y + dirY * self.speed * dt)  
-        elseif distance < 79 then
+        elseif self.distanceFromPlayer < 79 then
             self.x, self.y = world:move(self, self.x - dirX * self.speed * dt, self.y - dirY * self.speed * dt)
         else
             self.x, self.y = world:move(self, self.x, self.y)
