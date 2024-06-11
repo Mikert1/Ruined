@@ -53,7 +53,7 @@ end
         
         
 function stone:walk(playerX, playerY, dt)
-    local dx = playerX - self.x
+    local dx = playerX - (self.x + self.width / 2)
     local dy = (playerY + self.offsetY) - self.y
     local distance = math.sqrt(dx * dx + dy * dy)
 

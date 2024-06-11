@@ -53,13 +53,13 @@ end
 
 function boss:attack(dt)
     if self.attackTimer <= 0 then
-        self.attackTimer = 1
+        self.attackTimer = 10
     end
     self.attackTimer = self.attackTimer - dt
 end
 
 function boss:walk(playerX, playerY, dt) 
-    local dx = playerX - self.x
+    local dx = playerX - (self.x + self.width / 2)
     local dy = (playerY + self.offsetY) - self.y
     local distance = math.sqrt(dx * dx + dy * dy)
 
