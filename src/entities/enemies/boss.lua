@@ -55,7 +55,7 @@ end
 
 function boss:summon()
     for i = 1, 5 do
-        local x = math.random(self.x - (self.width / 2) - 10, self.x - (self.width / 2) + 10)
+        local x = math.random(self.x + (self.width / 2) - 10, self.x + (self.width / 2) + 10)
         local y = math.random(self.y - 10, self.y + 10)
         table.insert(enemymanager.activeEnemies, stone.new(x, y, 2))
     end
@@ -63,7 +63,7 @@ end
 
 function boss:attack(dt)
     if self.attackTimer <= 0 then
-        self.attackTimer = 0.1
+        self.attackTimer = 10
         if self.distanceFromPlayer <= 220 then
             self:summon()
         end
