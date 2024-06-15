@@ -385,7 +385,7 @@ end
 
 function file:draw()
     if file.message < 3 and (game.state == 1 or game.state == 0) then
-        love.graphics.print(file.status, love.graphics.getWidth() / 2 - (font:getWidth(file.status) * (playerCamera.globalScale / 1.3)) / 2, love.graphics.getHeight() / 3 - (font:getHeight(file.status) * (playerCamera.globalScale / 1.3)) / 2, nil, (playerCamera.globalScale / 1.3))
+        love.graphics.print(file.status, love.graphics.getWidth() / 2 - (font:getWidth(file.status) * (playerCamera.globalScale / 2)) / 2, 0, nil, (playerCamera.globalScale / 2))
     end
 end
 
