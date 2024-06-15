@@ -6,6 +6,7 @@
 <p>This game is made in a framework called <a href="https://love2d.org/">Love2D</a> (version 11.5). and fully written in <a href="https://www.lua.org/">lua</a> (version 5.1).</p>
 <h2>How to play:</h2>
 <p>To test the game download the <a href="https://github.com/Mikert1/Ruined/releases/tag/v1.4-early-developer-beta">Latest Release</a>.</p>
+<p>Or if you want to check the latest release then clone the repository.</p>
 <p>If you have love installed double click the .love file.</p>
 <p>And if that is not the case double click the .exe file in the zip folder.</p>
 <h2>Pictures:</h2>
