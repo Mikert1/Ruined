@@ -22,7 +22,7 @@ function player.load()
     player.y = 165.5
     player.width = 12
     player.height = 2
-    player.speedMultiplier = 10
+    player.speedMultiplier = 5
     player.speed = 10 * player.speedMultiplier
     player.sideSpeed = 7.71067812 * player.speedMultiplier
     player.hearts = 8
@@ -116,6 +116,16 @@ function player.update(dt)
 end
 
 function player.movement(dt)
+    if player.speedMultiplier > 10 then
+        player.speedMultiplier = 10
+    else
+        player.speedMultiplier = player.speedMultiplier + (dt * 5)
+        if player.speedMultiplier > 10 then
+            player.speedMultiplier = 10
+        end
+    end
+    player.speed = 10 * player.speedMultiplier
+    player.sideSpeed = 7.71067812 * player.speedMultiplier
     player.isMoving = false
     local dx, dy = 0, 0
     if game.controlType == 0 then
@@ -255,6 +265,7 @@ function player.movement(dt)
     else
         player.walkingOnGrass:stop()
         player.anim:gotoFrame(1)
+        player.speedMultiplier = 5
     end
 end
 
