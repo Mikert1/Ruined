@@ -119,7 +119,7 @@ function player.movement(dt)
     if player.speedMultiplier > 10 then
         player.speedMultiplier = 10
     else
-        player.speedMultiplier = player.speedMultiplier + (dt * 5)
+        player.speedMultiplier = player.speedMultiplier + (dt * 10)
         if player.speedMultiplier > 10 then
             player.speedMultiplier = 10
         end
