@@ -581,21 +581,14 @@ function worldManagement.update(dt)
     if isSwimming() then
         if worldManagement.thisWorld == "Snow" then
             player.isSwimming = false
-            player.speed = 10 * player.speedMultiplier / 1.5
-            player.sideSpeed = 7.71067812 * player.speedMultiplier / 1.5
         else
             player.isSwimming = true
-            player.speed = 10 * player.speedMultiplier / 1.5
-            player.sideSpeed = 7.71067812 * player.speedMultiplier / 1.5
         end
+        player.speedMultiplier = 6,666666666666667
     else
         player.isSwimming = false
         if isStairs() then
-            player.speed = 10 * player.speedMultiplier / 2
-            player.sideSpeed = 7.71067812 * player.speedMultiplier / 2
-        else
-            player.speed = 10 * player.speedMultiplier
-            player.sideSpeed = 7.71067812 * player.speedMultiplier
+            player.speedMultiplier = 5
         end
     end
     checkPortals()
