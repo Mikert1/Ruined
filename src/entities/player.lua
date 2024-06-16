@@ -265,7 +265,9 @@ function player.movement(dt)
     else
         player.walkingOnGrass:stop()
         player.anim:gotoFrame(1)
-        player.speedMultiplier = 5
+        if player.speedMultiplier > 5 then
+            player.speedMultiplier = 5
+        end
     end
 end
 

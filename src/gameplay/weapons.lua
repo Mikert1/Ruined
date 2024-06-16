@@ -331,8 +331,7 @@ function weapon.sword.use()
         else
             weapon.sword.sound:play()
         end
-        player.speed = 2 * player.speedMultiplier
-        player.sideSpeed = 1.54213562 * 0.80
+        player.speedMultiplier = 5
         if weapon.sword.combo.current == 1 then
             weapon.sword.anim = weapon.sword.animations.slash
             weapon.sword.combo.current = 2
@@ -393,7 +392,6 @@ function weapon.draw()
     if enemymanager.enemyGotHit > 0 then
         weapon.dammageDisplay.draw()
     end
-
     for _, projectile in ipairs(projectiles) do
         projectile:draw()
     end
