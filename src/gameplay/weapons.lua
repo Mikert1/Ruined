@@ -272,6 +272,7 @@ function weapon.bow.update(dt)
         else
             weapon.bow.holdCounter = 1.8
         end
+        player.speedMultiplier = 3
     end
 end
 
