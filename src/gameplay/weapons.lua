@@ -330,7 +330,7 @@ function weapon.sword.use()
             weapon.sword.cooldown = true
             weapon.sword.downTimer = 0
         else
-            weapon.sword.sound:play()
+            --weapon.sword.sound:play()
         end
         player.speedMultiplier = 5
         if weapon.sword.combo.current == 1 then
