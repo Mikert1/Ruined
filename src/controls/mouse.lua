@@ -109,7 +109,7 @@ function love.mousereleased(x, y, buttonClicked, istouch, presses)
         love.audio.setVolume(savedSettings.masterVolume / 100)
         file.settings.save()
         end
-        if buttonClicked == 1 and weapon.equipment == 2 and weapon.bow.hold == true then
+        if buttonClicked == 1 and weapon.equipment == 2 and weapon.bow.hold == true and not game.freeze then
             weapon.bow.use()
         end
     end

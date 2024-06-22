@@ -55,6 +55,11 @@ weapon.dammageDisplay = {}
 weapon.dammageDisplay.timer = 0
 weapon.enemyGotHit = false
 
+weapon.aim = {}
+weapon.aim.radius = 0
+weapon.aim.startAngle = 0
+weapon.aim.endAngle = 0
+
 function applyKnockback(target, angle)
     target.knockback.x = target.knockback.force * math.cos(angle)
     target.knockback.y = target.knockback.force * math.sin(angle)
@@ -388,6 +393,34 @@ function weapon.update(dt)
     weapon.cursor.x, weapon.cursor.y = player.x + player.width / 2, player.y + player.height / 2
     local mouseX, mouseY = playerCamera.cam:mousePosition()
     weapon.cursor.angle = math.atan2(mouseY - weapon.cursor.y, mouseX - weapon.cursor.x)
+    if weapon.bow.hold then
+        hold = weapon.bow.holdCounter
+        local speedNurf
+        local angleNurf
+        if hold > 1 then
+            hold = hold - 1
+            speedNurf = 1 * 2
+            angleNurf = hold * 2
+        else
+            speedNurf = hold * 2
+            angleNurf = 0
+        end
+        local dx, dy
+        if controller.joysticks then
+            dx = controller.joysticks:getGamepadAxis("rightx")
+            dy = controller.joysticks:getGamepadAxis("righty")
+        else
+            local mouseX, mouseY = playerCamera.cam:mousePosition()
+            dx = mouseX - weapon.cursor.x
+            dy = mouseY - weapon.cursor.y
+        end
+        local fixedAngle = math.pi / 4 + math.atan2(dy, dx) - 0.7853981633974483
+        weapon.aim.radius = (weapon.bow.arrow.speed * speedNurf) * 0.46
+        local scalingFactor = 1 - angleNurf / 1.66
+
+        weapon.aim.startAngle = fixedAngle - (math.pi / 8) * scalingFactor
+        weapon.aim.endAngle = fixedAngle + (math.pi / 8) * scalingFactor
+    end
     weapon.sword.update(dt)
     weapon.bow.update(dt)
 end
@@ -411,42 +444,9 @@ function weapon.draw()
     for _, projectile in ipairs(projectiles) do
         projectile:draw()
     end
-    if weapon.bow.hold then
-        hold = weapon.bow.holdCounter
-        local speedNurf
-        local angleNurf
-        if hold > 1 then
-            hold = hold - 1
-            speedNurf = 1 * 2
-            angleNurf = hold * 2
-        else
-            speedNurf = hold * 2
-            angleNurf = 0
-        end
-        local angle
-        local centerX, centerY = player.x + player.width / 2, player.y + player.height / 2
-        local dx, dy
-        if controller.joysticks then
-            angle = math.atan2(controller.joysticks:getGamepadAxis("righty"), controller.joysticks:getGamepadAxis("rightx"))
-            dx = controller.joysticks:getGamepadAxis("rightx")
-            dy = controller.joysticks:getGamepadAxis("righty")
-            local fixedAngle = math.pi / 4 + math.atan2(dy, dx) - 0.7853981633974483
-            local radius = (weapon.bow.arrow.speed * speedNurf) * 0.46
-            local scalingFactor = 1 - angleNurf / 1.66
-        else
-            local mouseX, mouseY = playerCamera.cam:mousePosition()
-            dx = mouseX - centerX
-            dy = mouseY - centerY
-        end
-        local fixedAngle = math.pi / 4 + math.atan2(dy, dx) - 0.7853981633974483
-        local radius = (weapon.bow.arrow.speed * speedNurf) * 0.46
-        local scalingFactor = 1 - angleNurf / 1.66
-
-        local startAngle = fixedAngle - (math.pi / 8) * scalingFactor
-        local endAngle = fixedAngle + (math.pi / 8) * scalingFactor
-        
+    if weapon.bow.hold then    
         love.graphics.setColor(1, 1 - weapon.bow.holdCounter / 2, 0, 0.2)
-        love.graphics.arc("line", centerX, centerY, radius, startAngle, endAngle)
+        love.graphics.arc("line", weapon.cursor.x, weapon.cursor.y, weapon.aim.radius, weapon.aim.startAngle, weapon.aim.endAngle)
         love.graphics.setColor(1, 1, 1)
     end
     love.graphics.setColor(1, 1, 1, 0.5)
