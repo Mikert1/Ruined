@@ -2,7 +2,9 @@ local anim8 = require("src/library/animations")
 local time = require("src/system/timer")
 local bump = require 'src/library/bump'
 local weapon = {}
+
 weapon.equipment = 1
+
 weapon.sword = {}
 weapon.sword.image = love.graphics.newImage("assets/textures/entities/player/cryonium_sword.png")
 weapon.sword.slash = {}
@@ -35,7 +37,6 @@ weapon.sword.colliderActive = false
 weapon.sword.sound = love.audio.newSource("assets/audio/hit.wav", "static")
 
 weapon.bow = {}
--- weapon.bow.image = love.graphics.newImage("assets/textures/entities/player/cryonium_bow.png")
 weapon.bow.arrow = {}
 weapon.bow.arrow.image = love.graphics.newImage("assets/textures/entities/player/arrow.png")
 weapon.bow.arrow.active = false
@@ -49,18 +50,21 @@ weapon.cursor.x = 0
 weapon.cursor.y = 0
 weapon.cursor.angle = 0
 
-local projectiles = {}
-
-weapon.dammageDisplay = {}
-weapon.dammageDisplay.timer = 0
-weapon.enemyGotHit = false
-
 weapon.aim = {}
 weapon.aim.radius = 0
 weapon.aim.startAngle = 0
 weapon.aim.endAngle = 0
 
-function applyKnockback(target, angle)
+weapon.dammageDisplay = {}
+weapon.dammageDisplay.timer = 0
+weapon.enemyGotHit = false
+
+local projectiles = {}
+local Projectile = {}
+
+-- local functions
+
+local function applyKnockback(target, angle)
     target.knockback.x = target.knockback.force * math.cos(angle)
     target.knockback.y = target.knockback.force * math.sin(angle)
 end
@@ -84,7 +88,6 @@ local function checkCollision(rect1, rect2, offsetX, offsetY)
     return false
 end
 
-
 local function findWallLayer()
     local correctLayer
     for _, layer in ipairs(_G.currentWorld.layers) do
@@ -99,6 +102,7 @@ local function findWallLayer()
     end
     return correctLayer
 end
+
 local function isColliding(collider)
     local correctLayer = findWallLayer()
     if correctLayer then
@@ -111,7 +115,19 @@ local function isColliding(collider)
     return false
 end
 
-Projectile = {}
+-- dammageDisplay functions
+
+function weapon.dammageDisplay.draw()
+    if weapon.equipment == 1 then
+        love.graphics.setColor(0, 1, 1)
+    elseif weapon.equipment == 2 then
+        love.graphics.setColor(1, 0.5, 0)
+    end
+    love.graphics.print(weapon.dammage, weapon.dammageDisplay.x, weapon.dammageDisplay.y)
+    love.graphics.setColor(1, 1, 1)
+end
+
+-- projectile functions
 
 function Projectile:new(x, y, speed, angle, image, hold)
     local speedNurf
@@ -156,7 +172,6 @@ function Projectile:new(x, y, speed, angle, image, hold)
     self.__index = self
     return projectile
 end
-
 
 function Projectile:update(dt, i)
     self.speed = self.speed * 0.98 * (1 - dt)
@@ -209,10 +224,12 @@ function Projectile:draw()
     love.graphics.draw(self.image, self.collider.x , self.collider.y, self.angle, 1, 1, self.collider.width * 3, self.collider.height / 2)
     if keys.tab == true then
 		love.graphics.setColor(1, 0, 1, 0.3)
-            love.graphics.rectangle("line", self.collider.x - self.collider.width / 2, self.collider.y - self.collider.height / 2, self.collider.width, self.collider.height, 0, 0)
+        love.graphics.rectangle("line", self.collider.x - self.collider.width / 2, self.collider.y - self.collider.height / 2, self.collider.width, self.collider.height, 0, 0)
         love.graphics.setColor(1, 1, 1)
     end
 end
+
+-- sword functions
 
 function weapon.sword.update(dt)
     if weapon.sword.combo.timer > 0 then
@@ -240,10 +257,6 @@ function weapon.sword.update(dt)
             weapon.sword.slash.active = false
         end
     end
-    -- if weapon.sword.slash.active == false then
-    --     weapon.dammageText.x = weapon.dammageText.x + (dt * 10)
-    --     weapon.dammageText.y = weapon.dammageText.y + (dt * 20)
-    -- end
     if weapon.enemyGotHit == true then
         if weapon.dammageDisplay.timer >= 60 then
             weapon.dammageDisplay.timer = 0
@@ -257,32 +270,6 @@ function weapon.sword.update(dt)
         enemy.y = enemy.y + enemy.knockback.y * dt
         enemy.knockback.x = enemy.knockback.x * 0.9
         enemy.knockback.y = enemy.knockback.y * 0.9
-    end
-end
-function weapon.dammageDisplay.draw()
-    if weapon.equipment == 1 then
-        love.graphics.setColor(0, 1, 1)
-    elseif weapon.equipment == 2 then
-        love.graphics.setColor(1, 0.5, 0)
-    end
-    love.graphics.print(weapon.dammage, weapon.dammageDisplay.x, weapon.dammageDisplay.y)
-    love.graphics.setColor(1, 1, 1)
-end
-
-function weapon.bow.update(dt)
-    for i, projectile in ipairs(projectiles) do
-        projectile:update(dt, i)
-    end
-    if weapon.bow.arrow.active == true then
-        weapon.bow.arrow.active = false
-    end
-    if weapon.bow.hold then
-        if weapon.bow.holdCounter < 1.8 then
-            weapon.bow.holdCounter = weapon.bow.holdCounter + dt
-        else
-            weapon.bow.holdCounter = 1.8
-        end
-        player.speedMultiplier = 3
     end
 end
 
@@ -359,6 +346,26 @@ function weapon.sword.use()
     end
 end
 
+-- bow functions
+
+function weapon.bow.update(dt)
+    for i, projectile in ipairs(projectiles) do
+        projectile:update(dt, i)
+    end
+    if weapon.bow.arrow.active == true then
+        weapon.bow.arrow.active = false
+    end
+    if weapon.bow.hold then
+        if weapon.bow.holdCounter < 1.8 then
+            weapon.bow.holdCounter = weapon.bow.holdCounter + dt
+        else
+            weapon.bow.holdCounter = 1.8
+        end
+        player.speedMultiplier = 3
+    end
+end
+
+
 function weapon.bow.charge()
     if weapon.bow.arrow.count >= 1 and not weapon.bow.arrow.active then
         weapon.bow.hold = true
@@ -388,6 +395,7 @@ function weapon.bow.use()
     end
 end
 
+-- global functions
 
 function weapon.update(dt)
     weapon.cursor.x, weapon.cursor.y = player.x + player.width / 2, player.y + player.height / 2
@@ -466,4 +474,5 @@ function weapon.draw2L()
         end
     end
 end
+
 return weapon
