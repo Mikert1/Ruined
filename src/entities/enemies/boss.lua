@@ -3,6 +3,8 @@ local boss = {image = love.graphics.newImage("assets/textures/entities/enemies/b
 boss.__index = boss
 local stone = require("src/entities/enemies/stone") -- for the summon function
 
+-- self functions
+
 function boss.new(x, y, calorLVL)
     calorLVL = calorLVL or 1
     local instance = setmetatable({}, boss)
@@ -112,8 +114,6 @@ function boss:walk(playerX, playerY, dt)
     }
 
 end
-
---
 
 function boss:update(dt)
     self:walk(player.x, player.y - 6, dt)

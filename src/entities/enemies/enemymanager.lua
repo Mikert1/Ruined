@@ -4,6 +4,8 @@ local boss = require("src/entities/enemies/boss")
 local worldManagement = require("src/gameplay/worldmanager")
 enemymanager.enemyGotHit = 0
 
+-- glabal functions
+
 function enemymanager:load()
     if self.activeEnemies then
         for _, entity in ipairs(self.activeEnemies) do

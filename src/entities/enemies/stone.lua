@@ -5,6 +5,8 @@ local stone = {
 }
 stone.__index = stone
 
+-- self functions
+
 function stone.new(x, y, calorLVL)
     local instance = setmetatable({}, stone)
     instance.x = x
