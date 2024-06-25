@@ -429,6 +429,8 @@ function weapon.update(dt)
         weapon.aim.startAngle = fixedAngle - (math.pi / 8) * scalingFactor
         weapon.aim.endAngle = fixedAngle + (math.pi / 8) * scalingFactor
     end
+    -- dont forget to call camrea cameraCoords function
+    love.mouse.setPosition(playerCamera.cam:cameraCoords(weapon.cursor.x + 20 * math.cos(weapon.cursor.angle), weapon.cursor.y + 20 * math.sin(weapon.cursor.angle)))
     weapon.sword.update(dt)
     weapon.bow.update(dt)
 end
