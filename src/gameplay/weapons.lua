@@ -49,6 +49,7 @@ weapon.cursor = {}
 weapon.cursor.x = 0
 weapon.cursor.y = 0
 weapon.cursor.angle = 0
+weapon.cursor.distance = 0
 
 weapon.aim = {}
 weapon.aim.radius = 0
@@ -401,6 +402,15 @@ function weapon.update(dt)
     weapon.cursor.x, weapon.cursor.y = player.x + player.width / 2, player.y + player.height / 2
     local mouseX, mouseY = playerCamera.cam:mousePosition()
     weapon.cursor.angle = math.atan2(mouseY - weapon.cursor.y, mouseX - weapon.cursor.x)
+    -- realy calculate the distance
+    local dx = mouseX - weapon.cursor.x
+    local dy = mouseY - weapon.cursor.y
+    weapon.cursor.distance = math.sqrt(dx * dx + dy * dy)
+    if weapon.cursor.distance > 20 then
+        weapon.cursor.distance = 20
+        love.mouse.setPosition(playerCamera.cam:cameraCoords(weapon.cursor.x + weapon.cursor.distance * math.cos(weapon.cursor.angle), weapon.cursor.y + weapon.cursor.distance * math.sin(weapon.cursor.angle)))
+    end
+
     if weapon.bow.hold then
         hold = weapon.bow.holdCounter
         local speedNurf
@@ -429,8 +439,6 @@ function weapon.update(dt)
         weapon.aim.startAngle = fixedAngle - (math.pi / 8) * scalingFactor
         weapon.aim.endAngle = fixedAngle + (math.pi / 8) * scalingFactor
     end
-    -- dont forget to call camrea cameraCoords function
-    love.mouse.setPosition(playerCamera.cam:cameraCoords(weapon.cursor.x + 20 * math.cos(weapon.cursor.angle), weapon.cursor.y + 20 * math.sin(weapon.cursor.angle)))
     weapon.sword.update(dt)
     weapon.bow.update(dt)
 end
