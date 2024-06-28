@@ -21,4 +21,20 @@ game.controlType = 0
 -- 1 = controller
 -- 2 = touchpad or phone
 game.freeze = true
+
+game.cursor = {
+    x = 0,
+    y = 0
+}
+
+function game.update(dt)
+    game.cursor.x, game.cursor.y = love.mouse.getPosition()
+end
+
+function game.draw()
+    love.graphics.setColor(1, 1, 1, 0.5)
+    love.graphics.circle("fill", game.cursor.x, game.cursor.y, 10, 10)
+    love.graphics.setColor(1, 1, 1)
+end
+
 return game

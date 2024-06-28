@@ -1,5 +1,6 @@
 local LOADTIMER = os.clock()
 love.graphics.setDefaultFilter("nearest", "nearest")
+love.mouse.setVisible(false)
 _G.game = require("src/system/game")
 local file = require("src/system/data")
 _G.savedSettings = file.settings.load()
@@ -55,6 +56,7 @@ function love.load()
 end
 
 function love.update(dt)
+    game.update(dt)
     lan.receiveData()
     lan.sendData()
     controller.update(dt)
@@ -134,4 +136,5 @@ function love.draw()
         file:draw()
         settings.draw2Layer()
         lan.draw()
+        game.draw()
     end

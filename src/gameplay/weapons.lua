@@ -476,9 +476,6 @@ function weapon.draw2L()
             end
         end
     end
-    love.graphics.setColor(1, 1, 1, 0.5)
-    love.graphics.circle("fill", weapon.cursor.x + weapon.cursor.distance * math.cos(weapon.cursor.angle), weapon.cursor.y + weapon.cursor.distance * math.sin(weapon.cursor.angle), playerCamera.globalScale / 6)
-    love.graphics.setColor(1, 1, 1)
 end
 
 return weapon
