@@ -406,10 +406,6 @@ function weapon.update(dt)
     local dx = mouseX - weapon.cursor.x
     local dy = mouseY - weapon.cursor.y
     weapon.cursor.distance = math.sqrt(dx * dx + dy * dy)
-    if weapon.cursor.distance > 20 then
-        weapon.cursor.distance = 20
-        love.mouse.setPosition(playerCamera.cam:cameraCoords(weapon.cursor.x + weapon.cursor.distance * math.cos(weapon.cursor.angle), weapon.cursor.y + weapon.cursor.distance * math.sin(weapon.cursor.angle)))
-    end
 
     if weapon.bow.hold then
         hold = weapon.bow.holdCounter
