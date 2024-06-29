@@ -1,6 +1,7 @@
 local LOADTIMER = os.clock()
 love.graphics.setDefaultFilter("nearest", "nearest")
 love.mouse.setVisible(false)
+love.mouse.setGrabbed(true)
 _G.game = require("src/system/game")
 local file = require("src/system/data")
 _G.savedSettings = file.settings.load()

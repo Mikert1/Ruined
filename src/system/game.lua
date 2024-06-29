@@ -24,7 +24,8 @@ game.freeze = true
 
 game.cursor = {
     x = 0,
-    y = 0
+    y = 0,
+    -- sprite = love.graphics.newImage("assets/textures/gui/cursor.png")
 }
 
 function game.update(dt)
@@ -33,7 +34,7 @@ end
 
 function game.draw()
     love.graphics.setColor(1, 1, 1, 0.5)
-    love.graphics.circle("fill", game.cursor.x, game.cursor.y, 10, 10)
+    love.graphics.circle("fill", game.cursor.x - 4, game.cursor.y - 4, 8, 8)
     love.graphics.setColor(1, 1, 1)
 end
 
