@@ -34,7 +34,7 @@ end
 
 function game.draw()
     love.graphics.setColor(1, 1, 1, 0.5)
-    love.graphics.circle("fill", game.cursor.x - 4, game.cursor.y - 4, 8, 8)
+    love.graphics.circle("fill", game.cursor.x - 0.5, game.cursor.y - 0.5, (1 * playerCamera.globalScale), (1 * playerCamera.globalScale))
     love.graphics.setColor(1, 1, 1)
 end
 
