@@ -679,6 +679,7 @@ function button:update(dt)
         end
     end
     if self.hover then
+        game.cursor.isHovering = true
         for i = 1, 3 do
             local colorDifference = math.abs(self.currentColor[i] - self.color[i])
             local transitionSpeed = dt * 6 * colorDifference
@@ -689,6 +690,7 @@ function button:update(dt)
             end
         end
     else
+        print("Cursor color:", game.cursor.color[1], game.cursor.color[2], game.cursor.color[3])
         for i = 1, 3 do
             local colorDifference = math.abs(self.currentColor[i] - 0.15)
             local transitionSpeed = dt * 3 * colorDifference
@@ -831,6 +833,7 @@ function button:draw()
 end
 
 function button:UpdateAll(dt)
+    game.cursor.isHovering = false
     for _, button in ipairs(button.activeButtons) do
         if button.warning.id == 0 or (button.id == 200 or button.id == 199) then
             button:update(dt)

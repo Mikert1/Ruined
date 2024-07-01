@@ -25,17 +25,23 @@ game.freeze = true
 game.cursor = {
     x = 0,
     y = 0,
-    sprite = love.graphics.newImage("assets/textures/gui/gameplay/cursor.png")
+    sprite = love.graphics.newImage("assets/textures/gui/gameplay/cursor.png"),
+    color = {1, 1, 1, 0.5},
+    isHovering = false
 }
 
 function game.update(dt)
     game.cursor.x, game.cursor.y = love.mouse.getPosition()
+    if game.cursor.isHovering then
+        game.cursor.color = {0, 1, 1, 1}
+    else
+        game.cursor.color = {0.15, 0.15, 0.15, 0.5}
+    end
 end
 
 function game.draw()
-    love.graphics.setColor(1, 1, 1, 0.5)
+    love.graphics.setColor(game.cursor.color)
     love.graphics.draw(game.cursor.sprite, game.cursor.x - 0.5 * playerCamera.globalScale, game.cursor.y - 0.5 * playerCamera.globalScale, 0, playerCamera.globalScale, playerCamera.globalScale, 0, 0)
-    -- love.graphics.circle("fill", game.cursor.x - 0.5, game.cursor.y - 0.5, (1 * playerCamera.globalScale), (1 * playerCamera.globalScale))
     love.graphics.setColor(1, 1, 1)
 end
 
