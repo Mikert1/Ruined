@@ -35,7 +35,7 @@ function game.update(dt)
     if game.cursor.isHovering then
         game.cursor.color = {0, 1, 1, 1}
     else
-        game.cursor.color = {0.15, 0.15, 0.15, 0.5}
+        game.cursor.color = {0.3, 0.3, 0.3, 0.5}
     end
 end
 
