@@ -693,7 +693,6 @@ function button:update(dt)
             end
         end
     else
-        print("Cursor color:", game.cursor.color[1], game.cursor.color[2], game.cursor.color[3])
         for i = 1, 3 do
             local colorDifference = math.abs(self.currentColor[i] - 0.15)
             local transitionSpeed = dt * 3 * colorDifference
