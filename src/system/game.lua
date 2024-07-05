@@ -32,11 +32,6 @@ game.cursor = {
 
 function game.update(dt)
     game.cursor.x, game.cursor.y = love.mouse.getPosition()
-    if game.cursor.isHovering then
-        game.cursor.color = {0, 1, 1, 1}
-    else
-        game.cursor.color = {0.3, 0.3, 0.3, 1}
-    end
 end
 
 function game.draw()
