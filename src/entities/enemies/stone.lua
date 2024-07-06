@@ -49,6 +49,8 @@ end
 function stone:takeDamage(damage, i)
     self.health = self.health - damage
     if self.health <= 0 then
+        particle.center.x = self.x + self.width / 2
+        particle.center.y = self.y + self.height / 2
         world:remove(self)
         table.remove(enemymanager.activeEnemies, i)
         particle.system:emit(100)

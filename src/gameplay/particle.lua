@@ -1,6 +1,7 @@
 local particle = {
     image = love.graphics.newImage("assets/textures/world/particle.png"),
-    system = nil
+    system = nil,
+    center = {x = 0, y = 0}
 }
 
 function particle.load()
@@ -18,7 +19,7 @@ function particle.update(dt)
 end
 
 function particle.draw()
-    love.graphics.draw(particle.system, player.x + player.width / 1.5, player.y + player.height)
+    love.graphics.draw(particle.system, particle.center.x, particle.center.y)
 end
 
 return particle
