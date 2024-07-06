@@ -31,6 +31,7 @@ local scene = require("src/gameplay/cutscene")
 local stone = require("src/entities/enemies/stone")
 local button = require("src/gui/button")
 local settings = require("src/gui/settings")
+local particle = require("src/gameplay/particle")
 _G.lan = require("src/network/lan")
 local LOADTIMER2 = os.clock()
 
@@ -92,6 +93,7 @@ function love.update(dt)
     end
     settings.update()
     button:UpdateAll(dt)
+    particle.update(dt)
 end
 
 function love.draw()
@@ -109,6 +111,7 @@ function love.draw()
 
         love.graphics.setShader()
         enemymanager:draw()
+        particle.draw()
         player:draw()
         lan.drawPlayer2()
         enemymanager:draw2L()

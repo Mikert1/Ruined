@@ -1,4 +1,5 @@
 local worldManagement = require("src/gameplay/worldmanager")
+local particle = require("src/gameplay/particle")
 local stone = {
     image = love.graphics.newImage("assets/textures/entities/enemies/stone/body.png"),
     eyes = love.graphics.newImage("assets/textures/entities/enemies/stone/eyes.png")
@@ -50,6 +51,7 @@ function stone:takeDamage(damage, i)
     if self.health <= 0 then
         world:remove(self)
         table.remove(enemymanager.activeEnemies, i)
+        particle.system:emit(100)
     end
 end
         
