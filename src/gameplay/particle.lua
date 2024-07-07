@@ -6,10 +6,12 @@ local particle = {
 
 function particle.load()
     particle.system = love.graphics.newParticleSystem(particle.image, 1000)
-    particle.system:setParticleLifetime(0.5, 1.5) -- Particles live between 0.5 and 1.5 seconds
-    particle.system:setSizeVariation(1) -- Particles can be different sizes
-    particle.system:setLinearAcceleration(-50, -50, 50, 50) -- Particles can move in any direction with varying speeds
-    particle.system:setColors(139, 69, 19, 255, 139, 69, 19, 0) -- Brown color fading to transparent
+    particle.system:setParticleLifetime(0.3, 0.8)
+    particle.system:setSizeVariation(1)
+    particle.system:setEmissionArea("uniform", 3, 3, 0, true)
+    particle.system:setLinearDamping(1, 2)
+    particle.system:setLinearAcceleration(-10, -10, 10, 10)
+    particle.system:setColors(0.267, 0.267, 0.267, 255, 0.267, 0.267, 0.267, 0)
 end
 
 particle.load()

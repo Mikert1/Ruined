@@ -32,6 +32,7 @@ local stone = require("src/entities/enemies/stone")
 local button = require("src/gui/button")
 local settings = require("src/gui/settings")
 local particle = require("src/gameplay/particle")
+local objectsManager = require("src/gameplay/objects")
 _G.lan = require("src/network/lan")
 local LOADTIMER2 = os.clock()
 
@@ -93,6 +94,7 @@ function love.update(dt)
     end
     settings.update()
     button:UpdateAll(dt)
+    objectsManager.update(dt)
     particle.update(dt)
 end
 

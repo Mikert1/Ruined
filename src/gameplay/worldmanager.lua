@@ -8,6 +8,7 @@ local gui
 local stone
 local boss
 local file
+local objectsManager = require("src/gameplay/objects")
 function worldManagement.loadAssets()
     bump = require 'src/library/bump'
     sti = require 'src/library/sti'
@@ -21,7 +22,6 @@ function worldManagement.loadAssets()
 end
 
 local saveStone = {}
-local structures = {}
 local playerCircleRadius
 local lightPositions
 local lightRadii
@@ -51,10 +51,6 @@ function worldManagement.load()
     }
     saveStone.image = saveStone.imageInactive
 
-    structures.s1 = {
-        image = love.graphics.newImage("assets/textures/world/structures/tent.png"),
-        imageBackground = love.graphics.newImage("assets/textures/world/structures/tentBackground.png")
-    }
     playerCircleRadius = 10
     lightPositions = {{0, 0}, {0, 0}}
     lightRadii = {0, 0}
@@ -240,29 +236,6 @@ local function saveStones()
         saveStone.x = 0
         saveStone.y = 0
     end
-end
-
-local function Structures(drawLayer)
-
-    if worldManagement.thisWorld == "Snow" then
-        for _, layer in ipairs(_G.currentWorld.layers) do
-            if layer.name == "wall" then
-                correctLayer = layer
-                break
-            end
-        end
-        if correctLayer then
-            for _, object in ipairs(correctLayer.objects) do
-                if object.name == "structure1" then
-                    if drawLayer == 1 then
-                        love.graphics.draw(structures.s1.imageBackground, object.x, object.y)
-                    else
-                        love.graphics.draw(structures.s1.image, object.x, object.y)
-                    end
-                end
-            end
-        end
-    end 
 end
 
 function worldManagement.teleport(loc)
@@ -645,14 +618,14 @@ function worldManagement:draw()
     if saveStone.y + 30 < player.y then
         love.graphics.draw(saveStone.image, saveStone.x, saveStone.y)
     end
-    Structures(1)
+    objectsManager.draw(1, worldManagement.thisWorld)
 end
 
 function worldManagement:draw2dLayer()
     if saveStone.y + 30 > player.y then
         love.graphics.draw(saveStone.image, saveStone.x, saveStone.y)
     end
-    Structures()
+    objectsManager.draw(2, worldManagement.thisWorld)
 end
 
 function worldManagement:drawDarkness()
