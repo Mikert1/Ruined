@@ -23,7 +23,40 @@ objectsManager.objects = {
         animation = {
             frame = 1,
             timer = 0,
-            order = {1, 2}
+            order = {
+                {
+                    frameNumber = 1,
+                    timeOnFrame = 0.2
+                },
+                {
+                    frameNumber = 2,
+                    timeOnFrame = 0.3
+                },
+                {
+                    frameNumber = 1,
+                    timeOnFrame = 0.1
+                },
+                {
+                    frameNumber = 2,
+                    timeOnFrame = 0.4
+                },
+                {
+                    frameNumber = 1,
+                    timeOnFrame = 0.1
+                },
+                {
+                    frameNumber = 2,
+                    timeOnFrame = 0.7
+                },
+                {
+                    frameNumber = 1,
+                    timeOnFrame = 0.1
+                },
+                {
+                    frameNumber = 2,
+                    timeOnFrame = 0.2
+                }
+            }
         }
     }
 }
@@ -36,7 +69,7 @@ function objectsManager.update(dt)
     for k, v in pairs(objectsManager.objects) do
         if v.type == "animation" then
             v.animation.timer = v.animation.timer + dt
-            if v.animation.timer > 0.5 then
+            if v.animation.timer > v.animation.order[v.animation.frame].timeOnFrame then
                 v.animation.timer = 0
                 v.animation.frame = v.animation.frame + 1
                 if v.animation.frame > #v.animation.order then
@@ -59,9 +92,9 @@ function objectsManager.draw(drawLayer, world)
             elseif v.type == "animation" then
                 love.graphics.rectangle("line", v.x - v.width / 2, v.y - v.height / 2, v.width, v.height)
                 if drawLayer == 1 then
-                    love.graphics.draw(v.image[v.animation.order[v.animation.frame]], v.x, v.y, 0, 1, 1, v.width / 2, v.height / 2)
+                    love.graphics.draw(v.image[v.animation.order[v.animation.frame].frameNumber], v.x, v.y, 0, 1, 1, v.width / 2, v.height / 2)
                 elseif drawLayer == 2 then
-                    love.graphics.draw(v.image[v.animation.order[v.animation.frame]], v.x, v.y, 0, 1, 1, v.width / 2, v.height / 2)
+                    love.graphics.draw(v.image[v.animation.order[v.animation.frame].frameNumber], v.x, v.y, 0, 1, 1, v.width / 2, v.height / 2)
                 end
             end
         end
