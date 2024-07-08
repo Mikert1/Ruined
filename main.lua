@@ -56,7 +56,6 @@ print("[Debug ] Console is active\n    - use Tab to show more info and show coll
 
 function love.load()
     story.load()
-    objectsManager.load()
 end
 
 function love.update(dt)

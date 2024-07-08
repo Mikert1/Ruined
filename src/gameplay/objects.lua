@@ -1,36 +1,35 @@
 local objectsManager = {}
 
-function objectsManager.load()
-    objectsManager.objects = {
-        tent = {
-            type = "static",
-            world = "Snow",
-            x = 167,
-            y = 286,
-            width = 46,
-            height = 61,
-            image = love.graphics.newImage("assets/textures/world/structures/tent.png"),
-            imageBackground = love.graphics.newImage("assets/textures/world/structures/tentBackground.png")
-        },
-        cryonium = {
-            type = "animation",
-            world = "Mountains",
-            x = 30,
-            y = 100,
-            width = 15,
-            height = 20,
-            image = {},
-            animation = {
-                frame = 1,
-                timer = 0,
-                order = {1, 2}
-            }
+print("[Loader] Loading objects...")
+objectsManager.objects = {
+    tent = {
+        type = "static",
+        world = "Snow",
+        x = 167,
+        y = 286,
+        width = 46,
+        height = 61,
+        image = love.graphics.newImage("assets/textures/world/structures/tent.png"),
+        imageBackground = love.graphics.newImage("assets/textures/world/structures/tentBackground.png")
+    },
+    cryonium = {
+        type = "animation",
+        world = "Mountains",
+        x = 30,
+        y = 100,
+        width = 15,
+        height = 20,
+        image = {},
+        animation = {
+            frame = 1,
+            timer = 0,
+            order = {1, 2}
         }
     }
+}
 
-    for i = 1, 2 do
-        objectsManager.objects.cryonium.image[i] = love.graphics.newImage("assets/textures/world/cryonium/a" .. i .. ".png")
-    end
+for i = 1, 2 do
+    objectsManager.objects.cryonium.image[i] = love.graphics.newImage("assets/textures/world/cryonium/a" .. i .. ".png")
 end
 
 function objectsManager.update(dt)
