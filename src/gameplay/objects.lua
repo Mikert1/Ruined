@@ -83,17 +83,20 @@ end
 function objectsManager.draw(drawLayer, world)
     for k, v in pairs(objectsManager.objects) do
         if v.world == world then
+            local objectY = v.y + v.height / 2
             if v.type == "static" then
                 if drawLayer == 1 then
                     love.graphics.draw(v.imageBackground, v.x, v.y, 0, 1, 1, v.width / 2, v.height / 2)
-                elseif drawLayer == 2 then
+                end
+                if drawLayer == 1 and objectY < player.y then
+                    love.graphics.draw(v.image, v.x, v.y, 0, 1, 1, v.width / 2, v.height / 2)
+                elseif drawLayer == 2 and objectY >= player.y then
                     love.graphics.draw(v.image, v.x, v.y, 0, 1, 1, v.width / 2, v.height / 2)
                 end
             elseif v.type == "animation" then
-                love.graphics.rectangle("line", v.x - v.width / 2, v.y - v.height / 2, v.width, v.height)
-                if drawLayer == 1 then
+                if drawLayer == 1 and objectY < player.y then
                     love.graphics.draw(v.image[v.animation.order[v.animation.frame].frameNumber], v.x, v.y, 0, 1, 1, v.width / 2, v.height / 2)
-                elseif drawLayer == 2 then
+                elseif drawLayer == 2 and objectY >= player.y then
                     love.graphics.draw(v.image[v.animation.order[v.animation.frame].frameNumber], v.x, v.y, 0, 1, 1, v.width / 2, v.height / 2)
                 end
             end
