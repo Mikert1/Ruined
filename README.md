@@ -1,5 +1,6 @@
-<img width="100%" src="assets/textures/github/game.png">
+![game](https://github.com/Mikert1/Ruined/assets/73882306/b35ce5a7-e065-462e-8beb-51ac57dd84d1)
 <h1>Ruined</h1>
+
 <p>“Ruined” the game is a hobby project that i started so i could learn Game Development. In early versions the code might not be perfect but i will try to improve every aspect of my game as i grow in skills.</p>
 <h2>Version:</h2>
 <h3>Current version: <strong>Early Developer Bèta Version: 1.6</strong></h3>
@@ -11,12 +12,12 @@
 <p>And if that is not the case and you are on windows double click the .exe file in the zip folder.</p>
 <h2>Pictures:</h2>
 <div>
-    <a><img width="49.5%" src="assets/textures/github/savegames.png"></a>
-    <a><img width="49.5%" src="assets/textures/github/story.png"></a>
+    <a><img width="49.5%" src="https://github.com/Mikert1/Ruined/assets/73882306/1ef52b0c-8240-489a-a191-458290eeaa21"></a>
+    <a><img width="49.5%" src="https://github.com/Mikert1/Ruined/assets/73882306/ec4af4f6-0ac1-460c-8bae-5d015817904d"></a>
 </div>
 <div>
-    <img width="49.5%" src="assets/textures/github/enemy.png">
-    <img width="49.5%" src="assets/textures/github/path.png">
+    <img width="49.5%" src="https://github.com/Mikert1/Ruined/assets/73882306/eef28b86-3676-42fc-b7ba-cc05ba1171a6">
+    <img width="49.5%" src="https://github.com/Mikert1/Ruined/assets/73882306/adea97ac-11a2-4c1b-b628-0f0edf4c7494">
 </div>
 <h2>Beta Website:</h2>
 <p><a href="http://mikert.com/game.html">Mikert.com</a></p>
