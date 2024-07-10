@@ -1,6 +1,5 @@
 local objectsManager = {}
 
-print("[Loader] Loading objects...")
 objectsManager.objects = {
     tent = {
         type = "static",
@@ -23,6 +22,7 @@ objectsManager.objects = {
         animation = {
             frame = 1,
             timer = 0,
+            count = 2,
             order = {
                 {
                     frameNumber = 1,
@@ -60,9 +60,12 @@ objectsManager.objects = {
         }
     }
 }
-
-for i = 1, 2 do
-    objectsManager.objects.cryonium.image[i] = love.graphics.newImage("assets/textures/world/cryonium/a" .. i .. ".png")
+for k, v in pairs(objectsManager.objects) do
+    if v.type == "animation" then
+        for i = 1, v.animation.count do
+            v.image[i] = love.graphics.newImage("assets/textures/world/structures/" .. k .. "/a" .. i .. ".png")
+        end
+    end
 end
 
 function objectsManager.update(dt)
