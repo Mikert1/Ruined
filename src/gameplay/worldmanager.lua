@@ -502,6 +502,7 @@ local function checkNpc(dt)
                         elseif story.data.storyTold.john2 == false then
                             talk("john2")
                         end
+                        game.freeze = true
                         story.npc.interactionHold = 0
                     else
                         if story.skiped == false then

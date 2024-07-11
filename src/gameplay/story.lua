@@ -98,6 +98,7 @@ function story.dialogue.update()
         game.state = 0
         story.load()
         worldManagement.saved = false
+        game.freeze = false
         -- story.data.storyTold.john1 = true
         return
     end
