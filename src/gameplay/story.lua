@@ -92,6 +92,7 @@ end
 
 function story.dialogue.update()
     if story.arrayLength < story.data.current then
+        -- this is the end of the story
         story.npc.interaction = false
         player.item.sword = true
         story.lasttext = false
@@ -99,7 +100,6 @@ function story.dialogue.update()
         story.load()
         worldManagement.saved = false
         game.freeze = false
-        -- story.data.storyTold.john1 = true
         return
     end
     if story.arrayLength == story.data.current then

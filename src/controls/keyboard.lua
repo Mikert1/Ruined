@@ -30,7 +30,15 @@ function love.keypressed(key)
             love.event.quit()
         end
     end
-    if not player.isDead and title.state == 5 then
+    if key == controls.keys.interact and story.npc.interaction == true and not player.isDead then
+        if story.dialogue.length < story.dialogue.position then
+            story.data.current = story.data.current + 1
+            story.dialogue.position = 0
+            story.dialogue.update()
+            story.skiped = true
+        end
+    end
+    if not player.isDead and title.state == 5 and game.state == 0 then
         if key == "escape" then
             if game.esc == true then
                 game.esc = false
@@ -46,14 +54,6 @@ function love.keypressed(key)
                 gui.map = false
                 player.walkingOnGrass:stop()
                 love.mouse.setGrabbed(false)
-            end
-        end
-        if key == controls.keys.interact and story.npc.interaction == true then
-            if story.dialogue.length < story.dialogue.position then
-                story.data.current = story.data.current + 1
-                story.dialogue.position = 0
-                story.dialogue.update()
-                story.skiped = true
             end
         end
         if key == controls.keys.map then

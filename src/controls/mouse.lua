@@ -85,6 +85,7 @@ function love.mousepressed(x, y, buttonClicked, istouch)
                     story.data.current = story.data.current + 1
                     story.dialogue.position = 0
                     story.dialogue.update()
+                    story.skiped = true
                 end
             end
             if buttonClicked == 1 and game.freeze == false then
