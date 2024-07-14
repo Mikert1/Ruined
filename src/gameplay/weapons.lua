@@ -298,6 +298,27 @@ function weapon.sword.use()
         weapon.sword.slash.y = playerCenterY + imageDistance * math.sin(angle) - weapon.sword.collider.height / 2
         weapon.sword.slash.direction = angle - 1.5
 
+        print(angle)
+        if angle > 1.5 or angle < -1.5 then
+            player.isLeft = true
+            if angle > 0 then
+                player.isUp = false
+                player.anim = player.animations.downLeft
+            else
+                player.isUp = true
+                player.anim = player.animations.upLeft
+            end
+        else
+            player.isLeft = false
+            if angle > 0 then
+                player.isUp = false
+                player.anim = player.animations.downRight
+            else
+                player.isUp = true
+                player.anim = player.animations.upRight
+            end
+        end
+
         if weapon.sword.combo.current == 3 then
             player.x, player.y = world:move(player, weapon.sword.collider.x + weapon.sword.collider.width / 2 - player.width / 2, weapon.sword.collider.y + weapon.sword.collider.height / 2)
         end
@@ -330,7 +351,7 @@ function weapon.sword.use()
         else
             --weapon.sword.sound:play()
         end
-        player.speedMultiplier = 5
+        player.speedMultiplier = 3
         if weapon.sword.combo.current == 1 then
             weapon.sword.anim = weapon.sword.animations.slash
             weapon.sword.combo.current = 2
