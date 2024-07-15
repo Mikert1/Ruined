@@ -3,7 +3,7 @@
 
 <p>“Ruined” the game is a hobby project that i started so i could learn Game Development. In early versions the code might not be perfect but i will try to improve every aspect of my game as i grow in skills.</p>
 <h2>Version:</h2>
-<h3>Current version: <strong>Early Developer Bèta Version: 1.6</strong></h3>
+<h3>Current version: <strong>Early Developer Pre-Alpha Version: 1.6</strong></h3>
 <p>This game is made in a framework called <a href="https://love2d.org/">Love2D</a> (version 11.5). and fully written in <a href="https://www.lua.org/">lua</a> (version 5.1).</p>
 <h2>How to play:</h2>
 <p>To test the game download the <a href="https://github.com/Mikert1/Ruined/releases/tag/v1.4-early-developer-beta">Latest Release</a>.</p>

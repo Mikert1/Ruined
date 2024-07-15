@@ -1,7 +1,7 @@
 local game = {}
 game.version = "1.6"
 game.name = "Ruined"
-game.beta = "Early Developer Bèta"
+game.beta = "Early Developer Pre-Alpha"
 game.buildName = "(DEV Build)"
 game.chapter = 1
 game.state = 1
