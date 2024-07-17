@@ -91,6 +91,8 @@ function controller.update(dt)
                             story.dialogue.position = 0
                             story.dialogue.update()
                             story.skiped = true
+                        elseif story.skiped == false then
+                            story.dialogue.position = story.dialogue.length
                         end
                     end
                 else

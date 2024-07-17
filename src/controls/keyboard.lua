@@ -36,6 +36,8 @@ function love.keypressed(key)
             story.dialogue.position = 0
             story.dialogue.update()
             story.skiped = true
+        elseif story.skiped == false then
+            story.dialogue.position = story.dialogue.length
         end
     end
     if not player.isDead and title.state == 5 and game.state == 0 then

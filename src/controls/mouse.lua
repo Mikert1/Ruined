@@ -86,6 +86,8 @@ function love.mousepressed(x, y, buttonClicked, istouch)
                     story.dialogue.position = 0
                     story.dialogue.update()
                     story.skiped = true
+                elseif story.skiped == false then
+                    story.dialogue.position = story.dialogue.length
                 end
             end
             if buttonClicked == 1 and game.freeze == false then
@@ -114,6 +116,7 @@ function love.mousereleased(x, y, buttonClicked, istouch, presses)
             weapon.bow.use()
         end
     end
+    story.skiped = false
 end
 
 function love.wheelmoved(x, y)
