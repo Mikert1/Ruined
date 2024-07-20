@@ -1,18 +1,36 @@
 local worldManagement = require("src/gameplay/worldmanager")
 local particle = require("src/gameplay/particle")
 local stone = {
-    image = love.graphics.newImage("assets/textures/entities/enemies/stone/body.png"),
-    eyes = love.graphics.newImage("assets/textures/entities/enemies/stone/eyes.png")
+    animation = {
+        summon = {},
+        walk = {
+            body = {},
+            eyes = {}
+        }
+    }
 }
+for i = 1, 1 do
+    table.insert(stone.animation.summon, love.graphics.newImage("assets/textures/entities/enemies/stone/summon/" .. i .. ".png"))
+end
+for i = 1, 1 do
+    table.insert(stone.animation.walk.body, love.graphics.newImage("assets/textures/entities/enemies/stone/walk/body/" .. i .. ".png"))
+    table.insert(stone.animation.walk.eyes, love.graphics.newImage("assets/textures/entities/enemies/stone/walk/eyes/" .. i .. ".png"))
+end
 stone.__index = stone
 
--- self functions
 
+-- self functions
 function stone.new(x, y, calorLVL)
     local instance = setmetatable({}, stone)
+    instance.animation = {
+        state = "summon",
+        current = 1,
+        timer = 0,
+        speed = 0.1,
+    }
     instance.x = x
     instance.y = y
-    instance.width = stone.image:getWidth()
+    instance.width = stone.animation.walk.body[1]:getWidth()
     instance.offsetY = 6
     instance.height = 2
     world:add(instance, instance.x, instance.y, instance.width, instance.height)
