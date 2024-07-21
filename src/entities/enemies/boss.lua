@@ -57,8 +57,9 @@ end
 
 function boss:summon()
     for i = 1, 5 do
-        local x = math.random(self.x + (self.width / 2) - 10, self.x + (self.width / 2) + 10)
-        local y = math.random(self.y - 10, self.y + 10)
+        range = 50
+        local x = math.random(self.x + (self.width / 2) - range, self.x + (self.width / 2) + range)
+        local y = math.random(self.y - range, self.y + range)
         table.insert(enemymanager.activeEnemies, stone.new(x, y, 2))
     end
 end
@@ -73,7 +74,7 @@ function boss:attack(dt)
     self.attackTimer = self.attackTimer - dt
 end
 
-function boss:walk(playerX, playerY, dt) 
+function boss:walk(playerX, playerY, dt)
     local dx = playerX - (self.x + self.width / 2)
     local dy = (playerY + self.offsetY) - self.y
     self.distanceFromPlayer = math.sqrt(dx * dx + dy * dy)

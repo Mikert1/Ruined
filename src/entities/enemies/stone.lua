@@ -2,14 +2,17 @@ local worldManagement = require("src/gameplay/worldmanager")
 local particle = require("src/gameplay/particle")
 local stone = {
     animation = {
-        summon = {},
+        summon = {
+            path = {1, 2, 3, 4, 5, 6, 7, 8}
+        },
         walk = {
             body = {},
-            eyes = {}
+            eyes = {},
+            path = {1}
         }
     }
 }
-for i = 1, 1 do
+for i = 1, 8 do
     table.insert(stone.animation.summon, love.graphics.newImage("assets/textures/entities/enemies/stone/summon/" .. i .. ".png"))
 end
 for i = 1, 1 do
@@ -25,8 +28,8 @@ function stone.new(x, y, calorLVL)
     instance.animation = {
         state = "summon",
         current = 1,
-        timer = 0,
-        speed = 0.1,
+        timer = 1,
+        speed = 8,
     }
     instance.x = x
     instance.y = y
@@ -77,55 +80,76 @@ end
         
         
 function stone:walk(playerX, playerY, dt)
-    local dx = playerX - (self.x + self.width / 2)
-    local dy = (playerY + self.offsetY) - self.y
-    local distance = math.sqrt(dx * dx + dy * dy)
+    if self.animation.state == "walk" then
+        local dx = playerX - (self.x + self.width / 2)
+        local dy = (playerY + self.offsetY) - self.y
+        local distance = math.sqrt(dx * dx + dy * dy)
 
-    if distance <= 80 then
-        if dx < 0 then
-            self.isLeft = true
+        if distance <= 80 then
+            if dx < 0 then
+                self.isLeft = true
+            else
+                self.isLeft = false
+            end
+            local dirX = dx / distance
+            local dirY = dy / distance
+
+            self.x, self.y = world:move(self, self.x + dirX * self.speed * dt, self.y + dirY * self.speed * dt)
         else
-            self.isLeft = false
+            if self.stepTimer <= 5 then
+                self.x, self.y = world:move(self, self.x + (dt * self.speed / 2), self.y)
+                self.isLeft = false
+            elseif self.stepTimer <= 10 then
+                self.x, self.y = world:move(self, self.x - (dt * self.speed / 2), self.y)
+                self.isLeft = true
+            else
+                self.stepTimer = 0
+            end
+            self.stepTimer = self.stepTimer + dt
         end
-        local dirX = dx / distance
-        local dirY = dy / distance
-
-        self.x, self.y = world:move(self, self.x + dirX * self.speed * dt, self.y + dirY * self.speed * dt)
+        self.collider = {
+            x = self.x - 0.5,
+            y = self.y - 0.5,
+            width = self.width + 1,
+            height = self.height + 1
+        }
     else
-        if self.stepTimer <= 5 then
-            self.x, self.y = world:move(self, self.x + (dt * self.speed / 2), self.y)
-            self.isLeft = false
-        elseif self.stepTimer <= 10 then
-            self.x, self.y = world:move(self, self.x - (dt * self.speed / 2), self.y)
-            self.isLeft = true
-        else
-            self.stepTimer = 0
-        end
-        self.stepTimer = self.stepTimer + dt
+        self.x, self.y = world:move(self, self.x, self.y)
     end
-    self.collider = {
-        x = self.x - 0.5,
-        y = self.y - 0.5,
-        width = self.width + 1,
-        height = self.height + 1
-    }
 end
 
 --
 
 function stone:update(dt)
     self:walk(player.x, player.y - 6, dt)
+    self.animation.timer = self.animation.timer - (dt * self.animation.speed)
+    if self.animation.timer <= 0 then
+        self.animation.current = self.animation.current + 1
+        if self.animation.current > #stone.animation[self.animation.state].path then
+            self.animation.current = 1
+            if self.animation.state == "summon" then
+                self.animation.state = "walk"
+            end
+        end
+        self.animation.timer = 1
+    end
 end
 
 function stone:draw()
-    if self.isLeft == false then
-        love.graphics.draw(self.image, self.x, self.y - self.offsetY)
+    if self.animation.state == "walk" then
+        love.graphics.draw(stone.animation[self.animation.state].body[self.animation.current], self.x, self.y - self.offsetY)
         love.graphics.setColor(self.eyeColor)
-        love.graphics.draw(self.eyes, self.x, self.y - self.offsetY)
+        if self.isLeft == false then
+            love.graphics.draw(stone.animation[self.animation.state].eyes[self.animation.current], self.x, self.y - self.offsetY)
+        else
+            love.graphics.draw(stone.animation[self.animation.state].eyes[self.animation.current], self.x + self.width , self.y - self.offsetY, nil, -1, 1)
+        end
     else
-        love.graphics.draw(self.image, self.x + self.width , self.y - self.offsetY, nil, -1, 1)
-        love.graphics.setColor(self.eyeColor)
-        love.graphics.draw(self.eyes, self.x + self.width , self.y - self.offsetY, nil, -1, 1)
+        if self.isLeft == false then
+            love.graphics.draw(stone.animation[self.animation.state][self.animation.current], self.x, self.y - self.offsetY)
+        else
+            love.graphics.draw(stone.animation[self.animation.state][self.animation.current], self.x + self.width , self.y - self.offsetY, nil, -1, 1)
+        end
     end
     if keys.tab == true then
         love.graphics.setColor(1, 0, 0)
