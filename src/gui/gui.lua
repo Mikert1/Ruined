@@ -17,12 +17,13 @@ function gui.load()
     gui.welcome.animations.region1 = anim8.newAnimation( gui.welcome.grid('1-10', 1), 0.3 )
 
     gui.healthbar = {}
-    gui.healthbar.sprite = love.graphics.newImage("assets/textures/gui/gameplay/healthbarplayer.png")
-    gui.healthbar.grid = anim8.newGrid( 78, 14, gui.healthbar.sprite:getWidth(), gui.healthbar.sprite:getHeight() )
-    gui.healthbar.animations = {}
-    gui.healthbar.animations.normal = anim8.newAnimation(gui.healthbar.grid('1-9', 1), 0.3)
-    gui.healthbar.animations.focus = anim8.newAnimation(gui.healthbar.grid('1-9', 3), 0.3)
-    gui.healthbar.anim = gui.healthbar.animations.normal
+    gui.healthbar.image = {}
+    gui.healthbar.animation = {
+        current = 0
+    }
+    for i = 0, 8 do
+        gui.healthbar.image[i] = love.graphics.newImage("assets/textures/gui/gameplay/healthBar/" .. i ..".png")
+    end
 
     gui.focusbar = {}
     gui.focusbar.sprite = love.graphics.newImage("assets/textures/gui/gameplay/specialbar.png")
@@ -119,25 +120,7 @@ function gui.update(dt)
     if player.hearts >= 9 then
         player.hearts = 8
     end
-    if player.hearts >= 8 then
-        gui.healthbar.anim:gotoFrame(9)
-    elseif player.hearts >= 7 and player.hearts < 8 then
-        gui.healthbar.anim:gotoFrame(8)
-    elseif player.hearts >= 6 and player.hearts < 7 then
-        gui.healthbar.anim:gotoFrame(7)
-    elseif player.hearts >= 5 and player.hearts < 6 then
-        gui.healthbar.anim:gotoFrame(6)
-    elseif player.hearts >= 4 and player.hearts < 5 then
-        gui.healthbar.anim:gotoFrame(5)
-    elseif player.hearts >= 3 and player.hearts < 4 then
-        gui.healthbar.anim:gotoFrame(4)
-    elseif player.hearts >= 2 and player.hearts < 3 then
-        gui.healthbar.anim:gotoFrame(3)
-    elseif player.hearts >= 1 and player.hearts < 2 then
-        gui.healthbar.anim:gotoFrame(2)
-    elseif player.hearts >= 0 and player.hearts < 1 then
-        gui.healthbar.anim:gotoFrame(1)
-    end
+    gui.healthbar.animation.current = player.hearts
     if gui.focus == false then
         gui.healthbar.anim = gui.healthbar.animations.normal
         player.sheet = player.spriteSheet
@@ -173,7 +156,7 @@ function gui:draw()
         love.graphics.print("Press enter (return) to load last save.", love.graphics.getWidth() / 2 - (46 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (30 * playerCamera.globalScale), nil, playerCamera.globalScale / 2.5)
     end
     love.graphics.setColor(1, 1, 1)
-    gui.healthbar.anim:draw(gui.healthbar.sprite, 0, love.graphics.getHeight() - (16.5 * playerCamera.globalScale) - gui.hide.health.y * playerCamera.globalScale, nil, playerCamera.globalScale * 1.2)
+    love.graphics.draw(gui.healthbar.image[gui.healthbar.animation.current], 0, love.graphics.getHeight() - (16.5 * playerCamera.globalScale) - gui.hide.health.y * playerCamera.globalScale, nil, playerCamera.globalScale * 1.2)
     gui.focusbar.anim:draw(gui.focusbar.sprite, love.graphics.getWidth() - (93.5 * playerCamera.globalScale), love.graphics.getHeight() - (16.5 * playerCamera.globalScale) - gui.hide.sword.y * playerCamera.globalScale, nil, playerCamera.globalScale * 1.2)
     -- if gui.welcome.timer > 0 then
     --     gui.welcome.animations.region1:draw(gui.welcome.image, love.graphics.getWidth() / 2 - (75 / 2 * playerCamera.globalScale), love.graphics.getHeight() / 4 - (20 / 2 * playerCamera.globalScale), nil, playerCamera.globalScale)

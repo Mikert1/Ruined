@@ -1,5 +1,4 @@
 local settings = {}
-local anim8 = require("src/library/animations")
 local title = require("src/gui/title")
 local button = require("src/gui/button")
 local time = require("src/system/timer")

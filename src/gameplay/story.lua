@@ -1,4 +1,3 @@
-local anim8 = require'src/library/animations'
 local file
 local worldManagement
 local story = {}
@@ -7,11 +6,6 @@ story.npc.john = {}
 story.npc.john.x = 115
 story.npc.john.y = 128
 story.npc.john.image = love.graphics.newImage("assets/textures/npc/johnNpc.png")
--- story.npc.john.grid = anim8.newGrid( 10, 17, story.npc.john.image:getWidth(), story.npc.john.image:getHeight() )
--- story.npc.john.animations = {}
--- story.npc.john.animations.stand = anim8.newAnimation( story.npc.john.grid('1-1', 1), 0.05 )
--- story.npc.john.animations.walk = anim8.newAnimation( story.npc.john.grid('1-4', 1), 0.2 )
--- story.npc.john.anim = story.npc.john.animations.stand
 story.npc.john.position = 1
 story.npc.john.collider = {
     x = 170,
