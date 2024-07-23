@@ -63,7 +63,7 @@ function settings.draw()
             love.graphics.setColor(0.1, 0.1, 0.1)
             love.graphics.print("Drop your file here.", love.graphics.getWidth() / 2 - (127 * playerCamera.globalScale),
                 love.graphics.getHeight() / 2 - (0 * playerCamera.globalScale), nil, playerCamera.globalScale * 0.2)
-            love.graphics.print("image 95x105 pixels (19x21 for every animation frame)",
+            love.graphics.print("Image 95x105 pixels (19x21 for every animation frame)",
                 love.graphics.getWidth() / 2 - (127 * playerCamera.globalScale),
                 love.graphics.getHeight() / 2 + (3 * playerCamera.globalScale), nil, playerCamera.globalScale * 0.2)
             love.graphics.setColor(1, 1, 1)

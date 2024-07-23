@@ -3,6 +3,7 @@ local title
 local settings
 local weapon
 local button = require("src/gui/button")
+local shader = require("src/system/shaders")
 
 function gui.load()
     title = require("src/gui/title")
@@ -17,12 +18,16 @@ function gui.load()
     gui.welcome.animations.region1 = anim8.newAnimation( gui.welcome.grid('1-10', 1), 0.3 )
 
     gui.healthbar = {}
-    gui.healthbar.image = {}
+    gui.healthbar.image = {
+        normal = {},
+        special = {}
+    }
     gui.healthbar.animation = {
         current = 0
     }
     for i = 0, 8 do
-        gui.healthbar.image[i] = love.graphics.newImage("assets/textures/gui/gameplay/healthBar/" .. i ..".png")
+        gui.healthbar.image.normal[i] = love.graphics.newImage("assets/textures/gui/gameplay/healthBar/" .. i ..".png")
+        gui.healthbar.image.special[i] = love.graphics.newImage("assets/textures/gui/gameplay/healthBarFocus/" .. i ..".png")
     end
 
     gui.focusbar = {}
@@ -156,7 +161,13 @@ function gui:draw()
         love.graphics.print("Press enter (return) to load last save.", love.graphics.getWidth() / 2 - (46 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (30 * playerCamera.globalScale), nil, playerCamera.globalScale / 2.5)
     end
     love.graphics.setColor(1, 1, 1)
-    love.graphics.draw(gui.healthbar.image[gui.healthbar.animation.current], 0, love.graphics.getHeight() - (16.5 * playerCamera.globalScale) - gui.hide.health.y * playerCamera.globalScale, nil, playerCamera.globalScale * 1.2)
+    if player.focus == true then
+        love.graphics.setShader()
+        love.graphics.draw(gui.healthbar.image.special[gui.healthbar.animation.current], 0, love.graphics.getHeight() - (16.5 * playerCamera.globalScale) - gui.hide.health.y * playerCamera.globalScale, nil, playerCamera.globalScale * 1.2)
+        love.graphics.setShader(shader.focus)
+    else
+        love.graphics.draw(gui.healthbar.image.normal[gui.healthbar.animation.current], 0, love.graphics.getHeight() - (16.5 * playerCamera.globalScale) - gui.hide.health.y * playerCamera.globalScale, nil, playerCamera.globalScale * 1.2)
+    end
     gui.focusbar.anim:draw(gui.focusbar.sprite, love.graphics.getWidth() - (93.5 * playerCamera.globalScale), love.graphics.getHeight() - (16.5 * playerCamera.globalScale) - gui.hide.sword.y * playerCamera.globalScale, nil, playerCamera.globalScale * 1.2)
     -- if gui.welcome.timer > 0 then
     --     gui.welcome.animations.region1:draw(gui.welcome.image, love.graphics.getWidth() / 2 - (75 / 2 * playerCamera.globalScale), love.graphics.getHeight() / 4 - (20 / 2 * playerCamera.globalScale), nil, playerCamera.globalScale)
