@@ -31,17 +31,19 @@ function gui.load()
     end
 
     gui.focusbar = {}
-    gui.focusbar.sprite = love.graphics.newImage("assets/textures/gui/gameplay/specialbar.png")
-    gui.focusbar.grid = anim8.newGrid( 78, 14, gui.focusbar.sprite:getWidth(), gui.focusbar.sprite:getHeight())
-    gui.focusbar.animations = {}
-    gui.focusbar.animations.normal = anim8.newAnimation(gui.focusbar.grid('1-9', 1), 1)
-    gui.focusbar.animations.bow = anim8.newAnimation(gui.focusbar.grid('1-9', 3), 1)
-    gui.focusbar.anim = gui.focusbar.animations.normal
-    gui.focusbar.active = false
-    gui.focusbar.bowActive = false
-    gui.focusbar.lightActive = false
-    gui.focusReady = false
-    gui.focusTime = 0
+    gui.focusbar.image = {
+        sword = {},
+        bow = {}
+    }
+    gui.focusbar.animation = {
+        current = 0
+    }
+
+    for i = 0, 8 do
+        gui.focusbar.image.sword[i] = love.graphics.newImage("assets/textures/gui/gameplay/swordBar/" .. i .. ".png")
+        -- gui.focusbar.image.bow[i] = love.graphics.newImage("assets/textures/gui/gameplay/bowFocus/" .. i .. ".png")
+    end
+
     gui.gameover = love.graphics.newImage("assets/textures/gui/gameplay/gameover.png")
 
     gui.hide = {}
@@ -73,27 +75,7 @@ function gui.update(dt)
         gui.welcome.animations.region1:update(dt)
     end
     if weapon.equipment == 1 then
-        gui.focusbar.anim = gui.focusbar.animations.normal
-        if gui.focusTime == 8 then
-            gui.focusbar.anim:gotoFrame(1)
-        elseif gui.focusTime >= 7 then
-            gui.focusbar.anim:gotoFrame(2)
-        elseif gui.focusTime >= 6 then
-            gui.focusbar.anim:gotoFrame(3)
-        elseif gui.focusTime >= 5 then
-            gui.focusbar.anim:gotoFrame(4)
-        elseif gui.focusTime >= 4 then
-            gui.focusbar.anim:gotoFrame(5)
-        elseif gui.focusTime >= 3 then
-            gui.focusbar.anim:gotoFrame(6)
-        elseif gui.focusTime >= 2 then
-            gui.focusbar.anim:gotoFrame(7)
-        elseif gui.focusTime >= 1 then
-            gui.focusbar.anim:gotoFrame(8)
-        elseif gui.focusTime >= 0 then
-            gui.focusbar.anim:gotoFrame(9)
-            player.focus = false
-        end
+        gui.focusbar.animation.current = math.floor(gui.focusTime)
     elseif weapon.equipment == 2 then
         gui.focusbar.anim = gui.focusbar.animations.bow
         if weapon.bow.arrow.count == 8 then
@@ -168,7 +150,11 @@ function gui:draw()
     else
         love.graphics.draw(gui.healthbar.image.normal[gui.healthbar.animation.current], 0, love.graphics.getHeight() - (16.5 * playerCamera.globalScale) - gui.hide.health.y * playerCamera.globalScale, nil, playerCamera.globalScale * 1.2)
     end
-    gui.focusbar.anim:draw(gui.focusbar.sprite, love.graphics.getWidth() - (93.5 * playerCamera.globalScale), love.graphics.getHeight() - (16.5 * playerCamera.globalScale) - gui.hide.sword.y * playerCamera.globalScale, nil, playerCamera.globalScale * 1.2)
+    if weapon.equipment == 1 then
+        love.graphics.draw(gui.focusbar.image.sword[gui.focusbar.animation.current], love.graphics.getWidth() - (93.5 * playerCamera.globalScale), love.graphics.getHeight() - (16.5 * playerCamera.globalScale) - gui.hide.sword.y * playerCamera.globalScale, nil, playerCamera.globalScale * 1.2)
+    elseif weapon.equipment == 2 then
+        love.graphics.draw(gui.focusbar.image.bow[gui.focusbar.animation.current], love.graphics.getWidth() - (93.5 * playerCamera.globalScale), love.graphics.getHeight() - (16.5 * playerCamera.globalScale) - gui.hide.sword.y * playerCamera.globalScale, nil, playerCamera.globalScale * 1.2)
+    end
     -- if gui.welcome.timer > 0 then
     --     gui.welcome.animations.region1:draw(gui.welcome.image, love.graphics.getWidth() / 2 - (75 / 2 * playerCamera.globalScale), love.graphics.getHeight() / 4 - (20 / 2 * playerCamera.globalScale), nil, playerCamera.globalScale)
     -- end
