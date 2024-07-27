@@ -30,18 +30,18 @@ function gui.load()
         gui.healthbar.image.special[i] = love.graphics.newImage("assets/textures/gui/gameplay/healthBarFocus/" .. i ..".png")
     end
 
-    gui.focusbar = {}
-    gui.focusbar.image = {
+    gui.weaponBar = {}
+    gui.weaponBar.image = {
         sword = {},
         bow = {}
     }
-    gui.focusbar.animation = {
+    gui.weaponBar.animation = {
         current = 0
     }
 
     for i = 0, 8 do
-        gui.focusbar.image.sword[i] = love.graphics.newImage("assets/textures/gui/gameplay/swordBar/" .. i .. ".png")
-        -- gui.focusbar.image.bow[i] = love.graphics.newImage("assets/textures/gui/gameplay/bowFocus/" .. i .. ".png")
+        gui.weaponBar.image.sword[i] = love.graphics.newImage("assets/textures/gui/gameplay/swordBar/" .. i .. ".png")
+        gui.weaponBar.image.bow[i] = love.graphics.newImage("assets/textures/gui/gameplay/bowAmmoBar/" .. i .. ".png")
     end
 
     gui.gameover = love.graphics.newImage("assets/textures/gui/gameplay/gameover.png")
@@ -75,28 +75,9 @@ function gui.update(dt)
         gui.welcome.animations.region1:update(dt)
     end
     if weapon.equipment == 1 then
-        gui.focusbar.animation.current = math.floor(gui.focusTime)
+        gui.weaponBar.animation.current = math.floor(gui.focusTime)
     elseif weapon.equipment == 2 then
-        gui.focusbar.anim = gui.focusbar.animations.bow
-        if weapon.bow.arrow.count == 8 then
-            gui.focusbar.anim:gotoFrame(1)
-        elseif weapon.bow.arrow.count >= 7 then
-            gui.focusbar.anim:gotoFrame(2)
-        elseif weapon.bow.arrow.count >= 6 then
-            gui.focusbar.anim:gotoFrame(3)
-        elseif weapon.bow.arrow.count >= 5 then
-            gui.focusbar.anim:gotoFrame(4)
-        elseif weapon.bow.arrow.count >= 4 then
-            gui.focusbar.anim:gotoFrame(5)
-        elseif weapon.bow.arrow.count >= 3 then
-            gui.focusbar.anim:gotoFrame(6)
-        elseif weapon.bow.arrow.count >= 2 then
-            gui.focusbar.anim:gotoFrame(7)
-        elseif weapon.bow.arrow.count >= 1 then
-            gui.focusbar.anim:gotoFrame(8)
-        elseif weapon.bow.arrow.count == 0 then
-            gui.focusbar.anim:gotoFrame(9)
-        end
+        gui.weaponBar.animation.current = math.floor(weapon.bow.arrow.count)
     end
     if not gui.healthbar then
         gui.healthbar = {}
@@ -151,9 +132,9 @@ function gui:draw()
         love.graphics.draw(gui.healthbar.image.normal[gui.healthbar.animation.current], 0, love.graphics.getHeight() - (16.5 * playerCamera.globalScale) - gui.hide.health.y * playerCamera.globalScale, nil, playerCamera.globalScale * 1.2)
     end
     if weapon.equipment == 1 then
-        love.graphics.draw(gui.focusbar.image.sword[gui.focusbar.animation.current], love.graphics.getWidth() - (93.5 * playerCamera.globalScale), love.graphics.getHeight() - (16.5 * playerCamera.globalScale) - gui.hide.sword.y * playerCamera.globalScale, nil, playerCamera.globalScale * 1.2)
+        love.graphics.draw(gui.weaponBar.image.sword[gui.weaponBar.animation.current], love.graphics.getWidth() - (93.5 * playerCamera.globalScale), love.graphics.getHeight() - (16.5 * playerCamera.globalScale) - gui.hide.sword.y * playerCamera.globalScale, nil, playerCamera.globalScale * 1.2)
     elseif weapon.equipment == 2 then
-        love.graphics.draw(gui.focusbar.image.bow[gui.focusbar.animation.current], love.graphics.getWidth() - (93.5 * playerCamera.globalScale), love.graphics.getHeight() - (16.5 * playerCamera.globalScale) - gui.hide.sword.y * playerCamera.globalScale, nil, playerCamera.globalScale * 1.2)
+        love.graphics.draw(gui.weaponBar.image.bow[gui.weaponBar.animation.current], love.graphics.getWidth() - (93.5 * playerCamera.globalScale), love.graphics.getHeight() - (16.5 * playerCamera.globalScale) - gui.hide.sword.y * playerCamera.globalScale, nil, playerCamera.globalScale * 1.2)
     end
     -- if gui.welcome.timer > 0 then
     --     gui.welcome.animations.region1:draw(gui.welcome.image, love.graphics.getWidth() / 2 - (75 / 2 * playerCamera.globalScale), love.graphics.getHeight() / 4 - (20 / 2 * playerCamera.globalScale), nil, playerCamera.globalScale)
