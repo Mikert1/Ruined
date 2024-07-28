@@ -12,7 +12,7 @@ weapon.sword.slash.active = false
 weapon.sword.slash.direction = 0
 weapon.sword.slash.image = love.graphics.newImage("assets/textures/entities/player/swordslash.png")
 weapon.sword.grid = anim8.newGrid( 39, 15, weapon.sword.slash.image:getWidth(), weapon.sword.slash.image:getHeight() )
-weapon.sword.grid2 = anim8.newGrid( 39, 30, weapon.sword.slash.image:getWidth(), weapon.sword.slash.image:getHeight() )
+weapon.sword.grid2 = anim8.newGrid( 39, 21, weapon.sword.slash.image:getWidth(), weapon.sword.slash.image:getHeight(), 30, 0 )
 weapon.sword.animations = {}
 weapon.sword.animations.slash = anim8.newAnimation( weapon.sword.grid('1-6', 1), 0.05 )
 weapon.sword.animations.slash2 = anim8.newAnimation( weapon.sword.grid('1-6', 2), 0.05 )
@@ -298,7 +298,6 @@ function weapon.sword.use()
         weapon.sword.slash.y = playerCenterY + imageDistance * math.sin(angle) - weapon.sword.collider.height / 2
         weapon.sword.slash.direction = angle - 1.5
 
-        print(angle)
         if angle > 1.5 or angle < -1.5 then
             player.isLeft = true
             if angle > 0 then
@@ -317,10 +316,6 @@ function weapon.sword.use()
                 player.isUp = true
                 player.anim = player.animations.upRight
             end
-        end
-
-        if weapon.sword.combo.current == 3 then
-            player.x, player.y = world:move(player, weapon.sword.collider.x + weapon.sword.collider.width / 2 - player.width / 2, weapon.sword.collider.y + weapon.sword.collider.height / 2)
         end
 
         for i, enemy in ipairs(enemymanager.activeEnemies) do
