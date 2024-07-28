@@ -30,9 +30,6 @@ function love.keypressed(key)
             love.event.quit()
         end
     end
-    -- if key == "c" then
-        
-    -- end
     if key == controls.keys.interact and story.npc.interaction == true and not player.isDead then
         if story.dialogue.length < story.dialogue.position then
             story.data.current = story.data.current + 1

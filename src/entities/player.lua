@@ -130,6 +130,22 @@ function player.movement(dt)
     player.sideSpeed = 7.71067812 * player.speedMultiplier
     player.isMoving = false
     local dx, dy = 0, 0
+--     if key == "c" then
+--         if gui.focusTime >= 1 then
+--         local dx = 0
+--         local dy = 0
+--         if player.isLeft then
+--             dx = -20
+--         elseif not player.isLeft then
+--             dx = 20
+--         end
+--         if player.isUp then
+--             dy = -20
+--         elseif not player.isUp then
+--             dy = 20
+--         end
+--         player.x, player.y = world:move(player, player.x + dx, player.y + dy, player.filter)
+--     end
     if game.controlType == 0 then
         if player.noMove == false then
             if love.keyboard.isDown("right", controls.keys.right) then

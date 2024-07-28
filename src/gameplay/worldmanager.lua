@@ -394,6 +394,7 @@ function worldManagement.teleport(loc)
     end
     saveStones()
     worldManagement.spawn()
+    playerCamera.cam:lookAt(player.x - 6, player.y - 8)
 end
 
 local function checkPortals()

@@ -47,17 +47,24 @@ function playerCamera.shake(intensity)
     playerCamera.cam:lookAt(x, y)
 end
 
+local function lerp(a, b, t)
+    return a + (b - a) * t
+end
 
 function playerCamera.follow(dt)
+    local lerpFactor = 0.1
+    local newCamPositon = {x = 0, y = 0}
+    if game.state == 0 then
+        newCamPositon = {x = lerp(playerCamera.cam.x ,player.x + 6, lerpFactor), y = lerp(playerCamera.cam.y, player.y - 8, lerpFactor)}
+    else
+        newCamPositon = {x = lerp(playerCamera.cam.x ,player.x + scene.x + 6, lerpFactor), y = lerp(playerCamera.cam.y, player.y + scene.y - 8, lerpFactor)}
+    end
+    
+    playerCamera.cam:lookAt(newCamPositon.x, newCamPositon.y)
     if controller.joysticks then
         if controller.joysticks:isGamepadDown("y") then
             playerCamera.shaker = 1
         end
-    end
-    if game.state == 0 then
-        playerCamera.cam:lookAt(player.x + 6, player.y - 8)
-    else
-        playerCamera.cam:lookAt(player.x + scene.x + 6, player.y + scene.y - 8)
     end
     if playerCamera.shaker > 0 then
         playerCamera.shaker = playerCamera.shaker - dt
