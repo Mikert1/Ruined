@@ -52,7 +52,7 @@ local function lerp(a, b, t)
 end
 
 function playerCamera.follow(dt)
-    local lerpFactor = 0.1
+    local lerpFactor = 7 * dt
     local newCamPositon = {x = 0, y = 0}
     if game.state == 0 then
         newCamPositon = {x = lerp(playerCamera.cam.x ,player.x + 6, lerpFactor), y = lerp(playerCamera.cam.y, player.y - 8, lerpFactor)}

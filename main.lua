@@ -58,6 +58,34 @@ function love.load()
     story.load()
 end
 
+local dev -- for me to skip some things like titlescreen becouse i see it every day ;)
+if require("dev") then
+    dev = require("dev")
+    if dev.skipTitlescreen == true then
+        title.mikert.showed = true
+        button.loadAll()
+        title.state = 1
+        file.show()
+        title.rezet()
+        title.text.name = "Ruined"
+        title.text.chapter = "Chapter 1"
+        title.mainColor = {0, 1, 1}
+        title.background.current = title.background.blue
+        button.loadAll()
+        file.filenumber = 1
+        game.state = 0
+        data = file.load()
+        worldManagement.teleport("start")
+        game.freeze = false
+        title.state = 5
+        game.esc = false
+        data = file.save()
+        player.noMove = false
+        button.loadAll()
+        love.mouse.setGrabbed(true)
+    end
+end
+
 function love.update(dt)
     game.update(dt)
     lan.receiveData()
