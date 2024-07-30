@@ -66,6 +66,10 @@ function player.load()
     player.walkingOnGrass:setVolume(0.3)
     player.walkingOnGrass:setLooping(true)
     
+    player.dash = {
+        timer = 1,
+        used = false
+    }
 end
 
 local function checkCollision(rect1, rect2)
@@ -130,29 +134,24 @@ function player.movement(dt)
     player.sideSpeed = 7.71067812 * player.speedMultiplier
     player.isMoving = false
     local dx, dy = 0, 0
---     if key == "c" then
---         if gui.focusTime >= 1 then
---         local dx = 0
---         local dy = 0
---         if player.isLeft then
---             dx = -20
---         elseif not player.isLeft then
---             dx = 20
---         end
---         if player.isUp then
---             dy = -20
---         elseif not player.isUp then
---             dy = 20
---         end
---         player.x, player.y = world:move(player, player.x + dx, player.y + dy, player.filter)
---     end
+    if player.dash.timer >= 0 then
+        player.dash.timer = player.dash.timer - dt
+    end
     if game.controlType == 0 then
         if player.noMove == false then
             if love.keyboard.isDown("right", controls.keys.right) then
                 if love.keyboard.isDown(controls.keys.down, controls.keys.up,"up","down") then
                     dx = player.sideSpeed * dt
+                    if love.keyboard.isDown("c") and player.dash.timer <= 0 then
+                        dx = (player.sideSpeed * dt) * 20
+                        player.dash.used = true
+                    end
                 else
                     dx = player.speed * dt
+                    if love.keyboard.isDown("c") and player.dash.timer <= 0 then
+                        dx = (player.speed * dt) * 20
+                        player.dash.used = true
+                    end
                 end
                 if player.isUp == false then
                     player.anim = player.animations.downRight
@@ -168,8 +167,16 @@ function player.movement(dt)
             if love.keyboard.isDown("left", controls.keys.left) then
                 if love.keyboard.isDown(controls.keys.down, controls.keys.up, "down","up") then
                     dx = player.sideSpeed * -1 * dt
+                    if love.keyboard.isDown("c") and player.dash.timer <= 0 then
+                        dx = (player.sideSpeed * -1 * dt) * 20
+                        player.dash.used = true
+                    end
                 else
                     dx = player.speed * -1 * dt
+                    if love.keyboard.isDown("c") and player.dash.timer <= 0 then
+                        dx = (player.speed * -1 * dt) * 20
+                        player.dash.used = true
+                    end
                 end
                 if player.isUp == false then
                     player.anim = player.animations.downLeft
@@ -185,8 +192,16 @@ function player.movement(dt)
             if love.keyboard.isDown("up",controls.keys.up) then
                 if love.keyboard.isDown(controls.keys.left,controls.keys.right,"left","right") then
                     dy = (player.sideSpeed * -1 * dt) * 0.8
+                    if love.keyboard.isDown("c") and player.dash.timer <= 0 then
+                        dy = (player.sideSpeed * -1 * dt) * 0.8 * 20
+                        player.dash.used = true
+                    end
                 else
                     dy = (player.speed * -1 * dt) * 0.8
+                    if love.keyboard.isDown("c") and player.dash.timer <= 0 then
+                        dy = (player.speed * -1 * dt) * 0.8 * 20
+                        player.dash.used = true
+                    end
                 end
                 if player.isLeft == false then
                     player.anim = player.animations.upRight
@@ -202,8 +217,16 @@ function player.movement(dt)
             if love.keyboard.isDown("down", controls.keys.down) then
                 if love.keyboard.isDown(controls.keys.left, controls.keys.right, "left", "right") then
                     dy = (player.sideSpeed * dt) * 0.8
+                    if love.keyboard.isDown("c") and player.dash.timer <= 0 then
+                        dy = (player.sideSpeed * dt) * 0.8 * 20
+                        player.dash.used = true
+                    end
                 else
                     dy = (player.speed * dt) * 0.8
+                    if love.keyboard.isDown("c") and player.dash.timer <= 0 then
+                        dy = (player.speed * dt) * 0.8 * 20
+                        player.dash.used = true
+                    end
                 end
                 if player.isLeft == true then
                     player.anim = player.animations.downRight
@@ -286,6 +309,11 @@ function player.movement(dt)
         if player.speedMultiplier > 5 then
             player.speedMultiplier = 5
         end
+    end
+    if player.dash.used == true then
+        player.dash.used = false
+        player.dash.timer = 1
+        gui.focusTime = gui.focusTime - 1
     end
 end
 
