@@ -142,13 +142,13 @@ function player.movement(dt)
             if love.keyboard.isDown("right", controls.keys.right) then
                 if love.keyboard.isDown(controls.keys.down, controls.keys.up,"up","down") then
                     dx = player.sideSpeed * dt
-                    if love.keyboard.isDown("c") and player.dash.timer <= 0 then
+                    if love.keyboard.isDown("c") and player.dash.timer <= 0 and gui.focusTime > 1 then
                         dx = (player.sideSpeed * dt) * 20
                         player.dash.used = true
                     end
                 else
                     dx = player.speed * dt
-                    if love.keyboard.isDown("c") and player.dash.timer <= 0 then
+                    if love.keyboard.isDown("c") and player.dash.timer <= 0 and gui.focusTime > 1 then
                         dx = (player.speed * dt) * 20
                         player.dash.used = true
                     end
@@ -167,13 +167,13 @@ function player.movement(dt)
             if love.keyboard.isDown("left", controls.keys.left) then
                 if love.keyboard.isDown(controls.keys.down, controls.keys.up, "down","up") then
                     dx = player.sideSpeed * -1 * dt
-                    if love.keyboard.isDown("c") and player.dash.timer <= 0 then
+                    if love.keyboard.isDown("c") and player.dash.timer <= 0 and gui.focusTime > 1 then
                         dx = (player.sideSpeed * -1 * dt) * 20
                         player.dash.used = true
                     end
                 else
                     dx = player.speed * -1 * dt
-                    if love.keyboard.isDown("c") and player.dash.timer <= 0 then
+                    if love.keyboard.isDown("c") and player.dash.timer <= 0 and gui.focusTime > 1 then
                         dx = (player.speed * -1 * dt) * 20
                         player.dash.used = true
                     end
@@ -192,13 +192,13 @@ function player.movement(dt)
             if love.keyboard.isDown("up",controls.keys.up) then
                 if love.keyboard.isDown(controls.keys.left,controls.keys.right,"left","right") then
                     dy = (player.sideSpeed * -1 * dt) * 0.8
-                    if love.keyboard.isDown("c") and player.dash.timer <= 0 then
+                    if love.keyboard.isDown("c") and player.dash.timer <= 0 and gui.focusTime > 1 then
                         dy = (player.sideSpeed * -1 * dt) * 0.8 * 20
                         player.dash.used = true
                     end
                 else
                     dy = (player.speed * -1 * dt) * 0.8
-                    if love.keyboard.isDown("c") and player.dash.timer <= 0 then
+                    if love.keyboard.isDown("c") and player.dash.timer <= 0 and gui.focusTime > 1 then
                         dy = (player.speed * -1 * dt) * 0.8 * 20
                         player.dash.used = true
                     end
@@ -217,13 +217,13 @@ function player.movement(dt)
             if love.keyboard.isDown("down", controls.keys.down) then
                 if love.keyboard.isDown(controls.keys.left, controls.keys.right, "left", "right") then
                     dy = (player.sideSpeed * dt) * 0.8
-                    if love.keyboard.isDown("c") and player.dash.timer <= 0 then
+                    if love.keyboard.isDown("c") and player.dash.timer <= 0 and gui.focusTime > 1 then
                         dy = (player.sideSpeed * dt) * 0.8 * 20
                         player.dash.used = true
                     end
                 else
                     dy = (player.speed * dt) * 0.8
-                    if love.keyboard.isDown("c") and player.dash.timer <= 0 then
+                    if love.keyboard.isDown("c") and player.dash.timer <= 0 and gui.focusTime > 1 then
                         dy = (player.speed * dt) * 0.8 * 20
                         player.dash.used = true
                     end
@@ -313,7 +313,9 @@ function player.movement(dt)
     if player.dash.used == true then
         player.dash.used = false
         player.dash.timer = 1
-        gui.focusTime = gui.focusTime - 1
+        if gui.focusTime > 1 then
+            gui.focusTime = gui.focusTime - 1
+        end
     end
 end
 
