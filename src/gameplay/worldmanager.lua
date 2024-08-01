@@ -306,16 +306,12 @@ function worldManagement.teleport(loc)
         end
         player.x, player.y = world:move(player, data.x, data.y)
         worldManagement.thisWorld = data.world
-        gui.welcome.timer = 3
-        gui.welcome.animations.region1:gotoFrame(1)
     end
     if loc == "mountains" then
         currentWorld = mountains
         player.x, player.y = world:move(player, player.x, 795)
         worldManagement.thisWorld = "Mountains"
         love.window.setTitle("Ruined | Overworld - Mountains")
-        gui.welcome.timer = 3
-        gui.welcome.animations.region1:gotoFrame(1)
         gui.mapWorld = {
             x = 100,
             y = 0
@@ -325,8 +321,6 @@ function worldManagement.teleport(loc)
         player.x, player.y = world:move(player, 2, player.y)
         worldManagement.thisWorld = "Mountains"
         love.window.setTitle("Ruined | Overworld - Mountains")
-        gui.welcome.timer = 3
-        gui.welcome.animations.region1:gotoFrame(1)
         gui.mapWorld = {
             x = 100,
             y = 0
@@ -336,8 +330,6 @@ function worldManagement.teleport(loc)
         player.x, player.y = world:move(player, currentWorld.width * currentWorld.tilewidth - 14, player.y)
         worldManagement.thisWorld = "Mountains"
         love.window.setTitle("Ruined | Overworld - Mountains")
-        gui.welcome.timer = 3
-        gui.welcome.animations.region1:gotoFrame(1)
         gui.mapWorld = {
             x = 100,
             y = 0
@@ -347,8 +339,6 @@ function worldManagement.teleport(loc)
         player.x, player.y = world:move(player, player.x, 3)
         worldManagement.thisWorld = "Village"
         love.window.setTitle("Ruined | Overworld - The Village")
-        gui.welcome.timer = 3
-        gui.welcome.animations.region1:gotoFrame(1)
         gui.mapWorld = {
             x = 100,
             y = 50
@@ -359,8 +349,6 @@ function worldManagement.teleport(loc)
         player.x, player.y = world:move(player, currentWorld.width * currentWorld.tilewidth - 13, player.y)
         worldManagement.thisWorld = "Forrest"
         love.window.setTitle("Ruined | Overworld - Forrest")
-        gui.welcome.timer = 3
-        gui.welcome.animations.region1:gotoFrame(1)
         gui.mapWorld = {
             x = 0,
             y = 0
@@ -371,8 +359,6 @@ function worldManagement.teleport(loc)
         player.x, player.y = world:move(player, 2, player.y)
         worldManagement.thisWorld = "Snow"
         love.window.setTitle("Ruined | Overworld - Snowy Mountains")
-        gui.welcome.timer = 3
-        gui.welcome.animations.region1:gotoFrame(1)
         gui.mapWorld = {
             x = 150,
             y = 0

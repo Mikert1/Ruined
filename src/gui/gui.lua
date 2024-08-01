@@ -9,13 +9,6 @@ function gui.load()
     title = require("src/gui/title")
     settings = require("src/gui/settings")
     weapon = require("src/gameplay/weapons")
-    local anim8 = require("src/library/animations")
-    gui.welcome = {}
-    gui.welcome.timer = 0
-    gui.welcome.image = love.graphics.newImage("assets/textures/gui/gameplay/welcome.png")
-    gui.welcome.grid = anim8.newGrid( 75, 20, gui.welcome.image:getWidth(), gui.welcome.image:getHeight() )
-    gui.welcome.animations = {}
-    gui.welcome.animations.region1 = anim8.newAnimation( gui.welcome.grid('1-10', 1), 0.3 )
 
     gui.healthbar = {}
     gui.healthbar.image = {
@@ -70,10 +63,6 @@ function gui.load()
 end
 
 function gui.update(dt)
-    if gui.welcome.timer > 0 then
-        gui.welcome.timer = gui.welcome.timer - dt
-        gui.welcome.animations.region1:update(dt)
-    end
     if weapon.equipment == 1 then
         gui.weaponBar.animation.current = math.floor(gui.focusTime)
     elseif weapon.equipment == 2 then
@@ -136,9 +125,6 @@ function gui:draw()
     elseif weapon.equipment == 2 then
         love.graphics.draw(gui.weaponBar.image.bow[gui.weaponBar.animation.current], love.graphics.getWidth() - (93.5 * playerCamera.globalScale), love.graphics.getHeight() - (16.5 * playerCamera.globalScale) - gui.hide.sword.y * playerCamera.globalScale, nil, playerCamera.globalScale * 1.2)
     end
-    -- if gui.welcome.timer > 0 then
-    --     gui.welcome.animations.region1:draw(gui.welcome.image, love.graphics.getWidth() / 2 - (75 / 2 * playerCamera.globalScale), love.graphics.getHeight() / 4 - (20 / 2 * playerCamera.globalScale), nil, playerCamera.globalScale)
-    -- end
     if gui.map == true then
         if player.isMoving == false then
             love.graphics.setColor(0, 0, 0, 0.5)
