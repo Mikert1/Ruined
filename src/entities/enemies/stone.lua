@@ -115,6 +115,12 @@ function stone:walk(playerX, playerY, dt)
         }
     else
         self.x, self.y = world:move(self, self.x, self.y)
+        self.collider = {
+            x = self.x - 0.5,
+            y = self.y - 0.5,
+            width = self.width + 1,
+            height = self.height + 1
+        }
     end
 end
 
