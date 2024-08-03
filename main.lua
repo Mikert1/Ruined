@@ -67,6 +67,8 @@ if require("dev") then
         title.state = 1
         file.show()
         title.rezet()
+        title.logo.anim = title.logo.animations.region2
+        title.logo.y = 90
         title.text.name = "Ruined"
         title.text.chapter = "Chapter 1"
         title.mainColor = {0, 1, 1}
