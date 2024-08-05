@@ -59,7 +59,7 @@ function love.load()
 end
 
 local dev -- for me to skip some things like titlescreen becouse i see it every day ;)
-if require("dev") then
+if love.filesystem.getInfo("dev.lua") then
     dev = require("dev")
     if dev.skipTitlescreen == true then
         title.mikert.showed = true
