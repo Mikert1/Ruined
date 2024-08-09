@@ -10,14 +10,24 @@ weapon.sword.image = love.graphics.newImage("assets/textures/entities/player/cry
 weapon.sword.slash = {}
 weapon.sword.slash.active = false
 weapon.sword.slash.direction = 0
-weapon.sword.slash.image = love.graphics.newImage("assets/textures/entities/player/swordslash.png")
-weapon.sword.grid = anim8.newGrid( 39, 15, weapon.sword.slash.image:getWidth(), weapon.sword.slash.image:getHeight() )
-weapon.sword.grid2 = anim8.newGrid( 39, 21, weapon.sword.slash.image:getWidth(), weapon.sword.slash.image:getHeight(), 30, 0 )
-weapon.sword.animations = {}
-weapon.sword.animations.slash = anim8.newAnimation( weapon.sword.grid('1-6', 1), 0.05 )
-weapon.sword.animations.slash2 = anim8.newAnimation( weapon.sword.grid('1-6', 2), 0.05 )
-weapon.sword.animations.slash3 = anim8.newAnimation( weapon.sword.grid2('1-6', 2), 0.05 )
-weapon.sword.anim = weapon.sword.animations.slash
+
+weapon.sword.animation = {
+    state = 1,
+    current = 1,
+    timer = 1,
+    speed = 30,
+    image = {}
+}
+
+for j = 1 , 3 do
+    weapon.sword.animation.image[j] = {}
+    if j == 3 then
+        local row3 = 5
+    end
+    for i = 1, row3 or 4 do
+        table.insert(weapon.sword.animation.image[j], love.graphics.newImage("assets/textures/entities/player/swordSlash/" .. j .. "/" .. i .. ".png"))
+    end
+end
 weapon.sword.prepSlash = {}
 weapon.sword.prepSlash.active = false
 weapon.sword.combo = {
@@ -242,20 +252,21 @@ function weapon.sword.update(dt)
     if enemymanager.enemyGotHit >= 0 then
         enemymanager.enemyGotHit = enemymanager.enemyGotHit - dt
     end
-    weapon.sword.anim:update(dt)
+    if weapon.sword.animation.timer <= 0 then
+        weapon.sword.animation.current = weapon.sword.animation.current + 1
+        if weapon.sword.animation.current > #weapon.sword.animation.image[weapon.sword.animation.state] then
+            weapon.sword.animation.current = 1
+            weapon.sword.slash.active = false
+        end
+        weapon.sword.animation.timer = 1
+    else
+        weapon.sword.animation.timer = weapon.sword.animation.timer - (dt * weapon.sword.animation.speed)
+    end
     if weapon.sword.cooldown == true then
         if weapon.sword.downTimer <= 0.5 then
             weapon.sword.downTimer = weapon.sword.downTimer + dt
         else
             weapon.sword.cooldown = false
-        end
-    end
-    if weapon.sword.slash.active == true then
-        if weapon.sword.anim.position >= 5 then
-            weapon.sword.visible = true
-        end
-        if weapon.sword.anim.position == 6 then
-            weapon.sword.slash.active = false
         end
     end
     if weapon.enemyGotHit == true then
@@ -277,7 +288,8 @@ end
 function weapon.sword.use()
     if weapon.sword.slash.active == false and weapon.sword.cooldown == false and player.item.sword == true then
         weapon.enemyGotHit = false
-        weapon.sword.anim:gotoFrame(1)
+        weapon.sword.animation.current = 1
+        weapon.sword.animation.timer = 1
         weapon.sword.slash.active = true
         local playerCenterX = player.x + player.width / 2
         local playerCenterY = player.y + player.height / 2
@@ -347,16 +359,11 @@ function weapon.sword.use()
             --weapon.sword.sound:play()
         end
         player.speedMultiplier = 3
-        if weapon.sword.combo.current == 1 then
-            weapon.sword.anim = weapon.sword.animations.slash
-            weapon.sword.combo.current = 2
-        elseif weapon.sword.combo.current == 2 then
-            weapon.sword.anim = weapon.sword.animations.slash2
-            weapon.sword.combo.current = 3
-        elseif weapon.sword.combo.current == 3 then
+        if weapon.sword.combo.current < 3 then
+            weapon.sword.combo.current = weapon.sword.combo.current + 1
+        else
             weapon.sword.cooldown = true
             weapon.sword.downTimer = 0
-            weapon.sword.anim = weapon.sword.animations.slash3
             weapon.sword.combo.current = 1
             playerCamera.shaker = 0.2
         end
@@ -460,7 +467,13 @@ function weapon.draw()
     if weapon.sword.slash.active == true then
         -- if the direction is negative
         if weapon.sword.slash.direction < 0 and -1 or 0 then
-            weapon.sword.anim:draw(weapon.sword.slash.image, weapon.sword.slash.x + (36) - (weapon.sword.slash.image:getWidth() / 6 / 2), weapon.sword.slash.y + 2 + (weapon.sword.slash.image:getHeight() / 2 / 2), weapon.sword.slash.direction, 1, 1, weapon.sword.slash.image:getWidth() / 6 / 2, weapon.sword.slash.image:getHeight() / 2 / 2)
+            local image = weapon.sword.animation.image[weapon.sword.combo.current][weapon.sword.animation.current]
+            local x = weapon.sword.slash.x + 34 - image:getWidth() / 2
+            local y = weapon.sword.slash.y + 6 + image:getHeight() / 2
+            local direction = weapon.sword.slash.direction
+            local offsetX = image:getWidth() / 2
+            local offsetY = image:getHeight() / 2
+            love.graphics.draw(image, x, y, direction, 1, 1, offsetX, offsetY)
             if keys.tab == true then
                 love.graphics.setColor(1, 0, 1)
                 love.graphics.rectangle("line", weapon.sword.collider.x, weapon.sword.collider.y, weapon.sword.collider.width, weapon.sword.collider.height)
@@ -484,7 +497,13 @@ end
 function weapon.draw2L()
     if weapon.sword.slash.active == true then
         if weapon.sword.slash.direction > 0 and 1 then
-            weapon.sword.anim:draw(weapon.sword.slash.image, weapon.sword.slash.x + (36) - (weapon.sword.slash.image:getWidth() / 6 / 2), weapon.sword.slash.y + 2 + (weapon.sword.slash.image:getHeight() / 2 / 2), weapon.sword.slash.direction, 1, 1, weapon.sword.slash.image:getWidth() / 6 / 2, weapon.sword.slash.image:getHeight() / 2 / 2)
+            local image = weapon.sword.animation.image[weapon.sword.combo.current][weapon.sword.animation.current]
+            local x = weapon.sword.slash.x + 34 - image:getWidth() / 2
+            local y = weapon.sword.slash.y + 6 + image:getHeight() / 2
+            local direction = weapon.sword.slash.direction
+            local offsetX = image:getWidth() / 2
+            local offsetY = image:getHeight() / 2
+            love.graphics.draw(image, x, y, direction, 1, 1, offsetX, offsetY)
             if keys.tab == true then
                 love.graphics.setColor(1,0,1)
                 love.graphics.rectangle("line", weapon.sword.collider.x, weapon.sword.collider.y, weapon.sword.collider.width, weapon.sword.collider.height)
