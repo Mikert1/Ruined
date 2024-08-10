@@ -19,19 +19,20 @@ weapon.sword.animation = {
     image = {}
 }
 
-for j = 1 , 3 do
+for j = 1, 3 do
     weapon.sword.animation.image[j] = {}
+    local row = 5
     if j == 3 then
-        local row3 = 5
+        row = 6
     end
-    for i = 1, row3 or 4 do
+    for i = 1, row do
         table.insert(weapon.sword.animation.image[j], love.graphics.newImage("assets/textures/entities/player/swordSlash/" .. j .. "/" .. i .. ".png"))
     end
 end
 weapon.sword.prepSlash = {}
 weapon.sword.prepSlash.active = false
 weapon.sword.combo = {
-    timer = 0,
+    timer = 1,
     max = 3,
     current = 1
 }
@@ -252,11 +253,17 @@ function weapon.sword.update(dt)
     if enemymanager.enemyGotHit >= 0 then
         enemymanager.enemyGotHit = enemymanager.enemyGotHit - dt
     end
-    if weapon.sword.animation.timer <= 0 then
+    if weapon.sword.slash.active and weapon.sword.animation.timer <= 0 then
         weapon.sword.animation.current = weapon.sword.animation.current + 1
         if weapon.sword.animation.current > #weapon.sword.animation.image[weapon.sword.animation.state] then
             weapon.sword.animation.current = 1
             weapon.sword.slash.active = false
+            if weapon.sword.combo.current < 3 then
+                weapon.sword.combo.current = weapon.sword.combo.current + 1
+            else
+                weapon.sword.combo.current = 1
+            end
+            print(weapon.sword.combo.current)
         end
         weapon.sword.animation.timer = 1
     else
@@ -359,12 +366,9 @@ function weapon.sword.use()
             --weapon.sword.sound:play()
         end
         player.speedMultiplier = 3
-        if weapon.sword.combo.current < 3 then
-            weapon.sword.combo.current = weapon.sword.combo.current + 1
-        else
+        if weapon.sword.combo.current >= 3 then
             weapon.sword.cooldown = true
             weapon.sword.downTimer = 0
-            weapon.sword.combo.current = 1
             playerCamera.shaker = 0.2
         end
     end
