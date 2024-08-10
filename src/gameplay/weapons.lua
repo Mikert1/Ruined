@@ -263,7 +263,6 @@ function weapon.sword.update(dt)
             else
                 weapon.sword.combo.current = 1
             end
-            print(weapon.sword.combo.current)
         end
         weapon.sword.animation.timer = 1
     else
@@ -491,7 +490,7 @@ function weapon.draw()
     for _, projectile in ipairs(projectiles) do
         projectile:draw()
     end
-    if weapon.bow.hold then    
+    if weapon.bow.hold then
         love.graphics.setColor(1, 1 - weapon.bow.holdCounter / 2, 0, 0.2)
         love.graphics.arc("line", weapon.cursor.x, weapon.cursor.y, weapon.aim.radius, weapon.aim.startAngle, weapon.aim.endAngle)
         love.graphics.setColor(1, 1, 1)
