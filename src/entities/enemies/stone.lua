@@ -9,6 +9,11 @@ local stone = {
             body = {},
             eyes = {},
             path = {1}
+        },
+        death = {
+            body = {},
+            eyes = {},
+            path = {1}
         }
     }
 }
