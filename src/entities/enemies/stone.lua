@@ -3,29 +3,35 @@ local particle = require("src/gameplay/particle")
 local stone = {
     animation = {
         summon = {
-            path = {1, 2, 3, 4, 5, 6, 7, 8}
+            body = {
+                path = {1, 2, 3, 4, 5, 6, 7, 8, 9}
+            },
+            eyes = {
+                path = {3, 3, 3, 3, 3, 3, 3, 2, 1}
+            },
         },
         walk = {
-            body = {},
-            eyes = {},
-            path = {1}
+            body = {
+                path = {1}
+            },
+            eyes = {
+                path = {1}
+            },
         },
         death = {
-            body = {},
-            eyes = {},
-            path = {1}
+            body = {
+                path = {1, 1, 1}
+            },
+            eyes = {
+                path = {1, 2, 3}
+            },
         }
     }
 }
-for v, k in pairs(stone.animation) do
-    if v == "summon" then
-        for i = 1, #k.path do
-            table.insert(k, love.graphics.newImage("assets/textures/entities/enemies/stone/" .. v .. "/" .. i .. ".png"))
-        end
-    else
-        for i = 1, #k.path do
-            table.insert(k.body, love.graphics.newImage("assets/textures/entities/enemies/stone/" .. v .. "/body/" .. i .. ".png"))
-            table.insert(k.eyes, love.graphics.newImage("assets/textures/entities/enemies/stone/" .. v .. "/eyes/" .. i .. ".png"))
+for n, v in pairs(stone.animation) do -- name, value
+    for m, w in pairs(v) do -- name, value
+        for i = 1, math.max(unpack(w.path)) do
+            w[i] = love.graphics.newImage("assets/textures/entities/enemies/stone/" .. n .. "/" .. m .. "/" .. i .. ".png") -- example summon body 1.png
         end
     end
 end
@@ -33,13 +39,16 @@ stone.__index = stone
 
 
 -- self functions
-function stone.new(x, y, calorLVL)
+function stone.new(x, y, lvl)
     local instance = setmetatable({}, stone)
     instance.animation = {
-        state = "summon",
-        current = 1,
-        timer = 1,
-        speed = 8,
+        state      = "summon",
+        bodyFrame  = 1,
+        eyesFrame  = 3,
+
+        timer      = 1,
+        speed      = 8,
+        pathIndex = 1
     }
     instance.x = x
     instance.y = y
@@ -47,15 +56,15 @@ function stone.new(x, y, calorLVL)
     instance.offsetY = 6
     instance.height = 2
     world:add(instance, instance.x, instance.y, instance.width, instance.height)
-    if calorLVL == 1 then
+    if lvl == 1 then
         instance.health = 1
         instance.speed = 30
         instance.eyeColor = {1, 1, 0}
-    elseif calorLVL == 2 then
+    elseif lvl == 2 then
         instance.health = 2
         instance.speed = 40
         instance.eyeColor = {1, 0.5, 0}
-    elseif calorLVL == 3 then
+    elseif lvl == 3 then
         instance.health = 4
         instance.speed = 50
         instance.eyeColor = {1, 0, 0}
@@ -140,32 +149,26 @@ function stone:update(dt)
     self:walk(player.x, player.y - 6, dt)
     self.animation.timer = self.animation.timer - (dt * self.animation.speed)
     if self.animation.timer <= 0 then
-        self.animation.current = self.animation.current + 1
-        if self.animation.current > #stone.animation[self.animation.state].path then
-            self.animation.current = 1
+        self.animation.pathIndex = self.animation.pathIndex + 1
+        if self.animation.pathIndex > #stone.animation[self.animation.state].body.path then
+            self.animation.pathIndex = 1
             if self.animation.state == "summon" then
                 self.animation.state = "walk"
             end
         end
+        self.animation.bodyFrame = stone.animation[self.animation.state].body.path[self.animation.pathIndex]
+        self.animation.eyesFrame = stone.animation[self.animation.state].eyes.path[self.animation.pathIndex]
         self.animation.timer = 1
     end
 end
 
 function stone:draw()
-    if self.animation.state == "walk" then
-        love.graphics.draw(stone.animation[self.animation.state].body[self.animation.current], self.x, self.y - self.offsetY)
-        love.graphics.setColor(self.eyeColor)
-        if self.isLeft == false then
-            love.graphics.draw(stone.animation[self.animation.state].eyes[self.animation.current], self.x, self.y - self.offsetY)
-        else
-            love.graphics.draw(stone.animation[self.animation.state].eyes[self.animation.current], self.x + self.width , self.y - self.offsetY, nil, -1, 1)
-        end
+    love.graphics.draw(stone.animation[self.animation.state].body[self.animation.bodyFrame], self.x, self.y - self.offsetY)
+    love.graphics.setColor(self.eyeColor)
+    if self.isLeft == false then
+        love.graphics.draw(stone.animation[self.animation.state].eyes[self.animation.eyesFrame], self.x, self.y - self.offsetY)
     else
-        if self.isLeft == false then
-            love.graphics.draw(stone.animation[self.animation.state][self.animation.current], self.x, self.y - self.offsetY)
-        else
-            love.graphics.draw(stone.animation[self.animation.state][self.animation.current], self.x + self.width , self.y - self.offsetY, nil, -1, 1)
-        end
+        love.graphics.draw(stone.animation[self.animation.state].eyes[self.animation.eyesFrame], self.x + self.width , self.y - self.offsetY, nil, -1, 1)
     end
     if keys.tab == true then
         love.graphics.setColor(1, 0, 0)
