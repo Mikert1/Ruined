@@ -17,12 +17,17 @@ local stone = {
         }
     }
 }
-for i = 1, 8 do
-    table.insert(stone.animation.summon, love.graphics.newImage("assets/textures/entities/enemies/stone/summon/" .. i .. ".png"))
-end
-for i = 1, 1 do
-    table.insert(stone.animation.walk.body, love.graphics.newImage("assets/textures/entities/enemies/stone/walk/body/" .. i .. ".png"))
-    table.insert(stone.animation.walk.eyes, love.graphics.newImage("assets/textures/entities/enemies/stone/walk/eyes/" .. i .. ".png"))
+for v, k in pairs(stone.animation) do
+    if v == "summon" then
+        for i = 1, #k.path do
+            table.insert(k, love.graphics.newImage("assets/textures/entities/enemies/stone/" .. v .. "/" .. i .. ".png"))
+        end
+    else
+        for i = 1, #k.path do
+            table.insert(k.body, love.graphics.newImage("assets/textures/entities/enemies/stone/" .. v .. "/body/" .. i .. ".png"))
+            table.insert(k.eyes, love.graphics.newImage("assets/textures/entities/enemies/stone/" .. v .. "/eyes/" .. i .. ".png"))
+        end
+    end
 end
 stone.__index = stone
 
