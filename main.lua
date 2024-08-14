@@ -89,6 +89,7 @@ if love.filesystem.getInfo("dev.lua") then
 end
 
 function love.update(dt)
+    dt = dt * dev.gameSpeed
     game.update(dt)
     lan.receiveData()
     lan.sendData()

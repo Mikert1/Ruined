@@ -48,7 +48,7 @@ function stone.new(x, y, lvl)
 
         timer      = 1,
         speed      = 8,
-        pathIndex = 1
+        pathIndex  = 1
     }
     instance.x = x
     instance.y = y
