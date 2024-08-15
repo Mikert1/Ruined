@@ -351,7 +351,7 @@ function weapon.sword.use()
                     end
                 end
                 local angle = math.atan2(enemy.y - player.y, enemy.x - player.x)
-                enemy:takeDamage(weapon.dammage, i)
+                enemy:takeDamage(weapon.dammage)
                 applyKnockback(enemy, angle)
                 weapon.enemyGotHit = true
                 weapon.dammageDisplay.x = (enemy.x + (enemy.width / 2)) + love.math.random(-5, 5)

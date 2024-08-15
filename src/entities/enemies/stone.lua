@@ -50,6 +50,7 @@ function stone.new(x, y, lvl)
         speed      = 8,
         pathIndex  = 1
     }
+    instance.index = nil
     instance.x = x
     instance.y = y
     instance.width = stone.animation.walk.body[1]:getWidth()
@@ -84,16 +85,26 @@ function stone.new(x, y, lvl)
     }
     instance.arrowInvincible = true
     return instance
+    
 end
 
-function stone:takeDamage(damage, i)
+function stone:death()
+    particle.center.x = self.x + self.width / 2
+    particle.center.y = self.y + self.height / 2
+    world:remove(self)
+    for i, enemy in ipairs(enemymanager.activeEnemies) do
+        if enemy == self then
+            table.remove(enemymanager.activeEnemies, i)
+            break
+        end
+    end
+    particle.system:emit(100)
+end
+
+function stone:takeDamage(damage)
     self.health = self.health - damage
-    if self.health <= 0 then
-        particle.center.x = self.x + self.width / 2
-        particle.center.y = self.y + self.height / 2
-        world:remove(self)
-        table.remove(enemymanager.activeEnemies, i)
-        particle.system:emit(100)
+    if self.health <= 0 then        
+        self.animation.state = "death"
     end
 end
         
@@ -154,6 +165,8 @@ function stone:update(dt)
             self.animation.pathIndex = 1
             if self.animation.state == "summon" then
                 self.animation.state = "walk"
+            elseif self.animation.state == "death" then
+                self:death()
             end
         end
         self.animation.bodyFrame = stone.animation[self.animation.state].body.path[self.animation.pathIndex]
