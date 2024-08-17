@@ -14,6 +14,7 @@ savedSettings.masterVolume = 100
 savedSettings.window = 0
 savedSettings.windowIndex = 1
 savedSettings.resolution = 0
+savedSettings.gameSpeed = 1
 file.filenumber = 0
 preview.file1 = {}
 preview.file2 = {}
@@ -355,6 +356,9 @@ function file.settings.load()
         love.audio.setVolume(savedSettings.masterVolume / 100)
     else
         savedSettings.masterVolume = 100
+    end
+    if not savedSettings.gameSpeed then
+        savedSettings.gameSpeed = 1
     end
     return savedSettings
 end

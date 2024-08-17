@@ -142,6 +142,9 @@ function button.loadAll()
             button.new(-40, 70, "Back", {1, 0.5, 0}, 3) -- back from settings to main menu or game
         elseif settings.tab == "stats" then
             button.new(-40, 70, "Back", {1, 0.5, 0}, 3) -- back from settings to main menu or game
+        elseif settings.tab == "eeprnd" then
+            button.new(-124, -40, "speed: " .. savedSettings.gameSpeed, {0, 0.5, 0.5}, 81) -- gameSpeed setting
+            button.new(-40, 70, "Back", {1, 0.5, 0}, 3) -- back from settings to main menu or game
         end
     elseif title.state == 1 or title.state == 2 or title.state == 3 then
         if title.delete.mode == false then
@@ -628,6 +631,21 @@ function button:action()
         end
         button.loadAll()
         title.rezet()
+    elseif self.id == 81 then -- gameSpeed button
+        if savedSettings.gameSpeed == 1 then
+            savedSettings.gameSpeed = 0.5
+        elseif savedSettings.gameSpeed == 0.5 then
+            savedSettings.gameSpeed = 0.25
+        elseif savedSettings.gameSpeed == 0.25 then
+            savedSettings.gameSpeed = 0.1
+        elseif savedSettings.gameSpeed == 0.1 then
+            savedSettings.gameSpeed = 100
+        elseif savedSettings.gameSpeed == 100 then
+            savedSettings.gameSpeed = 10
+        elseif savedSettings.gameSpeed == 10 then
+            savedSettings.gameSpeed = 1
+        end
+        button.loadAll()
     elseif self.id == 199 then -- no button
         button.warning.id = 0
         button.warning.text = ""

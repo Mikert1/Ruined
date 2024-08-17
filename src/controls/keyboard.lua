@@ -185,6 +185,11 @@ function love.keypressed(key)
         print("[Easter egg] Hello Mikert!")
         title.swordicon.savegame3 = title.swordicon.animations.progress4
     end
+    if love.keyboard.isDown("p") and love.keyboard.isDown("r") and love.keyboard.isDown("n") and love.keyboard.isDown("d") then
+        print("[Easter egg] Hello Denielo!")
+        settings.tab = "eeprnd"
+        button.loadAll()
+    end
 end
 function love.keyreleased(key)
     if key == controls.keys.interact then
