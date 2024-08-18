@@ -76,11 +76,6 @@ local Projectile = {}
 
 -- local functions
 
-local function applyKnockback(target, angle)
-    target.knockback.x = target.knockback.force * math.cos(angle)
-    target.knockback.y = target.knockback.force * math.sin(angle)
-end
-
 local function checkCollision(rect1, rect2, offsetX, offsetY)
     offsetX = offsetX or 0
     offsetY = offsetY or 0
@@ -211,6 +206,7 @@ function Projectile:update(dt, i)
     else
         for i, enemy in ipairs(enemymanager.activeEnemies) do
             if checkCollision(enemy, self.collider, 1.5, 1.5) then
+                local angle
                 if enemy.arrowInvincible then
                     weapon.dammage = 0.5
                     table.remove(projectiles, i)
@@ -219,10 +215,9 @@ function Projectile:update(dt, i)
                     enemymanager.enemyGotHit = 0.5
                     self.speed = 0
                     weapon.dammage = 2
-                    local angle = math.atan2(enemy.y - player.y, enemy.x - player.x)
-                    applyKnockback(enemy, angle)
+                    angle = math.atan2(enemy.y - player.y, enemy.x - player.x)
                 end
-                enemy:takeDamage(weapon.dammage, i)
+                enemy:takeDamage(weapon.dammage, angle)
                 weapon.enemyGotHit = true
                 enemymanager.enemyGotHit = 0.5
                 weapon.dammageDisplay.x = enemy.x + love.math.random(-5, 5)
@@ -351,8 +346,7 @@ function weapon.sword.use()
                     end
                 end
                 local angle = math.atan2(enemy.y - player.y, enemy.x - player.x)
-                enemy:takeDamage(weapon.dammage)
-                applyKnockback(enemy, angle)
+                enemy:takeDamage(weapon.dammage, angle)
                 weapon.enemyGotHit = true
                 weapon.dammageDisplay.x = (enemy.x + (enemy.width / 2)) + love.math.random(-5, 5)
                 weapon.dammageDisplay.y = (enemy.y + (enemy.height / 2)) + love.math.random(0, 10)

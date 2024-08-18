@@ -101,7 +101,14 @@ function stone:death()
     particle.system:emit(100)
 end
 
-function stone:takeDamage(damage)
+function stone:takeDamage(damage , knockbackAngle)
+    if self.animation.state == "summon" then
+        return
+    end
+    if knockbackAngle then
+        self.knockback.x = math.cos(knockbackAngle) * self.knockback.force
+        self.knockback.y = math.sin(knockbackAngle) * self.knockback.force
+    end
     self.health = self.health - damage
     if self.health <= 0 then        
         self.animation.state = "death"
