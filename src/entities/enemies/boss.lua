@@ -47,11 +47,20 @@ function boss.new(x, y, calorLVL)
     return instance
 end
 
+function boss:death()
+    world:remove(self)
+    for i, enemy in ipairs(enemymanager.activeEnemies) do
+        if enemy == self then
+            table.remove(enemymanager.activeEnemies, i)
+            break
+        end
+    end
+end
+
 function boss:takeDamage(damage, i)
     self.health = self.health - damage
     if self.health <= 0 then
-        world:remove(self)
-        table.remove(enemymanager.activeEnemies, i)
+        self:death()
     end
 end
 
