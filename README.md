@@ -21,5 +21,5 @@
     <img width="49.5%" src="https://github.com/Mikert1/Ruined/assets/73882306/adea97ac-11a2-4c1b-b628-0f0edf4c7494">
 </div>
 <h2>Beta Website:</h2>
-<p><a href="http://mikert.com/game.html">Mikert.com</a></p>
+<p><a href="https://mikert.com/project.html?id=1">Mikert.com</a></p>
 <h6>Made on a Windows Laptop. Stable Versions are Tested on linux and mac.</h6>
