@@ -257,6 +257,16 @@ function button.specialNew(x, y, imageOnButton, color, id, image, outline)
     self.imageOnButton = imageOnButton
     self.hover = false
     self.clicked = false
+    if id == 101 and settings.tab == "game"
+    or id == 102 and settings.tab == "video"
+    or id == 103 and settings.tab == "controls"
+    or id == 104 and settings.tab == "skin"
+    or id == 105 and settings.tab == "audio"
+    or id == 106 and settings.tab == "stats" then
+        self.highlighted = true
+    else
+        self.highlighted = false
+    end
     table.insert(button.activeButtons, self)
 end
 
@@ -699,8 +709,7 @@ function button:update(dt)
             self.hover = false
         end
     end
-    if self.hover then
-        game.cursor.color = {self.color[1] / 2, self.color[2] / 2, self.color[3] / 2, 1}
+    if self.highlighted then
         for i = 1, 3 do
             local colorDifference = math.abs(self.currentColor[i] - self.color[i])
             local transitionSpeed = dt * 6 * colorDifference
@@ -711,13 +720,26 @@ function button:update(dt)
             end
         end
     else
-        for i = 1, 3 do
-            local colorDifference = math.abs(self.currentColor[i] - 0.15)
-            local transitionSpeed = dt * 3 * colorDifference
-            if self.currentColor[i] < 0.15 then
-                self.currentColor[i] = math.min(self.currentColor[i] + transitionSpeed, 0.15)
-            elseif self.currentColor[i] > 0.15 then
-                self.currentColor[i] = math.max(self.currentColor[i] - transitionSpeed, 0.15)
+        if self.hover then
+            game.cursor.color = {self.color[1] / 2, self.color[2] / 2, self.color[3] / 2, 1}
+            for i = 1, 3 do
+                local colorDifference = math.abs(self.currentColor[i] - self.color[i])
+                local transitionSpeed = dt * 6 * colorDifference
+                if self.currentColor[i] < self.color[i] then
+                    self.currentColor[i] = math.min(self.currentColor[i] + transitionSpeed, self.color[i])
+                elseif self.currentColor[i] > self.color[i] then
+                    self.currentColor[i] = math.max(self.currentColor[i] - transitionSpeed, self.color[i])
+                end
+            end
+        else
+            for i = 1, 3 do
+                local colorDifference = math.abs(self.currentColor[i] - 0.15)
+                local transitionSpeed = dt * 3 * colorDifference
+                if self.currentColor[i] < 0.15 then
+                    self.currentColor[i] = math.min(self.currentColor[i] + transitionSpeed, 0.15)
+                elseif self.currentColor[i] > 0.15 then
+                    self.currentColor[i] = math.max(self.currentColor[i] - transitionSpeed, 0.15)
+                end
             end
         end
     end
