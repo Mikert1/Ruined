@@ -317,6 +317,33 @@ function file.settings.load()
             error("Oops! The save file (settings.json) failed to decode, this means the file was (probably) corrupted.")
         end
     end
+
+    --checks if the old settings are loaded -- temporary
+    if not savedSettings.devmode then
+        savedSettings.devmode = false
+    end
+    if not savedSettings.console then
+        savedSettings.console = false
+    end
+    if not savedSettings.screenShake then
+        savedSettings.screenShake = true
+    end
+    if not savedSettings.masterVolume then
+        savedSettings.masterVolume = 100
+    end
+    if not savedSettings.window then
+        savedSettings.window = 0
+    end
+    if not savedSettings.windowIndex then
+        savedSettings.windowIndex = 1
+    end
+    if not savedSettings.resolution then
+        savedSettings.resolution = 0
+    end
+    if not savedSettings.gameSpeed then
+        savedSettings.gameSpeed = 1
+    end
+
     if savedSettings.window == 2 then
         love.window.setMode(love.graphics.getWidth(), love.graphics.getHeight(), {borderless = true, resizable = true, display = savedSettings.windowIndex})
     elseif savedSettings.window == 1 then
