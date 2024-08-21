@@ -67,9 +67,10 @@ end
 function boss:summon()
     for i = 1, 5 do
         range = 50
+        random = math.random() * 2
         local x = math.random(self.x + (self.width / 2) - range, self.x + (self.width / 2) + range)
         local y = math.random(self.y - range, self.y + range)
-        table.insert(enemymanager.activeEnemies, stone.new(x, y, 2))
+        table.insert(enemymanager.activeEnemies, stone.new(x, y, 2, random))
     end
 end
 
