@@ -109,6 +109,12 @@ function settings.draw()
             love.graphics.setColor(1, 1, 1)
             love.graphics.draw(settings.loveImage , love.graphics.getWidth() / 2 - (127 * playerCamera.globalScale),
                 love.graphics.getHeight() / 2 + (40 * playerCamera.globalScale), nil, playerCamera.globalScale * 0.1)
+                love.graphics.setColor(0.1, 0.1, 0.1)
+            love.graphics.print("Characther made by: challacade", love.graphics.getWidth() / 2 - (40 * playerCamera.globalScale),
+                love.graphics.getHeight() / 2 + (40 * playerCamera.globalScale), nil, playerCamera.globalScale * 0.5)
+            love.graphics.print("all other assets made by: Mikert", love.graphics.getWidth() / 2 - (40 * playerCamera.globalScale),
+                love.graphics.getHeight() / 2 + (50 * playerCamera.globalScale), nil, playerCamera.globalScale * 0.5)
+            love.graphics.setColor(1, 1, 1)
         elseif settings.tab == "eeprnd" then
             love.graphics.setColor(0.1, 0.1, 0.1)
             love.graphics.print("Debugg Settings", love.graphics.getWidth() / 2 - (127 * playerCamera.globalScale),
