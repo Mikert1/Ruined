@@ -37,9 +37,13 @@ for n, v in pairs(stone.animation) do -- name, value
 end
 stone.__index = stone
 
+function stone.delaySummon(x, y, lvl, delay)
+    instance = {name = "stone", x = x, y = y, lvl = lvl, delay = delay}
+    table.insert(enemymanager.delayEnemies, instance)
+end
 
 -- self functions
-function stone.new(x, y, lvl, delay)
+function stone.new(x, y, lvl)
     local instance = setmetatable({}, stone)
     instance.animation = {
         state      = "summon",
@@ -83,7 +87,6 @@ function stone.new(x, y, lvl, delay)
         y = 0,
         force = 150
     }
-    instance.delay = delay or 0
     instance.arrowInvincible = true
     return instance
     
@@ -167,10 +170,6 @@ end
 function stone:update(dt)
     self:walk(player.x, player.y - 6, dt)
     self.animation.timer = self.animation.timer - (dt * self.animation.speed)
-    if self.delay > 0 then
-        self.delay = self.delay - dt
-        return
-    end
     if self.animation.timer <= 0 then
         self.animation.pathIndex = self.animation.pathIndex + 1
         if self.animation.pathIndex > #stone.animation[self.animation.state].body.path then
@@ -188,9 +187,6 @@ function stone:update(dt)
 end
 
 function stone:draw()
-    if self.delay > 0 then
-        return
-    end
     love.graphics.draw(stone.animation[self.animation.state].body[self.animation.bodyFrame], self.x, self.y - self.offsetY)
     love.graphics.setColor(self.eyeColor)
     if self.isLeft == false then

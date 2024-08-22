@@ -1,9 +1,13 @@
 local enemymanager = {}
-local stone = require("src/entities/enemies/stone")
-local boss = require("src/entities/enemies/boss")
-local worldManagement = require("src/gameplay/worldmanager")
+enemymanager.enemyTypes = {
+    stone = require("src/entities/enemies/stone"),
+    boss = require("src/entities/enemies/boss")
+}
 enemymanager.enemyGotHit = 0
+enemymanager.activeEnemies = {}
+enemymanager.delayEnemies = {}
 
+local worldManagement = require("src/gameplay/worldmanager")
 -- glabal functions
 
 function enemymanager:load()
@@ -18,6 +22,16 @@ end
 function enemymanager:update(dt)
     for _, entity in ipairs(self.activeEnemies) do
         entity:update(dt)
+    end
+    if #self.delayEnemies > 0 then
+        for i = #self.delayEnemies, 1, -1 do
+            local instance = self.delayEnemies[i]
+            instance.delay = instance.delay - dt
+            if instance.delay <= 0 then
+                table.insert(self.activeEnemies, self.enemyTypes[instance.name].new(instance.x, instance.y, instance.lvl))
+                table.remove(self.delayEnemies, i)
+            end
+        end
     end
 end
 
