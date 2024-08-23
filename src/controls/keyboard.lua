@@ -10,6 +10,7 @@ local file = require("src/system/data")
 local weapon = require("src/gameplay/weapons")
 local controls = require("src/controls/controls")
 local button = require("src/gui/button")
+local worldManagement = require("src/gameplay/worldmanager") -- if player is dead
 
 function love.keypressed(key)
     if not (controls.searchForKey == nil) then
@@ -105,6 +106,14 @@ function love.keypressed(key)
                     story.dialogue.update()
                 end
             end
+        end
+    else
+        if player.isDead then
+            enemymanager:load()
+            data = file.load()
+            worldManagement.teleport("start")
+            game.freeze = false
+            player.isDead = false
         end
     end
     if savedSettings.devmode == true then

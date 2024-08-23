@@ -60,6 +60,7 @@ function gui.load()
         x = 0,
         y = 0
     }
+    gui.barShow = false
 end
 
 function gui.update(dt)
@@ -82,6 +83,11 @@ function gui.update(dt)
         gui.healthbar.anim = gui.healthbar.animations.normal
         player.sheet = player.spriteSheet
     end
+    if gui.barShow then
+        gui.shower(dt)
+    else
+        gui.hider(dt)
+    end
 end
 
 function gui.hider(dt)
@@ -92,6 +98,7 @@ function gui.hider(dt)
         gui.hide.health.y = gui.hide.health.y - (dt * 100)
     end
 end
+
 function gui.shower(dt)
     if gui.hide.sword.y < 0 then
         if player.item.sword == true then

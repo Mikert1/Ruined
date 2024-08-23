@@ -108,14 +108,14 @@ function player.update(dt)
         end
     end
     if player.hearts <= 0 then
-        player.noMove = true
+        game.freeze = true
         player.isDead = true
         player.anim = player.animations.dead
         if love.keyboard.isDown("return") then
             enemymanager:load()
             data = file.load()
             worldManagement.teleport("start")
-            player.noMove = false
+            game.freeze = false
             player.isDead = false
         end
     end

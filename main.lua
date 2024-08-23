@@ -96,7 +96,6 @@ function love.update(dt)
     controller.update(dt)
     file.update(dt)
     if game.state == 0 then
-        gui.update(dt)
         if game.freeze == false then
             player.update(dt)
             player.movement(dt)
@@ -108,13 +107,14 @@ function love.update(dt)
             time.update(dt)
             weapon.update(dt)
             enemymanager:update(dt)
-            gui.shower(dt)
+            gui.barShow = true
         end
+        gui.update(dt)
     elseif game.state == 1 then
         title.update(dt)
         playerCamera.follow(dt)
     elseif game.state >= 2 and game.state < 3 then
-        gui.hider(dt)
+        gui.barShow = false
         playerCamera.follow(dt)
         if game.state == 2.3 or game.state == 2.4 or game.state == 2.6 then
             scene.camera.update(dt)
