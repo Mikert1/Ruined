@@ -61,6 +61,7 @@ function gui.load()
         y = 0
     }
     gui.barShow = false
+    gui.deadTimer = 0
 end
 
 function gui.update(dt)
@@ -82,6 +83,9 @@ function gui.update(dt)
     if gui.focus == false then
         gui.healthbar.anim = gui.healthbar.animations.normal
         player.sheet = player.spriteSheet
+    end
+    if player.isDead then
+        gui.deadTimer = gui.deadTimer + dt
     end
     if gui.barShow then
         gui.shower(dt)
@@ -116,8 +120,16 @@ end
 
 function gui:draw()
     if player.isDead == true then
-        love.graphics.draw(gui.gameover, love.graphics.getWidth() / 2 - (46 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (40 * playerCamera.globalScale), nil, playerCamera.globalScale)
-        love.graphics.print("Press enter (return) to load last save.", love.graphics.getWidth() / 2 - (46 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (30 * playerCamera.globalScale), nil, playerCamera.globalScale / 2.5)
+        love.graphics.setColor(0, 0, 0, 0 + (gui.deadTimer / 2))
+        love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
+        love.graphics.setColor(1, 1, 1)
+        if gui.deadTimer >= 2 then
+            love.graphics.draw(gui.gameover, love.graphics.getWidth() / 2 - (46 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (40 * playerCamera.globalScale), nil, playerCamera.globalScale)
+            love.graphics.print("Press escape to return to the title screen.", love.graphics.getWidth() / 2 - (46 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (50 * playerCamera.globalScale), nil, playerCamera.globalScale / 2.5)
+            if gui.deadTimer >= 3600 then
+                love.graphics.print("Good thing I gave you the amulet.", love.graphics.getWidth() / 2 - (46 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (70 * playerCamera.globalScale), nil, playerCamera.globalScale / 2.5)
+            end
+        end
     end
     love.graphics.setColor(1, 1, 1)
     if player.focus == true then

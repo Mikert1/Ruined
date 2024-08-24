@@ -109,11 +109,16 @@ function love.keypressed(key)
         end
     else
         if player.isDead then
+            if key == "escape" then
+                love.event.quit()
+                return
+            end
             enemymanager:load()
             data = file.load()
             worldManagement.teleport("start")
             game.freeze = false
             player.isDead = false
+            gui.deadTimer = 0
         end
     end
     if savedSettings.devmode == true then
