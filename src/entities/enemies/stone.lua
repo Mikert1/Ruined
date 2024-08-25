@@ -122,7 +122,7 @@ end
         
 function stone:walk(playerX, playerY, dt)
     if self.animation.state == "walk" then
-        local dx = playerX - (self.x + self.width / 2)
+        local dx = (playerX + 6) - (self.x + self.width / 2)
         local dy = (playerY + self.offsetY) - self.y
         local distance = math.sqrt(dx * dx + dy * dy)
 
