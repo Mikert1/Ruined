@@ -62,7 +62,7 @@ function player.load()
 
     player.item = {}
     player.item.sword = false
-    player.walkingOnGrass = love.audio.newSource("assets/audio/grass3.wav", "static")
+    player.walkingOnGrass = love.audio.newSource("assets/audio/grass.wav", "static")
     player.walkingOnGrass:setVolume(0.3)
     player.walkingOnGrass:setLooping(true)
     

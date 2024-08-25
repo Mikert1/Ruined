@@ -45,7 +45,7 @@ weapon.sword.collider = {
     height = 30
 }
 weapon.sword.colliderActive = false
-weapon.sword.sound = love.audio.newSource("assets/audio/hit.wav", "static")
+-- weapon.sword.sound = love.audio.newSource("assets/audio/hit.wav", "static")
 
 weapon.bow = {}
 weapon.bow.arrow = {}

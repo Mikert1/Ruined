@@ -85,7 +85,7 @@ function boss:attack(dt)
 end
 
 function boss:walk(playerX, playerY, dt)
-    local dx = playerX - (self.x + self.width / 2)
+    local dx = (playerX + 6) - (self.x + self.width / 2)
     local dy = (playerY + self.offsetY) - self.y
     self.distanceFromPlayer = math.sqrt(dx * dx + dy * dy)
 
