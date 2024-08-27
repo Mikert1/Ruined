@@ -17,14 +17,14 @@ local button
 local settings
 local particle
 local objectsManager
+local loadState = 1
 local function loader()
-    if firstLoadDone then
+    if loadState > 1 then
         love.graphics.setDefaultFilter("nearest", "nearest")
         love.mouse.setVisible(false)
         love.mouse.setGrabbed(false)
         _G.game = require("src/system/game")
         file = require("src/system/data")
-        _G.savedSettings = file.settings.load()
         print("[Loader] Starting...")
         require("src/system/error")
         _G.font = love.graphics.newFont("assets/fonts/berylium bd.otf", 16, "mono", 2, 1)
@@ -106,15 +106,19 @@ local function loader()
     end
 end
 
+function loadForLast()
+    savedSettings = file.settings.load()
+end
+
 function love.load()
-    if firstLoadDone then
+    if loadState > 1 then
         story.load()
     end
 end
 
 
 function love.update(dt)
-    if firstLoadDone then
+    if loadState > 1 then
         dt = dt * savedSettings.gameSpeed
         game.update(dt)
         lan.receiveData()
@@ -154,10 +158,14 @@ function love.update(dt)
         objectsManager.update(dt)
         particle.update(dt)
     end
+    if loadState == 2 then
+        loadForLast()
+        loadState = 3
+    end
 end
 
 function love.draw()
-    if firstLoadDone then
+    if loadState > 1 then
         love.graphics.setFont(font)
         if player.focus == true then 
             love.graphics.setShader(shader.focus)
@@ -204,7 +212,7 @@ function love.draw()
             game.draw()
     else
         love.graphics.print("Loading...", 10, 10)
-        firstLoadDone = true
+        loadState = 2
         loader()
     end
 end

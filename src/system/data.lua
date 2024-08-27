@@ -6,7 +6,7 @@ local worldManagement = require("src/gameplay/worldmanager")
 local file = {}
 local data = {}
 local preview = {}
-local savedSettings = {}
+_G.savedSettings = {}
 savedSettings.devmode = false
 savedSettings.console = false
 savedSettings.screenShake = true
@@ -387,6 +387,8 @@ function file.settings.load()
     if not savedSettings.gameSpeed then
         savedSettings.gameSpeed = 1
     end
+    local settings = require("src/gui/settings")
+    settings.slider.value = savedSettings.gameSpeed
     return savedSettings
 end
 

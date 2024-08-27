@@ -24,7 +24,7 @@ settings.slider = {
     knobRadius = 10,
     minValue = 0,
     maxValue = 100,
-    value = savedSettings.masterVolume,
+    value = 1,
     dragging = false,
     hover = false
 }
