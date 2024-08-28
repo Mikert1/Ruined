@@ -4,5 +4,5 @@ function love.conf(t)
     t.version = 11.5
     t.window.highdpi = true
     t.window.resizable = true
-    t.console = false
+    t.console = true
 end

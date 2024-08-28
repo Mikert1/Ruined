@@ -344,38 +344,40 @@ function file.settings.load()
         savedSettings.gameSpeed = 1
     end
 
+    if savedSettings.windowIndex <= love.window.getDisplayCount() then
+        local x, y, _ = love.window.getPosition()
+        love.window.setPosition(x, y, savedSettings.windowIndex)
+        print("[Info  ] Window set to display " .. savedSettings.windowIndex)
+    end
     if savedSettings.window == 1 then
         love.window.setFullscreen(true)
     else
+        local w, h = love.window.getDesktopDimensions(savedSettings.windowIndex)
         if savedSettings.resolution == 1 then
-            if (x > 800) and (y > 600) then
+            if (w > 800) and (h > 600) then
                 love.window.setMode(800, 600, {borderless = false, resizable = true, display = savedSettings.windowIndex})
             else
-                love.window.setMode(x, y, {borderless = false, resizable = true, display = savedSettings.windowIndex})
+                love.window.setMode(w, h, {borderless = false, resizable = true, display = savedSettings.windowIndex})
             end
         elseif savedSettings.resolution == 2 then
-            if (x > 1024) and (y > 768) then
+            if (w > 1024) and (h > 768) then
                 love.window.setMode(1024, 768, {borderless = false, resizable = true, display = savedSettings.windowIndex})
             else
-                love.window.setMode(x, y, {borderless = false, resizable = true, display = savedSettings.windowIndex})
+                love.window.setMode(w, h, {borderless = false, resizable = true, display = savedSettings.windowIndex})
             end
         elseif savedSettings.resolution == 3 then
-            if (x > 1280) and (y > 720) then
+            if (w > 1280) and (h > 720) then
                 love.window.setMode(1280, 720, {borderless = false, resizable = true, display = savedSettings.windowIndex})
             else
-                love.window.setMode(x, y, {borderless = false, resizable = true, display = savedSettings.windowIndex})
+                love.window.setMode(w, h, {borderless = false, resizable = true, display = savedSettings.windowIndex})
             end
         elseif savedSettings.resolution == 4 then
-            love.window.setMode(x, y, {borderless = false, resizable = true, display = savedSettings.windowIndex})
+            love.window.setMode(w, h, {borderless = false, resizable = true, display = savedSettings.windowIndex})
         end
-    end
-    if savedSettings.windowIndex <= love.window.getDisplayCount() then
-        love.window.setMode(love.graphics.getWidth(), love.graphics.getHeight(), {display = savedSettings.windowIndex, resizable = true})
     end
     if savedSettings.devmode == true and savedSettings.console == true then
         if love.system.getOS() == "Windows" then love._openConsole() end
     end
-    local x, y = love.window.getDesktopDimensions(savedSettings.windowIndex)
     
     if savedSettings.masterVolume then
         love.audio.setVolume(savedSettings.masterVolume / 100)
