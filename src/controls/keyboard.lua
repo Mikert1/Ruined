@@ -13,6 +13,7 @@ local button = require("src/gui/button")
 local worldManagement = require("src/gameplay/worldmanager") -- if player is dead
 
 function love.keypressed(key)
+    game.controlType = 0
     if not (controls.searchForKey == nil) then
         if key == "escape" then
             controls.searchForKey = nil

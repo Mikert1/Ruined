@@ -33,139 +33,172 @@ function controller.update(dt)
         end
         controller.joysticks:setVibration(controller.vibrationL, controller.vibrationR)
     end
-
-    if game.controlType == 0 then
-        controller.joysticks = love.joystick.getJoysticks()[1]
-    else
-        if controller.joysticks and controller.joysticks:isConnected() then
-            if not player.isDead then
-                game.controlType = 1
-                if controller.joysticks:getGamepadAxis("triggerright") > 0.5 then
-                    if controller.buttonReleace.triggerL == true then
-                        controller.buttonReleace.triggerL = false
-                        if weapon.equipment == 1 then
-                            weapon.sword.use()
-                        elseif weapon.equipment == 2 then
-                            weapon.bow.charge()
-                        end
-                    end
-                else
-                    if weapon.equipment == 2 and weapon.bow.hold == true then
-                        weapon.bow.use()
-                    end
-                    controller.buttonReleace.triggerL = true
-                end
-                if controller.joysticks:isGamepadDown("y") then
-                    if controller.buttonReleace.y == true then
-                        controller.buttonReleace.y = false
-                        if weapon.equipment == 1 then
-                            weapon.equipment = 2
-                        else
-                            weapon.equipment = 1
-                            weapon.bow.hold = false
-                            weapon.bow.holdCounter = 0
-                        end
-                    end
-                else
-                    controller.buttonReleace.y = true
-                end
-                if controller.joysticks:isGamepadDown("x") then
-                    if controller.buttonReleace.x == true then
-                        controller.buttonReleace.x = false
-                        if gui.focusReady == true then
-                            if player.focus == false then
-                                controller.vibrationL = 0.2
-                                controller.vibrationR = 1
-                                player.focusAnim = true
-                            end
-                        end
-                    end
-                else
-                    controller.buttonReleace.x = true
-                end
-                if controller.joysticks:isGamepadDown("a") then
-                    if controller.buttonReleace.a == true then
-                        controller.buttonReleace.a = false
-                        if story.dialogue.length < story.dialogue.position then
-                            story.data.current = story.data.current + 1
-                            story.dialogue.position = 0
-                            story.dialogue.update()
-                            story.skiped = true
-                        elseif story.skiped == false then
-                            story.dialogue.position = story.dialogue.length
-                        end
-                    end
-                else
-                    controller.buttonReleace.a = true
-                    story.skiped = false
-                end
-                if controller.joysticks:isGamepadDown("start") then
-                    if controller.buttonReleace.start == true then
-                        controller.buttonReleace.start = false
-                        if not player.isDead and title.state == 5 then
-                            if game.esc == true then
-                                game.esc = false
-                                player.noMove = false
-                                game.freeze = false
-                                button.loadAll()
-                            else
-                                game.esc = true
-                                player.noMove = true
-                                game.freeze = true
-                                button.loadAll()
-                                gui.map = false
-                                player.walkingOnGrass:stop()
-                            end
-                        end
-                    end
-                else
-                    controller.buttonReleace.start = true
-                end
-            end
-            if controller.joysticks:isGamepadDown("back") then
-                if controller.buttonReleace.back == true then
-                    controller.buttonReleace.back = false
-                    if game.state == 0 then
-                        if not player.isDead and title.state == 5 then
-                            if gui.map == true then
-                                gui.map = false
-                            else
-                                gui.map = true
-                            end
-                        end
-                    elseif game.state == 1 then
-                        if title.mikert.showed == false then
-                            title.mikert.showed = true
-                            button.loadAll()
-                        end
-                        file.filenumber = 1
-                        game.state = 0
-                        data = file.load()
-                        worldManagement.teleport("start")
-                        game.freeze = false
-                        title.state = 5
-                        game.esc = false
-                        data = file.save()
-                        button.loadAll()
-                    end
-                end
-                controller.buttonReleace.backCount = controller.buttonReleace.backCount + dt
-                if controller.buttonReleace.backCount > 1 then
-                    controller.buttonReleace.backCount = 0
-                    if keys.tab == true then
-                        print("[Info  ] Disabled Debugg mode")
-                        keys.tab = false
-                    else
-                        print("[Info  ] Enabled Debugg mode")
-                        keys.tab = true
+    
+    if controller.joysticks and controller.joysticks:isConnected() then
+        if not player.isDead then
+            if controller.joysticks:getGamepadAxis("triggerright") > 0.5 then
+                if controller.buttonReleace.triggerL == true then
+                    controller.buttonReleace.triggerL = false
+                    game.controlType = 1
+                    if weapon.equipment == 1 then
+                        weapon.sword.use()
+                    elseif weapon.equipment == 2 then
+                        weapon.bow.charge()
                     end
                 end
             else
-                controller.buttonReleace.backCountCount = 0
-                controller.buttonReleace.back = true
+                if weapon.equipment == 2 and weapon.bow.hold == true then
+                    weapon.bow.use()
+                end
+                controller.buttonReleace.triggerL = true
+            end
+            if controller.joysticks:isGamepadDown("y") then
+                if controller.buttonReleace.y == true then
+                    controller.buttonReleace.y = false
+                    game.controlType = 1
+                    if weapon.equipment == 1 then
+                        weapon.equipment = 2
+                    else
+                        weapon.equipment = 1
+                        weapon.bow.hold = false
+                        weapon.bow.holdCounter = 0
+                    end
+                end
+            else
+                controller.buttonReleace.y = true
+            end
+            if controller.joysticks:isGamepadDown("x") then
+                if controller.buttonReleace.x == true then
+                    controller.buttonReleace.x = false
+                    game.controlType = 1
+                    if gui.focusReady == true then
+                        if player.focus == false then
+                            controller.vibrationL = 0.2
+                            controller.vibrationR = 1
+                            player.focusAnim = true
+                        end
+                    end
+                end
+            else
+                controller.buttonReleace.x = true
+            end
+            if controller.joysticks:isGamepadDown("a") then
+                if controller.buttonReleace.a == true then
+                    controller.buttonReleace.a = false
+                    game.controlType = 1
+                    -- if title.state == 0 then
+                    --     if title.logo.y < 90 then
+                    --         title.logo.anim = title.logo.animations.region2
+                    --         title.logo.y = 90
+                    --     end
+                    -- elseif title.state == 4 then
+                    --     if settings.isMouseOverKnob(x, y) then
+                    --         print("clicked")
+                    --         settings.slider.dragging = true
+                    --     end
+                    -- elseif title.state == 5 then
+                    --     if not player.isDead then
+                    --         if story.npc.interaction == true then
+                    --             if story.dialogue.length < story.dialogue.position then
+                    --                 story.data.current = story.data.current + 1
+                    --                 story.dialogue.position = 0
+                    --                 story.dialogue.update()
+                    --                 story.skiped = true
+                    --             elseif story.skiped == false then
+                    --                 story.dialogue.position = story.dialogue.length
+                    --             end
+                    --         end
+                    --         if game.freeze == false then
+                    --             if weapon.equipment == 1 then
+                    --                 weapon.sword.use()
+                    --             elseif weapon.equipment == 2 then
+                    --                 weapon.bow.charge()
+                    --             end
+                    --         end
+                    --     end
+                    -- end
+                end
+            else
+                controller.buttonReleace.a = true
+                story.skiped = false
+            end
+            if controller.joysticks:isGamepadDown("start") then
+                if controller.buttonReleace.start == true then
+                    controller.buttonReleace.start = false
+                    game.controlType = 1
+                    if not player.isDead and title.state == 5 then
+                        if game.esc == true then
+                            game.esc = false
+                            player.noMove = false
+                            game.freeze = false
+                            button.loadAll()
+                        else
+                            game.esc = true
+                            player.noMove = true
+                            game.freeze = true
+                            button.loadAll()
+                            gui.map = false
+                            player.walkingOnGrass:stop()
+                        end
+                    end
+                end
+            else
+                controller.buttonReleace.start = true
+            end
+        end
+        if controller.joysticks:isGamepadDown("back") then
+            if controller.buttonReleace.back == true then
+                controller.buttonReleace.back = false
+                game.controlType = 1
+                if game.state == 0 then
+                    if not player.isDead and title.state == 5 then
+                        if gui.map == true then
+                            gui.map = false
+                        else
+                            gui.map = true
+                        end
+                    end
+                elseif game.state == 1 then
+                    if title.mikert.showed == false then
+                        title.mikert.showed = true
+                        button.loadAll()
+                    end
+                    file.filenumber = 1
+                    game.state = 0
+                    data = file.load()
+                    worldManagement.teleport("start")
+                    game.freeze = false
+                    title.state = 5
+                    game.esc = false
+                    data = file.save()
+                    button.loadAll()
+                end
+            end
+            controller.buttonReleace.backCount = controller.buttonReleace.backCount + dt
+            if controller.buttonReleace.backCount > 1 then
+                controller.buttonReleace.backCount = 0
+                game.controlType = 1
+                if keys.tab == true then
+                    print("[Info  ] Disabled Debugg mode")
+                    keys.tab = false
+                else
+                    print("[Info  ] Enabled Debugg mode")
+                    keys.tab = true
+                end
             end
         else
-            game.controlType = 0
+            controller.buttonReleace.backCountCount = 0
+            controller.buttonReleace.back = true
+        end
+        local lx = controller.joysticks:getGamepadAxis("leftx")
+        local ly = controller.joysticks:getGamepadAxis("lefty")
+        local rx = controller.joysticks:getGamepadAxis("rightx")
+        local ry = controller.joysticks:getGamepadAxis("righty")
+        if lx > 0.1 or lx < -0.1 
+        or ly > 0.1 or ly < -0.1
+        or rx > 0.1 or rx < -0.1
+        or ry > 0.1 or ry < -0.1 then
+            game.controlType = 1           
         end
     end
 end

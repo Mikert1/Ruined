@@ -347,7 +347,6 @@ function file.settings.load()
     if savedSettings.windowIndex <= love.window.getDisplayCount() then
         local x, y, _ = love.window.getPosition()
         love.window.setPosition(x, y, savedSettings.windowIndex)
-        print("[Info  ] Window set to display " .. savedSettings.windowIndex)
     end
     if savedSettings.window == 1 then
         love.window.setFullscreen(true)
@@ -355,24 +354,26 @@ function file.settings.load()
         local w, h = love.window.getDesktopDimensions(savedSettings.windowIndex)
         if savedSettings.resolution == 1 then
             if (w > 800) and (h > 600) then
-                love.window.setMode(800, 600, {borderless = false, resizable = true, display = savedSettings.windowIndex})
+                love.window.updateMode(800, 600)
             else
-                love.window.setMode(w, h, {borderless = false, resizable = true, display = savedSettings.windowIndex})
+                love.window.updateMode(w, h)
             end
         elseif savedSettings.resolution == 2 then
             if (w > 1024) and (h > 768) then
-                love.window.setMode(1024, 768, {borderless = false, resizable = true, display = savedSettings.windowIndex})
+                love.window.updateMode(1024, 768)
             else
-                love.window.setMode(w, h, {borderless = false, resizable = true, display = savedSettings.windowIndex})
+                love.window.updateMode(w, h)
             end
         elseif savedSettings.resolution == 3 then
             if (w > 1280) and (h > 720) then
-                love.window.setMode(1280, 720, {borderless = false, resizable = true, display = savedSettings.windowIndex})
+                love.window.updateMode(1280, 720)
             else
-                love.window.setMode(w, h, {borderless = false, resizable = true, display = savedSettings.windowIndex})
+                love.window.updateMode(w, h)
             end
         elseif savedSettings.resolution == 4 then
-            love.window.setMode(w, h, {borderless = false, resizable = true, display = savedSettings.windowIndex})
+            if (w > 1366) and (h > 768) then
+                love.window.updateMode(w, h)
+            end
         end
     end
     if savedSettings.devmode == true and savedSettings.console == true then

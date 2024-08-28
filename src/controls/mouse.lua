@@ -9,6 +9,7 @@ local button = require("src/gui/button")
 local preview = file.show()
 function love.mousemoved(x, y)
     if title.state == 0 then
+        game.controlType = 0
         if x > love.graphics.getWidth() / 2 - (100 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 - (72 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (50 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (88 * playerCamera.globalScale) then
             title.background.current = title.background.blue
             title.logo.anim = title.logo.animations.region2
@@ -102,6 +103,7 @@ function love.mousepressed(x, y, buttonClicked, istouch)
 end
 
 function love.mousereleased(x, y, buttonClicked, istouch, presses)
+    game.controlType = 0
     if title.mikert.showed == false then
         title.mikert.showed = true
         button.loadAll()
@@ -120,6 +122,7 @@ function love.mousereleased(x, y, buttonClicked, istouch, presses)
 end
 
 function love.wheelmoved(x, y)
+    game.controlType = 0
     settings.scroll = settings.scroll + (y * 5)
     -- if settings.scroll < 0 then
     --     settings.scroll = 0
