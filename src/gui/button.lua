@@ -70,8 +70,6 @@ function button.loadAll()
                 button.new(-127, -53, "Windowed", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 20, "Window Type:") -- Windowed
             elseif savedSettings.window == 1 then
                 button.new(-127, -53, "Fullscreen", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 20, "Window Type:") -- Fullscreen
-            elseif savedSettings.window == 2 then
-                button.new(-127, -53, "Borderless", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 20, "Window Type:") -- Borderless
             end
             button.new(-40, -53, savedSettings.windowIndex, {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 21, "Window Index:") -- resolution
             if not (savedSettings.window == 1) then
@@ -433,11 +431,6 @@ function button:action()
             savedSettings.window = 1
         elseif savedSettings.window == 1 then
             love.window.setFullscreen(false)
-            love.window.setMode(800, 600, {borderless = true, resizable = true, display = savedSettings.windowIndex})
-            savedSettings.window = 2
-        elseif savedSettings.window == 2 then
-            love.window.setFullscreen(false)
-            love.window.setMode(800, 600, {borderless = false, resizable = true, display = savedSettings.windowIndex}) 
             savedSettings.window = 0
         end
         button.loadAll()

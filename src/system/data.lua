@@ -344,19 +344,9 @@ function file.settings.load()
         savedSettings.gameSpeed = 1
     end
 
-    if savedSettings.window == 2 then
-        love.window.setMode(love.graphics.getWidth(), love.graphics.getHeight(), {borderless = true, resizable = true, display = savedSettings.windowIndex})
-    elseif savedSettings.window == 1 then
+    if savedSettings.window == 1 then
         love.window.setFullscreen(true)
-    end
-    if savedSettings.windowIndex <= love.window.getDisplayCount() then
-        love.window.setMode(love.graphics.getWidth(), love.graphics.getHeight(), {display = savedSettings.windowIndex, resizable = true})
-    end
-    if savedSettings.devmode == true and savedSettings.console == true then
-        if love.system.getOS() == "Windows" then love._openConsole() end
-    end
-    local x, y = love.window.getDesktopDimensions(savedSettings.windowIndex)
-    if not (savedSettings.window == 1) then
+    else
         if savedSettings.resolution == 1 then
             if (x > 800) and (y > 600) then
                 love.window.setMode(800, 600, {borderless = false, resizable = true, display = savedSettings.windowIndex})
@@ -379,6 +369,14 @@ function file.settings.load()
             love.window.setMode(x, y, {borderless = false, resizable = true, display = savedSettings.windowIndex})
         end
     end
+    if savedSettings.windowIndex <= love.window.getDisplayCount() then
+        love.window.setMode(love.graphics.getWidth(), love.graphics.getHeight(), {display = savedSettings.windowIndex, resizable = true})
+    end
+    if savedSettings.devmode == true and savedSettings.console == true then
+        if love.system.getOS() == "Windows" then love._openConsole() end
+    end
+    local x, y = love.window.getDesktopDimensions(savedSettings.windowIndex)
+    
     if savedSettings.masterVolume then
         love.audio.setVolume(savedSettings.masterVolume / 100)
     else
