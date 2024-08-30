@@ -33,7 +33,8 @@ function controller.update(dt)
         end
         controller.joysticks:setVibration(controller.vibrationL, controller.vibrationR)
     end
-    
+
+    controller.joysticks = love.joystick.getJoysticks()[1]
     if controller.joysticks and controller.joysticks:isConnected() then
         if not player.isDead then
             if controller.joysticks:getGamepadAxis("triggerright") > 0.5 then
@@ -194,11 +195,11 @@ function controller.update(dt)
         local ly = controller.joysticks:getGamepadAxis("lefty")
         local rx = controller.joysticks:getGamepadAxis("rightx")
         local ry = controller.joysticks:getGamepadAxis("righty")
-        if lx > 0.1 or lx < -0.1 
+        if lx > 0.1 or lx < -0.1
         or ly > 0.1 or ly < -0.1
         or rx > 0.1 or rx < -0.1
         or ry > 0.1 or ry < -0.1 then
-            game.controlType = 1           
+            game.controlType = 1
         end
     end
 end

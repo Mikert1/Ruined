@@ -9,14 +9,11 @@ local file
 local settings
 local title
 local gui
-local joystick
+local controller
 local closestButtonId = nil
 local moving = false
 local preview
 local worldManagement
-if love.joystick.getJoystickCount() > 0 then
-    joystick = love.joystick.getJoysticks()[1]
-end
 
 function button.load()
     file = require("src/system/data")
@@ -24,6 +21,7 @@ function button.load()
     settings = require("src/gui/settings")
     title = require("src/gui/title")
     gui = require("src/gui/gui")
+    controller = require("src/controls/controller")
     worldManagement = require("src/gameplay/worldmanager")
 end
 
@@ -739,6 +737,7 @@ function button:update(dt)
 end
 
 function button:handleJoystickInput()
+    local joystick = controller.joysticks
     local dx = joystick:getGamepadAxis("leftx")
     local dy = joystick:getGamepadAxis("lefty")
     
@@ -874,7 +873,7 @@ function button:UpdateAll(dt)
             button:update(dt)
         end
     end
-    if game.controlType == 1 then
+    if game.controlType == 1 and controller.joysticks:isConnected() then
         button:handleJoystickInput()
     end
 end
