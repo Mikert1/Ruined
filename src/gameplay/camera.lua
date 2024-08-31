@@ -61,11 +61,6 @@ function playerCamera.follow(dt)
     end
     
     playerCamera.cam:lookAt(newCamPositon.x, newCamPositon.y)
-    if controller.joysticks then
-        if controller.joysticks:isGamepadDown("y") then
-            playerCamera.shaker = 1
-        end
-    end
     if playerCamera.shaker > 0 then
         playerCamera.shaker = playerCamera.shaker - dt
         playerCamera.shake(playerCamera.shaker * playerCamera.globalScale)
