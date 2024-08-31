@@ -27,12 +27,10 @@ function time.everySecond()
             if gui.focusTime == 0 then
                 player.focus = false
             end
-        end
-        if gui.focusTime >= 8 then
-            gui.focusTime = 8
-            gui.focusReady = true
         else
-            gui.focusTime = gui.focusTime + 0.25
+            if gui.focusTime < 8 then
+                gui.focusTime = gui.focusTime + 0.25
+            end
             if gui.focusTime >= 8 then
                 gui.focusTime = 8
                 gui.focusReady = true

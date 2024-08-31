@@ -146,13 +146,11 @@ function gui:draw()
         love.graphics.draw(gui.weaponBar.image.bow[gui.weaponBar.animation.current], love.graphics.getWidth() - (93.5 * playerCamera.globalScale), love.graphics.getHeight() - (16.5 * playerCamera.globalScale) - gui.hide.sword.y * playerCamera.globalScale, nil, playerCamera.globalScale * 1.2)
     end
     if gui.map == true then
-        if player.isMoving == false then
-            love.graphics.setColor(0, 0, 0, 0.5)
-            love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
-        end
         if player.isMoving == true then
             love.graphics.setColor(1, 1, 1, 0.5)
         else
+            love.graphics.setColor(0, 0, 0, 0.5)
+            love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
             love.graphics.setColor(1, 1, 1)
         end
         love.graphics.draw(gui.mapImageBackground, love.graphics.getWidth() / 2 - (gui.mapImageBackground:getWidth() / 2 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (gui.mapImageBackground:getHeight() / 2 * playerCamera.globalScale), nil, playerCamera.globalScale)
