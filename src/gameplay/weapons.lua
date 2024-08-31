@@ -295,7 +295,7 @@ function weapon.sword.use()
         local playerCenterX = player.x + player.width / 2
         local playerCenterY = player.y + player.height / 2
         local angle
-        if controller.joysticks then
+        if game.controlType == 1 then
             angle = math.atan2(controller.joysticks:getGamepadAxis("righty"), controller.joysticks:getGamepadAxis("rightx"))
         else
             local mouseX, mouseY = playerCamera.cam:mousePosition()
