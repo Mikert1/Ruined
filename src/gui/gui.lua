@@ -62,6 +62,7 @@ function gui.load()
     }
     gui.barShow = false
     gui.deadTimer = 0
+    gui.focusTime = 0
 end
 
 function gui.update(dt)
