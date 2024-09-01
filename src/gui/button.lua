@@ -10,7 +10,7 @@ local settings
 local title
 local gui
 local controller
-local closestButtonId = nil
+local selectedGrid = {row = 1, column = 1}
 local moving = false
 local preview
 local worldManagement
@@ -31,15 +31,16 @@ button.fader = 0
 function button.loadAll()
     button.fader = 0.26
     button.activeButtons = {}
+    selectedGrid = {row = 1, column = 1}
     if title.state == 0 then
         button.specialNew(-100, 50, title.icons.start, {0, 1, 1}, 61)
         button.specialNew(-12.5, 50, title.icons.past, {0, 0.8, 0}, 62)
         button.specialNew(71, 50, title.icons.final, {0, 1, 1}, 63)
     elseif title.state == 5 then
         if game.esc == true then
-            button.new(-40, -25, "Resume", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 7) -- back from skin to settings
-            button.new(-40, 0, "Settings", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 6) -- back from skin to settings
-            button.new(-40, 25, "Title screen", {1, 0, 0}, 5) -- back from skin to settings
+            button.new(-40, -25, "Resume", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 7, 1, 1) -- back from skin to settings
+            button.new(-40, 0, "Settings", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 6, 1, 2) -- back from skin to settings
+            button.new(-40, 25, "Title screen", {1, 0, 0}, 5, 1, 3) -- back from skin to settings
             button.first()
         end
     elseif title.state == 4 then
@@ -197,25 +198,21 @@ end
 
 function button.first()
     if game.controlType == 1 then
-        local closestDistance = math.huge
-
+        local lowestRow = 0
+        local lowestColumn = 0
         for _, btn in ipairs(button.activeButtons) do
-            local distance = math.abs(btn.id - 0)
-            if distance < closestDistance then
-                closestButtonId = btn.id
-                closestDistance = distance
+            if btn.grid.row > lowestRow then
+                lowestRow = btn.grid.row
+            end
+            if btn.grid.column > lowestColumn then
+                lowestColumn = btn.grid.column
             end
         end
-
-        if closestButtonId then
-            print("Closest button id:", closestButtonId)
-        else
-            print("No buttons found")
-        end
+        selectedGrid = {row = lowestRow, column = lowestColumn}
     end
 end
 
-function button.new(x, y, text, color, id, info, scroll)
+function button.new(x, y, text, color, id, row, column, info, scroll)
     local self = setmetatable({}, button)
     self.x = x
     self.y = y
@@ -231,10 +228,15 @@ function button.new(x, y, text, color, id, info, scroll)
     self.hover = false
     self.clicked = false
     self.scroll = scroll
+
+    self.grid = {
+        row = row or 0, 
+        column = column or 0
+    }
     table.insert(button.activeButtons, self)
 end
 
-function button.specialNew(x, y, imageOnButton, color, id, image, outline)
+function button.specialNew(x, y, imageOnButton, color, id, image, outline, row, column)
     local self = setmetatable({}, button)
     self.x = x
     self.y = y
@@ -263,6 +265,11 @@ function button.specialNew(x, y, imageOnButton, color, id, image, outline)
     else
         self.highlighted = false
     end
+
+    self.grid = {
+        row = row or 0, 
+        column = column or 0
+    }
     table.insert(button.activeButtons, self)
 end
 
@@ -740,58 +747,82 @@ function button:handleJoystickInput()
     local joystick = controller.joysticks
     local dx = joystick:getGamepadAxis("leftx")
     local dy = joystick:getGamepadAxis("lefty")
-    
-    if closestButtonId then
-        local btn
-        for i, button in ipairs(button.activeButtons) do
-            if button.id == closestButtonId then
-                button.hover = true
-                btn = button
-            else
-                button.hover = false
+
+    local firstRowFound
+    local firstColumnFound
+    for i, button in ipairs(button.activeButtons) do
+        if dx > 0.5 then
+            if button.grid.row > selectedGrid.row then
+                if firstRowFound then
+                    if firstRowFound > button.grid.row then
+                        firstRowFound = button.grid.row
+                    end
+                else
+                    firstRowFound = button.grid.row
+                end
+            end
+        elseif dx < -0.5 then
+            if button.grid.row < selectedGrid.row then
+                if firstRowFound then
+                    if firstRowFound < button.grid.row then
+                        firstRowFound = button.grid.row
+                    end
+                else
+                    firstRowFound = button.grid.row
+                end
             end
         end
-        if btn then
-            if joystick:isGamepadDown("a") then
-                if btn.clicked == false then
-                    btn.clicked = true
-                    btn:action(btn.id)
+        if dy > 0.5 then
+            if button.grid.column > selectedGrid.column then
+                if firstColumnFound then
+                    if firstColumnFound > button.grid.column then
+                        firstColumnFound = button.grid.column
+                    end
+                else
+                    firstColumnFound = button.grid.column
                 end
-            else
-                btn.clicked = false
+            end
+        elseif dy < -0.5 then
+            if button.grid.column < selectedGrid.column then
+                if firstColumnFound then
+                    if firstColumnFound < button.grid.column then
+                        firstColumnFound = button.grid.column
+                    end
+                else
+                    firstColumnFound = button.grid.column
+                end
             end
         end
     end
-    if math.abs(dx) > 0.5 or math.abs(dy) > 0.5 then
-        if not moving then
+    if moving == false then
+        if firstRowFound then
+            selectedGrid.row = firstRowFound
             moving = true
-            local closestDistance = math.huge
-            local closestButtonIdCapture = closestButtonId
-            for _, btn in ipairs(button.activeButtons) do
-                local distanceX = math.abs(btn.x - dx)
-                local distanceY = math.abs(btn.y - dy)
-                local distance = math.sqrt(distanceX^2 + distanceY^2) -- Euclidean distance
-                if btn.id ~= closestButtonIdCapture and distance < closestDistance then
-                    -- Check if the closest button is in the direction of the current button
-                    local directionX = dx - btn.x
-                    local directionY = dy - btn.y
-                    local dotProduct = directionX * btn.x + directionY * btn.y
-                    print("Dot product:", dotProduct)
-                    if dotProduct < 0 then
-                        closestButtonId = btn.id
-                        closestDistance = distance
-                    end
-                end
-            end
-    
-            if closestButtonId then
-                print("Closest button id:", closestButtonId)
-            else
-                print("No buttons found")
-            end
         end
-    else
-        moving = false
+        if firstColumnFound then
+            selectedGrid.column = firstColumnFound
+            moving = true
+        end
+    end
+    if moving == true then
+        if math.abs(dx) < 0.1 and math.abs(dy) < 0.1 then
+            moving = false
+        end
+    end
+    for _, button in ipairs(button.activeButtons) do
+        if button.grid.row == selectedGrid.row and button.grid.column == selectedGrid.column then
+            button.hover = true
+        else
+            button.hover = false	
+        end
+        if joystick:isGamepadDown("a") then
+            if button.clicked == false then
+                button.clicked = true
+                button:action(button.id)
+            end
+        else
+            button.clicked = false
+        end
     end
 end
 
