@@ -267,7 +267,7 @@ function player.movement(dt)
                 player.isMoving = true
             end
             if controller.joysticks:getGamepadAxis("lefty") > 0.1 then
-                dy = player.speed * dt * controller.joysticks:getGamepadAxis("lefty")
+                dy = player.speed * dt * (controller.joysticks:getGamepadAxis("lefty") * 0.8)
                 if player.isLeft == true then
                     player.anim = player.animations.downRight
                 else
@@ -279,7 +279,7 @@ function player.movement(dt)
                 player.isUp = false
                 player.isMoving = true
             elseif controller.joysticks:getGamepadAxis("lefty") < -0.1 then
-                dy = player.speed * dt * controller.joysticks:getGamepadAxis("lefty")
+                dy = player.speed * dt * (controller.joysticks:getGamepadAxis("lefty") * 0.8)
                 if player.isLeft == false then
                     player.anim = player.animations.upRight
                 else
