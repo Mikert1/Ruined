@@ -184,12 +184,15 @@ function file.load()
                 },
                 isUp = false,
                 isLeft = true,
-                world = "naamloos",
+                world = "Village",
                 hearts = 8,
                 storyTold = {
                     john1 = false
                 }
             }
+            if game.chapter == 2 then
+                data.world = "naamloos"
+            end
             game.state = 2.3
             scene.welcome()
         end

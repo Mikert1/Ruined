@@ -321,6 +321,7 @@ function button.actionWarning(id)
     elseif id == 62 then
         print("[Warn  ] chapter 2 is not unlocked, finish chapter 1 to play chapter 2.")
         title.state = 2
+        game.chapter = 2
         file.show()
         title.rezet()
         title.text.name = "The days of John's"
@@ -331,6 +332,7 @@ function button.actionWarning(id)
     elseif id == 63 then
         print("[Warn  ] chapter 3 is not unlocked, finish chapter 2 to play chapter 3.")
         title.state = 3
+        game.chapter = 3
         file.show()
         title.rezet()
         title.text.name = "Returned"
@@ -598,6 +600,7 @@ function button:action()
         end
     elseif self.id == 61 then -- chapter button
         title.state = 1
+        game.chapter = 1
         file.show()
         title.rezet()
         title.text.name = "Ruined"
