@@ -22,6 +22,7 @@ local file = require("src/system/data")
 local worldManagement = require("src/gameplay/worldmanager")
 local title = require("src/gui/title")
 local button = require("src/gui/button")
+local settings = require("src/gui/settings")
 
 function love.gamepadpressed(joystick, _button)
 
@@ -131,6 +132,12 @@ function controller.update(dt)
         or rx > 0.1 or rx < -0.1
         or ry > 0.1 or ry < -0.1 then
             game.controlType = 1
+        end
+        if ry > 0.1 or ry < -0.1 then
+            settings.scroll = settings.scroll - (ry * 3)
+            if settings.scroll > 0 then
+                settings.scroll = 0
+            end
         end
     end
 end
