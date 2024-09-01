@@ -44,6 +44,7 @@ function button.loadAll()
             button.first()
         end
     elseif title.state == 4 then
+        selectedGrid.column = 2
         button.specialNew(-127, -88, settings.mainButtons.game, {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 101, settings.button, settings.buttonOutline)
         button.specialNew(-84, -88, settings.mainButtons.video, {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 102, settings.button, settings.buttonOutline)
         button.specialNew(-41, -88, settings.mainButtons.controls, {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 103, settings.button, settings.buttonOutline)
@@ -61,118 +62,111 @@ function button.loadAll()
             else
                 button.new(-127, -53, "Disabled", {1, 0.5, 0}, 1, 1, 2, "Developer Mode") -- devmode
             end
-            button.new(-40, 70, "Back", {1, 0.5, 0}, 3, 1, 10) -- back from settings to main menu or game
         elseif settings.tab == "video" then
             if savedSettings.window == 0 then
-                button.new(-127, -53, "Windowed", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 20, "Window Type:") -- Windowed
+                button.new(-127, -53, "Windowed", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 20, 1, 2, "Window Type:") -- Windowed
             elseif savedSettings.window == 1 then
-                button.new(-127, -53, "Fullscreen", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 20, "Window Type:") -- Fullscreen
+                button.new(-127, -53, "Fullscreen", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 20, 1, 2, "Window Type:") -- Fullscreen
             end
-            button.new(-40, -53, savedSettings.windowIndex, {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 21, "Window Index:") -- resolution
+            button.new(-40, -53, savedSettings.windowIndex, {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 21, 2, 2, "Window Index:") -- resolution
             if not (savedSettings.window == 1) then
-                button.new(47, -53, love.graphics.getWidth() .. "x" .. love.graphics.getHeight(), {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 22, "Window Resolution:") -- resolution
+                button.new(47, -53, love.graphics.getWidth() .. "x" .. love.graphics.getHeight(), {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 22, 2, 3, "Window Resolution:") -- resolution
             end
             if savedSettings.screenShake == true then
-                button.new(-127, -18, "Enabled", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 23, "Screen shake") -- screen shake
+                button.new(-127, -18, "Enabled", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 23, 1, 3, "Screen shake") -- screen shake
             else
-                button.new(-127, -18, "Disabled", {1, 0.5, 0}, 23, "Screen shake") -- screen shake
+                button.new(-127, -18, "Disabled", {1, 0.5, 0}, 23, 1, 3, "Screen shake") -- screen shake
             end
-            button.new(-40, 70, "Back", {1, 0.5, 0}, 3) -- back from settings to main menu or game
         elseif settings.tab == "controls" then
             if controls.searchForKey == "interact" then
-                button.new(-127, -53, "Press key", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 25, "Interact", true) -- 
+                button.new(-127, -53, "Press key", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 25, 1, 2, "Interact", true) -- 
             else
-                button.new(-127, -53, "Key: " .. string.upper(controls.keys.interact) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 25, "Interact", true) --
+                button.new(-127, -53, "Key: " .. string.upper(controls.keys.interact) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 25, 1, 2, "Interact", true) --
             end
             if controls.searchForKey == "map" then
-                button.new(-127, -18, "Press key", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 26, "Map", true) -- 
+                button.new(-127, -18, "Press key", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 26, 1, 3, "Map", true) -- 
             else
-                button.new(-127, -18, "Key: " .. string.upper(controls.keys.map) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 26, "Map", true) -- 
+                button.new(-127, -18, "Key: " .. string.upper(controls.keys.map) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 26, 1, 3, "Map", true) -- 
             end
             if controls.searchForKey == "focus" then
-                button.new(-127, 17, "Press key", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 27, "Focus", true) -- 
+                button.new(-127, 17, "Press key", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 27, 1, 4, "Focus", true) -- 
             else
-                button.new(-127, 17, "Key: " .. string.upper(controls.keys.focus) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 27, "Focus", true) -- 
+                button.new(-127, 17, "Key: " .. string.upper(controls.keys.focus) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 27, 1, 4, "Focus", true) -- 
             end
             if controls.searchForKey == "switchWeapon" then
-                button.new(-127, 52, "Press key", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 28, "Switch Weapon", true) -- 
+                button.new(-127, 52, "Press key", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 28, 1, 5, "Switch Weapon", true) -- 
             else
-                button.new(-127, 52, "Key: " .. string.upper(controls.keys.switchWeapon) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 28, "Switch Weapon", true) -- 
+                button.new(-127, 52, "Key: " .. string.upper(controls.keys.switchWeapon) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 28, 1, 5, "Switch Weapon", true) -- 
             end 
             -- keybind wasd keys
             if controls.searchForKey == "up" then
-                button.new(-127, 87, "Press key", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 29, "Move Up", true) -- 
+                button.new(-127, 87, "Press key", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 29, 1, 6, "Move Up", true) -- 
             else
-                button.new(-127, 87, "Key: " .. string.upper(controls.keys.up) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 29, "Move Up", true) -- 
+                button.new(-127, 87, "Key: " .. string.upper(controls.keys.up) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 29, 1, 6, "Move Up", true) -- 
             end
             if controls.searchForKey == "left" then
-                button.new(-127, 122, "Press key", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 30, "Move Left", true) -- 
+                button.new(-127, 122, "Press key", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 30, 1, 7, "Move Left", true) -- 
             else
-                button.new(-127, 122, "Key: " .. string.upper(controls.keys.left) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 30, "Move Left", true) -- 
+                button.new(-127, 122, "Key: " .. string.upper(controls.keys.left) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 30, 1, 7, "Move Left", true) -- 
             end
             if controls.searchForKey == "down" then
-                button.new(-127, 157, "Press key", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 31, "Move Down", true) -- 
+                button.new(-127, 157, "Press key", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 31, 1, 8, "Move Down", true) -- 
             else
-                button.new(-127, 157, "Key: " .. string.upper(controls.keys.down) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 31, "Move Down", true) -- 
+                button.new(-127, 157, "Key: " .. string.upper(controls.keys.down) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 31, 1, 8, "Move Down", true) -- 
             end
             if controls.searchForKey == "right" then
-                button.new(-127, 192, "Press key", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 32, "Move Right", true) -- 
+                button.new(-127, 192, "Press key", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 32, 1, 9, "Move Right", true) -- 
             else
-                button.new(-127, 192, "Key: " .. string.upper(controls.keys.right) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 32, "Move Right", true) -- 
+                button.new(-127, 192, "Key: " .. string.upper(controls.keys.right) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 32, 1, 9, "Move Right", true) -- 
             end
-            if savedSettings.devmode == true then
-                if controls.searchForKey == "devMode" then
-                    button.new(-127, 227, "Press key", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 33, "Dev info", true) -- 
-                else
-                    button.new(-127, 227, "Key: " .. string.upper(controls.keys.devMode) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 33, "Dev info", true) -- 
-                end
-            end
-
-            button.new(-124, 70, "Reset All", {1, 0, 0}, 24) -- remove saved skin
-            button.new(-40, 70, "Back", {1, 0.5, 0}, 3) -- back from settings to main menu or game
+            -- if savedSettings.devmode == true then
+            --     if controls.searchForKey == "devMode" then
+            --         button.new(-127, 227, "Press key", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 33, "Dev info", true) -- 
+            --     else
+            --         button.new(-127, 227, "Key: " .. string.upper(controls.keys.devMode) .. " ", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 33, "Dev info", true) -- 
+            --     end
+            -- end
+            button.new(-124, 70, "Reset All", {1, 0, 0}, 24, 1, 20) -- remove saved skin
         elseif settings.tab == "skin" then
-            button.new(-124, 70, "Reset", {1, 0, 0}, 4) -- remove saved skin
-            button.new(-40, 70, "Back", {1, 0.5, 0}, 3) -- back from skin to settings
+            button.new(-124, 70, "Reset", {1, 0, 0}, 4, 1, 20) -- remove saved skin
         elseif settings.tab == "audio" then
-            button.new(-40, 70, "Back", {1, 0.5, 0}, 3) -- back from settings to main menu or game
         elseif settings.tab == "stats" then
-            button.new(-40, 70, "Back", {1, 0.5, 0}, 3) -- back from settings to main menu or game
         elseif settings.tab == "eeprnd" then
-            button.new(-124, -40, "speed: " .. savedSettings.gameSpeed, {0, 0.5, 0.5}, 81) -- gameSpeed setting
-            button.new(-40, 70, "Back", {1, 0.5, 0}, 3) -- back from settings to main menu or game
+            button.new(-124, -40, "speed: " .. savedSettings.gameSpeed, {0, 0.5, 0.5}, 81, 1, 2) -- gameSpeed setting
         end
+        button.new(-40, 70, "Back", {1, 0.5, 0}, 3, 2, 20) -- back from settings to main menu or game
     elseif title.state == 1 or title.state == 2 or title.state == 3 then
         if title.delete.mode == false then
             if preview.file1.created == true then
-                button.new(-128, 43, "Play", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 51) -- Play game button for save 1
+                button.new(-128, 43, "Play", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 51, 1, 1) -- Play game button for save 1
             else
-                button.new(-128, 43, "Create", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 51) -- Create game button for save 1
+                button.new(-128, 43, "Create", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 51, 1, 1) -- Create game button for save 1
             end
             if preview.file2.created == true then
-                button.new(-40, 43, "Play", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 52) -- Play game button for save 2
+                button.new(-40, 43, "Play", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 52, 2, 1) -- Play game button for save 2
             else
-                button.new(-40, 43, "Create", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 52) -- Create game button for save 2
+                button.new(-40, 43, "Create", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 52, 2, 1) -- Create game button for save 2
             end
             if preview.file3.created == true then
-                button.new(48, 43, "Play", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 53) -- Play game button for save 3
+                button.new(48, 43, "Play", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 53, 3, 1) -- Play game button for save 3
             else
-                button.new(48, 43, "Create", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 53) -- Create game button for save 3
+                button.new(48, 43, "Create", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 53, 3, 1) -- Create game button for save 3
             end
         else
             if preview.file1.created == true then
-                button.new(-128, 43, "Delete", {1, 0, 0}, 51) -- Delete savefile button for save 1
+                button.new(-128, 43, "Delete", {1, 0, 0}, 51, 1, 1) -- Delete savefile button for save 1
             else
-                button.new(-128, 43, "Empty", {0.15, 0.15, 0.15}, 51) -- Empty that indicates that there is no savefile for save 1
+                button.new(-128, 43, "Empty", {0.15, 0.15, 0.15}, 51, 1, 1) -- Empty that indicates that there is no savefile for save 1
             end
             if preview.file2.created == true then
-                button.new(-40, 43, "Delete", {1, 0, 0}, 52) -- Delete savefile button for save 2
+                button.new(-40, 43, "Delete", {1, 0, 0}, 52, 2, 1) -- Delete savefile button for save 2
             else
-                button.new(-40, 43, "Empty", {0.15, 0.15, 0.15}, 52) -- Empty that indicates that there is no savefile for save 2
+                button.new(-40, 43, "Empty", {0.15, 0.15, 0.15}, 52, 2, 1) -- Empty that indicates that there is no savefile for save 2
             end
             if preview.file3.created == true then
-                button.new(48, 43, "Delete", {1, 0, 0}, 53) -- Delete savefile button for save 3
+                button.new(48, 43, "Delete", {1, 0, 0}, 53, 3, 1) -- Delete savefile button for save 3
             else
-                button.new(48, 43, "Empty", {0.15, 0.15, 0.15}, 53) -- Empty that indicates that there is no savefile for save 3
+                button.new(48, 43, "Empty", {0.15, 0.15, 0.15}, 53, 3, 1) -- Empty that indicates that there is no savefile for save 3
             end
         end
         button.specialNew(-128, 70, title.icons.currentSettings, {0, 1, 1}, 64, miniButtonImage, miniButtonImageOutline)
@@ -181,7 +175,7 @@ function button.loadAll()
         else
             button.specialNew(108, 70, title.icons.currentDelete, {1, 0, 0}, 65, miniButtonImage, miniButtonImageOutline)
         end
-        button.new(-40, 70, "Back", {1, 0.5, 0}, 50) -- back to ruined Title screen
+        button.new(-40, 70, "Back", {1, 0.5, 0}, 50, 2, 20) -- back to ruined Title screen
         button.first()
     end
     if not (button.warning.id == 0) then
