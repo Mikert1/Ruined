@@ -89,6 +89,40 @@ function love.gamepadreleased(joystick, _button)
             data = file.save()
             button.loadAll()
         end
+    elseif _button == "rightshoulder" then
+        if title.state == 4 then
+            if settings.tab == "game" then
+                settings.tab = "video"
+            elseif settings.tab == "video" then
+                settings.tab = "controls"
+            elseif settings.tab == "controls" then
+                settings.tab = "skin"
+            elseif settings.tab == "skin" then
+                settings.tab = "audio"
+            elseif settings.tab == "audio" then
+                settings.tab = "stats"
+            elseif settings.tab == "stats" then
+                settings.tab = "game"
+            end
+            button.loadAll()
+        end
+    elseif _button == "leftshoulder" then
+        if title.state == 4 then
+            if settings.tab == "game" then
+                settings.tab = "stats"
+            elseif settings.tab == "video" then
+                settings.tab = "game"
+            elseif settings.tab == "controls" then
+                settings.tab = "video"
+            elseif settings.tab == "skin" then
+                settings.tab = "controls"
+            elseif settings.tab == "audio" then
+                settings.tab = "skin"
+            elseif settings.tab == "stats" then
+                settings.tab = "audio"
+            end
+            button.loadAll()
+        end
     end
 end
 
@@ -133,10 +167,12 @@ function controller.update(dt)
         or ry > 0.1 or ry < -0.1 then
             game.controlType = 1
         end
-        if ry > 0.1 or ry < -0.1 then
-            settings.scroll = settings.scroll - (ry * 3)
-            if settings.scroll > 0 then
-                settings.scroll = 0
+        if title.state == 4 then
+            if ry > 0.1 or ry < -0.1 then
+                settings.scroll = settings.scroll - (ry * 3)
+                if settings.scroll > 0 then
+                    settings.scroll = 0
+                end
             end
         end
     end
