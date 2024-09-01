@@ -28,6 +28,7 @@ function love.gamepadpressed(joystick, _button)
 end
 
 function love.gamepadreleased(joystick, _button)
+    print(_button)
     game.controlType = 1
     if _button == "y" then
         if weapon.equipment == 1 then
@@ -45,6 +46,12 @@ function love.gamepadreleased(joystick, _button)
             player.focusAnim = true
         end
     elseif _button == "a" then
+        for _, button in ipairs(button.activeButtons) do
+            print(button.id)
+            if button.hover then
+                button:action(button.id)
+            end
+        end
         story.skiped = false
     elseif _button == "start" then
         -- Pause menu

@@ -53,17 +53,15 @@ function button.loadAll()
         if settings.tab == "game" then
             if savedSettings.devmode == true then
                 if savedSettings.console == true then
-                    button.new(-40, -53, "Enabled", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 16, "Auto Open Console") -- Console
+                    button.new(-40, -53, "Enabled", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 16, 2, 2, "Auto Open Console") -- Console
                 else
-                    button.new(-40, -53, "Disabled", {1, 0.5, 0}, 16, "Auto Open Console") -- Console
+                    button.new(-40, -53, "Disabled", {1, 0.5, 0}, 16, 2, 2, "Auto Open Console") -- Console
                 end
-                button.new(-127, -53, "Enabled", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 1, "Developer Mode") -- devmode
+                button.new(-127, -53, "Enabled", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 1, 1, 2, "Developer Mode") -- devmode
             else
-                button.new(-127, -53, "Disabled", {1, 0.5, 0}, 1, "Developer Mode") -- devmode
+                button.new(-127, -53, "Disabled", {1, 0.5, 0}, 1, 1, 2, "Developer Mode") -- devmode
             end
-            -- button.new(48, -53, "Customize", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 2, "Skin - Beta") -- skin
-            -- 
-            button.new(-40, 70, "Back", {1, 0.5, 0}, 3) -- back from settings to main menu or game
+            button.new(-40, 70, "Back", {1, 0.5, 0}, 3, 1, 10) -- back from settings to main menu or game
         elseif settings.tab == "video" then
             if savedSettings.window == 0 then
                 button.new(-127, -53, "Windowed", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 20, "Window Type:") -- Windowed
@@ -807,6 +805,7 @@ function button:handleJoystickInput()
             moving = true
         end
     end
+    -- print(selectedGrid.row, selectedGrid.column)
     if moving == true then
         if math.abs(dx) < 0.1 and math.abs(dy) < 0.1 then
             moving = false
@@ -816,15 +815,7 @@ function button:handleJoystickInput()
         if button.grid.row == selectedGrid.row and button.grid.column == selectedGrid.column then
             button.hover = true
         else
-            button.hover = false	
-        end
-        if joystick:isGamepadDown("a") then
-            if button.clicked == false then
-                button.clicked = true
-                button:action(button.id)
-            end
-        else
-            button.clicked = false
+            button.hover = false
         end
     end
 end
