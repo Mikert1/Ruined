@@ -8,62 +8,64 @@ local settings = require("src/gui/settings")
 local button = require("src/gui/button")
 local preview = file.show()
 function love.mousemoved(x, y)
-    game.controlType = 0
-    if title.state == 0 then
-        if x > love.graphics.getWidth() / 2 - (100 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 - (72 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (50 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (88 * playerCamera.globalScale) then
-            title.background.current = title.background.blue
-            title.logo.anim = title.logo.animations.region2
-            local iconImageData = love.image.newImageData("assets/textures/gui/title/logo1.png")
-            love.window.setIcon(iconImageData)
-        end
-        if x > love.graphics.getWidth() / 2 - (12.5 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (12.5 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (50 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (88 * playerCamera.globalScale) then
-            title.background.current = title.background.green
-            title.logo.anim = title.logo.animations.region3
-            local iconImageData = love.image.newImageData("assets/textures/gui/title/logo2.png")
-            love.window.setIcon(iconImageData)
-        end
-        if x > love.graphics.getWidth() / 2 + (71 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (99 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (50 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (88 * playerCamera.globalScale) then
-            title.background.current = title.background.storm
-            title.logo.anim = title.logo.animations.region4
-            local iconImageData = love.image.newImageData("assets/textures/gui/title/logo3.png")
-            love.window.setIcon(iconImageData)
-        end
-    elseif title.state >= 1 and title.state <= 3 then
-        if x > love.graphics.getWidth() / 2 + (108 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (128 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (70 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (90 * playerCamera.globalScale) then
-        --     if title.delete.mode == false then
-        --         title.icons.currentDelete = title.icons.delete1
-        --     else
-        --         title.icons.currentDelete = title.icons.delete2
-        --     end
-        -- else
-        --     if title.delete.mode == false then
-        --         title.icons.currentDelete = title.icons.delete1
-        --     else
-        --         title.icons.currentDelete = title.icons.delete2
-        --     end
-        end
-        if x > love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 - (108 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (70 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (90 * playerCamera.globalScale) then
-        --     if title.mainColor[3] == 1 then
-        --         title.settings.anim = title.settings.animations.hover
-        --     else
-        --         title.settings.anim = title.settings.animations.hoverG
-        --     end
-        -- else
-        --     title.settings.anim = title.settings.animations.normal
-        end
-    elseif title.state == 4 then
-        if settings.isMouseOverKnob(x, y) then
-            settings.slider.hover = true
-        else
-            settings.slider.hover = false
-        end
-        if settings.slider.dragging then
-            settings.slider.value = (x - love.graphics.getWidth() / 2 - (settings.slider.x * playerCamera.globalScale)) / ((settings.slider.width * playerCamera.globalScale)) * (settings.slider.maxValue - settings.slider.minValue)
-            if settings.slider.value < settings.slider.minValue then
-                settings.slider.value = settings.slider.minValue
+    if title.mikert.showed then
+        game.controlType = 0
+        if title.state == 0 then
+            if x > love.graphics.getWidth() / 2 - (100 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 - (72 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (50 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (88 * playerCamera.globalScale) then
+                title.background.current = title.background.blue
+                title.logo.anim = title.logo.animations.region2
+                local iconImageData = love.image.newImageData("assets/textures/gui/title/logo1.png")
+                love.window.setIcon(iconImageData)
             end
-            if settings.slider.value > settings.slider.maxValue then
-                settings.slider.value = settings.slider.maxValue
+            if x > love.graphics.getWidth() / 2 - (12.5 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (12.5 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (50 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (88 * playerCamera.globalScale) then
+                title.background.current = title.background.green
+                title.logo.anim = title.logo.animations.region3
+                local iconImageData = love.image.newImageData("assets/textures/gui/title/logo2.png")
+                love.window.setIcon(iconImageData)
+            end
+            if x > love.graphics.getWidth() / 2 + (71 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (99 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (50 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (88 * playerCamera.globalScale) then
+                title.background.current = title.background.storm
+                title.logo.anim = title.logo.animations.region4
+                local iconImageData = love.image.newImageData("assets/textures/gui/title/logo3.png")
+                love.window.setIcon(iconImageData)
+            end
+        elseif title.state >= 1 and title.state <= 3 then
+            if x > love.graphics.getWidth() / 2 + (108 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 + (128 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (70 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (90 * playerCamera.globalScale) then
+            --     if title.delete.mode == false then
+            --         title.icons.currentDelete = title.icons.delete1
+            --     else
+            --         title.icons.currentDelete = title.icons.delete2
+            --     end
+            -- else
+            --     if title.delete.mode == false then
+            --         title.icons.currentDelete = title.icons.delete1
+            --     else
+            --         title.icons.currentDelete = title.icons.delete2
+            --     end
+            end
+            if x > love.graphics.getWidth() / 2 - (128 * playerCamera.globalScale) and x < love.graphics.getWidth() / 2 - (108 * playerCamera.globalScale) and y > love.graphics.getHeight() / 2 + (70 * playerCamera.globalScale) and y < love.graphics.getHeight() / 2 + (90 * playerCamera.globalScale) then
+            --     if title.mainColor[3] == 1 then
+            --         title.settings.anim = title.settings.animations.hover
+            --     else
+            --         title.settings.anim = title.settings.animations.hoverG
+            --     end
+            -- else
+            --     title.settings.anim = title.settings.animations.normal
+            end
+        elseif title.state == 4 then
+            if settings.isMouseOverKnob(x, y) then
+                settings.slider.hover = true
+            else
+                settings.slider.hover = false
+            end
+            if settings.slider.dragging then
+                settings.slider.value = (x - love.graphics.getWidth() / 2 - (settings.slider.x * playerCamera.globalScale)) / ((settings.slider.width * playerCamera.globalScale)) * (settings.slider.maxValue - settings.slider.minValue)
+                if settings.slider.value < settings.slider.minValue then
+                    settings.slider.value = settings.slider.minValue
+                end
+                if settings.slider.value > settings.slider.maxValue then
+                    settings.slider.value = settings.slider.maxValue
+                end
             end
         end
     end

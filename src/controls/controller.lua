@@ -1,6 +1,6 @@
 local controller = {}
 controller.joysticks = love.joystick.getJoysticks()[1]
-if controller.joysticks then
+if controller.joysticks and controller.joysticks:isConnected() then
     game.controlType = 1
 end
 controller.buttonReleace = {}
