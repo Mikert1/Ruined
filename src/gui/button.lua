@@ -29,9 +29,18 @@ button.activeButtons = {}
 button.fader = 0
 
 function button.loadAll()
-    button.fader = 0.26
     button.activeButtons = {}
+    button.fader = 0.26
     selectedGrid = {row = 1, column = 1}
+    if not (button.warning.id == 0) then
+        if button.warning.icon == button.icons.danger then
+            button.new(-96, 30, "Go Back", {0, 1, 1}, 199, 1, 1) -- Cancel the action
+            button.new(16, 30, "Continue", {1, 0, 0}, 200, 2, 1) -- Continue with the action
+        else
+            button.new(-40, 30, "Oke", {0, 1, 1}, 199, 2, 1) -- Accepting that there is no action to be done
+        end
+        return
+    end
     if title.state == 0 then
         button.specialNew(-100, 50, title.icons.start, {0, 1, 1}, 61, 1, 1)
         button.specialNew(-12.5, 50, title.icons.past, {0, 0.8, 0}, 62, 2, 1)
@@ -177,14 +186,6 @@ function button.loadAll()
         end
         button.new(-40, 70, "Back", {1, 0.5, 0}, 50, 2, 20) -- back to ruined Title screen
         button.first()
-    end
-    if not (button.warning.id == 0) then
-        if button.warning.icon == button.icons.danger then
-            button.new(-96, 30, "Go Back", {0, 1, 1}, 199, 1, 1) -- Cancel the action
-            button.new(16, 30, "Continue", {1, 0, 0}, 200, 2, 1) -- Continue with the action
-        else
-            button.new(-40, 30, "Oke", {0, 1, 1}, 199, 2, 1) -- Accepting that there is no action to be done
-        end
     end
 end
 
@@ -498,6 +499,7 @@ function button:action()
             else
                 button.warning.text = "All keybinds are already set to default."
                 button.warning.icon = button.icons.info
+                button.loadAll()
             end
         end
         button.loadAll()
@@ -888,9 +890,7 @@ end
 function button:UpdateAll(dt)
     game.cursor.color = {0.3, 0.3, 0.3, 1}
     for _, button in ipairs(button.activeButtons) do
-        if button.warning.id == 0 or (button.id == 200 or button.id == 199) then
-            button:update(dt)
-        end
+        button:update(dt)
     end
     if game.controlType == 1 and controller.joysticks and controller.joysticks:isConnected() then
         button:handleJoystickInput()
@@ -898,11 +898,6 @@ function button:UpdateAll(dt)
 end
 
 function button:drawAll()
-    for _, button in ipairs(button.activeButtons) do
-        if not (button.id == 200 or button.id == 199) then
-            button:draw()
-        end
-    end
     if not (button.warning.id == 0) then
         love.graphics.setColor(0, 0, 0, 0.5)
         love.graphics.rectangle(
@@ -936,11 +931,9 @@ function button:drawAll()
             playerCamera.globalScale / 1.5
         )
         love.graphics.setColor(1, 1, 1)
-        for _, button in ipairs(button.activeButtons) do
-            if button.id == 200 or button.id == 199 then
-                button:draw()
-            end
-        end
+    end
+    for _, button in ipairs(button.activeButtons) do
+        button:draw()
     end
 end
 
