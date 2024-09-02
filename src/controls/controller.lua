@@ -29,7 +29,6 @@ function love.gamepadpressed(joystick, _button)
 end
 
 function love.gamepadreleased(joystick, _button)
-    print(_button)
     game.controlType = 1
     if _button == "y" then
         if weapon.equipment == 1 then
@@ -48,12 +47,44 @@ function love.gamepadreleased(joystick, _button)
         end
     elseif _button == "a" then
         for _, button in ipairs(button.activeButtons) do
-            print(button.id)
             if button.hover then
                 button:action(button.id)
             end
         end
         story.skiped = false
+    elseif _button == "b" then
+        if not (button.warning.id == 0) then
+            button.warning.id = 0
+            button.warning.text = ""
+            button.loadAll()
+            return
+        end
+        if title.state == 5 then
+            game.esc = false
+            player.noMove = false
+            game.freeze = false
+            button.loadAll()
+        end
+        if title.state == 4 then
+            if game.esc == true then
+                title.state = 5
+            else
+                love.window.setTitle("Ruined | Title Screen")
+                if title.mainColor[3] == 0 then
+                    title.state = 2
+                else
+                    title.state = 1
+                    --fix there will be the finaly (3)
+                end
+                title.delete.mode = false
+            end
+            button.loadAll()
+        elseif title.state == 1 or title.state == 2 or title.state == 3 then
+            title.state = 0
+            title.delete.mode = false
+            controls.searchForKey = nil
+            button.loadAll()
+        end
     elseif _button == "start" then
         -- Pause menu
         if not player.isDead and title.state == 5 then
@@ -69,7 +100,7 @@ function love.gamepadreleased(joystick, _button)
     elseif _button == "back" then
         game.controlType = 1
         if game.state == 0 then
-            if not player.isDead and title.state == 5 then
+            if not player.isDead and title.state == 5 and not game.esc then
                 -- Toggle map display
                 gui.map = not gui.map
             end
@@ -104,6 +135,7 @@ function love.gamepadreleased(joystick, _button)
             elseif settings.tab == "stats" then
                 settings.tab = "game"
             end
+            settings.scroll = 0
             button.loadAll()
         end
     elseif _button == "leftshoulder" then
@@ -121,6 +153,7 @@ function love.gamepadreleased(joystick, _button)
             elseif settings.tab == "stats" then
                 settings.tab = "audio"
             end
+            settings.scroll = 0
             button.loadAll()
         end
     end

@@ -44,20 +44,14 @@ function love.keypressed(key)
     end
     if not player.isDead and title.state == 5 and game.state == 0 then
         if key == "escape" then
-            if game.esc == true then
-                game.esc = false
-                player.noMove = false
-                game.freeze = false
-                button.loadAll()
-                love.mouse.setGrabbed(true)
-            else
-                game.esc = true
-                player.noMove = true
-                game.freeze = true
-                button.loadAll()
+            game.esc = not game.esc
+            player.noMove = game.esc
+            game.freeze = game.esc
+            button.loadAll()
+            love.mouse.setGrabbed(not game.esc)
+            if game.esc then
                 gui.map = false
                 player.walkingOnGrass:stop()
-                love.mouse.setGrabbed(false)
             end
         end
         if key == controls.keys.map then
