@@ -46,12 +46,17 @@ function love.gamepadreleased(joystick, _button)
             player.focusAnim = true
         end
     elseif _button == "a" then
-        for _, button in ipairs(button.activeButtons) do
-            if button.hover then
-                button:action(button.id)
+        if title.mikert.showed == false then
+            title.mikert.showed = true
+            button.loadAll()
+        else
+            for _, button in ipairs(button.activeButtons) do
+                if button.hover then
+                    button:action(button.id)
+                end
             end
+            story.skiped = false
         end
-        story.skiped = false
     elseif _button == "b" then
         if not (button.warning.id == 0) then
             button.warning.id = 0
