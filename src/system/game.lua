@@ -35,8 +35,10 @@ function game.update(dt)
 end
 
 function game.draw()
-    love.graphics.setColor(game.cursor.color)
-    love.graphics.draw(game.cursor.sprite, game.cursor.x, game.cursor.y, 0, playerCamera.globalScale, playerCamera.globalScale, 0, 0)
+    if game.controlType == 0 then
+        love.graphics.setColor(game.cursor.color)
+        love.graphics.draw(game.cursor.sprite, game.cursor.x, game.cursor.y, 0, playerCamera.globalScale, playerCamera.globalScale, 0, 0)
+    end
     love.graphics.setColor(1, 1, 1)
 end
 

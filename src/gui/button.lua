@@ -33,9 +33,9 @@ function button.loadAll()
     button.activeButtons = {}
     selectedGrid = {row = 1, column = 1}
     if title.state == 0 then
-        button.specialNew(-100, 50, title.icons.start, {0, 1, 1}, 61)
-        button.specialNew(-12.5, 50, title.icons.past, {0, 0.8, 0}, 62)
-        button.specialNew(71, 50, title.icons.final, {0, 1, 1}, 63)
+        button.specialNew(-100, 50, title.icons.start, {0, 1, 1}, 61, 1, 1)
+        button.specialNew(-12.5, 50, title.icons.past, {0, 0.8, 0}, 62, 2, 1)
+        button.specialNew(71, 50, title.icons.final, {0, 1, 1}, 63, 3, 1)
     elseif title.state == 5 then
         if game.esc == true then
             button.new(-40, -25, "Resume", {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 7, 1, 1) -- back from skin to settings
@@ -45,12 +45,12 @@ function button.loadAll()
         end
     elseif title.state == 4 then
         selectedGrid.column = 2
-        button.specialNew(-127, -88, settings.mainButtons.game, {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 101, settings.button, settings.buttonOutline)
-        button.specialNew(-84, -88, settings.mainButtons.video, {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 102, settings.button, settings.buttonOutline)
-        button.specialNew(-41, -88, settings.mainButtons.controls, {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 103, settings.button, settings.buttonOutline)
-        button.specialNew(2, -88, settings.mainButtons.customize, {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 104, settings.button, settings.buttonOutline)
-        button.specialNew(45, -88, settings.mainButtons.audio, {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 105, settings.button, settings.buttonOutline)
-        button.specialNew(88, -88, settings.mainButtons.a, {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 106, settings.button, settings.buttonOutline)
+        button.specialNew(-127, -88, settings.mainButtons.game, {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 101, 1, 1, settings.button, settings.buttonOutline)
+        button.specialNew(-84, -88, settings.mainButtons.video, {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 102, 2, 1, settings.button, settings.buttonOutline)
+        button.specialNew(-41, -88, settings.mainButtons.controls, {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 103, 3, 1, settings.button, settings.buttonOutline)
+        button.specialNew(2, -88, settings.mainButtons.customize, {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 104, 4, 1, settings.button, settings.buttonOutline)
+        button.specialNew(45, -88, settings.mainButtons.audio, {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 105, 5, 1, settings.button, settings.buttonOutline)
+        button.specialNew(88, -88, settings.mainButtons.a, {title.mainColor[1], title.mainColor[2], title.mainColor[3]}, 106, 6, 1, settings.button, settings.buttonOutline)
         if settings.tab == "game" then
             if savedSettings.devmode == true then
                 if savedSettings.console == true then
@@ -169,21 +169,21 @@ function button.loadAll()
                 button.new(48, 43, "Empty", {0.15, 0.15, 0.15}, 53, 3, 1) -- Empty that indicates that there is no savefile for save 3
             end
         end
-        button.specialNew(-128, 70, title.icons.currentSettings, {0, 1, 1}, 64, miniButtonImage, miniButtonImageOutline)
+        button.specialNew(-128, 70, title.icons.currentSettings, {0, 1, 1}, 64, 1, 2, miniButtonImage, miniButtonImageOutline)
         if title.delete.mode == false then
-            button.specialNew(108, 70, title.icons.currentDelete, {0, 1, 1}, 65, miniButtonImage, miniButtonImageOutline)
+            button.specialNew(108, 70, title.icons.currentDelete, {0, 1, 1}, 65, 3, 2, miniButtonImage, miniButtonImageOutline)
         else
-            button.specialNew(108, 70, title.icons.currentDelete, {1, 0, 0}, 65, miniButtonImage, miniButtonImageOutline)
+            button.specialNew(108, 70, title.icons.currentDelete, {1, 0, 0}, 65, 3, 2, miniButtonImage, miniButtonImageOutline)
         end
         button.new(-40, 70, "Back", {1, 0.5, 0}, 50, 2, 20) -- back to ruined Title screen
         button.first()
     end
     if not (button.warning.id == 0) then
         if button.warning.icon == button.icons.danger then
-            button.new(-96, 30, "Go Back", {0, 1, 1}, 199) -- Cancel the action
-            button.new(16, 30, "Continue", {1, 0, 0}, 200) -- Continue with the action
+            button.new(-96, 30, "Go Back", {0, 1, 1}, 199, 1, 1) -- Cancel the action
+            button.new(16, 30, "Continue", {1, 0, 0}, 200, 2, 1) -- Continue with the action
         else
-            button.new(-40, 30, "Oke", {0, 1, 1}, 199) -- Accepting that there is no action to be done
+            button.new(-40, 30, "Oke", {0, 1, 1}, 199, 2, 1) -- Accepting that there is no action to be done
         end
     end
 end
@@ -228,7 +228,7 @@ function button.new(x, y, text, color, id, row, column, info, scroll)
     table.insert(button.activeButtons, self)
 end
 
-function button.specialNew(x, y, imageOnButton, color, id, image, outline, row, column)
+function button.specialNew(x, y, imageOnButton, color, id, row, column, image, outline)
     local self = setmetatable({}, button)
     self.x = x
     self.y = y
@@ -892,7 +892,7 @@ function button:UpdateAll(dt)
             button:update(dt)
         end
     end
-    if game.controlType == 1 and controller.joysticks:isConnected() then
+    if game.controlType == 1 and controller.joysticks and controller.joysticks:isConnected() then
         button:handleJoystickInput()
     end
 end

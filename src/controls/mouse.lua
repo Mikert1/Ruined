@@ -124,7 +124,7 @@ end
 function love.wheelmoved(x, y)
     game.controlType = 0
     settings.scroll = settings.scroll + (y * 10)
-    if settings.scroll < 0 then
+    if settings.scroll > 0 then
         settings.scroll = 0
     end
     -- if settings.scroll > 100 then
