@@ -184,7 +184,7 @@ function button.loadAll()
         else
             button.specialNew(108, 70, title.icons.currentDelete, {1, 0, 0}, 65, 3, 2, miniButtonImage, miniButtonImageOutline)
         end
-        button.new(-40, 70, "Back", {1, 0.5, 0}, 50, 2, 20) -- back to ruined Title screen
+        button.new(-40, 70, "Back", {1, 0.5, 0}, 50, 2, 2) -- back to ruined Title screen
         button.first()
     end
 end
@@ -291,11 +291,9 @@ function button.actionWarning(id)
             title.state = 1
             --fix there will be the finaly (3)
         end
-        button.loadAll()
     elseif id == 24 then
         controls.keys = controls.default
         controls.save()
-        button.loadAll()
     elseif id == 51 then
         love.filesystem.remove("savegame1.json")
         love.filesystem.remove("previewcard1.json")
@@ -321,7 +319,6 @@ function button.actionWarning(id)
         title.text.chapter = "Chapter 2"
         title.mainColor = {0, 0.8, 0}
         title.background.current = title.background.green
-        button.loadAll()
     elseif id == 63 then
         print("[Warn  ] chapter 3 is not unlocked, finish chapter 2 to play chapter 3.")
         title.state = 3
@@ -332,7 +329,6 @@ function button.actionWarning(id)
         title.text.chapter = "Chapter 3"
         title.mainColor = {0, 1, 1}
         title.background.current = title.background.storm
-        button.loadAll()
     end
     button.warning.id = 0
     button.warning.text = ""
@@ -343,24 +339,19 @@ function button:action()
     if self.id == 1 then -- disables or enables devmode
         if savedSettings.devmode == false then
             savedSettings.devmode = true
-            button.loadAll()
         else
             savedSettings.devmode = false
-            button.loadAll()
         end
         file.settings.save()
     elseif self.id == 16 then -- auto open console
         if savedSettings.console == false then
             savedSettings.console = true
-            button.loadAll()
         else
             savedSettings.console = false
-            button.loadAll()
         end
         file.settings.save()
     elseif self.id == 2 then -- opens skin change setting menu
         settings.tab = "skin"
-        button.loadAll()
     elseif self.id == 3 then -- back button on settings screen
         if game.esc == true then
             title.state = 5
@@ -374,7 +365,6 @@ function button:action()
             end
             title.delete.mode = false
         end
-        button.loadAll()
     elseif self.id == 4 then -- removes texture pack
         file.settings.removeTexturePack()
     elseif self.id == 5 then -- back to title screen
@@ -382,48 +372,39 @@ function button:action()
             button.warning.id = self.id
             button.warning.icon = button.icons.danger
             button.warning.text = "You are not standing on a savestone. \nAll unsaved progress will be lost."
-            button.loadAll()
         else
             button.actionWarning(self.id)
         end
     elseif self.id == 6 then -- settings button
         title.state = 4
-        button.loadAll()
     elseif self.id == 7 then -- resume button
         game.esc = false
         game.freeze = false
         player.noMove = false
-        button.loadAll()
     elseif self.id == 101 then -- game button
         settings.tab = "game"
         controls.searchForKey = nil
         settings.scroll = 0
-        button.loadAll()
     elseif self.id == 102 then -- video button
         settings.tab = "video"
         controls.searchForKey = nil
         settings.scroll = 0
-        button.loadAll()
     elseif self.id == 103 then -- controls button
         settings.tab = "controls"
         controls.searchForKey = nil
         settings.scroll = 0
-        button.loadAll()
     elseif self.id == 104 then -- skin button
         settings.tab = "skin"
         settings.scroll = 0
         controls.searchForKey = nil
-        button.loadAll()
     elseif self.id == 105 then -- audio button
         settings.tab = "audio"
         settings.scroll = 0
         controls.searchForKey = nil
-        button.loadAll()
     elseif self.id == 106 then -- stats button
         settings.tab = "stats"
         settings.scroll = 0
         controls.searchForKey = nil
-        button.loadAll()
     elseif self.id == 20 then -- fullscreen button
         print(savedSettings.window)
         if savedSettings.window == 0 then
@@ -433,7 +414,6 @@ function button:action()
             love.window.setFullscreen(false)
             savedSettings.window = 0
         end
-        button.loadAll()
         file.settings.save()
     elseif self.id == 21 then -- window index button
         if savedSettings.windowIndex < love.window.getDisplayCount() then
@@ -476,15 +456,12 @@ function button:action()
             love.window.setMode(x, y, {borderless = false, resizable = true, display = savedSettings.windowIndex})
             savedSettings.resolution = 0
         end
-        button.loadAll()
         file.settings.save()
     elseif self.id == 23 then -- screen shake button
         if savedSettings.screenShake == false then
             savedSettings.screenShake = true
-            button.loadAll()
         else
             savedSettings.screenShake = false
-            button.loadAll()
         end
         file.settings.save()
 
@@ -494,53 +471,39 @@ function button:action()
             if controls.keys[key] ~= controls.default[key] then
                 button.warning.text = "Are you sure you want to reset all keybinds?"
                 button.warning.icon = button.icons.danger
-                button.loadAll()
                 return
             else
                 button.warning.text = "All keybinds are already set to default."
                 button.warning.icon = button.icons.info
-                button.loadAll()
             end
         end
-        button.loadAll()
     elseif self.id == 25 then -- keybind button
         controls.searchForKey = "interact"
-        button.loadAll()
     elseif self.id == 26 then -- keybind button
         controls.searchForKey = "map"
-        button.loadAll()
     elseif self.id == 27 then -- keybind button
         controls.searchForKey = "focus"
-        button.loadAll()
     elseif self.id == 28 then -- keybind button
         controls.searchForKey = "switchWeapon"
-        button.loadAll()
     elseif self.id == 29 then -- keybind button
         controls.searchForKey = "up"
-        button.loadAll()
     elseif self.id == 30 then -- keybind button
         controls.searchForKey = "left"
-        button.loadAll()
     elseif self.id == 31 then -- keybind button
         controls.searchForKey = "down"
-        button.loadAll()
     elseif self.id == 32 then -- keybind button
         controls.searchForKey = "right"
-        button.loadAll()
     elseif self.id == 33 then -- keybind button
         controls.searchForKey = "devMode"
-        button.loadAll()
     elseif self.id == 50 then -- back to ruined
         title.state = 0
         title.delete.mode = false
         controls.searchForKey = nil
-        button.loadAll()
     elseif self.id == 51 then -- play button
         if title.delete.mode == true then
             button.warning.id = self.id
             button.warning.icon = button.icons.danger
             button.warning.text = "Your about to delete Savefile 1?"
-            button.loadAll()
         else
             file.filenumber = 1
             game.state = 0
@@ -551,7 +514,6 @@ function button:action()
             game.esc = false
             data = file.save()
             player.noMove = false
-            button.loadAll()
             love.mouse.setGrabbed(true)
         end
     elseif self.id == 52 then -- play button
@@ -559,7 +521,6 @@ function button:action()
             button.warning.id = self.id
             button.warning.icon = button.icons.danger
             button.warning.text = "Your about to delete Savefile 2?"
-            button.loadAll()
         else
             file.filenumber = 2
             game.state = 0
@@ -570,7 +531,6 @@ function button:action()
             game.esc = false
             data = file.save()
             player.noMove = false
-            button.loadAll()
             love.mouse.setGrabbed(true)
         end
     elseif self.id == 53 then -- play button
@@ -578,7 +538,6 @@ function button:action()
             button.warning.id = self.id
             button.warning.icon = button.icons.danger
             button.warning.text = "Your about to delete Savefile 3?"
-            button.loadAll()
         else
             file.filenumber = 3
             game.state = 0
@@ -589,7 +548,6 @@ function button:action()
             game.esc = false
             data = file.save()
             player.noMove = false
-            button.loadAll()
             love.mouse.setGrabbed(true)
         end
     elseif self.id == 61 then -- chapter button
@@ -601,7 +559,6 @@ function button:action()
         title.text.chapter = "Chapter 1"
         title.mainColor = {0, 1, 1}
         title.background.current = title.background.blue
-        button.loadAll()
     elseif self.id == 62 then -- chapter button
         button.warning.id = self.id
         if savedSettings.devmode == true then
@@ -611,7 +568,6 @@ function button:action()
             button.warning.text = "This chapter is locked for now. \nWork in progress.\nIf you want to look turn on DEVMODE."
             button.warning.icon = button.icons.info
         end
-        button.loadAll()
     elseif self.id == 63 then -- chapter button 
         button.warning.id = self.id
         if savedSettings.devmode == true then
@@ -621,11 +577,9 @@ function button:action()
             button.warning.text = "This chapter is locked for now. \nWork in progress.\nIf you want to look turn on DEVMODE."
             button.warning.icon = button.icons.info
         end
-        button.loadAll()
     elseif self.id == 64 then -- setting button
         love.window.setTitle("Ruined | Settings")
         title.state = 4
-        button.loadAll()
     elseif self.id == 65 then -- delete button
         if title.delete.mode == false then
             title.delete.mode = true
@@ -634,7 +588,6 @@ function button:action()
             title.delete.mode = false
             title.icons.currentDelete = title.icons.delete1
         end
-        button.loadAll()
         title.rezet()
     elseif self.id == 81 then -- gameSpeed button
         if savedSettings.gameSpeed == 1 then
@@ -650,15 +603,14 @@ function button:action()
         elseif savedSettings.gameSpeed == 10 then
             savedSettings.gameSpeed = 1
         end
-        button.loadAll()
     elseif self.id == 199 then -- no button
         button.warning.id = 0
         button.warning.text = ""
-        button.loadAll()
     elseif self.id == 200 then -- yes button
         button.actionWarning(button.warning.id)
         button.warning.id = 0
     end
+    button.loadAll()
 end
 
 function button:update(dt)
