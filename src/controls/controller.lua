@@ -109,21 +109,6 @@ function love.gamepadreleased(joystick, _button)
                 -- Toggle map display
                 gui.map = not gui.map
             end
-        elseif game.state == 1 then
-            -- quick load savefile 1
-            if not title.mikert.showed then
-                title.mikert.showed = true
-                button.loadAll()
-            end
-            file.filenumber = 1
-            game.state = 0
-            data = file.load()
-            worldManagement.teleport("start")
-            game.freeze = false
-            title.state = 5
-            game.esc = false
-            data = file.save()
-            button.loadAll()
         end
     elseif _button == "rightshoulder" then
         if title.state == 4 then
