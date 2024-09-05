@@ -5,21 +5,12 @@ if controller.joysticks and controller.joysticks:isConnected() then
 end
 controller.buttonReleace = {}
 controller.buttonReleace.triggerL = true
-controller.buttonReleace.x = true
-controller.buttonReleace.y = true
-controller.buttonReleace.a = true
-controller.buttonReleace.back = true
-controller.buttonReleace.backCount = 0
-controller.buttonReleace.start = true
 controller.vibrationL = 0
 controller.vibrationR = 0
 local gui = require("src/gui/gui")
 local story = require("src/gameplay/story")
 local weapon = require("src/gameplay/weapons")
 local stone = require("src/entities/enemies/stone")
-local boss = require("src/entities/enemies/boss")
-local file = require("src/system/data")
-local worldManagement = require("src/gameplay/worldmanager")
 local title = require("src/gui/title")
 local button = require("src/gui/button")
 local settings = require("src/gui/settings")
@@ -39,7 +30,6 @@ function love.gamepadreleased(joystick, _button)
             weapon.bow.holdCounter = 0
         end
     elseif _button == "x" then
-
         if gui.focusReady and not player.focus then
             controller.vibrationL = 0.2
             controller.vibrationR = 1
