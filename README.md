@@ -2,10 +2,11 @@
 <h1>Ruined</h1>
 
 <p>“Ruined” the game is a hobby project that i started so i could learn Game Development. In early versions the code might not be perfect but i will try to improve every aspect of my game as i grow in skills.</p>
-<h2>Version:</h2>
-<h3>Current version: <strong>Pre-Alpha Version: 1.5</strong></h3>
-<h6>Repository version: <strong>Developer Pre-Alpha Version: 1.6</strong></h6>
-<p>This game is made in a framework called <a href="https://love2d.org/">Love2D</a> (version 11.5). and fully written in <a href="https://www.lua.org/">lua</a> (version 5.1).</p>
+<img alt="Static Badge" src="https://img.shields.io/badge/Game%20version-Pre--Alpha%201.5-%2300ffff">
+
+<h2>What i used:</h2>
+<img alt="Static Badge" src="https://img.shields.io/badge/L%C3%96VE%20Version-11-%2329AAE2">
+<img alt="Static Badge" src="https://img.shields.io/badge/Lua%20Version-5.1-%23000080">
 <h2>How to play:</h2>
 <p>To test the game download the <a href="https://github.com/Mikert1/Ruined/releases/tag/v1.4-early-developer-beta">Latest Release</a>.</p>
 <p>Or if you want to check the latest release then clone the repository.</p>
