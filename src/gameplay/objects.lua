@@ -8,8 +8,8 @@ objectsManager.objects = {
         y = 286,
         width = 46,
         height = 61,
-        image = love.graphics.newImage("assets/textures/world/structures/tent.png"),
-        imageBackground = love.graphics.newImage("assets/textures/world/structures/tentBackground.png")
+        image = love.graphics.newImage("assets/textures/world/structures/tent/a.png"),
+        imageBackground = love.graphics.newImage("assets/textures/world/structures/tent/b.png")
     },
     cryonium = {
         type = "animation",

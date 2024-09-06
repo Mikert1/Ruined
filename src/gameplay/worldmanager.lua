@@ -45,8 +45,8 @@ function worldManagement.load()
         active = false,
         healing = 0,
         timer = 0, -- timer
-        imageActive = love.graphics.newImage("assets/textures/world/structures/saveStone.png"),
-        imageInactive = love.graphics.newImage("assets/textures/world/structures/inactiveStone.png"),
+        imageActive = love.graphics.newImage("assets/textures/world/structures/savestone/active.png"),
+        imageInactive = love.graphics.newImage("assets/textures/world/structures/savestone/inactive.png"),
         ellipseCut = 1.2
     }
     saveStone.image = saveStone.imageInactive
