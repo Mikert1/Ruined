@@ -2,13 +2,13 @@
 <h1>Ruined</h1>
 
 <p>“Ruined” the game is a hobby project that i started so i could learn Game Development. In early versions the code might not be perfect but i will try to improve every aspect of my game as i grow in skills.</p>
-<img alt="Static Badge" src="https://img.shields.io/badge/Game%20version-Pre--Alpha%201.5-%2300ffff">
+<img alt="Static Badge" src="https://img.shields.io/badge/Game%20version-Pre--Alpha%201.5-%23333333">
 
 <h2>What i used:</h2>
-<img alt="Static Badge" src="https://img.shields.io/badge/L%C3%96VE%20Version-11-%2329AAE2">
+<img alt="Static Badge" src="https://img.shields.io/badge/L%C3%96VE%20Version-11-%23E84A99">
 <img alt="Static Badge" src="https://img.shields.io/badge/Lua%20Version-5.1-%23000080">
-<h2>How to play:</h2>
-<p>Use the <a href="https://github.com/Mikert1/Ruined/wiki/Download-and-run-Ruined">Wiki</a>.</p>
+<h2>Wiki items:</h2>
+<p><a href="https://github.com/Mikert1/Ruined/wiki/Download-and-run-Ruined">How to download and run the game</a>.</p>
 <h2>Pictures:</h2>
 <div>
     <a><img width="49.5%" src="https://github.com/Mikert1/Ruined/assets/73882306/1ef52b0c-8240-489a-a191-458290eeaa21"></a>

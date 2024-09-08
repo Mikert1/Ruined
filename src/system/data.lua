@@ -347,37 +347,37 @@ function file.settings.load()
         savedSettings.gameSpeed = 1
     end
 
-    if savedSettings.windowIndex <= love.window.getDisplayCount() then
-        local x, y, _ = love.window.getPosition()
-        love.window.setPosition(x, y, savedSettings.windowIndex)
-    end
+    local w, h = love.window.getDesktopDimensions(savedSettings.windowIndex)
     if savedSettings.window == 1 then
-        love.window.setFullscreen(true)
+        love.window.setMode(w, h)
     else
-        local w, h = love.window.getDesktopDimensions(savedSettings.windowIndex)
         if savedSettings.resolution == 1 then
             if (w > 800) and (h > 600) then
-                love.window.updateMode(800, 600)
+                love.window.setMode(800, 600)
             else
-                love.window.updateMode(w, h)
+                love.window.setMode(w, h)
             end
         elseif savedSettings.resolution == 2 then
             if (w > 1024) and (h > 768) then
-                love.window.updateMode(1024, 768)
+                love.window.setMode(1024, 768)
             else
-                love.window.updateMode(w, h)
+                love.window.setMode(w, h)
             end
         elseif savedSettings.resolution == 3 then
             if (w > 1280) and (h > 720) then
-                love.window.updateMode(1280, 720)
+                love.window.setMode(1280, 720)
             else
-                love.window.updateMode(w, h)
+                love.window.setMode(w, h)
             end
         elseif savedSettings.resolution == 4 then
             if (w > 1366) and (h > 768) then
-                love.window.updateMode(w, h)
+                love.window.setMode(w, h)
             end
         end
+    end
+    if savedSettings.windowIndex <= love.window.getDisplayCount() then
+        local x, y, _ = love.window.getPosition()
+        love.window.setPosition(x, y, savedSettings.windowIndex)
     end
     if savedSettings.devmode == true and savedSettings.console == true then
         if love.system.getOS() == "Windows" then love._openConsole() end
