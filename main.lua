@@ -18,6 +18,8 @@ local settings
 local particle
 local objectsManager
 local loadState = 1
+love.window.setTitle("Ruined | Title Screen")
+love.window.setIcon(love.image.newImageData("assets/textures/gui/title/logo1.png"))
 local function loader()
     if loadState > 1 then
         love.graphics.setDefaultFilter("nearest", "nearest")

@@ -1,8 +1,0 @@
-function love.conf(t)
-	t.window.title = "Ruined | Title Screen"
-    t.window.icon = "assets/textures/gui/title/logo1.png"
-    t.version = 11.5
-    t.window.highdpi = true
-    t.window.resizable = true
-    t.console = true
-end

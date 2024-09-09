@@ -346,32 +346,32 @@ function file.settings.load()
     if not savedSettings.gameSpeed then
         savedSettings.gameSpeed = 1
     end
-
+    local f = {resizable = true, highdpi = true} -- flags
     local w, h = love.window.getDesktopDimensions(savedSettings.windowIndex)
     if savedSettings.window == 1 then
-        love.window.setMode(w, h)
+        love.window.setMode(w, h, f)
     else
         if savedSettings.resolution == 1 then
             if (w > 800) and (h > 600) then
-                love.window.setMode(800, 600)
+                love.window.setMode(800, 600, f)
             else
-                love.window.setMode(w, h)
+                love.window.setMode(w, h, f)
             end
         elseif savedSettings.resolution == 2 then
             if (w > 1024) and (h > 768) then
-                love.window.setMode(1024, 768)
+                love.window.setMode(1024, 768, f)
             else
-                love.window.setMode(w, h)
+                love.window.setMode(w, h, f)
             end
         elseif savedSettings.resolution == 3 then
             if (w > 1280) and (h > 720) then
-                love.window.setMode(1280, 720)
+                love.window.setMode(1280, 720, f)
             else
-                love.window.setMode(w, h)
+                love.window.setMode(w, h, f)
             end
         elseif savedSettings.resolution == 4 then
             if (w > 1366) and (h > 768) then
-                love.window.setMode(w, h)
+                love.window.setMode(w, h, f)
             end
         end
     end
