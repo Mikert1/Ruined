@@ -1,44 +1,30 @@
 local LOADTIMER = os.clock()
-local file
-local bump
-local weapon
-local currentWorld
-local worldManagement
-local preview
-local debug
-local title
-local gui
-local time
-local shader
-local story
-local scene
-local stone
-local button
-local settings
-local particle
-local objectsManager
 local loadState = 1
 love.window.setTitle("Ruined | Title Screen")
 love.window.setIcon(love.image.newImageData("assets/textures/gui/title/logo1.png"))
+
+-- global variables
+local file, weapon, currentWorld, worldManagement, preview, debug, title, gui, time, shader, story, scene, stone, button, settings, particle, objectsManager
 local function loader()
     if loadState > 1 then
-        love.graphics.setDefaultFilter("nearest", "nearest")
-        love.mouse.setVisible(false)
-        love.mouse.setGrabbed(false)
-        _G.game = require("src/system/game")
-        file = require("src/system/data")
         print("[Loader] Starting...")
-        require("src/system/error")
+        
+        love.graphics.setDefaultFilter("nearest", "nearest")
         _G.font = love.graphics.newFont("assets/fonts/berylium bd.otf", 16, "mono", 2, 1)
         love.graphics.setFont(font)
-        require("src/controls/mouse")
+        love.mouse.setVisible(false)
+        love.mouse.setGrabbed(false)
+
+        _G.game = require("src/system/game")
         _G.player = require("src/entities/player")
         _G.playerCamera = require("src/gameplay/camera")
         _G.controls = require("src/controls/controls")
         _G.keys = require("src/controls/keyboard")
         _G.controller = require("src/controls/controller")
         _G.enemymanager = require("src/entities/enemies/enemymanager")
-        bump = require 'src/library/bump'
+        _G.lan = require("src/network/lan")
+
+        file = require("src/system/data")
         weapon = require("src/gameplay/weapons")
         currentWorld = require("src/gameplay/worldmanager")
         worldManagement = require("src/gameplay/worldmanager")
@@ -55,8 +41,6 @@ local function loader()
         settings = require("src/gui/settings")
         particle = require("src/gameplay/particle")
         objectsManager = require("src/gameplay/objects")
-        _G.lan = require("src/network/lan")
-        local LOADTIMER2 = os.clock()
         
         story.loadAssets()
         worldManagement.loadAssets()
@@ -64,13 +48,18 @@ local function loader()
         
         file.settings.loadTexturePack()
         
+        enemymanager:load()
         worldManagement.load()
         player.load()
         gui.load()
         title.load()
         controls.load()
-        enemymanager:load()
         button.load()
+
+        require("src/system/error")
+        require("src/controls/mouse")
+
+        local LOADTIMER2 = os.clock()
         print("[Loader] Done Loading files it took " .. LOADTIMER2 - LOADTIMER .. " seconds")
         print("[Loader] Done Loading game it took " .. os.clock() - LOADTIMER2 .. " seconds")
         print("[Loader] Total Time: " .. os.clock() - LOADTIMER .. " seconds")
