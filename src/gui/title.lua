@@ -85,7 +85,7 @@ function title.load()
     title.text.button2 = "Play"
     title.text.button3 = "Play"
     title.mikert = {}
-    title.mikert.timer = 0
+    title.mikert.timer = -1
     title.mikert.showed = false
     title.mikert.order = {
         1, 2, 3, 5, 6,
@@ -273,7 +273,7 @@ function title:draw()
     if title.mikert.showed == false then
         love.graphics.setColor(0, 0, 0)
         love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
-        if title.mikert.timer < 5 then
+        if title.mikert.timer > 0 and title.mikert.timer < 5 then
             love.graphics.setColor(1, 1, 1, 1 -( title.mikert.timer -3) / 2)
             love.graphics.draw(title.mikert.image[title.mikert.order[math.floor(title.mikert.timer * 10) + 1]], (love.graphics.getWidth() / 2) - (884 / 2 * (playerCamera.globalScale / 5)), (love.graphics.getHeight() / 2) - (188 / 2 * (playerCamera.globalScale / 5)), nil, playerCamera.globalScale / 5)
         end

@@ -5,6 +5,7 @@ love.window.setIcon(love.image.newImageData("assets/textures/gui/title/logo1.png
 
 -- global variables
 local file, weapon, currentWorld, worldManagement, preview, debug, title, gui, time, shader, story, scene, stone, button, settings, particle, objectsManager
+
 local function loader()
     if loadState > 1 then
         print("[Loader] Starting...")
