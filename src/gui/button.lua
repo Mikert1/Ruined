@@ -743,6 +743,7 @@ function button:handleJoystickInput()
             end
         end
     end
+
     if moving == false then
         if firstRowFound then
             selectedGrid.row = firstRowFound
