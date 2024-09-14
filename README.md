@@ -20,4 +20,7 @@
 </div>
 <h2>Beta Website:</h2>
 <p><a href="https://mikert.com/project.html?id=1">Mikert.com</a></p>
+<h2>Contact</h2>
+<p>Any bugs or questions?</p>
+<p>Contact: contact@mikert.com</p>
 <h6>Made on a Windows Laptop. Stable Versions are Tested on linux and mac.</h6>
