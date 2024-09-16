@@ -24,10 +24,10 @@ function debug.world:draw()
     if keys.tab == true then
         if game.state == 0 then
             currentWorld:bump_draw()
-            drawWaterLayer()
-            drawPortalLayer()
-            drawNpcLayer()
-            drawStairLayer()
+            drawLayer("water")
+            drawLayer("portal")
+            drawLayer("npc")
+            drawLayer("stairs")
             --sword collider
         end
     end

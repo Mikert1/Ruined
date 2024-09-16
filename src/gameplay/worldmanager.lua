@@ -115,11 +115,11 @@ local function findLayer(name)
     end
 end
 
-function drawWaterLayer()
-    local correctLayer = findLayer("water")
-    if correctLayer then
-        for _, object in pairs(correctLayer.objects) do
-            love.graphics.setColor(0, 0.5, 1)
+function drawLayer(name)
+    local layer = findLayer(name)
+    if layer then
+        for _, object in pairs(layer.objects) do
+            love.graphics.setColor(1, 0, 0)
             love.graphics.rectangle("line", object.x, object.y, object.width, object.height)
             love.graphics.setColor(1, 1, 1)
         end
@@ -136,28 +136,6 @@ local function isSwimming()
         end
     end
     return false
-end
-
-function drawPortalLayer()
-    local correctLayer = findLayer("portals")
-
-    for _, object in pairs(correctLayer.objects) do
-        love.graphics.setColor(0.5, 0, 1)
-        love.graphics.rectangle("line", object.x, object.y, object.width, object.height)
-        love.graphics.setColor(1, 1, 1)
-    end
-end
-
-function drawStairLayer()
-    local correctLayer = findLayer("stairs")
-
-    if correctLayer then
-        for _, object in pairs(correctLayer.objects) do
-            love.graphics.setColor(1, 0.8, 0)
-            love.graphics.rectangle("line", object.x, object.y, object.width, object.height)
-            love.graphics.setColor(1, 1, 1)
-        end
-    end
 end
 
 local function isStairs()
