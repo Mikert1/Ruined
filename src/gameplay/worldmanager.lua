@@ -1,14 +1,9 @@
 local worldManagement = {}
-local sti
-local bump
-local camera
-local story
-local shader
-local gui
-local stone
-local boss
-local file
-local objectsManager = require("src/gameplay/objects")
+
+-- load assets
+local sti, bump
+local camera, story, shader, gui, stone, boss, file, objectsManager
+
 function worldManagement.loadAssets()
     bump = require 'src/library/bump'
     sti = require 'src/library/sti'
@@ -19,8 +14,10 @@ function worldManagement.loadAssets()
     boss = require("src/entities/enemies/boss")
     file = require("src/system/data")
     story = require("src/gameplay/story")
+    objectsManager = require("src/gameplay/objects")
 end
 
+-- load variables
 local saveStone = {}
 local playerCircleRadius
 local lightPositions
@@ -64,6 +61,7 @@ function worldManagement.load()
     shader.light:send("lightRadii", unpack(lightRadii))
 end
 
+-- load non-worldManagement functions
 local function checkEllipseCollision(rect, ellipse)
     local rectCenterX = rect.x + rect.width / 2
     local rectCenterY = rect.y + rect.height / 2
@@ -106,7 +104,6 @@ local function checkCollision(rect1, rect2)
         rect1_bottom > rect2.y then
         return true
     end
-
     return false
 end
 
@@ -122,7 +119,6 @@ local function findWaterLayer()
             end
         end
     end
-
     return correctLayer
 end
 
@@ -146,7 +142,6 @@ local function isSwimming()
             end
         end
     end
-
     return false
 end
 
@@ -159,7 +154,6 @@ local function findPortalsLayer()
             break
         end
     end
-
     return correctLayer
 end
 
@@ -238,6 +232,59 @@ local function saveStones()
     end
 end
 
+local function checkPortals()
+    local correctLayer = findPortalsLayer()
+
+    if correctLayer then
+        for _, object in ipairs(correctLayer.objects) do
+            for property, value in pairs(object.properties) do
+                if property == "portalMountains" and value == true then
+                    if checkCollision(player, object) then
+                        worldManagement.teleport("mountains")
+                    end
+                elseif property == "portalMountainsWest" and value == true then
+                    if checkCollision(player, object) then
+                        worldManagement.teleport("mountainsWest")
+                    end
+                elseif property == "portalMountainsEast" and value == true then
+                    if checkCollision(player, object) then
+                        worldManagement.teleport("mountainsEast")
+                    end
+                elseif property == "portalVillage" and value == true then
+                    if checkCollision(player, object) then
+                        worldManagement.teleport("village")
+                    end
+                elseif property == "portalForrest" and value == true then
+                    if checkCollision(player, object) then
+                        worldManagement.teleport("forrest")
+                    end
+                elseif property == "portalSnow" and value == true then
+                    if checkCollision(player, object) then
+                        worldManagement.teleport("snow")
+                    end
+                end
+            end
+        end
+    end
+end
+
+local function talk(id)
+    if id == "john1" then
+        story.npc.foto.john = story.npc.foto.john_wounded
+    elseif id == "john2" then
+
+    end
+    story.id = id
+    story.npc.interactionAvalible = false
+    story.npc.interaction = true
+    story.dialogue.position = 0
+    game.state = 2.1
+    story.currentStory = story.dialogue[story.id][story.data.current]
+    story.arrayLength = #story.dialogue[story.id]
+    story.skiped = true
+end
+
+-- load worldManagement functions
 function worldManagement.teleport(loc)
     for _, layer in ipairs(_G.currentWorld.layers) do
         if layer.name == "wall" then
@@ -381,59 +428,6 @@ function worldManagement.teleport(loc)
     saveStones()
     worldManagement.spawn()
     playerCamera.cam:lookAt(player.x - 6, player.y - 8)
-end
-
-local function checkPortals()
-    local correctLayer = findPortalsLayer()
-
-    if correctLayer then
-        for _, object in ipairs(correctLayer.objects) do
-            for property, value in pairs(object.properties) do
-                if property == "portalMountains" and value == true then
-                    if checkCollision(player, object) then
-                        worldManagement.teleport("mountains")
-                    end
-                elseif property == "portalMountainsWest" and value == true then
-                    if checkCollision(player, object) then
-                        worldManagement.teleport("mountainsWest")
-                    end
-                elseif property == "portalMountainsEast" and value == true then
-                    if checkCollision(player, object) then
-                        worldManagement.teleport("mountainsEast")
-                    end
-                elseif property == "portalVillage" and value == true then
-                    if checkCollision(player, object) then
-                        worldManagement.teleport("village")
-                    end
-                elseif property == "portalForrest" and value == true then
-                    if checkCollision(player, object) then
-                        worldManagement.teleport("forrest")
-                    end
-                elseif property == "portalSnow" and value == true then
-                    if checkCollision(player, object) then
-                        worldManagement.teleport("snow")
-                    end
-                end
-            end
-        end
-    end
-end
-
-
-local function talk(id)
-    if id == "john1" then
-        story.npc.foto.john = story.npc.foto.john_wounded
-    elseif id == "john2" then
-
-    end
-    story.id = id
-    story.npc.interactionAvalible = false
-    story.npc.interaction = true
-    story.dialogue.position = 0
-    game.state = 2.1
-    story.currentStory = story.dialogue[story.id][story.data.current]
-    story.arrayLength = #story.dialogue[story.id]
-    story.skiped = true
 end
 
 function worldManagement.spawn()
