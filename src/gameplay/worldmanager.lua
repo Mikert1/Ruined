@@ -107,23 +107,16 @@ local function checkCollision(rect1, rect2)
     return false
 end
 
-local function findWaterLayer()
-    local correctLayer
+local function findLayer(name)
     for _, layer in ipairs(_G.currentWorld.layers) do
-        if layer.name == "water" then
-            for property, value in pairs(layer.properties) do
-                if property == "collidableSwim" and value == true then
-                    correctLayer = layer
-                    break
-                end
-            end
+        if layer.name == name then
+            return layer
         end
     end
-    return correctLayer
 end
 
 function drawWaterLayer()
-    local correctLayer = findWaterLayer()
+    local correctLayer = findLayer("water")
     if correctLayer then
         for _, object in pairs(correctLayer.objects) do
             love.graphics.setColor(0, 0.5, 1)
@@ -134,7 +127,7 @@ function drawWaterLayer()
 end
 
 local function isSwimming()
-    local correctLayer = findWaterLayer()
+    local correctLayer = findLayer("water")
     if correctLayer then
         for _, object in pairs(correctLayer.objects) do
             if checkCollision(player, object) then
@@ -145,20 +138,8 @@ local function isSwimming()
     return false
 end
 
-local function findPortalsLayer()
-    local correctLayer
-
-    for _, layer in ipairs(_G.currentWorld.layers) do
-        if layer.name == "portals" then
-            correctLayer = layer
-            break
-        end
-    end
-    return correctLayer
-end
-
 function drawPortalLayer()
-    local correctLayer = findPortalsLayer()
+    local correctLayer = findLayer("portals")
 
     for _, object in pairs(correctLayer.objects) do
         love.graphics.setColor(0.5, 0, 1)
@@ -167,24 +148,8 @@ function drawPortalLayer()
     end
 end
 
-local function findStairLayer()
-    local correctLayer
-    for _, layer in ipairs(_G.currentWorld.layers) do
-        if layer.name == "stairs" then
-            for property, value in pairs(layer.properties) do
-                if property == "collidableStairs" and value == true then
-                    correctLayer = layer
-                    break
-                end
-            end
-        end
-    end
-
-    return correctLayer
-end
-
 function drawStairLayer()
-    local correctLayer = findStairLayer()
+    local correctLayer = findLayer("stairs")
 
     if correctLayer then
         for _, object in pairs(correctLayer.objects) do
@@ -196,7 +161,7 @@ function drawStairLayer()
 end
 
 local function isStairs()
-    local correctLayer = findStairLayer()
+    local correctLayer = findLayer("stairs")
     if correctLayer then
         for _, object in pairs(correctLayer.objects) do
             if checkCollision(player, object) then
@@ -233,7 +198,7 @@ local function saveStones()
 end
 
 local function checkPortals()
-    local correctLayer = findPortalsLayer()
+    local correctLayer = findLayer("portals")
 
     if correctLayer then
         for _, object in ipairs(correctLayer.objects) do
