@@ -126,29 +126,21 @@ function drawLayer(name)
     end
 end
 
-local function isSwimming()
-    local correctLayer = findLayer("water")
-    if correctLayer then
-        for _, object in pairs(correctLayer.objects) do
-            if checkCollision(player, object) then
-                return true
+local function playerWalkingOn()
+    local layers = {
+        "water",
+        "stairs"
+    }
+    for _, layerName in ipairs(layers) do
+        local correctLayer = findLayer(layerName)
+        if correctLayer then
+            for _, object in pairs(correctLayer.objects) do
+                if checkCollision(player, object) then
+                    return layerName
+                end
             end
         end
     end
-    return false
-end
-
-local function isStairs()
-    local correctLayer = findLayer("stairs")
-    if correctLayer then
-        for _, object in pairs(correctLayer.objects) do
-            if checkCollision(player, object) then
-                return true
-            end
-        end
-    end
-
-    return false
 end
 
 local function saveStones()
@@ -476,18 +468,17 @@ function worldManagement.update(dt)
     if worldManagement.thisWorld == "Forrest" then
         inDarkness(dt)
     end
-    if isSwimming() then
+    local ground = playerWalkingOn()
+    player.isSwimming = false
+    if ground == "stairs" then
+        player.speedMultiplier = 5
+    elseif ground == "water" then
         if worldManagement.thisWorld == "Snow" then
             player.isSwimming = false
         else
             player.isSwimming = true
         end
         player.speedMultiplier = 6,666666666666667
-    else
-        player.isSwimming = false
-        if isStairs() then
-            player.speedMultiplier = 5
-        end
     end
     checkPortals()
     checkNpc(dt)
