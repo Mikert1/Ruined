@@ -352,6 +352,9 @@ function worldManagement.teleport(loc)
         saveStone.radius = 35
     end
     currentWorld:bump_init(world)
+    loadObjectsForWorld(worldManagement.thisWorld)
+    worldManagement.spawn()
+    saveStones()
     if (story.data.storyTold.john1 == false or story.data.storyTold.john2 == true) and worldManagement.thisWorld == story.npc.john.collider.world then
         story.npc.john.position = 1
         story.npc.john.x = 170
@@ -360,8 +363,6 @@ function worldManagement.teleport(loc)
     else
         story.npc.john.position = 0
     end
-    saveStones()
-    worldManagement.spawn()
     playerCamera.cam:lookAt(player.x - 6, player.y - 8)
 end
 
@@ -534,14 +535,14 @@ function worldManagement:draw()
     if saveStone.y + 30 < player.y then
         love.graphics.draw(saveStone.image, saveStone.x, saveStone.y)
     end
-    objectsManager.draw(1, worldManagement.thisWorld)
+    objectsManager.draw(1)
 end
 
 function worldManagement:draw2dLayer()
     if saveStone.y + 30 > player.y then
         love.graphics.draw(saveStone.image, saveStone.x, saveStone.y)
     end
-    objectsManager.draw(2, worldManagement.thisWorld)
+    objectsManager.draw(2)
 end
 
 function worldManagement:drawDarkness()
