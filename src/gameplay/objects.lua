@@ -66,12 +66,11 @@ function loadObjectsForWorld(world)
             }
         }
     end
-end
-
-for k, v in pairs(objectsManager.objects) do
-    if v.type == "animation" then
-        for i = 1, v.animation.count do
-            v.image[i] = love.graphics.newImage("assets/textures/world/structures/" .. k .. "/a" .. i .. ".png")
+    for k, v in pairs(objectsManager.objects) do
+        if v.type == "animation" then
+            for i = 1, v.animation.count do
+                v.image[i] = love.graphics.newImage("assets/textures/world/structures/" .. k .. "/a" .. i .. ".png")
+            end
         end
     end
 end
