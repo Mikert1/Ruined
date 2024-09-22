@@ -8,7 +8,6 @@ function loadObjectsForWorld(world)
     if world == "Snow" then
         objectsManager.objects.tent = {
             type = "static",
-            world = "Snow",
             x = 167,
             y = 286,
             width = 46,
@@ -19,7 +18,6 @@ function loadObjectsForWorld(world)
     elseif world == "Mountains" then
         objectsManager.objects.cryonium = {
             type = "animation",
-            world = "Mountains",
             x = 30,
             y = 100,
             width = 15,
@@ -66,6 +64,23 @@ function loadObjectsForWorld(world)
             }
         }
     end
+    local saveX, saveY = 0, 0
+    if world == "Mountains" then
+        saveX, saveY = 100, 100
+    elseif world == "Snow" then
+        saveX, saveY = 200, 200
+    end
+    objectsManager.objects.savestone = {
+        type = "interactive",
+        subType = "walk",
+        x = saveX,
+        y = saveY,
+        width = 34,
+        height = 32,
+        activeImage = love.graphics.newImage("assets/textures/world/structures/savestone/active.png"),
+        inactiveImage = love.graphics.newImage("assets/textures/world/structures/savestone/inactive.png"),
+        active = true
+    }
     for k, v in pairs(objectsManager.objects) do
         if v.type == "animation" then
             for i = 1, v.animation.count do
@@ -107,6 +122,20 @@ function objectsManager.draw(drawLayer)
                 love.graphics.draw(v.image[v.animation.order[v.animation.frame].frameNumber], v.x, v.y, 0, 1, 1, v.width / 2, v.height / 2)
             elseif drawLayer == 2 and objectY >= player.y then
                 love.graphics.draw(v.image[v.animation.order[v.animation.frame].frameNumber], v.x, v.y, 0, 1, 1, v.width / 2, v.height / 2)
+            end
+        elseif v.type == "interactive" then
+            if drawLayer == 1 and objectY < player.y then
+                if v.active then
+                    love.graphics.draw(v.activeImage, v.x, v.y, 0, 1, 1, v.width / 2, v.height / 2)
+                else
+                    love.graphics.draw(v.inactiveImage, v.x, v.y, 0, 1, 1, v.width / 2, v.height / 2)
+                end
+            elseif drawLayer == 2 and objectY >= player.y then
+                if v.active then
+                    love.graphics.draw(v.activeImage, v.x, v.y, 0, 1, 1, v.width / 2, v.height / 2)
+                else
+                    love.graphics.draw(v.inactiveImage, v.x, v.y, 0, 1, 1, v.width / 2, v.height / 2)
+                end
             end
         end
     end
