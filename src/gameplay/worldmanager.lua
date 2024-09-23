@@ -33,20 +33,6 @@ function worldManagement.load()
     _G.naamloos = sti("assets/maps/naamloos.lua", { "bump" })
     _G.currentWorld = village
     currentWorld:bump_init(world)
-    saveStone = {
-        x = 0,
-        y = 0,
-        width = 50,
-        height = 50,
-        radius = 35,
-        active = false,
-        healing = 0,
-        timer = 0, -- timer
-        imageActive = love.graphics.newImage("assets/textures/world/structures/savestone/active.png"),
-        imageInactive = love.graphics.newImage("assets/textures/world/structures/savestone/inactive.png"),
-        ellipseCut = 1.2
-    }
-    saveStone.image = saveStone.imageInactive
 
     playerCircleRadius = 10
     lightPositions = {{0, 0}, {0, 0}}
@@ -140,30 +126,6 @@ local function playerWalkingOn()
                 end
             end
         end
-    end
-end
-
-local function saveStones()
-    saveStone.active = false
-    saveStone.image = saveStone.imageInactive
-    local correctLayer
-    for _, layer in ipairs(_G.currentWorld.layers) do
-        if layer.name == "wall" then
-            correctLayer = layer
-            break
-        end
-    end
-    if correctLayer then
-        for _, object in ipairs(correctLayer.objects) do
-            if object.name == "save" then
-                saveStone.x = object.x
-                saveStone.y = object.y
-            end
-        end
-    else
-        print("[Warn  ] saveStone not found")
-        saveStone.x = 0
-        saveStone.y = 0
     end
 end
 
@@ -346,15 +308,9 @@ function worldManagement.teleport(loc)
             y = 0
         }
     end
-    if worldManagement.thisWorld == "Snow" then
-        saveStone.radius = 100
-    else
-        saveStone.radius = 35
-    end
     currentWorld:bump_init(world)
     loadObjectsForWorld(worldManagement.thisWorld)
     worldManagement.spawn()
-    saveStones()
     if (story.data.storyTold.john1 == false or story.data.storyTold.john2 == true) and worldManagement.thisWorld == story.npc.john.collider.world then
         story.npc.john.position = 1
         story.npc.john.x = 170
@@ -450,13 +406,13 @@ local function inDarkness(dt)
     end
     lightPositions[1] = {playerCamera.cam:cameraCoords(player.x + 6, player.y - 8)}
     lightRadii[1] = playerCircleRadius * playerCamera.globalScale
-    if saveStone.active == true then
-        lightPositions[2] = {playerCamera.cam:cameraCoords(saveStone.x + 13.5, saveStone.y + 31)}
-        lightRadii[2] = saveStone.radius * playerCamera.globalScale
-    else
-        lightPositions[2] = {0, 0}
-        lightRadii[2] = 0
-    end
+    -- if saveStone.active == true then
+    --     lightPositions[2] = {playerCamera.cam:cameraCoords(saveStone.x + 13.5, saveStone.y + 31)}
+    --     lightRadii[2] = saveStone.radius * playerCamera.globalScale
+    -- else
+    --     lightPositions[2] = {0, 0}
+    --     lightRadii[2] = 0
+    -- end
 
 
     shader.light:send("numLights", #lightPositions)
@@ -483,34 +439,34 @@ function worldManagement.update(dt)
     end
     checkPortals()
     checkNpc(dt)
-    if checkEllipseCollision(player, saveStone) then
-        if worldManagement.saved == false then
-            saveStone.active = true
-            worldManagement.saved = true
-            saveStone.image = saveStone.imageActive
-            data = file.save()
-        end
-        if player.hearts <= 8 then
-            if saveStone.healing >= 1 then
-                player.hearts = player.hearts + 1
-                saveStone.healing = 0
-                if player.hearts == 8 then
-                    saveStone.active = true
-                    saveStone.image = saveStone.imageActive
-                    data = file.save()
-                end
-            else
-                saveStone.healing = saveStone.healing + dt
-            end
-        end
-    else
-        worldManagement.saved = false
-    end
-    if saveStone.timer >= 1 then
-        saveStone.timer = 0
-    else
-        saveStone.timer = saveStone.timer + (dt / 4)
-    end
+    -- if checkEllipseCollision(player, saveStone) then
+    --     if worldManagement.saved == false then
+    --         saveStone.active = true
+    --         worldManagement.saved = true
+    --         saveStone.image = saveStone.imageActive
+    --         data = file.save()
+    --     end
+    --     if player.hearts <= 8 then
+    --         if saveStone.healing >= 1 then
+    --             player.hearts = player.hearts + 1
+    --             saveStone.healing = 0
+    --             if player.hearts == 8 then
+    --                 saveStone.active = true
+    --                 saveStone.image = saveStone.imageActive
+    --                 data = file.save()
+    --             end
+    --         else
+    --             saveStone.healing = saveStone.healing + dt
+    --         end
+    --     end
+    -- else
+    --     worldManagement.saved = false
+    -- end
+    -- if saveStone.timer >= 1 then
+    --     saveStone.timer = 0
+    -- else
+    --     saveStone.timer = saveStone.timer + (dt / 4)
+    -- end
 end
 
 
@@ -527,21 +483,15 @@ function worldManagement:draw()
     if currentWorld.layers["objective1"] then
         currentWorld:drawLayer(currentWorld.layers["objective1"])
     end
-    love.graphics.setColor(0, 1, 1, 0 + (saveStone.timer / 2))
-    love.graphics.ellipse("line", saveStone.x + 13.5, saveStone.y + 21 + (saveStone.timer * 10), saveStone.radius, saveStone.radius / saveStone.ellipseCut)
-    love.graphics.setColor(0, 1, 1, 0.5)
-    love.graphics.ellipse("line", saveStone.x + 13.5, saveStone.y + 31, saveStone.radius, saveStone.radius / saveStone.ellipseCut)
+    -- love.graphics.setColor(0, 1, 1, 0 + (saveStone.timer / 2))
+    -- love.graphics.ellipse("line", saveStone.x + 13.5, saveStone.y + 21 + (saveStone.timer * 10), saveStone.radius, saveStone.radius / saveStone.ellipseCut)
+    -- love.graphics.setColor(0, 1, 1, 0.5)
+    -- love.graphics.ellipse("line", saveStone.x + 13.5, saveStone.y + 31, saveStone.radius, saveStone.radius / saveStone.ellipseCut)
     love.graphics.setColor(1, 1, 1)
-    if saveStone.y + 30 < player.y then
-        love.graphics.draw(saveStone.image, saveStone.x, saveStone.y)
-    end
     objectsManager.draw(1)
 end
 
 function worldManagement:draw2dLayer()
-    if saveStone.y + 30 > player.y then
-        love.graphics.draw(saveStone.image, saveStone.x, saveStone.y)
-    end
     objectsManager.draw(2)
 end
 

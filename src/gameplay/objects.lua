@@ -65,21 +65,36 @@ function loadObjectsForWorld(world)
         }
     end
     local saveX, saveY = 0, 0
-    if world == "Mountains" then
-        saveX, saveY = 100, 100
-    elseif world == "Snow" then
-        saveX, saveY = 200, 200
+    for _, layer in ipairs(_G.currentWorld.layers) do
+        if layer.name == "wall" then
+            correctLayer = layer
+            break
+        end
+    end
+    if correctLayer then
+        for _, object in ipairs(correctLayer.objects) do
+            if object.name == "save" then
+                saveX = object.x
+                saveY = object.y
+                break
+            end
+        end
+    else
+        saveX = 0
+        saveY = 0
+        print("[Warn  ] saveStone not found")
     end
     objectsManager.objects.savestone = {
         type = "interactive",
         subType = "walk",
+        radius = 20,
         x = saveX,
         y = saveY,
         width = 34,
         height = 32,
+        active = true,
         activeImage = love.graphics.newImage("assets/textures/world/structures/savestone/active.png"),
         inactiveImage = love.graphics.newImage("assets/textures/world/structures/savestone/inactive.png"),
-        active = true
     }
     for k, v in pairs(objectsManager.objects) do
         if v.type == "animation" then
