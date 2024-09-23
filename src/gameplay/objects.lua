@@ -1,7 +1,8 @@
 local objectsManager = {}
 objectsManager.objects = {}
-local objectsManager = {}
-objectsManager.objects = {}
+
+local worldManagement = require("src/gameplay/worldmanager")
+local file = require("src/system/data")
 
 function loadObjectsForWorld(world)
     objectsManager.objects = {}
@@ -87,14 +88,15 @@ function loadObjectsForWorld(world)
     objectsManager.objects.savestone = {
         type = "interactive",
         subType = "walk",
-        radius = 20,
+        radius = 35,
         x = saveX,
         y = saveY,
         width = 34,
         height = 32,
-        active = true,
+        active = false,
         activeImage = love.graphics.newImage("assets/textures/world/structures/savestone/active.png"),
         inactiveImage = love.graphics.newImage("assets/textures/world/structures/savestone/inactive.png"),
+        ellipseCut = 1.2
     }
     for k, v in pairs(objectsManager.objects) do
         if v.type == "animation" then
@@ -116,8 +118,44 @@ function objectsManager.update(dt)
                     v.animation.frame = 1
                 end
             end
+            elseif v.type == "interactive" then
+            if v.subType == "walk" then
+                if objectsManager.checkCollision(player, v) then
+                    v.active = true
+                    if worldManagement.saved == false then
+                        worldManagement.saved = true
+                        data = file.save()
+                    end
+                else
+                    worldManagement.saved = false
+                end
+            end
         end
     end
+end
+
+function objectsManager.checkCollision(rect, ellipse)    
+    local rectCenterX = rect.x + rect.width / 2
+    local rectCenterY = rect.y + rect.height / 2
+
+    local ellipseDistanceX = math.abs(ellipse.x - rectCenterX)
+    local ellipseDistanceY = math.abs(ellipse.y - rectCenterY)
+
+    if ellipseDistanceX <= (rect.width / 2 + ellipse.radius) and
+        ellipseDistanceY <= (rect.height / 2 + ellipse.radius / ellipse.ellipseCut) then
+        if ellipseDistanceX <= (rect.width / 2) or
+            ellipseDistanceY <= (rect.height / 2) then
+            return true
+        end
+
+        local cornerDistanceSquared = (ellipseDistanceX - rect.width / 2)^2 +
+                                      (ellipseDistanceY - rect.height / 2)^2
+
+        if cornerDistanceSquared <= (ellipse.radius^2) then
+            return true
+        end
+    end
+    return nil
 end
 
 function objectsManager.draw(drawLayer)

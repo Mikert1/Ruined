@@ -18,7 +18,6 @@ function worldManagement.loadAssets()
 end
 
 -- load variables
-local saveStone = {}
 local playerCircleRadius
 local lightPositions
 local lightRadii
@@ -439,34 +438,6 @@ function worldManagement.update(dt)
     end
     checkPortals()
     checkNpc(dt)
-    -- if checkEllipseCollision(player, saveStone) then
-    --     if worldManagement.saved == false then
-    --         saveStone.active = true
-    --         worldManagement.saved = true
-    --         saveStone.image = saveStone.imageActive
-    --         data = file.save()
-    --     end
-    --     if player.hearts <= 8 then
-    --         if saveStone.healing >= 1 then
-    --             player.hearts = player.hearts + 1
-    --             saveStone.healing = 0
-    --             if player.hearts == 8 then
-    --                 saveStone.active = true
-    --                 saveStone.image = saveStone.imageActive
-    --                 data = file.save()
-    --             end
-    --         else
-    --             saveStone.healing = saveStone.healing + dt
-    --         end
-    --     end
-    -- else
-    --     worldManagement.saved = false
-    -- end
-    -- if saveStone.timer >= 1 then
-    --     saveStone.timer = 0
-    -- else
-    --     saveStone.timer = saveStone.timer + (dt / 4)
-    -- end
 end
 
 
