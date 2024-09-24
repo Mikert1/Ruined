@@ -88,6 +88,7 @@ function loadObjectsForWorld(world)
     objectsManager.objects.savestone = {
         type = "interactive",
         subType = "walk",
+        name = "save",
         radius = 35,
         x = saveX,
         y = saveY,
@@ -96,7 +97,8 @@ function loadObjectsForWorld(world)
         active = false,
         activeImage = love.graphics.newImage("assets/textures/world/structures/savestone/active.png"),
         inactiveImage = love.graphics.newImage("assets/textures/world/structures/savestone/inactive.png"),
-        ellipseCut = 1.2
+        ellipseCut = 1.2,
+        timer = 0
     }
     for k, v in pairs(objectsManager.objects) do
         if v.type == "animation" then
@@ -158,7 +160,28 @@ function objectsManager.checkCollision(rect, ellipse)
     return nil
 end
 
+function objectsManager.subDraw(drawLayer)
+    for k, v in pairs(objectsManager.objects) do
+        local objectY = v.y + v.height / 2
+        if v.type == "interactive" and v.name == "save" then
+            if drawLayer == 1 and objectY < player.y then
+                love.graphics.setColor(0, 1, 1, 0 + (v.timer / 2))
+                love.graphics.ellipse("line", v.x, v.y + (v.timer * 10), v.radius, v.radius / v.ellipseCut)
+                love.graphics.setColor(0, 1, 1, 0.5)
+                love.graphics.ellipse("line", v.x, v.y, v.radius, v.radius / v.ellipseCut)
+            elseif drawLayer == 2 and objectY >= player.y then
+                love.graphics.setColor(0, 1, 1, 0 + (v.timer / 2))
+                love.graphics.ellipse("line", v.x, v.y + (v.timer * 10), v.radius, v.radius / v.ellipseCut)
+                love.graphics.setColor(0, 1, 1, 0.5)
+                love.graphics.ellipse("line", v.x, v.y, v.radius, v.radius / v.ellipseCut)
+            end
+            love.graphics.setColor(1, 1, 1, 1)
+        end
+    end
+end
+
 function objectsManager.draw(drawLayer)
+    objectsManager.subDraw(drawLayer)
     for k, v in pairs(objectsManager.objects) do
         local objectY = v.y + v.height / 2
         if v.type == "static" then
