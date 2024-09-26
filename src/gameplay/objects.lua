@@ -163,7 +163,7 @@ end
 function objectsManager.subDraw(drawLayer)
     for k, v in pairs(objectsManager.objects) do
         local objectY = v.y + v.height / 2
-        if v.type == "interactive" and v.name == "save" then
+        if v.type == "interactive" and v.name == "save" and v.active then
             local ellipseCenterX = (v.x + v.width / 2) - v.radius / 2
             local ellipseCenterY = objectY
             if drawLayer == 1 and objectY < player.y then
