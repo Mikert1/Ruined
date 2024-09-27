@@ -47,35 +47,6 @@ function worldManagement.load()
 end
 
 -- load non-worldManagement functions
-local function checkEllipseCollision(rect, ellipse)
-    local rectCenterX = rect.x + rect.width / 2
-    local rectCenterY = rect.y + rect.height / 2
-
-    local ellipseDistanceX = math.abs(saveStone.x + 13.5 - rectCenterX)
-    local ellipseDistanceY = math.abs(saveStone.y + 31 - rectCenterY)
-
-    if ellipseDistanceX > (rect.width / 2 + ellipse.radius) then
-        return false
-    end
-
-    if ellipseDistanceY > (rect.height / 2 + ellipse.radius / ellipse.ellipseCut) then
-        return false
-    end
-
-    if ellipseDistanceX <= (rect.width / 2) then
-        return true
-    end
-
-    if ellipseDistanceY <= (rect.height / 2) then
-        return true
-    end
-
-    local cornerDistanceSquared = (ellipseDistanceX - rect.width / 2)^2 +
-                                  (ellipseDistanceY - rect.height / 2)^2
-
-    return cornerDistanceSquared <= (ellipse.radius^2)
-end
-
 local function checkCollision(rect1, rect2)
     local rect1_right = rect1.x + rect1.width
     local rect1_bottom = rect1.y + rect1.height
@@ -454,10 +425,6 @@ function worldManagement:draw()
     if currentWorld.layers["objective1"] then
         currentWorld:drawLayer(currentWorld.layers["objective1"])
     end
-    -- love.graphics.setColor(0, 1, 1, 0 + (saveStone.timer / 2))
-    -- love.graphics.ellipse("line", saveStone.x + 13.5, saveStone.y + 21 + (saveStone.timer * 10), saveStone.radius, saveStone.radius / saveStone.ellipseCut)
-    -- love.graphics.setColor(0, 1, 1, 0.5)
-    -- love.graphics.ellipse("line", saveStone.x + 13.5, saveStone.y + 31, saveStone.radius, saveStone.radius / saveStone.ellipseCut)
     love.graphics.setColor(1, 1, 1)
     objectsManager.draw(1)
 end
