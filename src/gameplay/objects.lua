@@ -136,17 +136,21 @@ function objectsManager.update(dt)
     end
 end
 
-function objectsManager.checkCollision(rect, ellipse)    
+function objectsManager.checkCollision(rect, ellipse)
     local rectCenterX = rect.x + rect.width / 2
     local rectCenterY = rect.y + rect.height / 2
 
-    local ellipseDistanceX = math.abs(ellipse.x - rectCenterX)
-    local ellipseDistanceY = math.abs(ellipse.y - rectCenterY)
+    local ellipseCenterX = ellipse.x + ellipse.width / 2 - ellipse.radius / 2
+    local ellipseCenterY = ellipse.y + ellipse.height / 2
+
+    local ellipseDistanceX = math.abs(ellipseCenterX - rectCenterX)
+    local ellipseDistanceY = math.abs(ellipseCenterY - rectCenterY)
 
     if ellipseDistanceX <= (rect.width / 2 + ellipse.radius) and
-        ellipseDistanceY <= (rect.height / 2 + ellipse.radius / ellipse.ellipseCut) then
+       ellipseDistanceY <= (rect.height / 2 + ellipse.radius / ellipse.ellipseCut) then
+
         if ellipseDistanceX <= (rect.width / 2) or
-            ellipseDistanceY <= (rect.height / 2) then
+           ellipseDistanceY <= (rect.height / 2) then
             return true
         end
 
@@ -157,6 +161,7 @@ function objectsManager.checkCollision(rect, ellipse)
             return true
         end
     end
+
     return nil
 end
 
