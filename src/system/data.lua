@@ -31,7 +31,7 @@ function file.save()
     data.isUp = player.isUp
     data.isLeft = player.isLeft
     data.world = worldManagement.thisWorld
-    data.hearts = player.hearts
+    data.hearts = player.health
 
     data.item = {}
     data.item.sword = player.item.sword
@@ -218,7 +218,7 @@ function file.load()
     time.seconds = data.seconds
     time.minutes = data.minutes
     time.hours = data.hours
-    player.hearts = data.hearts
+    player.health = data.hearts
     if data.item.sword == true then
         player.item.sword = true
     end

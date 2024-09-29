@@ -74,13 +74,13 @@ function gui.update(dt)
     if not gui.healthbar then
         gui.healthbar = {}
     end
-    if not player.hearts then
+    if not player.health then
         gui.healthbar.hearts = 7
     end
-    if player.hearts >= 9 then
-        player.hearts = 8
+    if player.health >= 9 then
+        player.health = 8
     end
-    gui.healthbar.animation.current = player.hearts
+    gui.healthbar.animation.current = player.health
     if gui.focus == false then
         gui.healthbar.anim = gui.healthbar.animations.normal
         player.sheet = player.spriteSheet

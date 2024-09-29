@@ -95,6 +95,7 @@ function loadObjectsForWorld(world)
         width = 31,
         height = 32,
         active = false,
+        timer = 0,
         activeImage = love.graphics.newImage("assets/textures/world/structures/savestone/active.png"),
         inactiveImage = love.graphics.newImage("assets/textures/world/structures/savestone/inactive.png"),
         ellipseCut = 1.2,
@@ -127,6 +128,11 @@ function objectsManager.update(dt)
                     if worldManagement.saved == false then
                         worldManagement.saved = true
                         data = file.save()
+                    end
+                    v.timer = v.timer - dt
+                    if v.timer < 0 then
+                        player.health = player.health + 1
+                        v.timer = 1
                     end
                 else
                     worldManagement.saved = false
@@ -172,13 +178,13 @@ function objectsManager.subDraw(drawLayer)
             local ellipseCenterX = (v.x + v.width / 2) - v.radius / 2
             local ellipseCenterY = objectY
             if drawLayer == 1 and objectY < player.y then
-            love.graphics.setColor(0, 1, 1, 0 + (v.timer / 2))
-            love.graphics.ellipse("line", ellipseCenterX, ellipseCenterY + (v.timer * 10), v.radius, v.radius / v.ellipseCut)
+            love.graphics.setColor(0, 1, 1, 0 + (-v.timer + 1) / 2)
+            love.graphics.ellipse("line", ellipseCenterX, ellipseCenterY + (-v.timer * 12), v.radius, v.radius / v.ellipseCut)
             love.graphics.setColor(0, 1, 1, 0.5)
             love.graphics.ellipse("line", ellipseCenterX, ellipseCenterY, v.radius, v.radius / v.ellipseCut)
             elseif drawLayer == 2 and objectY >= player.y then
-            love.graphics.setColor(0, 1, 1, 0 + (v.timer / 2))
-            love.graphics.ellipse("line", ellipseCenterX, ellipseCenterY + (v.timer * 10), v.radius, v.radius / v.ellipseCut)
+            love.graphics.setColor(0, 1, 1, 0 + (-v.timer + 1) / 2)
+            love.graphics.ellipse("line", ellipseCenterX, ellipseCenterY + (-v.timer * 12), v.radius, v.radius / v.ellipseCut)
             love.graphics.setColor(0, 1, 1, 0.5)
             love.graphics.ellipse("line", ellipseCenterX, ellipseCenterY, v.radius, v.radius / v.ellipseCut)
             end

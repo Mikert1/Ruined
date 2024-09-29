@@ -25,7 +25,7 @@ function player.load()
     player.speedMultiplier = 5
     player.speed = 10 * player.speedMultiplier
     player.sideSpeed = 7.71067812 * player.speedMultiplier
-    player.hearts = 8
+    player.health = 8
     player.gotHit = false
     player.isDead = false
     player.invincibleTimer = 0
@@ -93,8 +93,8 @@ function player.update(dt)
     if player.gotHit == false then
         for _, enemy in ipairs(enemymanager.activeEnemies) do
             if checkCollision(player, enemy) then
-                if player.hearts > 0 then
-                    player.hearts = player.hearts - 1
+                if player.health > 0 then
+                    player.health = player.health - 1
                 end
                 player.gotHit = true
                 break
@@ -107,7 +107,7 @@ function player.update(dt)
             player.invincibleTimer = 0
         end
     end
-    if player.hearts <= 0 then
+    if player.health <= 0 then
         game.freeze = true
         player.isDead = true
         gui.barShow = false
