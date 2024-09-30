@@ -179,12 +179,16 @@ function objectsManager.subDraw(drawLayer)
             local ellipseCenterY = objectY
             if drawLayer == 1 and objectY < player.y then
             love.graphics.setColor(0, 1, 1, 0 + (-v.timer + 1) / 2)
-            love.graphics.ellipse("line", ellipseCenterX, ellipseCenterY + (-v.timer * 12), v.radius, v.radius / v.ellipseCut)
+            if worldManagement.saved then
+                love.graphics.ellipse("line", ellipseCenterX, ellipseCenterY + (-v.timer * 12), v.radius, v.radius / v.ellipseCut)
+            end
             love.graphics.setColor(0, 1, 1, 0.5)
             love.graphics.ellipse("line", ellipseCenterX, ellipseCenterY, v.radius, v.radius / v.ellipseCut)
             elseif drawLayer == 2 and objectY >= player.y then
             love.graphics.setColor(0, 1, 1, 0 + (-v.timer + 1) / 2)
-            love.graphics.ellipse("line", ellipseCenterX, ellipseCenterY + (-v.timer * 12), v.radius, v.radius / v.ellipseCut)
+            if worldManagement.saved then
+                love.graphics.ellipse("line", ellipseCenterX, ellipseCenterY + (-v.timer * 12), v.radius, v.radius / v.ellipseCut)
+            end
             love.graphics.setColor(0, 1, 1, 0.5)
             love.graphics.ellipse("line", ellipseCenterX, ellipseCenterY, v.radius, v.radius / v.ellipseCut)
             end
