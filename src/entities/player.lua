@@ -93,7 +93,7 @@ function player.update(dt)
     if player.gotHit == false then
         for _, enemy in ipairs(enemymanager.activeEnemies) do
             if checkCollision(player, enemy) then
-                if player.health > 0 then
+                if player.health > 0 and enemy.animation.state == "walk" then
                     player.health = player.health - 1
                 end
                 player.gotHit = true
