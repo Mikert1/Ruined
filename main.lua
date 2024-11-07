@@ -66,7 +66,7 @@ local function loader()
         print("[Loader] Total Time: " .. os.clock() - LOADTIMER .. " seconds")
         print("[Debug ] Console is active\n    - use Tab to show more info and show colliders")
 
-        TEMP = love.graphics.newImage("assets/textures/gui/cards/calorite/a.png")
+        TEMP = love.graphics.newImage("assets/textures/gui/cards/name/a.png")
     
         local dev -- for me to skip some things like titlescreen becouse i see it every day ;)
         if love.filesystem.getInfo("dev.lua") then
