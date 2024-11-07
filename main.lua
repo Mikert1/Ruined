@@ -65,8 +65,6 @@ local function loader()
         print("[Loader] Done Loading game it took " .. os.clock() - LOADTIMER2 .. " seconds")
         print("[Loader] Total Time: " .. os.clock() - LOADTIMER .. " seconds")
         print("[Debug ] Console is active\n    - use Tab to show more info and show colliders")
-
-        TEMP = love.graphics.newImage("assets/textures/gui/cards/name/a.png")
     
         local dev -- for me to skip some things like titlescreen becouse i see it every day ;)
         if love.filesystem.getInfo("dev.lua") then
@@ -194,7 +192,6 @@ function love.draw()
                 love.graphics.setColor(0, 0, 0, 0.5)
                 love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
                 love.graphics.setColor(1, 1, 1)
-                love.graphics.draw(TEMP, 0, 0, 0, playerCamera.cam.scale, playerCamera.cam.scale)
             end
             gui:draw()
             title:draw()
