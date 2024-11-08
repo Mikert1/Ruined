@@ -9,7 +9,8 @@ function minigame.start()
         deck = {
             cryonium = {},
             calorite = {},
-            stone = {}
+            stone = {},
+            name = {}
         },
         other = {
             back = {
@@ -94,6 +95,7 @@ function minigame.start()
         cryonium = {"ca", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10", "cj", "cq", "ck"},
         calorite = {"ca", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10", "cj", "cq", "ck"},
         stone = {"ca", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10", "cj", "cq", "ck"},
+        name = {"ca", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10", "cj", "cq", "ck"},
         joker = {"j1", "j2"}
     }
     minigame.random = getRandomCard()
