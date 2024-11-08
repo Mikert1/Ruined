@@ -42,6 +42,7 @@ local function loader()
         settings = require("src/gui/settings")
         particle = require("src/gameplay/particle")
         objectsManager = require("src/gameplay/objects")
+        minigame = require("src/gameplay/minigame")
         
         story.loadAssets()
         worldManagement.loadAssets()
@@ -149,6 +150,7 @@ function love.update(dt)
         button:UpdateAll(dt)
         objectsManager.update(dt)
         particle.update(dt)
+        minigame.update(dt)
     end
     if loadState == 2 then
         loadForLast()
