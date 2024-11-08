@@ -86,6 +86,9 @@ function love.keypressed(key)
         if key == "p" then
             lan.sendData("Hello, other player!")
         end
+        if key == "l" then
+            minigame.active = true
+        end
         if story.npc.interaction == true then
             if key == "right" or key == controls.keys.interact then
                 if story.dialogue.length < story.dialogue.position then

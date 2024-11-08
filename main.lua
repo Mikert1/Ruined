@@ -2,6 +2,7 @@ local LOADTIMER = os.clock()
 local loadState = 1
 love.window.setTitle("Ruined | Title Screen")
 love.window.setIcon(love.image.newImageData("assets/textures/gui/title/logo1.png"))
+love._openConsole()
 
 -- global variables
 local file, weapon, currentWorld, worldManagement, preview, debug, title, gui, time, shader, story, scene, stone, button, settings, particle, objectsManager
@@ -181,11 +182,11 @@ function love.draw()
             if player.focus == true then 
                 love.graphics.setShader(shader.focus)
             end
-
+            
             worldManagement:draw2dLayer()
             weapon.draw2L()
             story.npc:draw2L()
-
+            
             worldManagement:drawDarkness()
         playerCamera.cam:detach()
             love.graphics.setColor(1, 1, 1)
@@ -204,7 +205,8 @@ function love.draw()
             settings.draw2Layer()
             lan.draw()
             game.draw()
-    else
+            minigame.draw()
+        else
         love.graphics.print("Loading...", 10, 10)
         loadState = 2
         loader()

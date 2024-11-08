@@ -2,82 +2,95 @@ local minigame = {}
 minigame.active = false
 minigame.playingCards = {
     deck = {
-        {
-            name = "Ace of Cryonium",
-            type = "Cryonium",
-            value = "a"
+        cryonium = {},
+        calorite = {},
+        stone = {}
+    },
+    other = {
+        joker = {
+            name = "Joker",
+            value = "joker",
+            sprite = love.graphics.newImage("assets/textures/gui/minigame/cards/other/j.png")
         },
-        {
-            name = "Two of Cryonium",
-            type = "Cryonium",
-            value = 2
-        },
-        {
-            name = "Three of Cryonium",
-            type = "Cryonium",
-            value = 3
-        },
-        {
-            name = "Four of Cryonium",
-            type = "Cryonium",
-            value = 4
-        },
-        {
-            name = "Five of Cryonium",
-            type = "Cryonium",
-            value = 5
-        },
-        {
-            name = "Six of Cryonium",
-            type = "Cryonium",
-            value = 6
-        },
-        {
-            name = "Seven of Cryonium",
-            type = "Cryonium",
-            value = 7
-        },
-        {
-            name = "Eight of Cryonium",
-            type = "Cryonium",
-            value = 8
-        },
-        {
-            name = "Nine of Cryonium",
-            type = "Cryonium",
-            value = 9
-        },
-        {
-            name = "Ten of Cryonium",
-            type = "Cryonium",
-            value = 10
-        },
-        {
-            name = "Jack of Cryonium",
-            type = "Cryonium",
-            value = "j"
-        },
-        {
-            name = "Queen of Cryonium",
-            type = "Cryonium",
-            value = "q"
-        },
-        {
-            name = "King of Cryonium",
-            type = "Cryonium",
-            value = "k"
+        back = {
+            name = "???",
+            value = "back",
+            sprite = love.graphics.newImage("assets/textures/gui/minigame/cards/other/back.png")
         }
     }
 }
 
-for i, card in ipairs(minigame.playingCards.deck) do
-    card.sprite = love.graphics.newImage("assets/textures/gui/minigame/cards/" .. card.type .. "/" .. card.value .. ".png")
+for cardTypeName, cardType in pairs(minigame.playingCards.deck) do
+    cardType = {
+        ca = {
+            name = "Ace",
+            value = "a"
+        },
+        c2 = {
+            name = "Two",
+            value = 2
+        },
+        c3 = {
+            name = "Three",
+            value = 3
+        },
+        c4 = {
+            name = "Four",
+            value = 4
+        },
+        c5 = {
+            name = "Five",
+            value = 5
+        },
+        c6 = {
+            name = "Six",
+            value = 6
+        },
+        c7 = {
+            name = "Seven",
+            value = 7
+        },
+        c8 = {
+            name = "Eight",
+            value = 8
+        },
+        c9 = {
+            name = "Nine",
+            value = 9
+        },
+        c10 = {
+            name = "Ten",
+            value = 10
+        },
+        cj = {
+            name = "Jack",
+            value = "j"
+        },
+        cq = {
+            name = "Queen",
+            value = "q"
+        },
+        ck = {
+            name = "King",
+            value = "k"
+        }
+    }
+    for cardKey, card in pairs(cardType) do
+        card.sprite = love.graphics.newImage("assets/textures/gui/minigame/cards/"..cardTypeName.."/"..card.value..".png")
+    end
 end
+
 
 function minigame.update(dt)
     if minigame.active then
         
     end
 end
+
+function minigame.draw()
+    if minigame.active then
+        love.graphics.draw(minigame.playingCards.deck.cryonium.ca.sprite, 0, 0, 0, playerCamera.globalScale, playerCamera.globalScale)  
+    end
+end 
 
 return minigame
