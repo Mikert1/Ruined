@@ -12,11 +12,6 @@ function minigame.start()
             stone = {}
         },
         other = {
-            joker = {
-                name = "Joker",
-                value = "joker",
-                sprite = love.graphics.newImage("assets/textures/gui/minigame/cards/other/j.png")
-            },
             back = {
                 name = "???",
                 value = "back",
@@ -82,23 +77,42 @@ function minigame.start()
             card.sprite = love.graphics.newImage("assets/textures/gui/minigame/cards/"..cardTypeName.."/"..card.value..".png")
         end
     end
+    minigame.playingCards.deck.joker = {}
+    joker = minigame.playingCards.deck.joker
+    joker.j1 = {
+        name = "Joker",
+        value = "j",
+        sprite = love.graphics.newImage("assets/textures/gui/minigame/cards/other/joker.png")
+    }
+    joker.j2 = {
+        name = "Joker",
+        value = "j",
+        sprite = love.graphics.newImage("assets/textures/gui/minigame/cards/other/joker.png")
+    }
+
     minigame.avalibleCards = {
         cryonium = {"ca", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10", "cj", "cq", "ck"},
         calorite = {"ca", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10", "cj", "cq", "ck"},
-        stone = {"ca", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10", "cj", "cq", "ck"}
-        -- other = {"joker", "joker"}
+        stone = {"ca", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10", "cj", "cq", "ck"},
+        joker = {"j1", "j2"}
     }
     minigame.random = getRandomCard()
 end
 
 function getRandomCard()
     local categories = {}
-    for category in pairs(minigame.avalibleCards) do
-        table.insert(categories, category)
+    local categoryWeights = {}
+
+    for category, cards in pairs(minigame.avalibleCards) do
+        local weight = #cards
+        for i = 1, weight do
+            table.insert(categories, category)
+        end
+        categoryWeights[category] = weight
     end
 
     local randomCategory = categories[math.random(#categories)]
-    
+
     local cards = minigame.avalibleCards[randomCategory]
     local randomCard = cards[math.random(#cards)]
 
@@ -114,7 +128,7 @@ function minigame.draw()
     if minigame.active then
         local card = minigame.random.card
         local catecory = minigame.random.category
-        love.graphics.draw(minigame.playingCards.deck[catecory][card].sprite, 0, 0, 0, playerCamera.globalScale, playerCamera.globalScale)  
+        love.graphics.draw(minigame.playingCards.deck[catecory][card].sprite, 0, 0, 0, playerCamera.globalScale, playerCamera.globalScale)
     end
 end 
 
