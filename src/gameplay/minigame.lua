@@ -92,13 +92,6 @@ function minigame.start()
         sprite = love.graphics.newImage("assets/textures/gui/minigame/cards/other/joker.png")
     }
 
-    minigame.avalibleCards = {
-        cryonium = {"ca", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10", "cj", "cq", "ck"},
-        calorite = {"ca", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10", "cj", "cq", "ck"},
-        stone = {"ca", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10", "cj", "cq", "ck"},
-        name = {"ca", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10", "cj", "cq", "ck"},
-        joker = {"j1", "j2"}
-    }
     minigame.hand = {
         player = {
             getRandomCard(),
@@ -110,23 +103,21 @@ function minigame.start()
 end
 
 function getRandomCard()
-    local categories = {}
-    local categoryWeights = {}
+    local availableCards = {}
 
-    for category, cards in pairs(minigame.avalibleCards) do
-        local weight = #cards
-        for i = 1, weight do
-            table.insert(categories, category)
+    for _, cards in pairs(minigame.playingCards.deck) do
+        for cardKey, card in pairs(cards) do
+            table.insert(availableCards, card)
         end
-        categoryWeights[category] = weight
     end
 
-    local randomCategory = categories[math.random(#categories)]
+    if #availableCards == 0 then
 
-    local cards = minigame.avalibleCards[randomCategory]
-    local randomCard = cards[math.random(#cards)]
+        return nil
+    end
 
-    return {card = randomCard, category = randomCategory}
+    local card = availableCards[math.random(#availableCards)]
+    return card
 end
 function minigame.update(dt)
     if minigame.active then
@@ -137,9 +128,9 @@ end
 function minigame.draw()
     if minigame.active then
         for i, card in ipairs(minigame.hand.player) do
-            love.graphics.draw(minigame.playingCards.deck[card.category][card.card].sprite, love.graphics.getWidth() / 2 - (18 * playerCamera.globalScale) + (i - 2) * (18 * playerCamera.globalScale), love.graphics.getHeight() - (56 * playerCamera.globalScale), 0, playerCamera.globalScale, playerCamera.globalScale)
+            love.graphics.draw(card.sprite, love.graphics.getWidth() / 2 - (18 * playerCamera.globalScale) + (i - 2) * (18 * playerCamera.globalScale), love.graphics.getHeight() - (56 * playerCamera.globalScale), 0, playerCamera.globalScale, playerCamera.globalScale)
         end
     end
-end 
+end
 
 return minigame
