@@ -5,6 +5,7 @@ math.randomseed(os.time())
 
 function minigame.start()
     minigame.active = true
+    game.freeze = true
     minigame.playingCards = {
         deck = {
             cryonium = {},
@@ -98,7 +99,14 @@ function minigame.start()
         name = {"ca", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10", "cj", "cq", "ck"},
         joker = {"j1", "j2"}
     }
-    minigame.random = getRandomCard()
+    minigame.hand = {
+        player = {
+            getRandomCard(),
+            getRandomCard(),
+            getRandomCard()
+        },
+        enemy = {}
+    }
 end
 
 function getRandomCard()
@@ -128,9 +136,9 @@ end
 
 function minigame.draw()
     if minigame.active then
-        local card = minigame.random.card
-        local catecory = minigame.random.category
-        love.graphics.draw(minigame.playingCards.deck[catecory][card].sprite, 0, 0, 0, playerCamera.globalScale, playerCamera.globalScale)
+        for i, card in ipairs(minigame.hand.player) do
+            love.graphics.draw(minigame.playingCards.deck[card.category][card.card].sprite, love.graphics.getWidth() / 2 - (18 * playerCamera.globalScale) + (i - 2) * (18 * playerCamera.globalScale), love.graphics.getHeight() - (56 * playerCamera.globalScale), 0, playerCamera.globalScale, playerCamera.globalScale)
+        end
     end
 end 
 
