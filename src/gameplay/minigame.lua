@@ -107,6 +107,10 @@ function minigame.stop()
     game.freeze = false
 end
 
+function minigame.addCardToHand(hand)
+    table.insert(hand, getRandomCard())
+end
+
 function getRandomCard()
     local availableCards = {}
     for category, cards in pairs(minigame.playingCards.deck) do
