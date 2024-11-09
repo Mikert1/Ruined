@@ -102,10 +102,14 @@ function minigame.start()
     }
 end
 
+function minigame.stop()
+    minigame.active = false
+    game.freeze = false
+end
+
 function getRandomCard()
     local availableCards = {}
-
-    for _, cards in pairs(minigame.playingCards.deck) do
+    for category, cards in pairs(minigame.playingCards.deck) do
         for cardKey, card in pairs(cards) do
             table.insert(availableCards, card)
         end
@@ -117,7 +121,15 @@ function getRandomCard()
     end
 
     local card = availableCards[math.random(#availableCards)]
-    return card
+
+    for cardTypeName, cardType in pairs(minigame.playingCards.deck) do
+        for cardKey, cardInDeck in pairs(cardType) do
+            if cardInDeck.name == card.name then
+                minigame.playingCards.deck[cardTypeName][cardKey] = nil
+                return card
+            end
+        end
+    end
 end
 function minigame.update(dt)
     if minigame.active then
