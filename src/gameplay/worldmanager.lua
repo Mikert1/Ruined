@@ -281,14 +281,6 @@ function worldManagement.teleport(loc)
     currentWorld:bump_init(world)
     loadObjectsForWorld(worldManagement.thisWorld)
     worldManagement.spawn()
-    if (story.data.storyTold.john1 == false or story.data.storyTold.john2 == true) and worldManagement.thisWorld == story.npcs.john.collider.world then
-        story.npcs.john.position = 1
-        story.npcs.john.x = 170
-        story.npcs.john.y = 332
-        story.npcs.john.image = love.graphics.newImage("assets/textures/npc/johnNpcWounded.png")
-    else
-        story.npcs.john.position = 0
-    end
     playerCamera.cam:lookAt(player.x - 6, player.y - 8)
 end
 
