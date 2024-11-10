@@ -225,10 +225,10 @@ function file.load()
     if data.storyTold then
         if data.storyTold.john1 == true then
             story.data.storyTold.john1 = true
-            story.npc.john.position = 1
+            story.npcs.john.position = 1
         else
             story.data.storyTold.john1 = false
-            story.npc.john.position = 1
+            story.npcs.john.position = 1
         end
     end
     love.load()

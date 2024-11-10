@@ -281,13 +281,13 @@ function worldManagement.teleport(loc)
     currentWorld:bump_init(world)
     loadObjectsForWorld(worldManagement.thisWorld)
     worldManagement.spawn()
-    if (story.data.storyTold.john1 == false or story.data.storyTold.john2 == true) and worldManagement.thisWorld == story.npc.john.collider.world then
-        story.npc.john.position = 1
-        story.npc.john.x = 170
-        story.npc.john.y = 332
-        story.npc.john.image = love.graphics.newImage("assets/textures/npc/johnNpcWounded.png")
+    if (story.data.storyTold.john1 == false or story.data.storyTold.john2 == true) and worldManagement.thisWorld == story.npcs.john.collider.world then
+        story.npcs.john.position = 1
+        story.npcs.john.x = 170
+        story.npcs.john.y = 332
+        story.npcs.john.image = love.graphics.newImage("assets/textures/npc/johnNpcWounded.png")
     else
-        story.npc.john.position = 0
+        story.npcs.john.position = 0
     end
     playerCamera.cam:lookAt(player.x - 6, player.y - 8)
 end
@@ -317,8 +317,8 @@ end
 
 function drawNpcLayer()
     local correctLayer = nil
-    if story.npc.john.collider.world == worldManagement.thisWorld then
-        correctLayer = story.npc.john.collider
+    if story.npcs.john.collider.world == worldManagement.thisWorld then
+        correctLayer = story.npcs.john.collider
     end
 
     if correctLayer then
@@ -330,11 +330,11 @@ end
 
 local function checkNpc(dt)
     local correctLayer = nil
-    if story.npc.john.collider.world == worldManagement.thisWorld then
-        correctLayer = story.npc.john.collider
+    if story.npcs.john.collider.world == worldManagement.thisWorld then
+        correctLayer = story.npcs.john.collider
     end
     if correctLayer then
-        if checkCollision(player, story.npc.john.collider) then
+        if checkCollision(player, story.npcs.john.collider) then
             if story.npc.interaction == false then
                 story.npc.who = "john"
                 story.npc.interactionAvalible = true
