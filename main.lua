@@ -197,6 +197,7 @@ function love.draw()
                 love.graphics.setColor(1, 1, 1)
             end
             gui:draw()
+            minigame.draw()
             title:draw()
             settings.draw()
             button:drawAll()
@@ -205,7 +206,6 @@ function love.draw()
             settings.draw2Layer()
             lan.draw()
             game.draw()
-            minigame.draw()
         else
         love.graphics.print("Loading...", 10, 10)
         loadState = 2

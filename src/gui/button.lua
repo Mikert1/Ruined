@@ -841,7 +841,7 @@ function button:draw()
 end
 
 function button:UpdateAll(dt)
-    game.cursor.color = {0.3, 0.3, 0.3, 1}
+    game.cursor.color = {1, 1, 1, 0.5}
     for _, button in ipairs(button.activeButtons) do
         button:update(dt)
     end

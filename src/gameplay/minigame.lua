@@ -141,14 +141,40 @@ function minigame.update(dt)
     end
 end
 
+function minigame.hover(x, y)
+    if minigame.active then
+        local count = #minigame.hand.player
+        for i, card in ipairs(minigame.hand.player) do
+            card.hover = false
+        end
+        for i = count, 1, -1 do
+            local card = minigame.hand.player[i]
+            local cardX = love.graphics.getWidth() / 2 - 
+            (count * 36 * playerCamera.globalScale - (count - 1) * 18 * playerCamera.globalScale) / 2 + 
+            (i - 1) * (36 * playerCamera.globalScale - 18 * playerCamera.globalScale)
+            local cardY = love.graphics.getHeight() - (56 * playerCamera.globalScale)
+
+            if x > cardX and x < cardX + 36 * playerCamera.globalScale and y > cardY and y < cardY + 56 * playerCamera.globalScale then
+                card.hover = true
+                break
+            end
+        end
+    end
+end
+
 function minigame.draw()
     if minigame.active then
         local count = #minigame.hand.player
         for i, card in ipairs(minigame.hand.player) do
-            local x = love.graphics.getWidth() / 2 - 
-            (count * 36 * playerCamera.globalScale - (count - 1) * 18 * playerCamera.globalScale) / 2 + 
+            local x = love.graphics.getWidth() / 2 -
+            (count * 36 * playerCamera.globalScale - (count - 1) * 18 * playerCamera.globalScale) / 2 +
             (i - 1) * (36 * playerCamera.globalScale - 18 * playerCamera.globalScale)
-            local y = love.graphics.getHeight() - (56 * playerCamera.globalScale)
+            local y
+            if card.hover then
+                y = love.graphics.getHeight() - (56 * playerCamera.globalScale) - 10 * playerCamera.globalScale
+            else
+                y = love.graphics.getHeight() - (56 * playerCamera.globalScale)
+            end
             love.graphics.draw(card.sprite, x, y, 0, playerCamera.globalScale, playerCamera.globalScale)
         end
     end

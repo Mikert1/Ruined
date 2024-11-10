@@ -69,6 +69,9 @@ function love.mousemoved(x, y)
             end
         end
     end
+    if minigame.active then
+        minigame.hover(x, y)
+    end
 end
 function love.mousepressed(x, y, buttonClicked, istouch)
     if title.state == 0 then
