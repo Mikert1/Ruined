@@ -143,8 +143,13 @@ end
 
 function minigame.draw()
     if minigame.active then
+        local count = #minigame.hand.player
         for i, card in ipairs(minigame.hand.player) do
-            love.graphics.draw(card.sprite, love.graphics.getWidth() / 2 - (18 * playerCamera.globalScale) + (i - 2) * (18 * playerCamera.globalScale), love.graphics.getHeight() - (56 * playerCamera.globalScale), 0, playerCamera.globalScale, playerCamera.globalScale)
+            local x = love.graphics.getWidth() / 2 - 
+            (count * 36 * playerCamera.globalScale - (count - 1) * 18 * playerCamera.globalScale) / 2 + 
+            (i - 1) * (36 * playerCamera.globalScale - 18 * playerCamera.globalScale)
+            local y = love.graphics.getHeight() - (56 * playerCamera.globalScale)
+            love.graphics.draw(card.sprite, x, y, 0, playerCamera.globalScale, playerCamera.globalScale)
         end
     end
 end
