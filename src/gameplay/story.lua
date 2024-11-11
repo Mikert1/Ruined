@@ -158,25 +158,31 @@ function story.npc:draw2L()
         end
     end
     if story.npc.interactionAvalible == true then
-        love.graphics.stencil(function()
-            love.graphics.rectangle(
-                "fill",
-                (story.npcs.john.collider.x + 5 - story.dialogue.storyAvalible:getWidth() / 2),
-                (story.npcs.john.collider.y - 20),
-                story.dialogue.storyAvalible:getWidth(),
-                (-story.npc.interactionHold * 4) * story.dialogue.storyAvalible:getHeight())
-            end, "replace", 1)
-            love.graphics.draw(story.dialogue.storyAvalibleShadow, story.npcs.john.collider.x + 5 - story.dialogue.storyAvalible:getWidth() / 2, (story.npcs.john.collider.y - 20) - story.dialogue.storyAvalible:getHeight())
-            love.graphics.setColor(1,1,1)
-            love.graphics.draw(story.dialogue.storyAvalible, story.npcs.john.collider.x + 5 - story.dialogue.storyAvalible:getWidth() / 2, (story.npcs.john.collider.y - 20) - story.dialogue.storyAvalible:getHeight())
-            love.graphics.setStencilTest("greater", 0)
-            if story.npc.who == "john" then
-                love.graphics.setColor(0,0.8,0)
-            else
-                love.graphics.setColor(0,1,1)
+        for name, npc in pairs(story.npcs) do
+            if npc.collider.world == worldManagement.thisWorld then
+                if npc.collider.y < player.y then
+                    love.graphics.stencil(function()
+                        love.graphics.rectangle(
+                            "fill",
+                            (npc.collider.x + 5 - story.dialogue.storyAvalible:getWidth() / 2),
+                            (npc.collider.y - 20),
+                            story.dialogue.storyAvalible:getWidth(),
+                            (-story.npc.interactionHold * 4) * story.dialogue.storyAvalible:getHeight())
+                    end, "replace", 1)
+                    love.graphics.draw(story.dialogue.storyAvalibleShadow, npc.collider.x + 5 - story.dialogue.storyAvalible:getWidth() / 2, (npc.collider.y - 20) - story.dialogue.storyAvalible:getHeight())
+                    love.graphics.setColor(1,1,1)
+                    love.graphics.draw(story.dialogue.storyAvalible, npc.collider.x + 5 - story.dialogue.storyAvalible:getWidth() / 2, (npc.collider.y - 20) - story.dialogue.storyAvalible:getHeight())
+                    love.graphics.setStencilTest("greater", 0)
+                    if story.npc.who == "john" then
+                        love.graphics.setColor(0,0.8,0)
+                    else
+                        love.graphics.setColor(0,1,1)
+                    end
+                    love.graphics.draw(story.dialogue.storyAvalible, npc.collider.x + 5 - story.dialogue.storyAvalible:getWidth() / 2, (npc.collider.y - 20) - story.dialogue.storyAvalible:getHeight())
+                    love.graphics.setStencilTest()
+                end
             end
-        love.graphics.draw(story.dialogue.storyAvalible, story.npcs.john.collider.x + 5 - story.dialogue.storyAvalible:getWidth() / 2, (story.npcs.john.collider.y - 20) - story.dialogue.storyAvalible:getHeight())
-        love.graphics.setStencilTest()
+        end
         love.graphics.setColor(1,1,1)
     end
 end

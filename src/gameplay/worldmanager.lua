@@ -321,40 +321,36 @@ function drawNpcLayer()
 end
 
 local function checkNpc(dt)
-    local correctLayer = nil
-    if story.npcs.john.collider.world == worldManagement.thisWorld then
-        correctLayer = story.npcs.john.collider
-    end
-    if correctLayer then
-        if checkCollision(player, story.npcs.john.collider) then
-            if story.npc.interaction == false then
-                story.npc.who = "john"
-                story.npc.interactionAvalible = true
-                if love.keyboard.isDown(controls.keys.interact) or (controller.joysticks and controller.joysticks:isGamepadDown("a")) then
-                    if story.npc.interactionHold >= 0.25 then
-                        if story.data.storyTold.john1 == false then
-                            talk("john1")
-                        elseif story.data.storyTold.john2 == false then
-                            talk("john2")
+    story.npc.interactionAvalible = false
+    for name, npc in pairs(story.npcs) do
+        if npc.collider.world == worldManagement.thisWorld then
+            if checkCollision(player, npc.collider) then
+                if story.npc.interaction == false then
+                    story.npc.who = name
+                    story.npc.interactionAvalible = true
+                    if love.keyboard.isDown(controls.keys.interact) or (controller.joysticks and controller.joysticks:isGamepadDown("a")) then
+                        if story.npc.interactionHold >= 0.25 then
+                            if story.data.storyTold.john1 == false then
+                                talk("john1")
+                            elseif story.data.storyTold.john2 == false then
+                                talk("john2")
+                            end
+                            game.freeze = true
+                            story.npc.interactionHold = 0
+                        else
+                            if story.skiped == false then
+                                story.npc.interactionHold = story.npc.interactionHold + dt
+                            end
                         end
-                        game.freeze = true
-                        story.npc.interactionHold = 0
                     else
-                        if story.skiped == false then
-                            story.npc.interactionHold = story.npc.interactionHold + dt
+                        if story.npc.interactionHold > 0 then
+                            story.npc.interactionHold = story.npc.interactionHold - dt / 4
+                        else
+                            story.npc.interactionHold = 0
                         end
-                    end
-                else
-                    if story.npc.interactionHold > 0 then
-                        story.npc.interactionHold = story.npc.interactionHold - dt / 4
-                    else
-                        story.npc.interactionHold = 0
                     end
                 end
             end
-        else
-            story.npc.interactionAvalible = false
-            story.npc.interaction = false
         end
     end
 end
