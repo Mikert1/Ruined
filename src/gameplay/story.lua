@@ -38,6 +38,7 @@ story.npcs = {
     }
 }
 story.npc.who = "john"
+story.npc.whoID = "john"
 story.npc.foto = {}
 story.npc.foto.john_normal = love.graphics.newImage("assets/textures/npc/john.png")
 story.npc.foto.john_wounded = love.graphics.newImage("assets/textures/npc/johnWounded.png")
@@ -140,26 +141,19 @@ end
 
 function story.dialogue:draw()
     if story.npc.interaction == true then
-        if story.npc.who == "john" then
-            love.graphics.setColor(0,0.8,0)
-        else
-            love.graphics.setColor(0,1,1)
-        end
+        love.graphics.setColor(story.npcs[story.npc.whoID].color or {0, 1, 1})
         love.graphics.draw(story.dialogue.image, love.graphics.getWidth() / 2 - (109 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (13 * playerCamera.globalScale), nil, playerCamera.globalScale)
-        love.graphics.setColor(1,1,1)
-        love.graphics.draw(story.npc.foto.john, love.graphics.getWidth() / 2 - (100 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (30 * playerCamera.globalScale), nil, playerCamera.globalScale)
-        love.graphics.print(story.dialogue.text, love.graphics.getWidth() / 2 - (30 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (28 * playerCamera.globalScale), nil, playerCamera.globalScale/1.5)
-        --love.graphics.print(story.dialogue.green, love.graphics.getWidth() / 2 - (30 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (28 * playerCamera.globalScale), nil, playerCamera.globalScale/1.5)
-        love.graphics.print(story.npc.who, love.graphics.getWidth() / 2 - (95 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (14 * playerCamera.globalScale), nil, playerCamera.globalScale/1.5)
         if story.dialogue.length < story.dialogue.position then
-            love.graphics.setColor(0,0.8,0)
             if story.lasttext == false then
                 love.graphics.draw(story.dialogue.skipImage, love.graphics.getWidth() / 2 + (90 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (-80 * playerCamera.globalScale), nil, playerCamera.globalScale)
             else
                 love.graphics.draw(story.dialogue.doneImage, love.graphics.getWidth() / 2 + (90 * playerCamera.globalScale), love.graphics.getHeight() / 2 - (-80 * playerCamera.globalScale), nil, playerCamera.globalScale)
             end
-            love.graphics.setColor(1,1,1)
         end
+        love.graphics.setColor(1,1,1)
+        love.graphics.draw(story.npc.foto.john, love.graphics.getWidth() / 2 - (100 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (30 * playerCamera.globalScale), nil, playerCamera.globalScale)
+        love.graphics.print(story.dialogue.text, love.graphics.getWidth() / 2 - (30 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (28 * playerCamera.globalScale), nil, playerCamera.globalScale/1.5)
+        love.graphics.print(story.npc.who, love.graphics.getWidth() / 2 - (95 * playerCamera.globalScale), love.graphics.getHeight() / 2 + (14 * playerCamera.globalScale), nil, playerCamera.globalScale/1.5)
     end
 end
 function story.npc:draw2L()
@@ -170,9 +164,7 @@ function story.npc:draw2L()
                 love.graphics.draw(npc.image, npc.collider.x, npc.collider.y - npc.image:getHeight())
             end
         end
-    end
-    if story.npc.interactionAvalible then
-        for name, npc in pairs(story.npcs) do
+        if story.npc.interactionAvalible then
             if npc.collider.world == worldManagement.thisWorld then
                 if npc.collider.y < player.y then
                     local sprite = story.dialogue.storyAvalible[npc.nextDialogue.marked]
@@ -195,8 +187,8 @@ function story.npc:draw2L()
                     love.graphics.setStencilTest()
                 end
             end
+            love.graphics.setColor(1, 1, 1)
         end
-        love.graphics.setColor(1, 1, 1)
     end
 end
 return story

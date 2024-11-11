@@ -327,6 +327,7 @@ local function checkNpc(dt)
             if checkCollision(player, npc.collider) then
                 if story.npc.interaction == false then
                     story.npc.who = name
+                    story.npc.whoID = name
                     story.npc.interactionAvalible = true
                     if love.keyboard.isDown(controls.keys.interact) or (controller.joysticks and controller.joysticks:isGamepadDown("a")) then
                         if story.npc.interactionHold >= 0.25 then
