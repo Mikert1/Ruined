@@ -13,20 +13,29 @@ story.npcs = {
             world = "Snow"
         },
         color = {0, 0.8, 0},
+        nextDialogue = {
+            name = 1,
+            type = "chat",
+            marked = "important"
+        }
     },
     gambler = {
         x = 115,
         y = 128,
         image = love.graphics.newImage("assets/textures/npc/gambler.png"),
-        position = 1,
         collider = {
             x = 170,
             y = 332,
             width = 28,
             height = 24,
             world = "Mountains"
+        },
+        nextDialogue = {
+            value = 1,
+            type = "chat",
+            marked = "question"
         }
-    },
+    }
 }
 story.npc.who = "john"
 story.npc.foto = {}
@@ -166,7 +175,7 @@ function story.npc:draw2L()
         for name, npc in pairs(story.npcs) do
             if npc.collider.world == worldManagement.thisWorld then
                 if npc.collider.y < player.y then
-                    local sprite = story.dialogue.storyAvalible.important
+                    local sprite = story.dialogue.storyAvalible[npc.nextDialogue.marked]
                     local x = npc.collider.x - sprite:getWidth() / 2 + npc.collider.width / 2
                     local y = npc.collider.y - npc.image:getHeight() - 1
                     local storyWidth = sprite:getWidth()
