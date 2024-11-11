@@ -66,22 +66,41 @@ story.dialogue.john1 = {
     "I will teach you how to use\nCryonium. and show you \nhow it can help you on your \njourney.",
     "Good luck traveler. I will wait\nfor you here.",
 }
-story.dialogue.john2 = {
-    "Hey traveler, You got the\nCryonium?",
-    "Thanks for your help. i need \nthis for later on. you can keep\nmy sword. It's yours now.",
-    "Wanna try out the real power of\nCryonium?",
-    "Oke get your sword and Press Q",
+story.dialogue.npc = {
+    john = {
+        {
+            dialogue = {
+                "Hello traveler, my name is John.",
+                "I got attacked. For now I can no \nlonger fight. I need your help.",
+                "Take my sword and defeat the\nenemies in the mountains. \nAnd bring me the Cryonium. I \nwill reward you with my sword.",
+                "I will teach you how to use\nCryonium. and show you \nhow it can help you on your \njourney.",
+                "Good luck traveler. I will wait\nfor you here.",
+            },
+        }
+    },
+    gambler = {
+        {
+            dialogue = {
+                "Hey new guy, wanna play a\ngame?",
+                "Oh sorry i forgot you are not a \nprofessional gambler.",
+                "I will teach you how to play\nthis game. you will be a\ngambler in no time.",
+            },
+        },
+        {
+            dialogue = {
+                "Wanna play a game?"
+            },
+            save = false
+        }
+    }
 }
-story.id = "john1"
-story.currentStory = story.dialogue[story.id][1]
-story.arrayLength = #story.dialogue[story.id]
+story.id = 1
+story.currentStory = story.dialogue.npc[story.npc.whoID][1].dialogue[1]
+story.arrayLength = #story.dialogue.npc[story.npc.whoID][1].dialogue
 story.dialogue.length = string.len(story.currentStory)
 
 story.data = {}
 story.data.current = 1
-story.data.storyTold = {}
-story.data.storyTold.john1 = false
-story.data.storyTold.john2 = false
 story.dialogue.text = string.sub(story.currentStory, 0, story.dialogue.position)
 story.dialogue.active = false
 story.lasttext = false
@@ -94,8 +113,8 @@ end
 
 function story.load()
     story.data.current = 1
-    story.currentStory = story.dialogue[story.id][story.data.current]
-    story.arrayLength = #story.dialogue[story.id]
+    story.currentStory = story.dialogue.npc[story.npc.whoID][story.data.current].dialogue[1]
+    story.arrayLength = #story.dialogue.npc[story.npc.whoID][story.data.current].dialogue
     story.dialogue.length = string.len(story.currentStory)
 end
 
@@ -112,6 +131,7 @@ end
 function story.dialogue.update()
     if story.arrayLength < story.data.current then
         -- this is the end of the story
+        data.storyProgress.john = story.id
         story.npc.interaction = false
         player.item.sword = true
         story.lasttext = false
@@ -124,7 +144,9 @@ function story.dialogue.update()
     if story.arrayLength == story.data.current then
         story.lasttext = true
     end
-    story.currentStory = story.dialogue[story.id][story.data.current]
+    print(story.data.current)
+    story.currentStory = story.dialogue.npc[story.npc.whoID][story.id].dialogue[story.data.current]
+    story.arrayLength = #story.dialogue.npc[story.npc.whoID][story.id].dialogue
     story.dialogue.text = string.sub(story.currentStory, 0, story.dialogue.position)
 end
 

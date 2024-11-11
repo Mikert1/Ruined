@@ -5,6 +5,10 @@ local scene = require("src/gameplay/cutscene")
 local worldManagement = require("src/gameplay/worldmanager")
 local file = {}
 local data = {}
+data.storyProgress = {
+    john = 0,
+    gambler = 0
+}
 local preview = {}
 _G.savedSettings = {}
 savedSettings.devmode = false
@@ -39,9 +43,6 @@ function file.save()
     data.seconds = time.seconds
     data.minutes = time.minutes
     data.hours = time.hours
-
-    data.storyTold = {}
-    data.storyTold.john1 = story.data.storyTold.john1
 
     if file.filenumber == 1 then
         preview.file1.world = worldManagement.thisWorld
@@ -221,15 +222,6 @@ function file.load()
     player.health = data.hearts
     if data.item.sword == true then
         player.item.sword = true
-    end
-    if data.storyTold then
-        if data.storyTold.john1 == true then
-            story.data.storyTold.john1 = true
-            story.npcs.john.position = 1
-        else
-            story.data.storyTold.john1 = false
-            story.npcs.john.position = 1
-        end
     end
     love.load()
     return data

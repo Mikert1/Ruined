@@ -135,22 +135,6 @@ local function checkPortals()
     end
 end
 
-local function talk(id)
-    if id == "john1" then
-        story.npc.foto.john = story.npc.foto.john_wounded
-    elseif id == "john2" then
-
-    end
-    story.id = id
-    story.npc.interactionAvalible = false
-    story.npc.interaction = true
-    story.dialogue.position = 0
-    game.state = 2.1
-    story.currentStory = story.dialogue[story.id][story.data.current]
-    story.arrayLength = #story.dialogue[story.id]
-    story.skiped = true
-end
-
 -- load worldManagement functions
 function worldManagement.teleport(loc)
     for _, layer in ipairs(_G.currentWorld.layers) do
@@ -307,6 +291,17 @@ function worldManagement.spawn()
     end
 end
 
+local function talk(name)
+    story.id = data.storyProgress[name] + 1
+    story.npc.interactionAvalible = false
+    story.npc.interaction = true
+    story.dialogue.position = 0
+    game.state = 2.1
+    story.currentStory = story.dialogue.npc[story.npc.whoID][story.id].dialogue[1]
+    story.arrayLength = #story.dialogue.npc[story.npc.whoID][story.id].dialogue
+    story.skiped = true
+end
+
 function drawNpcLayer()
     local correctLayer = nil
     if story.npcs.john.collider.world == worldManagement.thisWorld then
@@ -331,11 +326,7 @@ local function checkNpc(dt)
                     story.npc.interactionAvalible = true
                     if love.keyboard.isDown(controls.keys.interact) or (controller.joysticks and controller.joysticks:isGamepadDown("a")) then
                         if story.npc.interactionHold >= 0.25 then
-                            if story.data.storyTold.john1 == false then
-                                talk("john1")
-                            elseif story.data.storyTold.john2 == false then
-                                talk("john2")
-                            end
+                            talk(name)
                             game.freeze = true
                             story.npc.interactionHold = 0
                         else
