@@ -42,7 +42,11 @@ story.dialogue = {}
 story.dialogue.image = love.graphics.newImage("assets/textures/gui/dialogue/dialogue.png")
 story.dialogue.skipImage = love.graphics.newImage("assets/textures/gui/dialogue/skip.png")
 story.dialogue.doneImage = love.graphics.newImage("assets/textures/gui/dialogue/done.png")
-story.dialogue.storyAvalible = love.graphics.newImage("assets/textures/gui/dialogue/interact.png")
+story.dialogue.storyAvalible = {
+    important = love.graphics.newImage("assets/textures/gui/dialogue/important.png"),
+    question = love.graphics.newImage("assets/textures/gui/dialogue/question.png"),
+    game = love.graphics.newImage("assets/textures/gui/dialogue/game.png"),
+}
 story.dialogue.storyAvalibleShadow = love.graphics.newImage("assets/textures/gui/dialogue/interactshadow.png")
 story.dialogue.position = 0
 story.dialogue.john1 = {
@@ -162,10 +166,11 @@ function story.npc:draw2L()
         for name, npc in pairs(story.npcs) do
             if npc.collider.world == worldManagement.thisWorld then
                 if npc.collider.y < player.y then
-                    local x = npc.collider.x - story.dialogue.storyAvalible:getWidth() / 2 + npc.collider.width / 2
+                    local sprite = story.dialogue.storyAvalible.important
+                    local x = npc.collider.x - sprite:getWidth() / 2 + npc.collider.width / 2
                     local y = npc.collider.y - npc.image:getHeight() - 1
-                    local storyWidth = story.dialogue.storyAvalible:getWidth()
-                    local storyHeight = story.dialogue.storyAvalible:getHeight()
+                    local storyWidth = sprite:getWidth()
+                    local storyHeight = sprite:getHeight()
                     local interactionHeight = (-story.npc.interactionHold * 4) * storyHeight
     
                     love.graphics.stencil(function()
@@ -174,10 +179,10 @@ function story.npc:draw2L()
     
                     love.graphics.draw(story.dialogue.storyAvalibleShadow, x, y - storyHeight)
                     love.graphics.setColor(0.3, 0.3, 0.3)
-                    love.graphics.draw(story.dialogue.storyAvalible, x, y - storyHeight)
+                    love.graphics.draw(sprite, x, y - storyHeight)
                     love.graphics.setStencilTest("greater", 0)
                     love.graphics.setColor(npc.color or {0, 1, 1})
-                    love.graphics.draw(story.dialogue.storyAvalible, x, y - storyHeight)
+                    love.graphics.draw(sprite, x, y - storyHeight)
                     love.graphics.setStencilTest()
                 end
             end
