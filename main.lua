@@ -2,6 +2,9 @@ local LOADTIMER = os.clock()
 local loadState = 1
 love.window.setTitle("Ruined | Title Screen")
 love.window.setIcon(love.image.newImageData("assets/textures/gui/title/logo1.png"))
+local f = {resizable = true, highdpi = true} -- flags
+
+love.window.setMode(800, 600, f)
 love._openConsole()
 
 -- global variables
