@@ -145,8 +145,8 @@ function story.dialogue.update()
         story.lasttext = true
     end
     print(story.data.current)
-    story.currentStory = story.dialogue.npc[story.npc.whoID][story.id].dialogue[story.data.current]
-    story.arrayLength = #story.dialogue.npc[story.npc.whoID][story.id].dialogue
+    story.currentStory = story.dialogue.npc[story.npc.whoID][story.id + 1].dialogue[story.data.current]
+    story.arrayLength = #story.dialogue.npc[story.npc.whoID][story.id + 1].dialogue
     story.dialogue.text = string.sub(story.currentStory, 0, story.dialogue.position)
 end
 

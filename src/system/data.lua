@@ -5,10 +5,6 @@ local scene = require("src/gameplay/cutscene")
 local worldManagement = require("src/gameplay/worldmanager")
 local file = {}
 local data = {}
-data.storyProgress = {
-    john = 0,
-    gambler = 0
-}
 local preview = {}
 _G.savedSettings = {}
 savedSettings.devmode = false
@@ -125,6 +121,10 @@ function file.load()
                 hearts = 8,
                 storyTold = {
                     john1 = false
+                },
+                storyProgress = {
+                    john = 0,
+                    gambler = 0
                 }
             }
             game.state = 2.3
@@ -157,6 +157,10 @@ function file.load()
                 hearts = 8,
                 storyTold = {
                     john1 = false
+                },
+                storyProgress = {
+                    john = 0,
+                    gambler = 0
                 }
             }
             game.state = 2.3
@@ -189,6 +193,10 @@ function file.load()
                 hearts = 8,
                 storyTold = {
                     john1 = false
+                },
+                storyProgress = {
+                    john = 0,
+                    gambler = 0
                 }
             }
             if game.chapter == 2 then

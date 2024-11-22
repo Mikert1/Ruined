@@ -292,13 +292,17 @@ function worldManagement.spawn()
 end
 
 local function talk(name)
-    story.id = data.storyProgress[name] + 1
+    story.id = data.storyProgress[name]
     story.npc.interactionAvalible = false
     story.npc.interaction = true
     story.dialogue.position = 0
     game.state = 2.1
-    story.currentStory = story.dialogue.npc[story.npc.whoID][story.id].dialogue[1]
-    story.arrayLength = #story.dialogue.npc[story.npc.whoID][story.id].dialogue
+    story.currentStory = 
+    story.dialogue.npc[story.npc.whoID][story.id + 1].dialogue[1] or
+    story.dialogue.npc[story.npc.whoID][story.id].dialogue[1]
+    story.arrayLength = 
+    #story.dialogue.npc[story.npc.whoID][story.id + 1].dialogue or
+    #story.dialogue.npc[story.npc.whoID][story.id].dialogue
     story.skiped = true
 end
 
