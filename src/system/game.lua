@@ -1,5 +1,5 @@
 local game = {}
-game.version = "1.6"
+game.version = "1.7"
 game.name = "Ruined"
 game.beta = "Developer Pre-Alpha"
 game.buildName = "(DEV Build)"

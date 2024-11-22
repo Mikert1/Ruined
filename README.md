@@ -2,7 +2,7 @@
 <h1>Ruined</h1>
 
 <p>“Ruined” the game is a hobby project that i started so i could learn Game Development. In early versions the code might not be perfect but i will try to improve every aspect of my game as i grow in skills.</p>
-<img alt="Static Badge" src="https://img.shields.io/badge/Game%20version-Early--Developer--Pre--Alpha%201.5-%23333333">
+<img alt="Static Badge" src="https://img.shields.io/badge/Game%20version-Early--Developer--Pre--Alpha%201.6-%23333333">
 
 <h2>What i used:</h2>
 <img alt="Static Badge" src="https://img.shields.io/badge/L%C3%96VE%20Version-11-%23E84A99">
