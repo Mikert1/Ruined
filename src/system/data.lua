@@ -346,12 +346,10 @@ function file.settings.load()
     if not savedSettings.gameSpeed then
         savedSettings.gameSpeed = 1
     end
-    local w, h = love.window.getDesktopDimensions()
-    if 3 <= love.window.getDisplayCount() then
-        local x, y, _ = love.window.getPosition()
-        love.window.setPosition(x, y, savedSettings.windowIndex)
-        w, h = love.window.getDesktopDimensions(savedSettings.windowIndex)
-    end
+
+    local x, y, _ = love.window.getPosition()
+    love.window.setPosition(x, y, savedSettings.windowIndex)
+    w, h = love.window.getDesktopDimensions(savedSettings.windowIndex)
     if savedSettings.window == 1 then
         love.window.updateMode(w, h, {borderless = true, fullscreen = false})
         if love.window.getFullscreen() then
@@ -384,6 +382,7 @@ function file.settings.load()
             end
         end
     end
+
     if savedSettings.devmode == true and savedSettings.console == true then
         if love.system.getOS() == "Windows" then love._openConsole() end
     end
