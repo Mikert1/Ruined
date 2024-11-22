@@ -348,38 +348,33 @@ function file.settings.load()
     end
 
     local x, y, _ = love.window.getPosition()
+    local f = {borderless = false, resizable = true, display = savedSettings.windowIndex}
     love.window.setPosition(x, y, savedSettings.windowIndex)
     w, h = love.window.getDesktopDimensions(savedSettings.windowIndex)
     if savedSettings.window == 1 then
-        love.window.updateMode(w, h, {borderless = true, fullscreen = false})
-        if love.window.getFullscreen() then
-            print("Fullscreen mode is enabled")
-        else
-            print("Fullscreen mode is not enabled")
-        end
+        love.window.setMode(w, h, f)
     else
+        print(savedSettings.resolution)
         if savedSettings.resolution == 1 then
             if (w > 800) and (h > 600) then
-                love.window.updateMode(800, 600)
+                love.window.setMode(800, 600, f)
             else
-                love.window.updateMode(w, h)
+                love.window.setMode(w, h, f)
             end
         elseif savedSettings.resolution == 2 then
             if (w > 1024) and (h > 768) then
-                love.window.updateMode(1024, 768)
+                love.window.setMode(1024, 768, f)
             else
-                love.window.updateMode(w, h)
+                love.window.setMode(w, h, f)
             end
         elseif savedSettings.resolution == 3 then
             if (w > 1280) and (h > 720) then
-                love.window.updateMode(1280, 720)
+                love.window.setMode(1280, 720, f)
             else
-                love.window.updateMode(w, h)
+                love.window.setMode(w, h, f)
             end
-        elseif savedSettings.resolution == 4 then
-            if (w > 1366) and (h > 768) then
-                love.window.updateMode(w, h)
-            end
+        elseif savedSettings.resolution == 0 then
+            love.window.setMode(w, h, f)
         end
     end
 

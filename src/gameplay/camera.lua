@@ -9,6 +9,10 @@ playerCamera.realScale.x = (playerCamera.globalScaleFactor / 1200) * love.graphi
 playerCamera.realScale.y = (playerCamera.globalScaleFactor / 1200) * love.graphics.getHeight()
 playerCamera.shaker = 0
 
+function love.resize(w, h)
+    print("New window size: " .. w .. "x" .. h)
+end
+
 function playerCamera.shake(intensity)
     if savedSettings.screenShake == false then
         return

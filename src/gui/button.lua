@@ -428,34 +428,36 @@ function button:action()
         file.settings.save()
     elseif self.id == 22 then -- resolution button
         local x, y = love.window.getDesktopDimensions(savedSettings.windowIndex)
+        local f = {borderless = false, resizable = true, display = savedSettings.windowIndex}
         if savedSettings.resolution == 0 then
             savedSettings.resolution = 1
             if (x > 800) and (y > 600) then
-                love.window.setMode(800, 600, {borderless = false, resizable = true, display = savedSettings.windowIndex})
+                love.window.setMode(800, 600, f)
             else
-                love.window.setMode(x, y, {borderless = false, resizable = true, display = savedSettings.windowIndex})
+                love.window.setMode(x, y, f)
                 savedSettings.resolution = 0
             end
         elseif savedSettings.resolution == 1 then
             savedSettings.resolution = 2
             if (x > 1024) and (y > 768) then
-                love.window.setMode(1024, 768, {borderless = false, resizable = true, display = savedSettings.windowIndex})
+                love.window.setMode(1024, 768, f)
             else
-                love.window.setMode(x, y, {borderless = false, resizable = true, display = savedSettings.windowIndex})
+                love.window.setMode(x, y, f)
                 savedSettings.resolution = 0
             end
         elseif savedSettings.resolution == 2 then
             savedSettings.resolution = 3
             if (x > 1280) and (y > 720) then
-                love.window.setMode(1280, 720, {borderless = false, resizable = true, display = savedSettings.windowIndex})
+                love.window.setMode(1280, 720, f)
             else
-                love.window.setMode(x, y, {borderless = false, resizable = true, display = savedSettings.windowIndex})
+                love.window.setMode(x, y, f)
                 savedSettings.resolution = 0
             end
         elseif savedSettings.resolution == 3 then
-            love.window.setMode(x, y, {borderless = false, resizable = true, display = savedSettings.windowIndex})
+            love.window.setMode(x, y, f)
             savedSettings.resolution = 0
         end
+        love.resize(w, h)
         file.settings.save()
     elseif self.id == 23 then -- screen shake button
         if savedSettings.screenShake == false then
