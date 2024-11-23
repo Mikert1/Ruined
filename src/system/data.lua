@@ -392,6 +392,7 @@ function file.settings.load()
     end
     local settings = require("src/gui/settings")
     settings.slider.value = savedSettings.gameSpeed
+    love.resize(love.graphics.getWidth(), love.graphics.getHeight())
     return savedSettings
 end
 

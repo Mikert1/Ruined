@@ -2,15 +2,24 @@ local playerCamera = {}
 local camera = require 'src/library/cam'
 local scene = require("src/gameplay/cutscene")
 playerCamera.cam = camera()
-playerCamera.globalScaleFactor = 6
-playerCamera.globalScale = (playerCamera.globalScaleFactor / 1200) * love.graphics.getHeight()
-playerCamera.realScale = {}
-playerCamera.realScale.x = (playerCamera.globalScaleFactor / 1200) * love.graphics.getWidth()
-playerCamera.realScale.y = (playerCamera.globalScaleFactor / 1200) * love.graphics.getHeight()
+playerCamera.globalScaleFactor = 3
 playerCamera.shaker = 0
 
+local function scaleCalculation()
+    local scale = {
+        x = (playerCamera.globalScaleFactor / 1200) * love.graphics.getWidth(),
+        y = (playerCamera.globalScaleFactor / 800) * love.graphics.getHeight()
+    }
+    return scale
+end
+
+playerCamera.realScale = scaleCalculation()
+playerCamera.globalScale = playerCamera.realScale.y
+
 function love.resize(w, h)
-    print("New window size: " .. w .. "x" .. h)
+    playerCamera.realScale = scaleCalculation()
+    playerCamera.globalScale = playerCamera.realScale.y
+    playerCamera.cam:zoomTo(playerCamera.globalScale)
 end
 
 function playerCamera.shake(intensity)
@@ -57,36 +66,19 @@ end
 
 function playerCamera.follow(dt)
     local lerpFactor = 7 * dt
-    local newCamPositon = {x = 0, y = 0}
+    local delayedCamPosition = {x = 0, y = 0}
     if game.state == 0 then
-        newCamPositon = {x = lerp(playerCamera.cam.x ,player.x + 6, lerpFactor), y = lerp(playerCamera.cam.y, player.y - 8, lerpFactor)}
+        delayedCamPosition = {x = lerp(playerCamera.cam.x ,player.x + 6, lerpFactor), y = lerp(playerCamera.cam.y, player.y - 8, lerpFactor)}
     else
-        newCamPositon = {x = lerp(playerCamera.cam.x ,player.x + scene.x + 6, lerpFactor), y = lerp(playerCamera.cam.y, player.y + scene.y - 8, lerpFactor)}
+        delayedCamPosition = {x = lerp(playerCamera.cam.x ,player.x + scene.x + 6, lerpFactor), y = lerp(playerCamera.cam.y, player.y + scene.y - 8, lerpFactor)}
     end
-    
-    playerCamera.cam:lookAt(newCamPositon.x, newCamPositon.y)
+    playerCamera.cam:lookAt(delayedCamPosition.x, delayedCamPosition.y)
     if playerCamera.shaker > 0 then
         playerCamera.shaker = playerCamera.shaker - dt
         playerCamera.shake(playerCamera.shaker * playerCamera.globalScale)
     else
         playerCamera.shaker = 0
     end
-    if player.focus == true then
-        playerCamera.globalScaleFactor = playerCamera.globalScaleFactor + 0.05
-        if playerCamera.globalScaleFactor >= 8 then
-            playerCamera.globalScaleFactor = 8
-        end
-        playerCamera.globalScale = (playerCamera.globalScaleFactor / 1200) * love.graphics.getHeight()
-    else
-        playerCamera.globalScaleFactor = playerCamera.globalScaleFactor + -0.05
-        if playerCamera.globalScaleFactor <= 6 then
-            playerCamera.globalScaleFactor = 6
-        end
-        playerCamera.globalScale = (playerCamera.globalScaleFactor/ 1200) * love.graphics.getHeight()
-    end
-    playerCamera.realScale.x = (playerCamera.globalScaleFactor / 1200) * love.graphics.getWidth()
-    playerCamera.realScale.y = (playerCamera.globalScaleFactor / 1200) * love.graphics.getHeight()
-    playerCamera.cam:zoomTo(playerCamera.globalScale)
     if keys.f4 == 2 or keys.f4 == 3 then -- debugg keys remove when done
         playerCamera.cam:zoomTo(1)
     end
